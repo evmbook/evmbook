@@ -25,7 +25,7 @@ scripts/
 
 ## Author
 
-Written by Nakamoto Wei - a collective pseudonym representing contributors to the Mastering EVM project.
+Written by Cipher Null - a collective pseudonym representing contributors to the Mastering EVM project.
 
 ## License
 
