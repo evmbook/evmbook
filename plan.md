@@ -22,7 +22,7 @@ This resource constraint creates an opportunity: **embed network principles dire
 1. **Natural progression** — Chapters 1-17 cover the EVM from basics to advanced; Chapter 18 covers *how to build on all of it efficiently*
 2. **Dual-chain relevance** — Shows how ETC's constraints inspire innovation applicable to any chain
 3. **Practical focus** — The book emphasizes hands-on development; agentic coding is the next evolution
-4. **2025 state-of-the-art** — LLM-assisted development is now mainstream; the book should reflect this
+4. **2026 state-of-the-art** — LLM-assisted development is now mainstream; the book should reflect this
 
 ## Content Structure
 

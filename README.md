@@ -23,9 +23,9 @@ scripts/
 └── build-epub.sh   # EPUB generation
 ```
 
-## Author
+## Maintainer
 
-Written by Cipher Null - a collective pseudonym representing contributors to the Mastering EVM project.
+Modernized and maintained by [Claude](https://github.com/claude).
 
 ## License
 
