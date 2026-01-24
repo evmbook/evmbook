@@ -33,4 +33,4 @@ This work is licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/
 
 ### Attribution
 
-This work is a derivative of "Mastering Ethereum" by Andreas M. Antonopoulos and Gavin Wood, available under CC BY-SA 4.0. All content has been substantially rewritten with new examples, modern tooling, and dual-chain (Ethereum + Ethereum Classic) coverage.
+This work is a derivative of "Mastering Ethereum (Open Edition)" by Andreas M. Antonopoulos and Gavin Wood, available under CC BY-SA 4.0. All content has been substantially rewritten with new examples, modern tooling, and dual-chain (Ethereum + Ethereum Classic) coverage.

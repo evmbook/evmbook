@@ -6,7 +6,7 @@
 
 **Free. Open Source. Always Current.**
 
-[Read Online](https://masteringevm.com) | [Download PDF](#downloads) | [Download EPUB](#downloads) | [Contribute](https://github.com/evmbook)
+[Read Online](https://masteringevm.com/read) | [Download PDF](https://masteringevm.com/downloads) | [Download EPUB](https://masteringevm.com/downloads) | [Contribute](https://github.com/evmbook)
 
 ---
 
@@ -40,10 +40,10 @@ The frontier of blockchain development. How agentic coding multiplies developer 
 
 A unique feature of this book: **we cover both major EVM implementations**.
 
-| | Ethereum (ETH) | Ethereum Classic (ETC) |
+| | Ethereum Classic (ETC) | Ethereum (ETH) |
 |---|---|---|
-| **Consensus** | Proof of Stake | Proof of Work |
-| **Philosophy** | Innovation-first | Immutability-first |
+| **Consensus** | Proof of Work | Proof of Stake |
+| **Philosophy** | Immutability-first | Innovation-first |
 | **Genesis** | July 30, 2015 | July 30, 2015 |
 | **Fork** | — | Block 1,920,000 |
 
@@ -60,7 +60,7 @@ Technical education shouldn't be gatekept behind paywalls. Read online, download
 The blockchain space moves fast. We continuously update content to reflect the current state of EVM development. No more learning from 2017 tutorials.
 
 ### Battle-Tested Content
-Built on the foundation of *Mastering Ethereum* by Andreas M. Antonopoulos and Gavin Wood, substantially rewritten and modernized for 2026.
+Built on the foundation of *Mastering Ethereum (Open Edition)* by Andreas M. Antonopoulos and Gavin Wood, substantially rewritten and modernized for 2026.
 
 ### Modern Tooling
 Foundry, Hardhat, ethers.js v6, Solidity 0.8.x—we cover the tools developers actually use today.
@@ -81,9 +81,9 @@ Foundry, Hardhat, ethers.js v6, Solidity 0.8.x—we cover the tools developers a
 
 | Format | Description |
 |--------|-------------|
-| [**Read Online**](https://masteringevm.com) | Optimized web reading experience |
-| **PDF** | Coming soon |
-| **EPUB** | Coming soon |
+| [**Read Online**](https://masteringevm.com/read) | Optimized web reading experience |
+| [**PDF**](https://masteringevm.com/download) | Coming soon |
+| [**EPUB**](https://masteringevm.com/download) | Coming soon |
 
 ---
 
@@ -160,7 +160,7 @@ This work is licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/
 - Share — copy and redistribute in any medium or format
 - Adapt — remix, transform, and build upon for any purpose
 
-**Attribution:** This work is a derivative of *Mastering Ethereum* by Andreas M. Antonopoulos and Gavin Wood.
+**Attribution:** This work is a derivative of *Mastering Ethereum (Open Edition)* by Andreas M. Antonopoulos and Gavin Wood.
 
 ---
 
