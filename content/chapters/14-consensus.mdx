@@ -108,6 +108,101 @@ Ethereum Classic's block reward schedule:
 
 This creates a fixed monetary policy similar to Bitcoin's halving schedule.
 
+## ETC Olympia Upgrade
+
+The Olympia upgrade represents a significant evolution for Ethereum Classic, bringing modern transaction semantics while solving the challenge of decentralized protocol funding.
+
+### The Olympia ECIP Family
+
+Olympia is implemented through a coordinated family of Ethereum Classic Improvement Proposals:
+
+| ECIP | Title | Layer |
+|------|-------|-------|
+| **ECIP-1111** | EIP-1559 + EIP-3198 semantics | Consensus |
+| **ECIP-1112** | Treasury address and custody | Consensus |
+| **ECIP-1121** | Opcode alignment (PUSH0, MCOPY, etc.) | Consensus |
+| ECIP-1113-1120 | Governance frameworks | Application |
+
+The core consensus changes are ECIP-1111, 1112, and 1121. The governance ECIPs (1113-1120) define application-layer frameworks for treasury management but don't require hard fork changes.
+
+### ECIP-1111: EIP-1559 Transaction Semantics
+
+ECIP-1111 brings EIP-1559-style transactions to Ethereum Classic:
+
+- **Type 2 transactions**: `maxFeePerGas` and `maxPriorityFeePerGas` fields
+- **Base fee algorithm**: Adjusts based on block fullness, targeting 50% capacity
+- **EIP-3198**: Exposes `BASEFEE` opcode for contracts to read the current base fee
+
+The transaction format and fee calculation are identical to Ethereum's implementation. Existing wallets and tooling that support EIP-1559 will work seamlessly.
+
+### ECIP-1112: Treasury Funding Mechanism
+
+Here's where Olympia diverges from Ethereum. Instead of burning the base fee:
+
+```
+Ethereum (post-London):
+├── Base fee → BURNED
+└── Priority fee → Validator
+
+Ethereum Classic (post-Olympia):
+├── Base fee → Treasury address
+└── Priority fee → Miner
+```
+
+The treasury address is **consensus-recognized**—meaning nodes enforce that base fees go to this specific address. It's not a smart contract that could be exploited; it's built into the protocol rules.
+
+#### Why Treasury Funding?
+
+Decentralized networks face a fundamental challenge: how do you fund ongoing development without:
+1. A central foundation with pre-mined funds (centralization risk)
+2. Inflationary block rewards (dilutes existing holders)
+3. Relying on altruism (unsustainable)
+
+Olympia's solution: **redirect existing fee revenue**. Users already pay transaction fees. Rather than burning this value (which benefits all holders abstractly through scarcity) or giving it entirely to miners (who provide security but not development), Olympia allocates the base fee portion to protocol development.
+
+This creates sustainable funding without:
+- New token issuance
+- Increased fees for users
+- Central control of funds
+
+#### Treasury Governance
+
+ECIP-1113 through ECIP-1120 establish governance frameworks for treasury management. These operate at the application layer, using multisig contracts and community voting to direct funds. The consensus layer only enforces that fees go to the treasury address—how those funds are spent is determined by off-chain governance processes.
+
+### ECIP-1121: Opcode Alignment
+
+ECIP-1121 brings ETC's opcode set in line with Ethereum's recent additions:
+
+| Opcode | Hex | Description | EIP |
+|--------|-----|-------------|-----|
+| PUSH0 | 0x5F | Push zero to stack | EIP-3855 |
+| MCOPY | 0x5E | Memory copy | EIP-5656 |
+| TLOAD | 0x5C | Transient storage load | EIP-1153 |
+| TSTORE | 0x5D | Transient storage store | EIP-1153 |
+| BLOBHASH | 0x49 | Get blob hash | EIP-4844* |
+| BLOBBASEFEE | 0x4A | Get blob base fee | EIP-7516* |
+
+*Note: BLOBHASH and BLOBBASEFEE are included for bytecode compatibility but return zero on ETC since blob transactions (EIP-4844) are not implemented on proof-of-work chains.
+
+This opcode alignment ensures that smart contracts compiled for recent Ethereum versions will execute correctly on ETC. Without these opcodes, contracts using Solidity 0.8.20+ or newer tooling would fail to deploy.
+
+### Impact on Miners and Users
+
+**For users**: Transaction fee estimation becomes more predictable. The base fee algorithm smooths out fee spikes. Users get refunds when their `maxFeePerGas` exceeds the actual cost.
+
+**For miners**: Priority fees remain the incentive for transaction inclusion. Miners can still order transactions by priority fee and extract MEV. Block rewards (from the fixed emission schedule) continue unchanged.
+
+**For developers**: Modern tooling works out of the box. Contracts can read `BASEFEE`. New opcodes enable gas optimizations (PUSH0 saves gas vs PUSH1 0x00).
+
+### Philosophical Implications
+
+Olympia represents ETC's approach to evolution: adopt proven improvements (EIP-1559's UX benefits, modern opcodes) while charting a distinct path on economic policy (treasury vs burn).
+
+This is consistent with ETC's values:
+- **Immutability**: No irregular state changes; the chain history remains unaltered
+- **Sound money**: Fixed emission schedule unchanged; no new issuance
+- **Decentralization**: Treasury enables funding without central control
+
 ## Proof of Stake (PoS)
 
 Proof of Stake replaces computational work with economic stake. Ethereum transitioned to PoS in September 2022 ("The Merge").

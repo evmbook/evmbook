@@ -122,8 +122,11 @@ Opcodes are the machine instructions of the EVM. Here are the major categories:
 | `MLOAD` | Load word from memory |
 | `MSTORE` | Store word to memory |
 | `MSTORE8` | Store byte to memory |
+| `MCOPY` | Copy memory region (EIP-5656) |
 | `SLOAD` | Load word from storage |
 | `SSTORE` | Store word to storage |
+| `TLOAD` | Load from transient storage (EIP-1153) |
+| `TSTORE` | Store to transient storage (EIP-1153) |
 
 ### Contract Interaction
 
@@ -134,7 +137,92 @@ Opcodes are the machine instructions of the EVM. Here are the major categories:
 | `STATICCALL` | Read-only call |
 | `CREATE` | Deploy new contract |
 | `CREATE2` | Deploy with deterministic address |
-| `SELFDESTRUCT` | Destroy contract |
+| `SELFDESTRUCT` | Destroy contract (see note below) |
+
+<Callout type="warning">
+**SELFDESTRUCT Changes (EIP-6780)**: Since the Cancun upgrade on Ethereum, `SELFDESTRUCT` only destroys contract state if called in the **same transaction** as contract creation. Otherwise, it only transfers the contract's balance to the target without deleting code or storage. ETC will adopt similar semantics in a future upgrade. For reentrancy guards and similar patterns, use transient storage (`TSTORE`/`TLOAD`) instead.
+</Callout>
+
+### New Opcodes (2023-2025)
+
+Recent upgrades introduced important new opcodes:
+
+| Opcode | Hex | Description | Available |
+|--------|-----|-------------|-----------|
+| `PUSH0` | 0x5F | Push zero to stack (saves 1 gas vs `PUSH1 0x00`) | ETH Shanghai, ETC Olympia |
+| `MCOPY` | 0x5E | Memory-to-memory copy | ETH Cancun, ETC Olympia |
+| `TLOAD` | 0x5C | Load from transient storage | ETH Cancun, ETC Olympia |
+| `TSTORE` | 0x5D | Store to transient storage | ETH Cancun, ETC Olympia |
+| `BASEFEE` | 0x48 | Current block base fee (EIP-1559) | ETH London, ETC Olympia |
+| `BLOBHASH` | 0x49 | Get blob versioned hash | ETH Cancun only |
+| `BLOBBASEFEE` | 0x4A | Get blob base fee | ETH Cancun only |
+
+#### PUSH0 (EIP-3855)
+
+Pushes zero onto the stack for 2 gas instead of 3 gas for `PUSH1 0x00`:
+
+```
+// Old: 3 gas
+PUSH1 0x00
+
+// New: 2 gas
+PUSH0
+```
+
+Solidity 0.8.20+ generates `PUSH0` by default. This saves gas across many common patterns (function argument padding, zero initialization, etc.).
+
+#### Transient Storage (EIP-1153)
+
+Transient storage is automatically cleared at the end of each transaction—perfect for reentrancy locks:
+
+```solidity
+// Using transient storage for reentrancy guard
+contract ReentrancyGuard {
+    uint256 private constant LOCKED = 2;
+    uint256 private constant UNLOCKED = 1;
+
+    modifier nonReentrant() {
+        // TLOAD: Read transient storage
+        assembly { if eq(tload(0), LOCKED) { revert(0, 0) } }
+
+        // TSTORE: Set lock
+        assembly { tstore(0, LOCKED) }
+        _;
+        // TSTORE: Clear lock (automatically cleared at tx end anyway)
+        assembly { tstore(0, UNLOCKED) }
+    }
+}
+```
+
+Benefits:
+- 100 gas for `TLOAD`/`TSTORE` vs 2,100/20,000 for `SLOAD`/`SSTORE`
+- No need to clear at end (automatic)
+- Perfect for per-transaction state
+
+#### MCOPY (EIP-5656)
+
+Efficient memory-to-memory copy:
+
+```solidity
+// Old approach: loop with MLOAD/MSTORE
+assembly {
+    let length := mload(data)
+    let src := add(data, 32)
+    let dest := result
+    for { let i := 0 } lt(i, length) { i := add(i, 32) } {
+        mstore(add(dest, i), mload(add(src, i)))
+    }
+}
+
+// New approach: single MCOPY instruction
+assembly {
+    mcopy(dest, src, length)
+}
+```
+
+<Note>
+**ETC Opcode Parity (ECIP-1121)**: The Olympia upgrade brings all these opcodes to Ethereum Classic, ensuring contracts compiled for recent Ethereum versions work correctly on ETC. `BLOBHASH` and `BLOBBASEFEE` are included for bytecode compatibility but return zero since ETC doesn't support blob transactions.
+</Note>
 
 ### Block Information
 
@@ -146,9 +234,15 @@ Opcodes are the machine instructions of the EVM. Here are the major categories:
 | `NUMBER` | Block number |
 | `DIFFICULTY` / `PREVRANDAO` | PoW difficulty or PoS randomness |
 | `GASLIMIT` | Block gas limit |
+| `CHAINID` | Current chain ID (1 for ETH, 61 for ETC) |
+| `BASEFEE` | Current block base fee (EIP-1559/EIP-3198) |
 
 <Note>
 The `DIFFICULTY` opcode returns different values on **Ethereum Classic (PoW)** vs **Ethereum (PoS)**. After The Merge, Ethereum renamed it to `PREVRANDAO` and it returns random data from the beacon chain instead of mining difficulty.
+</Note>
+
+<Note>
+**BASEFEE** returns the current block's base fee. On Ethereum, the base fee is burned; on Ethereum Classic (post-Olympia), it goes to the protocol treasury. Contracts can use this for gas price estimation and fee-aware logic.
 </Note>
 
 ## Gas Mechanics

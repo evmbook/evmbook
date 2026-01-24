@@ -14,7 +14,11 @@ In this chapter, we will dissect transactions, show how they work, and examine t
 
 First let's take a look at the basic structure of a transaction, as it is serialized and transmitted on the Ethereum network. Each client and application that receives a serialized transaction will store it in-memory using its own internal data structure, perhaps embellished with metadata that doesn't exist in the network serialized transaction itself. The network-serialization is the only standard form of a transaction.
 
-A transaction is a serialized binary message that contains the following data:
+<Callout type="info">
+This section describes **legacy (Type 0) transactions**. Modern EVM networks support multiple transaction types with different fields—see the "Transaction Types" section for details on Type 1 (access lists), Type 2 (EIP-1559), and Type 3 (blobs).
+</Callout>
+
+A legacy transaction is a serialized binary message that contains the following data:
 
 **Nonce** — A sequence number, issued by the originating EOA, used to prevent message replay
 
@@ -106,9 +110,174 @@ Now, imagine that you have multiple independent wallet applications that are gen
 
 In the end, these concurrency problems, on top of the difficulty of tracking account balances and transaction confirmations in independent processes, force most implementations toward avoiding concurrency and creating bottlenecks such as a single process handling all withdrawal transactions in an exchange, or setting up multiple hot wallets that can work completely independently for withdrawals and only need to be intermittently rebalanced.
 
+## Transaction Types
+
+The EVM has evolved beyond the original transaction format. Today, multiple transaction types coexist, each with different fields and behaviors. Understanding these types is essential for modern EVM development.
+
+### Type 0: Legacy Transactions
+
+The original transaction format, still supported on all EVM chains:
+
+```
+{
+  nonce,
+  gasPrice,
+  gasLimit,
+  to,
+  value,
+  data,
+  v, r, s  // signature
+}
+```
+
+Legacy transactions use a single `gasPrice` field: you specify how much you're willing to pay per unit of gas, and miners prioritize transactions with higher gas prices.
+
+### Type 1: Access List Transactions (EIP-2930)
+
+Introduced in the Berlin upgrade (2021), Type 1 transactions add an `accessList` field:
+
+```
+{
+  chainId,
+  nonce,
+  gasPrice,
+  gasLimit,
+  to,
+  value,
+  data,
+  accessList,    // NEW: list of addresses and storage keys
+  v, r, s
+}
+```
+
+The access list declares which addresses and storage slots the transaction will access. This provides gas discounts for "warm" storage access and helps with certain security considerations around gas costs.
+
+### Type 2: EIP-1559 Transactions
+
+The London upgrade (August 2021 on Ethereum) introduced a fundamentally new fee mechanism. Type 2 transactions replace `gasPrice` with two new fields:
+
+```
+{
+  chainId,
+  nonce,
+  maxPriorityFeePerGas,  // NEW: tip to block producer
+  maxFeePerGas,          // NEW: maximum total fee per gas
+  gasLimit,
+  to,
+  value,
+  data,
+  accessList,
+  v, r, s
+}
+```
+
+#### How EIP-1559 Fees Work
+
+EIP-1559 introduces a **base fee** that's set by the protocol, not by users:
+
+- **Base fee**: Determined algorithmically based on network congestion. If blocks are more than 50% full, the base fee increases. If less than 50% full, it decreases. This creates predictable pricing.
+
+- **Priority fee (tip)**: An optional tip to incentivize block producers to include your transaction. Goes directly to the miner/validator.
+
+- **Max fee**: The absolute maximum you're willing to pay per gas unit. This protects you from unexpectedly high fees if the base fee spikes.
+
+The actual fee paid is:
+```
+fee_per_gas = min(maxFeePerGas, baseFee + maxPriorityFeePerGas)
+total_fee = fee_per_gas × gas_used
+```
+
+Any difference between `maxFeePerGas` and the actual fee is refunded.
+
+#### EIP-1559 on Ethereum: The Fee Burn
+
+On Ethereum, the base fee is **burned**—destroyed forever. Only the priority fee goes to validators. This creates deflationary pressure when network activity is high. During periods of intense usage, more ETH is burned than issued as rewards, making ETH supply deflationary.
+
+```
+On Ethereum:
+├── Base fee → BURNED (removed from circulation)
+└── Priority fee → Validator
+```
+
+#### EIP-1559 on Ethereum Classic: Treasury Funding (Olympia)
+
+Ethereum Classic implements EIP-1559 differently through the Olympia upgrade (ECIP-1111). Instead of burning the base fee, ETC directs it to a **treasury address** for protocol development:
+
+```
+On Ethereum Classic (post-Olympia):
+├── Base fee → Treasury (funds development)
+└── Priority fee → Miner
+```
+
+<Callout type="note" title="Olympia: Decentralized Funding Without New Issuance">
+The Olympia upgrade solves a critical challenge for decentralized networks: how do you fund ongoing development without a central foundation?
+
+By redirecting the base fee to a consensus-recognized treasury (ECIP-1112), ETC creates a sustainable funding mechanism using *existing* transaction fee revenue—no new tokens are minted. Users pay the same fees they would anyway; those fees just go to protocol development instead of being burned.
+
+This is philosophically distinct from ETH's burn (which benefits all holders through scarcity) and from inflationary treasury systems (which dilute existing holders).
+</Callout>
+
+#### Code Example: Type 2 Transactions with ethers.js
+
+```javascript
+// Modern ethers.js v6 Type 2 transaction
+const tx = await signer.sendTransaction({
+  to: "0x...",
+  value: ethers.parseEther("0.1"),
+  // EIP-1559 fields
+  maxFeePerGas: ethers.parseUnits("50", "gwei"),
+  maxPriorityFeePerGas: ethers.parseUnits("2", "gwei"),
+});
+
+// Or let the provider estimate fees
+const feeData = await provider.getFeeData();
+console.log("Base fee:", ethers.formatUnits(feeData.gasPrice, "gwei"), "gwei");
+console.log("Max priority:", ethers.formatUnits(feeData.maxPriorityFeePerGas, "gwei"), "gwei");
+
+// Send with auto-estimated fees
+const tx = await signer.sendTransaction({
+  to: "0x...",
+  value: ethers.parseEther("0.1"),
+  // ethers.js automatically uses Type 2 on EIP-1559 networks
+});
+```
+
+### Type 3: Blob Transactions (EIP-4844)
+
+<Callout type="warning">
+Blob transactions are currently only available on Ethereum (since the Dencun upgrade, March 2024). Ethereum Classic, as a proof-of-work chain, does not implement EIP-4844.
+</Callout>
+
+The Dencun upgrade introduced Type 3 transactions for Layer 2 rollups:
+
+```
+{
+  chainId,
+  nonce,
+  maxPriorityFeePerGas,
+  maxFeePerGas,
+  gasLimit,
+  to,
+  value,
+  data,
+  accessList,
+  maxFeePerBlobGas,    // NEW: max fee for blob data
+  blobVersionedHashes, // NEW: commitments to blob data
+  v, r, s
+}
+```
+
+Blobs are large data chunks (~128 KB each) attached to transactions but not stored permanently in execution state. They're designed for rollups to post data availability proofs cheaply. Blob data is guaranteed available for ~18 days, then pruned.
+
+Blob transactions have a separate fee market (`blobBaseFee`) that operates independently of the regular gas market.
+
 ## Transaction Gas
 
-We talked about gas a little in earlier chapters. However, let's cover some basics about the role of the `gasPrice` and `gasLimit` components of a transaction.
+We talked about gas a little in earlier chapters. However, let's cover some basics about the role of gas in transactions.
+
+<Callout type="note">
+The following section discusses both the legacy `gasPrice` model and the modern EIP-1559 fee mechanism. On EIP-1559-enabled networks (Ethereum since London 2021, ETC since Olympia 2025), the `maxFeePerGas` and `maxPriorityFeePerGas` fields are preferred. Legacy `gasPrice` transactions are still supported for backward compatibility.
+</Callout>
 
 Gas is the fuel of Ethereum. Gas is not ether—it's a separate virtual currency with its own exchange rate against ether. Ethereum uses gas to control the amount of resources that a transaction can use, since it will be processed on thousands of computers around the world. The open-ended (Turing-complete) computation model requires some form of metering in order to avoid denial-of-service attacks or inadvertently resource-devouring transactions.
 

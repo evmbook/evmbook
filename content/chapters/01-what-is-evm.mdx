@@ -24,6 +24,186 @@ The EVM's purpose is not primarily to be a digital currency payment network. Whi
 
 Unlike Bitcoin, which has a very limited scripting language, EVM-based chains are designed to be general-purpose programmable blockchains that run a *virtual machine* capable of executing code of arbitrary and unbounded complexity. Where Bitcoin's Script language is, intentionally, constrained to simple true/false evaluation of spending conditions, the EVM's language is *Turing complete*, meaning that it can straightforwardly function as a general-purpose computer.
 
+## The Road to Programmable Money
+
+The EVM didn't emerge in a vacuum. Understanding where it came from—and how it differs from alternatives—helps clarify why it became the dominant platform for decentralized applications.
+
+### The Smart Contract Vision
+
+The concept of "smart contracts" predates Bitcoin by over a decade. In 1994, cryptographer Nick Szabo wrote about "a computerized transaction protocol that executes the terms of a contract." His vision was of self-enforcing agreements encoded in software, eliminating the need for trusted intermediaries.
+
+Szabo's foundational papers—"Smart Contracts" (1994), "Smart Contracts: Building Blocks for Digital Markets" (1996), and "The Idea of Smart Contracts" (1997)—outlined how cryptographic protocols could automate contract execution. He envisioned everything from automated escrow to self-executing property transfers.
+
+<Callout type="note">
+Nick Szabo also designed Bit Gold (1998), a precursor to Bitcoin that introduced many concepts later used by Satoshi Nakamoto. While Bit Gold was never implemented, its influence on cryptocurrency design is undeniable.
+</Callout>
+
+However, Szabo lacked a decentralized platform to run these contracts. Traditional servers meant trusting someone to run the code honestly. The missing piece was a trustless execution environment—which wouldn't arrive until Bitcoin introduced decentralized consensus in 2008.
+
+### Early Attempts at Programmability
+
+Once Bitcoin proved that decentralized consensus was possible, developers immediately began exploring how to add programmability.
+
+**Namecoin (2011)** — The first altcoin, created by forking Bitcoin. Namecoin added a simple key-value store for registering names (like `.bit` domains). While not truly programmable, it demonstrated that blockchain state could hold more than just currency balances. Namecoin pioneered the concept of "auxiliary blockchain applications" but hit the fundamental limitation: Bitcoin Script was deliberately constrained.
+
+**Colored Coins (2012)** — A proposal to "color" specific satoshis to represent other assets—stocks, bonds, or property titles. By marking Bitcoin outputs with metadata, colored coins created a primitive asset layer. Projects like Colu and ChromaWay implemented this, but the lack of on-chain logic meant all rules had to be enforced externally.
+
+**Mastercoin/Omni (2013)** — J.R. Willett's Mastercoin (later renamed Omni) embedded a complete token protocol in Bitcoin transactions using `OP_RETURN` outputs. It enabled token creation, simple exchanges, and even basic smart contracts. Tether (USDT) originally launched on Omni. However, Omni contracts were interpreted off-chain—nodes had to run special software to understand what the Bitcoin transactions "meant." There was no virtual machine, no on-chain state transitions.
+
+**Counterparty (2014)** — Built on Bitcoin using a "proof of burn" launch, Counterparty embedded an entire virtual machine in Bitcoin transactions. It even implemented a Turing-complete scripting language (Ethereum's Solidity!) compiled to Bitcoin opcodes. But the execution was awkward: contracts ran on Counterparty nodes interpreting Bitcoin data, not natively on the blockchain. Transaction costs were high because every instruction required Bitcoin fees.
+
+These projects proved the demand for programmability but also revealed Bitcoin's limitations. Satoshi's deliberate choice to keep Script minimal—no loops, no global state—made building complex applications painful.
+
+### The Ethereum Solution
+
+Vitalik Buterin's insight was that the blockchain itself should be the virtual machine. Instead of embedding contracts in a cryptocurrency's transaction format, build the cryptocurrency *around* the virtual machine. Every node runs the same code, producing deterministic state transitions. The blockchain records not just balances but arbitrary program state.
+
+This design choice—making the VM the first-class citizen—enabled:
+
+- **Global state**: Contracts can read each other's storage
+- **Composability**: Contracts can call contracts
+- **Synchronous execution**: Within a transaction, everything happens atomically
+- **Native gas metering**: The protocol itself limits computation
+
+The EVM succeeded where others struggled because it was designed for programmability from the ground up, not bolted onto a payment system.
+
+## Comparing Blockchain Computation Models
+
+The EVM is one approach to blockchain computation, but not the only one. Understanding alternative models helps appreciate the EVM's trade-offs and design philosophy.
+
+### Account Model vs UTXO Model
+
+The most fundamental architectural difference between blockchain platforms is how they track ownership.
+
+**Bitcoin's UTXO Model**: Transactions consume "unspent transaction outputs" (UTXOs) and create new ones. There are no accounts—just outputs waiting to be spent. Verification is stateless: you only need the referenced outputs, not global state. This enables parallel validation and simplifies light clients.
+
+```
+UTXO Model:
+  Input:  Spend UTXO(txid:abc, vout:0) worth 1 BTC
+  Output: Create UTXO worth 0.3 BTC → Alice
+          Create UTXO worth 0.7 BTC → Bob (change)
+```
+
+**EVM's Account Model**: Addresses have balances and (for contracts) storage. Transactions modify global state—increasing one balance, decreasing another. State is persistent and globally accessible. This enables complex interactions but requires full nodes to track all state.
+
+```
+Account Model:
+  Before: Alice.balance = 1 ETH, Bob.balance = 0 ETH
+  Tx:     Alice sends 0.3 ETH to Bob
+  After:  Alice.balance = 0.7 ETH, Bob.balance = 0.3 ETH
+```
+
+The EVM chose accounts because smart contracts need persistent state. A contract's storage slots must be readable and writable across transactions. UTXO works well for payments but makes stateful computation awkward.
+
+### Bitcoin Script
+
+Bitcoin's Script is a stack-based language deliberately limited by design:
+
+- **No loops**: Scripts always terminate
+- **No global state**: Only the current transaction's inputs/outputs are visible
+- **Limited opcodes**: ~100 operations, mostly cryptographic and stack manipulation
+- **Two-stack architecture**: Main stack and alt stack, no memory
+
+Script evaluates spending conditions. A standard transaction asks: "Does this signature match this public key?" More complex scripts enable multisig, timelocks, and hash-locked payments. But you can't build a DEX in Script—it's not designed for that.
+
+<Callout type="info">
+Bitcoin's constraints are a feature, not a bug. Predictable execution means easier security auditing. Every Script is guaranteed to terminate, eliminating denial-of-service through infinite loops. Bitcoin prioritizes security and simplicity over flexibility.
+</Callout>
+
+### Solana Virtual Machine (SVM)
+
+Solana took a different approach: optimize for throughput at all costs. The SVM differs from the EVM in several key ways:
+
+**Programs are stateless**: Solana "programs" (smart contracts) don't store data themselves. Instead, they operate on "accounts" passed to them as transaction inputs. State lives in accounts, logic lives in programs. This separation enables parallel execution—transactions touching different accounts can run simultaneously.
+
+**Account ownership model**: Every Solana account has an "owner" program that controls modifications. This differs from the EVM's `msg.sender` pattern where any address can call any contract.
+
+**Rust and BPF**: Solana programs are written in Rust (or C) and compiled to Berkeley Packet Filter (BPF) bytecode. This is lower-level than EVM bytecode, enabling more optimization but requiring more careful programming.
+
+**Parallel execution (Sealevel)**: Solana's runtime can execute non-conflicting transactions in parallel across multiple cores. This is its key throughput advantage—but requires transactions to declare their account dependencies upfront.
+
+Trade-offs: Solana achieves higher TPS but faces criticism about centralization (validator hardware requirements are high) and reliability (network outages have occurred). The programming model is less intuitive than Solidity for developers used to object-oriented patterns.
+
+### Cardano's Extended UTXO (eUTXO)
+
+Cardano attempts to combine UTXO's advantages with smart contract capability through the Extended UTXO model:
+
+**UTXOs with data**: Each output can carry a "datum"—arbitrary data attached to the UTXO. Scripts can read this data when the UTXO is spent.
+
+**Redeemers**: When spending a script-locked UTXO, you provide a "redeemer"—input data for the script to process.
+
+**Deterministic execution**: Because scripts only see their inputs (not global state), you know exactly what resources a transaction will consume before submitting it. No gas estimation uncertainty.
+
+**Plutus (Haskell-based)**: Cardano scripts are written in Plutus, a Haskell-derived language emphasizing formal verification.
+
+Trade-offs: The eUTXO model makes some patterns harder—like a simple AMM where multiple users try to swap simultaneously (they're all trying to spend the same UTXO). Cardano addresses this with design patterns like "batching" but requires different thinking than EVM development.
+
+### Move-Based Chains (Sui, Aptos)
+
+The Move language (originally developed for Facebook's Diem/Libra) introduces *resource-oriented programming*:
+
+**Linear types**: Resources can't be accidentally copied or destroyed—they must be explicitly moved. This prevents common bugs like double-spending at the language level.
+
+**Object-centric model**: Sui treats blockchain state as "objects" with clear ownership. Objects can be owned by addresses, shared, or immutable. This enables parallel execution for owned objects.
+
+**Native parallel execution**: Like Solana, Move chains can execute non-conflicting transactions in parallel. The ownership model makes conflicts explicit.
+
+Trade-offs: Move is a new language requiring developers to learn different paradigms. The ecosystem is younger than Ethereum's, with fewer tools, auditors, and battle-tested patterns.
+
+### WebAssembly (WASM) Chains
+
+Several platforms use WebAssembly as their virtual machine:
+
+**Cosmos/CosmWasm**: The Cosmos ecosystem uses CosmWasm for smart contracts. Contracts are written in Rust, compiled to WASM, and can interact across chains via IBC (Inter-Blockchain Communication).
+
+**Polkadot**: Parachains (Polkadot's heterogeneous shards) often use WASM for their runtime and smart contracts. Ink! is Polkadot's Rust-based contract language.
+
+**Near Protocol**: Uses WASM with a sharded architecture. Contracts are written in Rust or AssemblyScript.
+
+WASM advantages: It's a standard with multiple implementations, supports many source languages, and has extensive tooling from the web development world.
+
+Trade-offs: WASM wasn't designed for blockchain—it lacks built-in gas metering (chains must add it), has a larger attack surface than purpose-built VMs, and the abstraction can introduce overhead.
+
+### DAG-Based Systems
+
+Some platforms abandon the blockchain structure entirely:
+
+**IOTA (Tangle)**: Transactions form a directed acyclic graph (DAG) rather than a linear chain. Each transaction references two previous transactions. There are no miners—users validate each other's transactions. The Tangle was designed for IoT microtransactions but has struggled with decentralization and spam prevention.
+
+**Hedera Hashgraph**: Uses a DAG with a "gossip about gossip" protocol to achieve consensus. Hedera claims faster finality than blockchains but operates with permissioned governance (a council of corporations controls the network). It offers "Hedera Smart Contract Service" running EVM bytecode.
+
+### Payment-Focused Ledgers
+
+Some platforms deliberately limit programmability to focus on payments:
+
+**XRP Ledger (Ripple)**: Includes a built-in DEX and payment channels but no general-purpose smart contracts. This is by design—XRPL prioritizes fast, cheap payments for institutional use cases. Recent additions like Hooks provide limited programmability.
+
+**Stellar**: Similar philosophy to XRPL—focused on payments and asset issuance. Stellar has "anchors" (fiat on-ramps), path payments (automatic currency conversion), and Soroban (a recent addition for smart contracts using WASM).
+
+### Historical and Alternative Platforms
+
+**NXT (2013)**: One of the first pure proof-of-stake platforms. Offered limited built-in features (asset exchange, voting, messaging) but not general programmability. Influenced later PoS designs.
+
+**EOS (2018)**: Promised high TPS through Delegated Proof of Stake (DPoS). Made transactions "free" (no gas) but required staking for resources. The centralization of 21 block producers and governance issues led to a decline.
+
+**Decred (2016)**: Hybrid PoW/PoS consensus with a built-in treasury system. Notable for pioneering on-chain governance and stakeholder voting. Limited smart contract capability but interesting governance model.
+
+**Monero**: Deliberately avoids smart contracts to maintain privacy. Complex scripts would leak information. Focuses purely on private value transfer.
+
+### Why the EVM Won
+
+Despite newer alternatives, the EVM dominates smart contract development. Why?
+
+**First-mover advantage in general-purpose computation**: Ethereum launched in 2015 with a working VM. Competitors arrived years later.
+
+**Developer ecosystem**: Solidity, Remix, Hardhat, Foundry, OpenZeppelin—the tooling is mature. Developers know Solidity. Auditors know Solidity. This creates a powerful moat.
+
+**Network effects**: Users, liquidity, and dApps concentrate where other users, liquidity, and dApps already exist. Ethereum has the most DeFi TVL, the most NFT volume, the most stablecoin circulation.
+
+**EVM compatibility as a standard**: Recognizing Ethereum's dominance, many chains (BSC, Polygon, Avalanche C-Chain, Arbitrum, Optimism, Fantom, Gnosis Chain) chose EVM compatibility. Developers can deploy existing code. Users can use existing wallets. This made "EVM" a de facto standard rather than just Ethereum's VM.
+
+**Multi-chain reality**: Rather than one chain winning, we have many EVM chains with different trade-offs (security, speed, cost, decentralization). The EVM bytecode is the common language. Ethereum Classic, as the original EVM chain continuing proof-of-work, occupies a unique position in this ecosystem.
+
 ## Components of a Blockchain
 
 The components of an open, public blockchain are (usually):
@@ -88,9 +268,14 @@ Today, both chains share the same EVM architecture and are largely compatible at
 | **Consensus** | Proof-of-Stake (since The Merge, 2022) | Proof-of-Work |
 | **Chain ID** | 1 | 61 |
 | **Philosophy** | Pragmatic evolution | Immutability, code-is-law |
+| **Fee mechanism** | EIP-1559 with fee burn | EIP-1559 with treasury funding (Olympia) |
 | **Primary Testnet** | Sepolia | Mordor |
 
 For developers, the practical implications are minimal—the same Solidity code compiles to the same EVM bytecode and runs on both chains. The differences lie in network configuration, gas economics, and community values.
+
+<Callout type="note" title="ETC Olympia Upgrade">
+The Olympia upgrade family (ECIP-1111 through ECIP-1121) brings EIP-1559-style transactions to ETC. Rather than burning the base fee like Ethereum, ETC directs these fees to a consensus-recognized treasury address for protocol development. This solves the long-standing challenge of decentralized funding without creating new tokens—existing transaction fees fund future development.
+</Callout>
 
 ## Ethereum's Development Stages
 
@@ -105,7 +290,7 @@ The four main development stages are codenamed *Frontier*, *Homestead*, *Metropo
 - **Block #7,280,000 (Constantinople)** — Further Metropolis upgrades.
 - **Block #15,537,394 (The Merge)** — Ethereum's transition from PoW to PoS in September 2022.
 
-Ethereum Classic has followed its own upgrade path, maintaining proof-of-work consensus while implementing compatible EVM upgrades through ECIPs (Ethereum Classic Improvement Proposals).
+Ethereum Classic has followed its own upgrade path, maintaining proof-of-work consensus while implementing compatible EVM upgrades through ECIPs (Ethereum Classic Improvement Proposals). The upcoming **Olympia upgrade** (ECIP-1111 through ECIP-1121) brings EIP-1559-style transactions to ETC, with a unique twist: instead of burning the base fee like Ethereum does, ETC redirects it to a treasury for protocol development—solving decentralized funding without new token issuance.
 
 ## A General-Purpose Blockchain
 
@@ -122,7 +307,7 @@ In an EVM-based blockchain, the components of a blockchain system are, more spec
 - **Transactions** — Network messages that include a sender, recipient, value, and data payload.
 - **State machine** — The Ethereum Virtual Machine (EVM), a stack-based virtual machine that executes *bytecode* (machine-language instructions). EVM programs, called "smart contracts," are written in high-level languages (e.g., Solidity) and compiled to bytecode for execution on the EVM.
 - **Data structures** — State is stored locally on each node as a database (usually LevelDB), which contains the transactions and system state in a serialized hashed data structure called a *Merkle Patricia Tree*.
-- **Consensus algorithm** — Ethereum uses proof-of-stake (PoS) via the Beacon Chain. Ethereum Classic uses proof-of-work (PoW) with the Etchash algorithm.
+- **Consensus algorithm** — Ethereum uses proof-of-stake (PoS) via the Beacon Chain. Ethereum Classic uses proof-of-work (PoW) with the ETCHash algorithm.
 - **Clients** — There are several interoperable implementations. For Ethereum: Geth, Nethermind, Besu. For Ethereum Classic: Core Geth, Hyperledger Besu, and Erigon.
 
 ### Further Reading

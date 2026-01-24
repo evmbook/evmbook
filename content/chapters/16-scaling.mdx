@@ -133,11 +133,16 @@ contract OptimisticRollup {
 }
 ```
 
-**Examples:** Optimism, Arbitrum, Base
+**Examples:** Optimism, Arbitrum, Base, Mantle, Blast
+
+As of 2025, optimistic rollups dominate L2 usage:
+- **Arbitrum**: ~60% of L2 TVL, largest ecosystem
+- **Optimism/OP Stack**: Powers Base (Coinbase), Mantle, and others
+- **Base**: Fastest-growing L2, backed by Coinbase
 
 **Tradeoffs:**
 - ✅ EVM equivalent (same code works)
-- ✅ Lower gas costs than L1
+- ✅ Lower gas costs than L1 (~10x cheaper pre-blobs, ~100x cheaper post-blobs)
 - ❌ 7-day withdrawal period (for security)
 - ❌ Relies on at least one honest challenger
 
@@ -168,13 +173,20 @@ contract ZKRollup {
 }
 ```
 
-**Examples:** zkSync Era, Polygon zkEVM, Scroll, Linea
+**Examples:** zkSync Era, Polygon zkEVM, Scroll, Linea, Starknet (non-EVM)
+
+The ZK rollup landscape matured significantly in 2024-2025:
+- **zkSync Era**: Production since 2023, account abstraction native
+- **Polygon zkEVM**: Type-2 EVM equivalence
+- **Scroll**: Type-2 EVM equivalence, decentralizing prover network
+- **Linea**: ConsenSys-backed, production since 2023
 
 **Tradeoffs:**
-- ✅ Fast finality (no challenge period)
+- ✅ Fast finality (minutes, not days)
 - ✅ Strong cryptographic guarantees
-- ❌ Proving is computationally expensive
-- ❌ EVM compatibility can be challenging
+- ✅ Proving costs decreasing rapidly (ASIC acceleration, recursive proofs)
+- ❌ More complex infrastructure than optimistic rollups
+- ❌ Some EVM edge cases may differ
 
 ## Rollup Comparison
 
@@ -200,10 +212,40 @@ Rollups need transaction data available to reconstruct state:
 - Cheaper, but trust assumptions
 - Examples: StarkEx, zkPorter
 
-**EIP-4844 (Proto-Danksharding):**
-- "Blobs" of data that are cheaper than calldata
-- Temporary storage (~2 weeks)
-- Significantly reduces rollup costs
+**EIP-4844 (Proto-Danksharding) — Ethereum Only:**
+
+The Dencun upgrade (March 2024) introduced "blob-carrying transactions" that dramatically reduce rollup costs:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    Blob Transaction                          │
+│  ┌─────────────────────┐  ┌─────────────────────────────┐  │
+│  │  Regular Tx Fields  │  │  Blob Data (up to 6 blobs)  │  │
+│  │  (to, value, data)  │  │  ~128 KB per blob           │  │
+│  └─────────────────────┘  └─────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────┘
+```
+
+Key characteristics:
+- **Blobs are temporary** — Pruned after ~18 days (4096 epochs)
+- **Separate fee market** — `blobBaseFee` adjusts independently of gas
+- **~10-100x cheaper** than calldata for L2 data posting
+- **Target: 3 blobs/block** — ~0.375 MB/block data capacity
+
+Economics:
+- Blob gas has its own base fee mechanism (like EIP-1559)
+- When blob demand exceeds target, `blobBaseFee` increases
+- When demand is low, blobs cost nearly nothing
+
+Impact on L2 costs:
+```
+Before EIP-4844:  ~$0.10-$1.00 per L2 transaction (calldata)
+After EIP-4844:   ~$0.001-$0.01 per L2 transaction (blobs)
+```
+
+<Callout type="note">
+**ETC and Blob Transactions**: Ethereum Classic does not implement EIP-4844 (blob transactions). As a proof-of-work chain without L2 rollup infrastructure, there's no demand for blob data availability. ETC's lower base load means congestion isn't a current concern. If L2 development occurs on ETC in the future, alternative data availability solutions could be explored.
+</Callout>
 
 ## State Channels
 
@@ -360,10 +402,16 @@ function finalizeWithdrawal() external {
 
 The ecosystem is evolving toward:
 
-- **Multiple rollups** — Specialized for different use cases
-- **Shared sequencing** — Atomic cross-rollup transactions
-- **Data availability layers** — Celestia, EigenDA
-- **Account abstraction** — Seamless UX across chains
+- **Multiple rollups** — Specialized for different use cases (DeFi, gaming, social)
+- **Shared sequencing** — Atomic cross-rollup transactions (Espresso, Astria)
+- **Data availability layers** — Celestia (live), EigenDA (live), Avail
+- **Account abstraction** — EIP-4337 (live), native AA via EIP-7702 (Pectra)
+- **Restaking** — EigenLayer enabling shared security for new services
+- **Based rollups** — Sequencing by L1 validators for maximum decentralization
+
+<Callout type="info">
+**Pectra Upgrade (Late 2024)**: Ethereum's Pectra fork introduced EIP-7702 for native account abstraction, allowing EOAs to temporarily act as smart contract wallets. This significantly improves L2 UX by enabling gas sponsorship, batched transactions, and programmable wallet behavior without deploying separate smart contract wallets.
+</Callout>
 
 ```
                     ┌─────────────────────────┐
