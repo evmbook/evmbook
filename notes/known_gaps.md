@@ -62,7 +62,7 @@ This document tracks claims that need additional verification, sources that coul
 6. **BitShares/BitUSD documentation**
    - Need: Original stablecoin whitepaper
    - Why: First crypto-collateralized stable
-   - Status: Not included in current library
+   - Status: ✓ Added to library.bib as `misc_bitshares_bitusd_2014`
 
 ---
 
@@ -156,7 +156,7 @@ Multiple theories exist:
 
 ### Short-term
 
-5. [ ] Add BitShares/BitUSD to library.bib
+5. [x] Add BitShares/BitUSD to library.bib — Added as `misc_bitshares_bitusd_2014`
 6. [ ] Expand ZK proof system coverage
 7. [ ] Profile DeFi era builders
 8. [ ] Add auction theory foundations
@@ -164,5 +164,11 @@ Multiple theories exist:
 ### Long-term
 
 9. [ ] Expert review of contested claims
-10. [ ] International crypto history expansion
+10. [x] International crypto history expansion — Added `primitives/international_adoption.md`
 11. [ ] Interview-based verification where possible
+
+### Phase 2-3 Completions
+
+12. [x] Create restaking primitive — `primitives/restaking.md`
+13. [x] Create cross-chain interoperability primitive — `primitives/cross_chain_interoperability.md`
+14. [x] Expand all skeleton era chapters (0-12)
