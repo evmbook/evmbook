@@ -271,13 +271,43 @@ Registry of important historical claims with confidence assessments and source d
 
 ---
 
+## Restaking & Shared Security (Eras 5-12)
+
+| ID | Claim | Era | Confidence | Source(s) | Notes |
+|----|-------|-----|------------|-----------|-------|
+| C121 | Merge mining (Namecoin 2011) was the first shared security model, allowing miners to secure multiple PoW chains simultaneously | 5 | HIGH | Namecoin documentation | Precursor to PoS restaking |
+| C122 | Cosmos Interchain Security (2019) introduced PoS shared security, allowing the Hub to secure consumer chains | 7 | HIGH | [@misc_cosmos_ibc_2019] | "Replicated security" model |
+| C123 | Eigenlayer whitepaper (2023) formalized restaking—using staked ETH to secure multiple services with additional slashing conditions | 11 | HIGH | [@misc_eigenlayer_2023] | Sreeram Kannan, University of Washington |
+| C124 | Eigenlayer reached $15B+ TVL by mid-2024, becoming largest DeFi protocol by TVL | 12 | HIGH | DeFiLlama | Rapid capital inflows |
+| C125 | Vitalik raised concerns about restaking "overloading" Ethereum's consensus layer (May 2023) | 11 | HIGH | [@misc_buterin_overload_2023] | "Don't overload Ethereum consensus" |
+| C126 | Liquid Restaking Tokens (LRTs) like eETH, ezETH emerged in 2024 as tradable representations of restaked positions | 12 | HIGH | Protocol documentation | EtherFi, Renzo, Puffer, Kelp |
+| C127 | Symbiotic (2024), backed by Lido and Paradigm, introduced permissionless multi-asset restaking as alternative to Eigenlayer | 12 | HIGH | [@misc_symbiotic_2024] | Not limited to ETH |
+| C128 | EigenDA launched as first major AVS, providing data availability services secured by restaked ETH | 12 | HIGH | Eigenlayer documentation | First production AVS |
+
+---
+
+## Cross-Chain Interoperability (Eras 5-12)
+
+| ID | Claim | Era | Confidence | Source(s) | Notes |
+|----|-------|-----|------------|-----------|-------|
+| C129 | Hash Time-Locked Contracts (2013) enabled first trustless atomic swaps between blockchains without third parties | 5 | HIGH | Multiple implementations | Foundation for cross-chain |
+| C130 | Blockstream's sidechains paper (2014) formalized two-way pegs and SPV proofs for cross-chain asset transfers | 5 | HIGH | [@misc_blockstream_sidechains_2014] | Adam Back et al. |
+| C131 | Wrapped Bitcoin (WBTC) launched January 2019 as first major wrapped asset, using custodian consortium model | 7 | HIGH | WBTC documentation | BitGo custodianship |
+| C132 | Cosmos IBC (2019) provided first production-grade general message passing via light client verification | 8 | HIGH | [@misc_cosmos_ibc_2019] | Tendermint consensus verification |
+| C133 | Bridge exploits totaled over $2B in 2022 alone: Ronin ($625M), Wormhole ($320M), Nomad ($190M), Harmony ($100M) | 10 | HIGH | Post-mortems, news | High-value attack targets |
+| C134 | LayerZero (2021) introduced Ultra Light Node design separating oracle and relayer for configurable security | 9 | HIGH | [@misc_layerzero_2021] | Application-configurable trust |
+| C135 | Canonical L2 bridges inherit L1 security via fraud/validity proofs, while third-party bridges introduce additional trust assumptions | 9-12 | HIGH | L2 documentation | Security model distinction |
+| C136 | Chain abstraction and intent-based bridging emerged in 2024 to hide cross-chain complexity from end users | 12 | MEDIUM | Various protocols | Particle, Socket, Across+ |
+
+---
+
 ## Summary Statistics
 
 | Category | Count |
 |----------|-------|
-| Total Claims | 120 |
-| HIGH Confidence | 95 |
-| MEDIUM Confidence | 14 |
+| Total Claims | 136 |
+| HIGH Confidence | 110 |
+| MEDIUM Confidence | 15 |
 | LOW Confidence | 6 |
 | CONTESTED | 5 |
 
@@ -301,6 +331,8 @@ Registry of important historical claims with confidence assessments and source d
 | DePIN & Infrastructure | 4 | C075-C078 |
 | Bitcoin Programmability | 6 | C105-C110 |
 | Privacy Infrastructure | 10 | C111-C120 |
+| Restaking & Shared Security | 8 | C121-C128 |
+| Cross-Chain Interoperability | 8 | C129-C136 |
 
 ---
 

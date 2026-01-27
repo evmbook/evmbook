@@ -215,6 +215,31 @@ Human-readable index of sources in `library.bib` with credibility assessments an
 
 ---
 
+## Restaking & Shared Security
+
+| Key | Citation | Tier | Status | Notes |
+|-----|----------|------|--------|-------|
+| `misc_eigenlayer_2023` | Kannan, S. et al. (2023). EigenLayer | T1 | Verified | Restaking protocol whitepaper |
+| `misc_buterin_overload_2023` | Buterin, V. (2023). Don't Overload Consensus | T1 | Verified | Concerns about restaking |
+| `misc_symbiotic_2024` | Symbiotic (2024). Permissionless Restaking | T2 | Verified | Alternative restaking protocol |
+| `misc_babylon_btc_2024` | Babylon (2024). Bitcoin Staking Protocol | T2 | Verified | BTC restaking |
+
+---
+
+## Cross-Chain Interoperability
+
+| Key | Citation | Tier | Status | Notes |
+|-----|----------|------|--------|-------|
+| `misc_blockstream_sidechains_2014` | Back, A. et al. (2014). Pegged Sidechains | T1 | Verified | Two-way peg concept |
+| `misc_cosmos_ibc_2019` | Cosmos/Tendermint (2019). IBC | T1 | Verified | General message passing |
+| `misc_layerzero_2021` | Pellegrino, R. et al. (2021). LayerZero | T1 | Verified | Ultra Light Node design |
+| `misc_wormhole_hack_2022` | Various (2022). Wormhole Exploit | T2 | Verified | $320M bridge exploit |
+| `misc_nomad_hack_2022` | Various (2022). Nomad Exploit | T2 | Verified | $190M bridge exploit |
+| `misc_axelar_2022` | Axelar (2022). Connecting Web3 | T2 | Verified | PoS message passing |
+| `misc_hyperlane_2023` | Hyperlane (2023). Interoperability Layer | T2 | Verified | Modular ISM design |
+
+---
+
 ## Sources Needing Follow-Up
 
 The following sources need additional verification or primary documentation:
