@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#FAFAFA"/>
+
+  <!-- Title -->
+  <text x="400" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#333">
+    Proof of Work vs Proof of Stake
+  </text>
+
+  <!-- PoW Section (Left) -->
+  <g transform="translate(200, 60)">
+    <!-- Header -->
+    <rect x="-150" y="0" width="300" height="40" rx="5" fill="#3AB83A"/>
+    <text y="26" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#FFF">
+      Proof of Work (ETC)
+    </text>
+
+    <!-- Content box -->
+    <rect x="-150" y="45" width="300" height="300" rx="5" fill="#E8F5E9" stroke="#3AB83A" stroke-width="2"/>
+
+    <!-- Mining icon -->
+    <g transform="translate(0, 90)">
+      <rect x="-30" y="-25" width="60" height="50" rx="5" fill="#2D8F2D"/>
+      <text y="5" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#FFF">&#x26CF;</text>
+    </g>
+
+    <!-- Details -->
+    <text y="145" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#333">Security: Hashpower</text>
+    <text y="175" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#666">Miners solve puzzles</text>
+    <text y="190" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#666">with hardware + electricity</text>
+
+    <line x1="-100" y1="205" x2="100" y2="205" stroke="#3AB83A" stroke-width="1" opacity="0.5"/>
+
+    <text y="230" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#333">Block Time: ~13 sec</text>
+    <text y="250" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#333">Finality: Probabilistic</text>
+    <text y="270" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#333">Attack: 51% hashpower</text>
+
+    <line x1="-100" y1="285" x2="100" y2="285" stroke="#3AB83A" stroke-width="1" opacity="0.5"/>
+
+    <text y="310" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">ETCHash algorithm</text>
+    <text y="325" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">DAG-based, GPU friendly</text>
+  </g>
+
+  <!-- PoS Section (Right) -->
+  <g transform="translate(600, 60)">
+    <!-- Header -->
+    <rect x="-150" y="0" width="300" height="40" rx="5" fill="#627EEA"/>
+    <text y="26" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#FFF">
+      Proof of Stake (ETH)
+    </text>
+
+    <!-- Content box -->
+    <rect x="-150" y="45" width="300" height="300" rx="5" fill="#E8F4FD" stroke="#627EEA" stroke-width="2"/>
+
+    <!-- Staking icon -->
+    <g transform="translate(0, 90)">
+      <circle r="25" fill="#4B6DD0"/>
+      <text y="7" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#FFF">&#x039E;</text>
+    </g>
+
+    <!-- Details -->
+    <text y="145" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#333">Security: Staked ETH</text>
+    <text y="175" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#666">Validators stake 32 ETH</text>
+    <text y="190" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#666">as collateral</text>
+
+    <line x1="-100" y1="205" x2="100" y2="205" stroke="#627EEA" stroke-width="1" opacity="0.5"/>
+
+    <text y="230" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#333">Block Time: 12 sec</text>
+    <text y="250" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#333">Finality: Economic (~13 min)</text>
+    <text y="270" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#333">Attack: 34%/51% stake</text>
+
+    <line x1="-100" y1="285" x2="100" y2="285" stroke="#627EEA" stroke-width="1" opacity="0.5"/>
+
+    <text y="310" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">Slashing for misbehavior</text>
+    <text y="325" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">~99.95% less energy</text>
+  </g>
+
+  <!-- Center comparison -->
+  <g transform="translate(400, 250)">
+    <text y="-20" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#999">vs</text>
+
+    <!-- Comparison points -->
+    <rect x="-50" y="0" width="100" height="70" rx="5" fill="#FFF" stroke="#DDD" stroke-width="1"/>
+    <text y="20" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#333">Same EVM</text>
+    <text y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#333">Same Contracts</text>
+    <text y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#333">Different Security</text>
+  </g>
+
+  <!-- Bottom note -->
+  <text x="400" y="420" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#999">
+    The EVM specification is consensus-agnostic. Both mechanisms secure the same virtual machine.
+  </text>
+</svg>

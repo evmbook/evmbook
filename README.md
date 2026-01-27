@@ -1,6 +1,10 @@
-# Mastering EVM
+# Mastering EVM (2025 Edition)
+
+**The Complete Guide to the Ethereum Virtual Machine**
 
 A comprehensive guide to EVM development for 2025-2026. This book covers everything from foundational cryptography to building complete DeFi protocols, with a focus on practical code patterns and the evolution of key primitives.
+
+**Version 2025.1.0** | **28 Chapters** | **8 Appendices** | **~180,000 words**
 
 **Website**: [masteringevm.com](https://masteringevm.com)
 
@@ -43,21 +47,35 @@ Regulatory landscape, ecosystem bootstrapping (dependency trees), and agentic de
 - **Dependency trees**: Know what to build first when bootstrapping a new EVM ecosystem
 - **Modern tooling**: Foundry, viem, wagmi, TypeScript throughout
 
+## Available Formats
+
+| Format | Price | Status |
+|--------|-------|--------|
+| **Web** | Free | [masteringevm.com](https://masteringevm.com) |
+| **PDF** | Free | [Download](https://masteringevm.com/downloads) |
+| **EPUB** | Free | [Download](https://masteringevm.com/downloads) |
+| **Kindle** | $9.99 | Amazon |
+| **Paperback** | $49.99 | Amazon / IngramSpark |
+
+ISBN (Paperback): 979-8-9947278-0-5
+
 ## Repository Structure
 
 ```
 evmbook-v1/
 ├── content/
-│   ├── chapters/           # 27 chapters (MDX)
+│   ├── chapters/           # 28 chapters (MDX) including preface
 │   │   ├── 00-preface.mdx
 │   │   ├── 01-evm-today.mdx
 │   │   └── ... through 27-agentic-development.mdx
-│   └── appendices/         # 6 appendices
+│   └── appendices/         # 8 appendices (A-H)
 │       ├── a-fork-history.mdx
 │       ├── b-eip-standards.mdx
-│       └── ...
+│       └── ... through h-essential-reading.mdx
+├── publishing/             # Publishing metadata and templates
 ├── images/                 # Diagrams and screenshots
 ├── code/                   # Runnable code examples
+├── scripts/                # Build scripts (PDF, EPUB)
 ├── .claude/                # Claude Code configuration
 └── .github/                # GitHub Copilot configuration
 ```
@@ -122,6 +140,9 @@ This work is licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/
 
 This work builds upon concepts from "Mastering Ethereum" by Andreas M. Antonopoulos and Gavin Wood (CC BY-SA 4.0), but has been substantially rewritten with new examples, modern tooling (2025-2026), dual-chain coverage, and comprehensive application layer evolution content not present in the original.
 
-## Maintainer
+## Author & Publisher
 
-Developed and maintained with assistance from [Claude](https://claude.ai).
+**Christopher Mercer** — Author
+**White B0x Inc.** — Publisher
+
+Developed with assistance from [Claude](https://claude.ai).

@@ -1,0 +1,31 @@
+{
+  "name": "mastering-evm",
+  "version": "2025.1.0",
+  "description": "Mastering EVM (2025 Edition) - The Complete Guide to the Ethereum Virtual Machine",
+  "author": "Christopher Mercer",
+  "publisher": "White B0x Inc.",
+  "license": "CC-BY-SA-4.0",
+  "homepage": "https://masteringevm.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/evmbook/evmbook.git"
+  },
+  "keywords": [
+    "ethereum",
+    "evm",
+    "solidity",
+    "smart-contracts",
+    "blockchain",
+    "defi",
+    "web3"
+  ],
+  "scripts": {
+    "build:pdf": "scripts/build-pdf.sh",
+    "build:epub": "scripts/build-epub.sh",
+    "build:kindle": "scripts/build-kindle.sh",
+    "build:all": "scripts/build-all.sh",
+    "validate": "scripts/validate.sh",
+    "lint": "scripts/lint.sh"
+  },
+  "devDependencies": {}
+}

@@ -1,0 +1,117 @@
+# Mastering EVM (2025 Edition) - Publishing Metadata
+# This file contains metadata for multi-format publishing
+
+title: "Mastering EVM"
+subtitle: "The Complete Guide to the Ethereum Virtual Machine"
+edition: "2025 Edition"
+version: "2025.1.0"
+release_date: "January 2026"
+
+# Authors
+authors:
+  - name: "Christopher Mercer"
+    role: "Author"
+  - name: "Claude (Anthropic)"
+    role: "Writing Collaborator"
+
+# Audiobook
+audiobook:
+  reader: "Christopher Mercer"
+  narrator_notes: "Read by the author"
+  format: "MP3/M4B"
+  distribution: "Audible, direct download"
+
+# Publisher
+publisher:
+  name: "White B0x Inc."
+  location: "United States"
+
+# ISBN Numbers (Bowker)
+isbn:
+  paperback: "979-8-9947278-0-5"
+  ebook: "979-8-9947278-1-2"
+  audiobook: "979-8-9947278-2-9"
+
+# Print Specifications
+print_specifications:
+  trim_size: "7.5 x 9.25 inches"
+  page_count: "~600"
+  paper: "60# white offset"
+  ink: "Black and white interior"
+  binding: "Perfect bound paperback"
+  cover: "Matte laminated"
+  spine_width: "~1.2 inches"  # Calculated from page count
+
+# Digital Formats
+digital_formats:
+  - format: "PDF"
+    price: "Free"
+    distribution: "Direct download"
+  - format: "EPUB"
+    price: "Free"
+    distribution: "Direct download"
+  - format: "Web"
+    price: "Free"
+    distribution: "masteringevm.com"
+  - format: "Kindle"
+    price: "$9.99"
+    distribution: "Amazon KDP"
+  - format: "Paperback"
+    price: "$49.99"
+    distribution: "Amazon KDP, IngramSpark"
+
+# Print-on-Demand Services
+print_on_demand:
+  primary:
+    name: "Amazon KDP"
+    url: "https://kdp.amazon.com"
+    formats: ["Paperback", "Kindle"]
+  secondary:
+    name: "IngramSpark"
+    url: "https://ingramspark.com"
+    formats: ["Paperback"]
+    distribution: "Libraries, bookstores"
+
+# Content Summary
+content:
+  chapters: 28  # Including preface (00-27)
+  appendices: 8  # A through H
+  word_count: "~180,000"
+  code_examples: true
+  diagrams: true
+
+# Subject Categories (for bookstore/library classification)
+bisac_codes:
+  - "COM051300"  # Computers / Programming / Open Source
+  - "COM051010"  # Computers / Programming Languages / JavaScript
+  - "COM051390"  # Computers / Security / Cryptography
+
+# Keywords (for discoverability)
+keywords:
+  - "Ethereum"
+  - "EVM"
+  - "Solidity"
+  - "smart contracts"
+  - "blockchain development"
+  - "DeFi"
+  - "Web3"
+  - "cryptocurrency"
+  - "decentralized applications"
+
+# License
+license:
+  type: "CC BY-SA 4.0"
+  url: "https://creativecommons.org/licenses/by-sa/4.0/"
+  attribution: "Derivative of Mastering Ethereum (Open Edition) by Andreas M. Antonopoulos and Gavin Wood"
+
+# Website
+website:
+  url: "https://masteringevm.com"
+  read_online: "https://masteringevm.com/read"
+  downloads: "https://masteringevm.com/downloads"
+
+# Repository
+repository:
+  url: "https://github.com/evmbook/evmbook"
+  issues: "https://github.com/evmbook/evmbook/issues"
+  contributing: "https://github.com/evmbook/evmbook/blob/main/CONTRIBUTING.md"

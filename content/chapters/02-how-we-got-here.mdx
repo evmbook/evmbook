@@ -344,22 +344,63 @@ Cost: Electricity spent on computation
 - **RandomX** (Monero): CPU-optimized, actively fights ASICs
 - **Equihash** (Zcash): Memory-hard, ASIC-resistant design
 
-**The Environmental Debate:**
+**Energy Narrative Evolution (2017-2026):**
 
-PoW's electricity consumption became controversial:
-- Bitcoin network uses ~100+ TWh/year (comparable to small countries)
-- Defenders argue: energy secures the network, incentivizes renewable sources
-- Critics argue: wasteful, environmental harm exceeds benefits
-- This debate drove Ethereum's move to PoS
+The conversation around PoW energy consumption has undergone a dramatic transformation:
+
+**Era 1: "Wasteful" Framing (2017-2022)**
+
+Early criticism framed Bitcoin mining as pure waste:
+- Network uses ~100-150 TWh/year (comparable to small countries)
+- Media focus on carbon footprint without examining energy sources
+- China mining ban (2021) temporarily validated "environmental harm" narrative
+- This framing contributed to Ethereum's decision to pursue PoS
+
+**Era 2: The Stranded Energy Revelation (2023-2025)**
+
+A fundamental reframing emerged as data revealed mining's unique properties:
+
+*Grid Stabilization:*
+- Texas ERCOT integration: miners as controllable load
+- Miners shut down during peak demand, stabilizing the grid
+- "Buyer of last resort" for excess renewable energy
+- Wind and solar projects became economically viable with mining as baseload customer
+
+*Stranded Energy Monetization:*
+- Remote hydroelectric, solar, and wind installations found customers
+- Mining rigs deployed at sites too remote for grid connection
+- Previously "wasted" energy converted to economic value
+- Documentaries like *Stranded* (2024) showcased global examples
+
+*Methane Flaring Offset:*
+- Oil and gas industry discovered mining applications
+- Flared methane (wasted at wellheads) powers mining operations
+- Converts environmental liability into revenue
+- Some operations achieve carbon-negative status
+
+**Era 3: The AI Datacenter Comparison (2024-2026)**
+
+The emergence of large language models and AI infrastructure recontextualized energy debates:
+
+| Infrastructure | Est. Power (2025) | Growth Rate | Hardware Impact |
+|----------------|-------------------|-------------|-----------------|
+| Bitcoin mining | ~150 TWh/year | Stable | Specialized ASICs, predictable supply |
+| AI/LLM datacenters | ~500+ TWh/year | Exponential | GPU-hungry, caused chip shortages |
+
+Key shifts:
+- AI training runs consume orders of magnitude more energy than Bitcoin
+- AI demand caused GPU shortages, price spikes, and supply chain strain
+- Bitcoin's energy profile—stable, flexible, interruptible—contrasts with AI's rigid demand
+- Regulatory conversation shifted from "ban mining" to "mining as grid asset"
 
 **Where PoW Persists:**
 
-- **Bitcoin**: No plans to change; PoW is a core feature
-- **Ethereum Classic**: Philosophically committed to PoW
-- **Litecoin, Monero, Zcash**: Various PoW algorithms
-- **Kaspa**: GHOSTDAG protocol with high-throughput PoW
+- **Bitcoin**: PoW is a core security feature; no plans to change
+- **Ethereum Classic**: Philosophically committed to PoW as permissionless security
+- **Litecoin, Monero, Zcash**: Various PoW algorithms serving different goals
+- **Kaspa**: GHOSTDAG protocol demonstrating high-throughput PoW is possible
 
-**Developer Lesson**: PoW's simplicity is its strength—the security model is easy to reason about. The tradeoff is environmental cost and the tendency toward mining centralization.
+**Developer Lesson**: PoW's security model is straightforward—the cost to attack equals the cost to mine. The 2020s revealed that "energy consumption" and "energy waste" are not synonyms. Mining's flexibility as interruptible load, buyer of stranded energy, and grid stabilization tool changed the calculus. Evaluate energy use in context, not in isolation.
 
 ### Proof of Stake: Capital Over Computation (2012-Present)
 
@@ -677,7 +718,7 @@ PoH + Tower BFT = Solana consensus
 - Tower BFT provides finality
 ```
 
-Solana achieves ~400ms block times and thousands of TPS, but has experienced multiple outages when the network couldn't handle load.
+Solana achieves ~400ms block times and thousands of TPS. The network experienced multiple outages during 2021-2022 when traffic exceeded capacity, but client diversity efforts (Jump Crypto's Firedancer client) and protocol improvements have significantly improved stability since 2024.
 
 **Proof of Space and Time (Chia, 2021):**
 

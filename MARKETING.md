@@ -1,12 +1,14 @@
 <div align="center">
 
-# Mastering EVM
+# Mastering EVM (2025 Edition)
 
 ### The Complete Guide to the Ethereum Virtual Machine
 
-**Free. Open Source. Always Current.**
+**Version 2025.1.0** | **28 Chapters** | **~180,000 words**
 
-[Read Online](https://masteringevm.com/read) | [Download PDF](https://masteringevm.com/downloads) | [Download EPUB](https://masteringevm.com/downloads) | [Contribute](https://github.com/evmbook)
+**Free Digital. Print Available.**
+
+[Read Online](https://masteringevm.com/read) | [Download PDF](https://masteringevm.com/downloads) | [Download EPUB](https://masteringevm.com/downloads) | [Buy Paperback](https://amazon.com) | [Contribute](https://github.com/evmbook)
 
 ---
 
@@ -90,13 +92,30 @@ Foundry, viem, wagmi, TypeScript, Solidity 0.8.26+—the tools developers actual
 
 ---
 
-## Downloads
+## Available Formats
 
-| Format | Description |
-|--------|-------------|
-| [**Read Online**](https://masteringevm.com/read) | Optimized web reading experience |
-| [**PDF**](https://masteringevm.com/download) | Coming soon |
-| [**EPUB**](https://masteringevm.com/download) | Coming soon |
+| Format | Price | Description |
+|--------|-------|-------------|
+| [**Read Online**](https://masteringevm.com/read) | Free | Optimized web reading experience |
+| [**PDF**](https://masteringevm.com/downloads) | Free | High-quality downloadable PDF |
+| [**EPUB**](https://masteringevm.com/downloads) | Free | E-reader compatible format |
+| [**Kindle**](https://amazon.com) | $9.99 | Amazon Kindle edition |
+| [**Paperback**](https://amazon.com) | $49.99 | 7.5" × 9.25", ~600 pages |
+
+### Print Specifications
+
+- **Trim Size**: 7.5 × 9.25 inches (standard technical book)
+- **Pages**: ~600
+- **Paper**: 60# white offset
+- **Ink**: Black and white interior
+- **Binding**: Perfect bound paperback
+- **Cover**: Matte laminated
+
+### ISBN
+
+- **Paperback**: 979-8-9947278-0-5
+- **EPUB**: 979-8-9947278-1-2
+- **Audiobook**: 979-8-9947278-2-9
 
 ---
 
@@ -194,12 +213,15 @@ This work is licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/
 
 **Attribution:** This work is a derivative of *Mastering Ethereum (Open Edition)* by Andreas M. Antonopoulos and Gavin Wood.
 
+**Author:** Christopher Mercer
+**Publisher:** White B0x Inc.
+
 ---
 
 <div align="center">
 
 **Start your journey.**
 
-[**Read Mastering EVM →**](https://masteringevm.com)
+[**Read Mastering EVM (2025 Edition) →**](https://masteringevm.com)
 
 </div>

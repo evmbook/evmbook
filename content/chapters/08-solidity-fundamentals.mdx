@@ -267,7 +267,7 @@ function destroy() public {
 ```
 
 <Warning>
-The `SELFDESTRUCT` opcode is being deprecated in Ethereum. EIP-6780 (part of the Dencun upgrade) significantly changed its behavior — it now only sends funds and does not delete contract code except when called in the same transaction as contract creation. Plan accordingly for long-term code.
+The `SELFDESTRUCT` opcode was deprecated on Ethereum with EIP-6780 (Dencun upgrade, March 2024). It now only sends funds and does not delete contract code except when called in the same transaction as contract creation. On Ethereum Classic, SELFDESTRUCT retains its original behavior. Write chain-aware code if targeting both networks.
 </Warning>
 
 ### Function Modifiers
@@ -446,4 +446,4 @@ In this chapter, we explored the Solidity programming language for writing smart
 - Calling other contracts safely
 - Gas considerations and optimization
 
-In the next chapter, we will explore Vyper, another smart contract language with a focus on security and simplicity.
+In the next chapter, we'll dive into advanced Solidity patterns—proxy architectures for upgradeability, inline assembly for low-level optimization, and design patterns used in production contracts.

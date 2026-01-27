@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 550" width="800" height="550">
+  <defs>
+    <marker id="depArrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#999"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#FAFAFA"/>
+
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#333">
+    DeFi Dependency Tree
+  </text>
+  <text x="400" y="48" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#666">
+    What depends on what when bootstrapping an ecosystem
+  </text>
+
+  <!-- Layer 0: EVM -->
+  <g transform="translate(400, 100)">
+    <rect x="-80" y="-25" width="160" height="50" rx="8" fill="#1a1a2e" stroke="#333" stroke-width="2"/>
+    <text y="5" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#FFF">EVM Runtime</text>
+    <text y="18" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#AAA">Execution Layer</text>
+  </g>
+
+  <!-- Layer 1: Token Standard -->
+  <g transform="translate(400, 180)">
+    <rect x="-70" y="-22" width="140" height="44" rx="6" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+    <text y="5" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#333">ERC-20 Tokens</text>
+    <text y="17" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Fungible assets</text>
+  </g>
+  <line x1="400" y1="125" x2="400" y2="158" stroke="#999" stroke-width="1.5" marker-end="url(#depArrow)"/>
+
+  <!-- Layer 2: AMM + Stablecoins (parallel) -->
+  <g transform="translate(250, 270)">
+    <rect x="-70" y="-22" width="140" height="44" rx="6" fill="#FFE0EB" stroke="#FF007A" stroke-width="2"/>
+    <text y="5" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#333">AMM / DEX</text>
+    <text y="17" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Price discovery</text>
+  </g>
+  <g transform="translate(550, 270)">
+    <rect x="-70" y="-22" width="140" height="44" rx="6" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+    <text y="5" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#333">Stablecoins</text>
+    <text y="17" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Quote currency</text>
+  </g>
+  <line x1="360" y1="202" x2="280" y2="248" stroke="#999" stroke-width="1.5" marker-end="url(#depArrow)"/>
+  <line x1="440" y1="202" x2="520" y2="248" stroke="#999" stroke-width="1.5" marker-end="url(#depArrow)"/>
+
+  <!-- Cross dependency between AMM and Stablecoins -->
+  <path d="M 320 270 Q 400 255 480 270" stroke="#999" stroke-width="1" fill="none" stroke-dasharray="4,2"/>
+  <text x="400" y="260" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#999">mutual dependency</text>
+
+  <!-- Layer 3: Oracles + Lending (parallel) -->
+  <g transform="translate(150, 360)">
+    <rect x="-60" y="-22" width="120" height="44" rx="6" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+    <text y="5" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#333">Oracles</text>
+    <text y="17" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Price feeds</text>
+  </g>
+  <g transform="translate(350, 360)">
+    <rect x="-60" y="-22" width="120" height="44" rx="6" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2"/>
+    <text y="5" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#333">Lending</text>
+    <text y="17" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Collateral, rates</text>
+  </g>
+  <g transform="translate(550, 360)">
+    <rect x="-60" y="-22" width="120" height="44" rx="6" fill="#E0F7FA" stroke="#00BCD4" stroke-width="2"/>
+    <text y="5" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#333">Governance</text>
+    <text y="17" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">DAO, voting</text>
+  </g>
+
+  <!-- Connections to Layer 3 -->
+  <line x1="220" y1="292" x2="170" y2="338" stroke="#999" stroke-width="1.5" marker-end="url(#depArrow)"/>
+  <line x1="280" y1="292" x2="320" y2="338" stroke="#999" stroke-width="1.5" marker-end="url(#depArrow)"/>
+  <line x1="520" y1="292" x2="380" y2="338" stroke="#999" stroke-width="1.5" marker-end="url(#depArrow)"/>
+  <line x1="550" y1="292" x2="550" y2="338" stroke="#999" stroke-width="1.5" marker-end="url(#depArrow)"/>
+
+  <!-- Layer 4: Advanced Applications -->
+  <g transform="translate(250, 450)">
+    <rect x="-55" y="-20" width="110" height="40" rx="5" fill="#ECEFF1" stroke="#607D8B" stroke-width="1"/>
+    <text y="5" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#333">Launchpads</text>
+  </g>
+  <g transform="translate(400, 450)">
+    <rect x="-55" y="-20" width="110" height="40" rx="5" fill="#ECEFF1" stroke="#607D8B" stroke-width="1"/>
+    <text y="5" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#333">NFT Markets</text>
+  </g>
+  <g transform="translate(550, 450)">
+    <rect x="-55" y="-20" width="110" height="40" rx="5" fill="#ECEFF1" stroke="#607D8B" stroke-width="1"/>
+    <text y="5" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#333">Derivatives</text>
+  </g>
+
+  <!-- Connections to Layer 4 -->
+  <line x1="200" y1="382" x2="230" y2="430" stroke="#999" stroke-width="1" marker-end="url(#depArrow)"/>
+  <line x1="350" y1="382" x2="280" y2="430" stroke="#999" stroke-width="1" marker-end="url(#depArrow)"/>
+  <line x1="350" y1="382" x2="400" y2="430" stroke="#999" stroke-width="1" marker-end="url(#depArrow)"/>
+  <line x1="550" y1="382" x2="550" y2="430" stroke="#999" stroke-width="1" marker-end="url(#depArrow)"/>
+
+  <!-- Legend -->
+  <g transform="translate(680, 120)">
+    <text font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#333">Build Order:</text>
+    <text y="18" font-family="Arial, sans-serif" font-size="9" fill="#666">1. EVM + Tokens</text>
+    <text y="33" font-family="Arial, sans-serif" font-size="9" fill="#666">2. AMM + Stables</text>
+    <text y="48" font-family="Arial, sans-serif" font-size="9" fill="#666">3. Oracles + Lending</text>
+    <text y="63" font-family="Arial, sans-serif" font-size="9" fill="#666">4. Advanced Apps</text>
+  </g>
+
+  <!-- Bottom note -->
+  <text x="400" y="520" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#999">
+    Arrows show "depends on" relationships. Bootstrap from bottom to top.
+  </text>
+</svg>
