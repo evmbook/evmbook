@@ -240,6 +240,87 @@ Human-readable index of sources in `library.bib` with credibility assessments an
 
 ---
 
+## AMM & Market Design — Academic Research
+
+| Key | Citation | Tier | Status | Notes |
+|-----|----------|------|--------|-------|
+| `article_angeris_cfmm_2020` | Angeris, G., Kao, H., Chiang, R., Noyes, C., Chitra, T. (2020). CFMM Analysis | T1 | Verified | Formal analysis of Uniswap markets |
+| `article_angeris_replicating_2020` | Angeris, G., Evans, A., Chitra, T. (2020). Replicating Market Makers | T1 | Verified | LP positions as options |
+| `article_angeris_optimal_routing_2021` | Angeris, G., Chitra, T. (2021). Optimal Routing | T1 | Verified | Multi-pool routing theory |
+| `article_hasbrouck_market_microstructure_2006` | Hasbrouck, J. (2006). Empirical Market Microstructure | T1 | Verified | Classic market microstructure text |
+| `article_kyle_informed_trading_1985` | Kyle, A.S. (1985). Continuous Auctions and Insider Trading | T1 | Verified | Foundational microstructure paper |
+| `article_glosten_bid_ask_1985` | Glosten, L.R. & Milgrom, P.R. (1985). Bid Ask Information | T1 | Verified | Adverse selection in markets |
+| `misc_koppelmann_invariant_2015` | Köppelmann, M. (2015). On-chain decentralized exchange | T1 | Verified | First x*y=k formulation (Sep 2015) |
+| `misc_johnson_euler_2016` | Johnson, E. (2016). Euler DEX | T2 | Verified | September 2016 DEX design |
+| `misc_buterin_reddit_amm_2016` | Buterin, V. (2016). Reddit AMM Post | T1 | Verified | October 3, 2016; DEXs like prediction markets |
+| `misc_lu_invariants_2017` | Lu, A. (2017). Building Intuition for x*y=k | T2 | Verified | March 2017; invariant explanation |
+
+---
+
+## DeFi Derivatives — Academic Research
+
+| Key | Citation | Tier | Status | Notes |
+|-----|----------|------|--------|-------|
+| `article_replicating_portfolio_2020` | Angeris, G. et al. (2020). Replicating Portfolios | T1 | Verified | LP as options framework |
+| `article_rmm_stanford` | Angeris, G. et al. (2021). RMM: Replicating Market Makers | T1 | Verified | Stanford; arbitrary payoff replication |
+| `article_panoptic_2022` | Lambert, G. (2022). Panoptic Protocol | T1 | Verified | Perpetual options on Uniswap V3 |
+| `misc_paradigm_everlasting_options` | Paradigm (2021). Everlasting Options | T1 | Verified | Never-expiring options concept |
+| `misc_paradigm_power_perps` | Paradigm (2021). Power Perpetuals | T1 | Verified | Squeeth (ETH²) concept |
+| `misc_perpetual_protocol` | Perpetual Protocol (2020). vAMM Documentation | T1 | Verified | First vAMM perpetual |
+| `misc_defi_derivatives` | 0xperp (2024). Awesome DeFi Derivatives | T2 | Verified | Curated resource collection |
+
+---
+
+## Fee Markets & Blockspace Economics
+
+| Key | Citation | Tier | Status | Notes |
+|-----|----------|------|--------|-------|
+| `article_roughgarden_eip1559_2021` | Roughgarden, T. (2021). Transaction Fee Mechanism Design | T1 | Verified | Formal EIP-1559 analysis |
+| `article_chung_welfare_2023` | Chung, H. & Shi, E. (2023). Welfare Analysis of Blockchains | T1 | Verified | Mechanism design for blockspace |
+| `article_buterin_multidim_eip1559_2023` | Buterin, V. (2023). Multidimensional EIP-1559 | T1 | Verified | Extending EIP-1559 to blobs |
+| `misc_awesome_blockspace` | 0xperp (2024). Awesome Blockspace | T2 | Verified | Curated resource collection |
+| `misc_awesome_fee_markets` | 0xperp (2024). Awesome Fee Markets | T2 | Verified | Curated resource collection |
+
+---
+
+## Prediction Markets & Information Economics
+
+| Key | Citation | Tier | Status | Notes |
+|-----|----------|------|--------|-------|
+| `article_hanson_lmsr_2003` | Hanson, R. (2003). LMSR | T1 | Verified | AMM intellectual origin |
+| `article_hanson_parimutuel_2003` | Hanson, R. (2003). Parimutuel Markets | T1 | Verified | Alternative PM design |
+| `book_tetlock_predictions_2017` | Tetlock, P. (2017). Expert Political Judgment | T1 | Verified | Superforecasting research |
+| `misc_augur_whitepaper_2015` | Peterson, J. et al. (2015). Augur | T1 | Verified | First decentralized prediction market |
+| `misc_polymarket_2020` | Polymarket (2020). Documentation | T2 | Verified | Major prediction market platform |
+| `misc_awesome_prediction_markets` | 0xperp (2024). Awesome Prediction Markets | T2 | Verified | Curated resource collection |
+| `misc_event_markets_resources` | Adjacent Research (2024). Event Markets | T2 | Verified | Market research |
+
+---
+
+## Stablecoins — Academic Research
+
+| Key | Citation | Tier | Status | Notes |
+|-----|----------|------|--------|-------|
+| `misc_bitshares_bitusd_2014` | BitShares (2014). BitUSD | T1 | Verified | First crypto-collateralized stablecoin |
+| `online_makerdao_whitepaper_2017` | MakerDAO (2017). Dai Whitepaper | T1 | Verified | CDP system design |
+| `misc_curve_stableswap_2019` | Egorov, M. (2019). StableSwap Invariant | T1 | Verified | Stablecoin-optimized AMM |
+| `misc_frax_2020` | Frax Finance (2020). Fractional-Algorithmic | T2 | Verified | Hybrid stablecoin design |
+| `misc_ust_collapse_2022` | Various (2022). UST/LUNA Analysis | T2 | Verified | Algorithmic stablecoin failure |
+| `misc_awesome_stablecoins` | 0xperp (2024). Awesome Stablecoins | T2 | Verified | Curated resource collection |
+
+---
+
+## Auction Theory — Foundational Research
+
+| Key | Citation | Tier | Status | Notes |
+|-----|----------|------|--------|-------|
+| `article_vickrey_auctions_1961` | Vickrey, W. (1961). Counterspeculation, Auctions | T1 | Verified | Second-price auctions; Nobel work |
+| `article_myerson_optimal_auctions_1981` | Myerson, R. (1981). Optimal Auction Design | T1 | Verified | Revenue-optimal mechanisms |
+| `article_milgrom_theory_auctions_1982` | Milgrom, P. & Weber, R. (1982). Theory of Auctions | T1 | Verified | Common value auctions |
+| `book_klemperer_auctions_1999` | Klemperer, P. (1999). Auction Theory | T1 | Verified | Definitive auction theory survey |
+
+---
+
 ## Sources Needing Follow-Up
 
 The following sources need additional verification or primary documentation:
