@@ -260,6 +260,8 @@ contract Diamond {
 
 **Use case:** Large protocols where different teams maintain different functionality, or where contract size limits would otherwise require splitting.
 
+![Proxy Pattern Architecture](/images/diagrams/ch09-proxy-patterns.svg)
+
 ## Upgrade Safety Rules
 
 Upgrading proxy implementations requires careful attention to storage layout:
@@ -895,6 +897,15 @@ contract TokenVault is
     {}
 }
 ```
+
+<Callout type="note" title="Code Examples">
+Complete implementations of advanced patterns covered in this chapter:
+
+- [ProxyPatterns.sol](../code/chapter-09/src/ProxyPatterns.sol) — Transparent, UUPS, and Beacon proxy implementations
+- [Libraries.sol](../code/chapter-09/src/Libraries.sol) — Library patterns and usage
+- [Assembly.sol](../code/chapter-09/src/Assembly.sol) — Yul inline assembly examples
+- [GasPatterns.sol](../code/chapter-09/src/GasPatterns.sol) — Gas optimization patterns
+</Callout>
 
 ## Summary
 

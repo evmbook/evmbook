@@ -35,7 +35,7 @@ Every oracle solution makes tradeoffs between:
 - **Cost**: How much does each update cost?
 - **Coverage**: What data feeds are available?
 
-## Era 1: Centralized Oracles (2016-2017)
+## Era 0: Centralized Oracles (2016-2017)
 
 ### The Simple Solution
 
@@ -62,7 +62,7 @@ contract SimpleOracle {
 
 MakerDAO's original oracles used a 2-of-3 multisig of trusted parties. Better than one, but still centralized.
 
-## Era 2: Decentralized Oracle Networks (2017-2020)
+## Era 1: Decentralized Oracle Networks (2017-2020)
 
 ### Chainlink: The Dominant Solution
 
@@ -155,7 +155,9 @@ contract RandomGame is VRFConsumerBaseV2 {
 }
 ```
 
-## Era 3: Specialized Oracle Designs (2020-Present)
+![Oracle Architecture](/images/diagrams/ch22-oracle-architecture.svg)
+
+## Era 2: Specialized Oracle Designs (2020-Present)
 
 As DeFi matured, specialized oracles emerged for different use cases.
 

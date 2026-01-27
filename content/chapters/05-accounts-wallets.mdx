@@ -92,6 +92,8 @@ address = keccak256(0xff ++ sender ++ salt ++ keccak256(initCode))[12:]
 
 **Developer Lesson:** CREATE2 enables counterfactual addresses—you can compute a contract's address before deploying it, enabling patterns like factory contracts and gasless wallet deployment.
 
+![Ethereum Account Model](/images/diagrams/ch05-account-model.svg)
+
 ## Keys and Cryptography
 
 Every EOA is secured by a private key. Understanding the cryptographic relationship between private keys, public keys, and addresses is essential.

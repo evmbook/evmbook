@@ -24,7 +24,7 @@ Centralized exchanges (CEXs) work. Binance, Coinbase, and others process billion
 
 The goal was clear: trustless token exchange where users maintain custody and anyone can provide liquidity or list tokens. The path to get there was not.
 
-## Era 1: On-Chain Order Books (2016-2017)
+## Era 0: On-Chain Order Books (2016-2017)
 
 ### EtherDelta: The Pioneer
 
@@ -77,7 +77,7 @@ EtherDelta proved decentralized exchange was possible. It also proved that repli
 Despite its limitations, EtherDelta processed significant volume during the 2017 ICO boom. It was later acquired, hacked, and eventually faded—but it demonstrated market demand for trustless trading.
 </Callout>
 
-## Era 2: Bonding Curves and Continuous Liquidity (2017)
+## Era 1: Bonding Curves and Continuous Liquidity (2017)
 
 ### Bancor: The First AMM
 
@@ -112,7 +112,7 @@ function calculatePurchaseReturn(
 
 Bancor proved the AMM concept but didn't achieve mass adoption. That would require simplification.
 
-## Era 3: Constant Product AMM (2018-2020)
+## Era 2: Constant Product AMM (2018-2020)
 
 ### Uniswap V1 & V2: Elegant Simplicity
 
@@ -208,7 +208,7 @@ Price impact example:
 
 Most of the liquidity in a V2 pool sits at prices far from the current market, earning nothing. This inefficiency would drive the next evolution.
 
-## Era 4: Specialized Curves (2020)
+## Era 3: Specialized Curves (2020)
 
 ### Curve Finance: StableSwap
 
@@ -262,7 +262,7 @@ Curve became the backbone of stablecoin liquidity, processing billions in volume
 A Vyper compiler bug led to reentrancy vulnerabilities in several Curve pools, resulting in ~$70M in losses. The incident highlighted risks in language-level security and concentrated liquidity in single protocols.
 </Callout>
 
-## Era 5: Concentrated Liquidity (2021)
+## Era 4: Concentrated Liquidity (2021)
 
 ### Uniswap V3: Capital Efficiency Revolution
 
@@ -316,7 +316,7 @@ IUniswapV3Pool pool = IUniswapV3Pool(poolAddress);
 uint256 price = uint256(sqrtPriceX96) * uint256(sqrtPriceX96) * 1e18 >> 192;
 ```
 
-## Era 6: Incentive-Aligned Liquidity (2022-Present)
+## Era 5: Incentive-Aligned Liquidity (2022-Present)
 
 ### The Liquidity Mining Problem
 
@@ -379,6 +379,8 @@ function claimRewards(address pool) external {
 4. **Protocol-owned liquidity**: Projects can bribe for liquidity cheaper than renting it
 
 **Aerodrome on Base** became the dominant DEX by TVL within months of Base's launch, demonstrating ve(3,3)'s effectiveness at bootstrapping liquidity.
+
+![AMM Evolution Timeline](/images/diagrams/ch16-amm-evolution.svg)
 
 ## The Dependency Tree
 

@@ -112,7 +112,15 @@ chapter: N
 - **Chapters**: `content/chapters/XX-name.mdx`
 - **Appendices**: `content/appendices/X-name.mdx`
 - **Chapter index**: `content/chapters/_index.json`
-- **Comprehensive plan**: `/home/dev/.claude/plans/composed-spinning-tome.md`
+
+## Project Documentation
+
+All project docs are self-contained in `docs/`:
+- **`docs/PROJECT-STATUS.md`** - Current status, next steps, book structure
+- **`docs/MILESTONES.md`** - Phase tracking, research logs
+- **`docs/DESIGN-SYSTEM.md`** - Diagram specs, colors, typography
+
+**Read these docs first** when starting a new session.
 
 ## Task Patterns
 
@@ -141,4 +149,5 @@ For open-ended exploration, prefer using specialized agents:
 - Describe this as an "11-book series" - it's a single book
 - Use ethers.js v5 patterns - use viem or ethers.js v6
 - Write JavaScript - use TypeScript
-- Reference SERIES_MAPPING.md, BOOK_PLAN.md, or similar - these don't exist
+- Reference external plan files - all docs are in `docs/`
+- Post verbose progress updates in chat - document in `docs/` instead

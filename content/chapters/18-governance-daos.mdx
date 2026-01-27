@@ -21,7 +21,7 @@ Smart contracts are immutable by default. But protocols need to evolve:
 
 The question isn't whether governance exists—it's whether it's transparent. Every "decentralized" protocol has some upgrade mechanism. The honest ones make it visible.
 
-## Era 1: Trusted Multisigs (2016-2019)
+## Era 0: Trusted Multisigs (2016-2019)
 
 ### The Gnosis Safe Model
 
@@ -85,7 +85,7 @@ contract Multisig {
 Many "decentralized" protocols remain governed by small multisigs. This isn't inherently wrong—but claiming decentralization while a 3-of-5 controls everything is misleading. Know your protocol's actual governance structure.
 </Callout>
 
-## Era 2: On-Chain Governance (2020)
+## Era 1: On-Chain Governance (2020)
 
 ### Compound Governor: The Standard
 
@@ -222,7 +222,7 @@ If governance passes a malicious proposal (hack, bribery, mistake), users have t
 
 Without timelocks, a governance attack can drain a protocol instantly.
 
-## Era 3: OpenZeppelin Governor (2021-Present)
+## Era 2: OpenZeppelin Governor (2021-Present)
 
 ### The Modular Standard
 
@@ -336,7 +336,9 @@ function _delegate(address delegator, address delegatee) internal virtual {
 - **Expertise**: Technical proposals benefit from informed delegates
 - **Quorum**: Concentrated voting power helps reach quorum
 
-## Era 4: veToken Governance (2020-Present)
+![DAO Governance Lifecycle](/images/diagrams/ch18-dao-governance.svg)
+
+## Era 3: veToken Governance (2020-Present)
 
 ### The Curve Model
 

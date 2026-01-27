@@ -1,0 +1,1350 @@
+% ============================================================================
+% Mastering EVM - BibTeX Library
+% ============================================================================
+% Organization: Chronological by era, then alphabetical within era
+% Key format: {type}_{author}_{topic}_{year}
+% ============================================================================
+
+% ============================================================================
+% ERA 0: Pre-1900 - Ancient Cryptography
+% ============================================================================
+
+@book{book_kahn_codebreakers_1967,
+  author = {Kahn, David},
+  title = {The Codebreakers: The Story of Secret Writing},
+  publisher = {Macmillan},
+  year = {1967},
+  note = {Comprehensive history of cryptography from ancient times}
+}
+
+@article{article_kerckhoffs_cryptographie_1883,
+  author = {Kerckhoffs, Auguste},
+  title = {La cryptographie militaire},
+  journal = {Journal des sciences militaires},
+  year = {1883},
+  volume = {9},
+  pages = {5--38, 161--191},
+  note = {Kerckhoffs's principle: security should depend only on key secrecy}
+}
+
+% ============================================================================
+% ERA 1: 1900-1945 - Early Computing & Enigma
+% ============================================================================
+
+@article{article_turing_computable_1936,
+  author = {Turing, Alan M.},
+  title = {On Computable Numbers, with an Application to the Entscheidungsproblem},
+  journal = {Proceedings of the London Mathematical Society},
+  year = {1936},
+  volume = {42},
+  number = {1},
+  pages = {230--265}
+}
+
+% ============================================================================
+% ERA 2: 1945-1975 - Information Theory
+% ============================================================================
+
+@article{article_shannon_communication_1948,
+  author = {Shannon, Claude E.},
+  title = {A Mathematical Theory of Communication},
+  journal = {Bell System Technical Journal},
+  year = {1948},
+  volume = {27},
+  number = {3},
+  pages = {379--423},
+  note = {Foundation of information theory}
+}
+
+@article{article_shannon_secrecy_1949,
+  author = {Shannon, Claude E.},
+  title = {Communication Theory of Secrecy Systems},
+  journal = {Bell System Technical Journal},
+  year = {1949},
+  volume = {28},
+  number = {4},
+  pages = {656--715},
+  note = {Mathematical foundations of cryptography; perfect secrecy proof}
+}
+
+% ============================================================================
+% ERA 3: 1976-1990 - Public Key Revolution
+% ============================================================================
+
+@article{article_diffie_hellman_1976,
+  author = {Diffie, Whitfield and Hellman, Martin E.},
+  title = {New Directions in Cryptography},
+  journal = {IEEE Transactions on Information Theory},
+  year = {1976},
+  volume = {22},
+  number = {6},
+  pages = {644--654},
+  note = {Introduced public-key cryptography and Diffie-Hellman key exchange}
+}
+
+@article{article_rivest_rsa_1978,
+  author = {Rivest, Ronald L. and Shamir, Adi and Adleman, Leonard},
+  title = {A Method for Obtaining Digital Signatures and Public-Key Cryptosystems},
+  journal = {Communications of the ACM},
+  year = {1978},
+  volume = {21},
+  number = {2},
+  pages = {120--126},
+  note = {First practical public-key cryptosystem}
+}
+
+@phdthesis{thesis_merkle_secrecy_1979,
+  author = {Merkle, Ralph C.},
+  title = {Secrecy, Authentication, and Public Key Systems},
+  school = {Stanford University},
+  year = {1979},
+  note = {Introduced Merkle trees; independent public-key discovery}
+}
+
+@article{article_lamport_byzantine_1982,
+  author = {Lamport, Leslie and Shostak, Robert and Pease, Marshall},
+  title = {The Byzantine Generals Problem},
+  journal = {ACM Transactions on Programming Languages and Systems},
+  year = {1982},
+  volume = {4},
+  number = {3},
+  pages = {382--401},
+  note = {Foundational paper on distributed consensus with Byzantine faults}
+}
+
+@inproceedings{inproceedings_chaum_blind_1982,
+  author = {Chaum, David},
+  title = {Blind Signatures for Untraceable Payments},
+  booktitle = {Advances in Cryptology: Proceedings of Crypto 82},
+  year = {1982},
+  pages = {199--203},
+  note = {Foundation for digital cash}
+}
+
+@phdthesis{thesis_chaum_security_1982,
+  author = {Chaum, David},
+  title = {Computer Systems Established, Maintained, and Trusted by Mutually Suspicious Groups},
+  school = {University of California, Berkeley},
+  year = {1982},
+  note = {Dissertation on cryptographic digital cash concepts}
+}
+
+@article{article_koblitz_elliptic_1987,
+  author = {Koblitz, Neal},
+  title = {Elliptic Curve Cryptosystems},
+  journal = {Mathematics of Computation},
+  year = {1987},
+  volume = {48},
+  number = {177},
+  pages = {203--209}
+}
+
+@article{article_miller_elliptic_1985,
+  author = {Miller, Victor S.},
+  title = {Use of Elliptic Curves in Cryptography},
+  journal = {Advances in Cryptology — CRYPTO '85 Proceedings},
+  year = {1985},
+  pages = {417--426},
+  note = {Independent discovery of elliptic curve cryptography}
+}
+
+% ============================================================================
+% ERA 4: 1990-2008 - Cypherpunks, P2P Networks & Digital Cash Precursors
+% ============================================================================
+
+% --- P2P File Sharing & Distributed Systems (Parallel Track) ---
+
+@misc{misc_napster_1999,
+  author = {Fanning, Shawn},
+  title = {Napster},
+  year = {1999},
+  note = {First major P2P file sharing; centralized index, distributed storage; shutdown 2001}
+}
+
+@inproceedings{inproceedings_gnutella_2000,
+  author = {Ripeanu, Matei},
+  title = {Peer-to-Peer Architecture Case Study: Gnutella Network},
+  booktitle = {Proceedings First International Conference on Peer-to-Peer Computing},
+  year = {2001},
+  note = {Fully decentralized P2P; no central server; influenced DHT designs}
+}
+
+@misc{misc_wilcox_mojonation_2000,
+  author = {Wilcox-O'Hearn, Zooko},
+  title = {Mojo Nation},
+  year = {2000},
+  note = {P2P with digital tokens (Mojo) for incentivizing sharing; precursor to token economics; spawned MNet, then Tahoe-LAFS}
+}
+
+@inproceedings{inproceedings_stoica_chord_2001,
+  author = {Stoica, Ion and Morris, Robert and Karger, David and Kaashoek, M. Frans and Balakrishnan, Hari},
+  title = {Chord: A Scalable Peer-to-Peer Lookup Service for Internet Applications},
+  booktitle = {ACM SIGCOMM Computer Communication Review},
+  year = {2001},
+  volume = {31},
+  number = {4},
+  pages = {149--160},
+  note = {Distributed hash table (DHT); foundational for P2P routing}
+}
+
+@inproceedings{inproceedings_maymounkov_kademlia_2002,
+  author = {Maymounkov, Petar and Mazi{\`e}res, David},
+  title = {Kademlia: A Peer-to-Peer Information System Based on the XOR Metric},
+  booktitle = {International Workshop on Peer-to-Peer Systems (IPTPS)},
+  year = {2002},
+  pages = {53--65},
+  note = {DHT protocol used by BitTorrent, IPFS, Ethereum devp2p}
+}
+
+@misc{misc_cohen_bittorrent_2001,
+  author = {Cohen, Bram},
+  title = {BitTorrent},
+  year = {2001},
+  note = {Launched 2001; incentive-compatible P2P (tit-for-tat); influenced blockchain P2P layer design}
+}
+
+@inproceedings{inproceedings_cohen_bittorrent_incentives_2003,
+  author = {Cohen, Bram},
+  title = {Incentives Build Robustness in BitTorrent},
+  booktitle = {Workshop on Economics of Peer-to-Peer Systems},
+  year = {2003},
+  note = {Economic incentive design in P2P; tit-for-tat strategy}
+}
+
+% --- Cryptographic Precursors (Digital Cash Track) ---
+
+@inproceedings{inproceedings_dwork_pricing_1992,
+  author = {Dwork, Cynthia and Naor, Moni},
+  title = {Pricing via Processing or Combatting Junk Mail},
+  booktitle = {Advances in Cryptology — CRYPTO '92},
+  year = {1992},
+  pages = {139--147},
+  note = {First formalization of proof-of-work concept for anti-spam}
+}
+
+@misc{misc_hughes_manifesto_1993,
+  author = {Hughes, Eric},
+  title = {A Cypherpunk's Manifesto},
+  year = {1993},
+  howpublished = {Cypherpunks mailing list},
+  url = {https://www.activism.net/cypherpunk/manifesto.html},
+  note = {Philosophical foundation of cypherpunk movement}
+}
+
+@misc{misc_szabo_smart_contracts_1994,
+  author = {Szabo, Nick},
+  title = {Smart Contracts},
+  year = {1994},
+  howpublished = {Unpublished manuscript},
+  url = {https://www.fon.hum.uva.nl/rob/Courses/InformationInSpeech/CDROM/Literature/LOTwinterschool2006/szabo.best.vwh.net/smart.contracts.html},
+  note = {Original definition of smart contracts concept}
+}
+
+@misc{misc_szabo_smart_contracts_building_1996,
+  author = {Szabo, Nick},
+  title = {Smart Contracts: Building Blocks for Digital Markets},
+  year = {1996},
+  howpublished = {Extropy Magazine},
+  note = {Extended treatment of smart contracts concept}
+}
+
+@techreport{techreport_back_hashcash_1997,
+  author = {Back, Adam},
+  title = {Hashcash},
+  year = {1997},
+  note = {Original announcement on cypherpunks mailing list}
+}
+
+@techreport{techreport_back_hashcash_2002,
+  author = {Back, Adam},
+  title = {Hashcash - A Denial of Service Counter-Measure},
+  year = {2002},
+  url = {http://www.hashcash.org/papers/hashcash.pdf},
+  note = {Formal paper on proof-of-work for anti-spam; cited in Bitcoin whitepaper}
+}
+
+@misc{misc_dai_bmoney_1998,
+  author = {Dai, Wei},
+  title = {b-money},
+  year = {1998},
+  howpublished = {Cypherpunks mailing list},
+  url = {http://www.weidai.com/bmoney.txt},
+  note = {Prescient Bitcoin precursor; cited in Bitcoin whitepaper}
+}
+
+@misc{misc_szabo_bitgold_1998,
+  author = {Szabo, Nick},
+  title = {Bit Gold},
+  year = {1998},
+  howpublished = {Blog post},
+  note = {Initially described 1998; published 2005; uncited precursor to Bitcoin}
+}
+
+@inproceedings{inproceedings_castro_pbft_1999,
+  author = {Castro, Miguel and Liskov, Barbara},
+  title = {Practical Byzantine Fault Tolerance},
+  booktitle = {Proceedings of the Third Symposium on Operating Systems Design and Implementation (OSDI '99)},
+  year = {1999},
+  pages = {173--186},
+  note = {First practical BFT algorithm}
+}
+
+@article{article_hanson_lmsr_2003,
+  author = {Hanson, Robin},
+  title = {Combinatorial Information Market Design},
+  journal = {Information Systems Frontiers},
+  year = {2003},
+  volume = {5},
+  number = {1},
+  pages = {107--119},
+  note = {Logarithmic Market Scoring Rule; precursor to AMM concepts}
+}
+
+@misc{misc_finney_rpow_2004,
+  author = {Finney, Hal},
+  title = {RPOW - Reusable Proofs of Work},
+  year = {2004},
+  url = {https://nakamotoinstitute.org/finney/rpow/},
+  note = {Server-based reusable proof of work; stepping stone to Bitcoin}
+}
+
+% ============================================================================
+% ERA 5: 2008-2013 - Bitcoin Birth
+% ============================================================================
+
+@techreport{whitepaper_nakamoto_bitcoin_2008,
+  author = {Nakamoto, Satoshi},
+  title = {Bitcoin: A Peer-to-Peer Electronic Cash System},
+  year = {2008},
+  url = {https://bitcoin.org/bitcoin.pdf},
+  note = {The Bitcoin whitepaper; 9 pages that launched cryptocurrency}
+}
+
+% ============================================================================
+% ERA 6: 2013-2017 - Ethereum, IPFS & Programmable Money
+% ============================================================================
+
+% --- Decentralized Storage (Continuation of P2P Track) ---
+
+@techreport{whitepaper_benet_ipfs_2014,
+  author = {Benet, Juan},
+  title = {IPFS - Content Addressed, Versioned, P2P File System},
+  year = {2014},
+  url = {https://ipfs.io/ipfs/QmR7GSQM93Cx5eAg6a6yRzNde1FQv7uL6X1o4k7zrJa3LX/ipfs.draft3.pdf},
+  note = {InterPlanetary File System; content-addressed storage; uses Kademlia DHT}
+}
+
+@techreport{whitepaper_filecoin_2017,
+  author = {Benet, Juan and Greco, Nicola},
+  title = {Filecoin: A Decentralized Storage Network},
+  year = {2017},
+  url = {https://filecoin.io/filecoin.pdf},
+  note = {Incentivized storage network; proof of replication/spacetime; evolved from IPFS}
+}
+
+% --- Ethereum Core ---
+
+@techreport{whitepaper_buterin_ethereum_2013,
+  author = {Buterin, Vitalik},
+  title = {A Next-Generation Smart Contract and Decentralized Application Platform},
+  year = {2013},
+  url = {https://ethereum.org/whitepaper},
+  note = {Ethereum whitepaper; vision for general-purpose blockchain}
+}
+
+@techreport{yellowpaper_wood_ethereum_2014,
+  author = {Wood, Gavin},
+  title = {Ethereum: A Secure Decentralised Generalised Transaction Ledger},
+  year = {2014},
+  url = {https://ethereum.github.io/yellowpaper/paper.pdf},
+  note = {Ethereum Yellow Paper; formal EVM specification}
+}
+
+@misc{eip_vogelsteller_erc20_2015,
+  author = {Vogelsteller, Fabian and Buterin, Vitalik},
+  title = {EIP-20: Token Standard},
+  year = {2015},
+  howpublished = {Ethereum Improvement Proposal},
+  url = {https://eips.ethereum.org/EIPS/eip-20},
+  note = {ERC-20 fungible token standard}
+}
+
+@misc{misc_buchman_tendermint_2016,
+  author = {Buchman, Ethan},
+  title = {Tendermint: Byzantine Fault Tolerance in the Age of Blockchains},
+  year = {2016},
+  howpublished = {Master's thesis, University of Guelph},
+  note = {Tendermint consensus; foundation for Cosmos}
+}
+
+@techreport{whitepaper_poon_lightning_2016,
+  author = {Poon, Joseph and Dryja, Thaddeus},
+  title = {The Bitcoin Lightning Network: Scalable Off-Chain Instant Payments},
+  year = {2016},
+  url = {https://lightning.network/lightning-network-paper.pdf},
+  note = {Lightning Network; first major L2 scaling proposal}
+}
+
+% ============================================================================
+% ERA 7: 2017-2019 - ICO Boom & DeFi Foundations
+% ============================================================================
+
+@techreport{whitepaper_bancor_2017,
+  author = {Hertzog, Eyal and Benartzi, Guy and Benartzi, Galia},
+  title = {Bancor Protocol: Continuous Liquidity for Cryptographic Tokens Through Their Smart Contracts},
+  year = {2017},
+  note = {Introduced bonding curves for continuous liquidity; predates Uniswap}
+}
+
+@techreport{whitepaper_poon_plasma_2017,
+  author = {Poon, Joseph and Buterin, Vitalik},
+  title = {Plasma: Scalable Autonomous Smart Contracts},
+  year = {2017},
+  url = {https://plasma.io/plasma.pdf},
+  note = {Early Ethereum scaling approach}
+}
+
+@article{article_buterin_casper_2017,
+  author = {Buterin, Vitalik and Griffith, Virgil},
+  title = {Casper the Friendly Finality Gadget},
+  year = {2017},
+  journal = {arXiv preprint arXiv:1710.09437},
+  note = {Ethereum's proof-of-stake finality mechanism}
+}
+
+@techreport{whitepaper_chainlink_2017,
+  author = {Ellis, Steve and Juels, Ari and Nazarov, Sergey},
+  title = {ChainLink: A Decentralized Oracle Network},
+  year = {2017},
+  note = {Chainlink whitepaper; decentralized oracle design}
+}
+
+@misc{eip_entriken_erc721_2018,
+  author = {Entriken, William and Shirley, Dieter and Evans, Jacob and Sachs, Nastassia},
+  title = {EIP-721: Non-Fungible Token Standard},
+  year = {2018},
+  howpublished = {Ethereum Improvement Proposal},
+  url = {https://eips.ethereum.org/EIPS/eip-721},
+  note = {NFT standard}
+}
+
+@misc{blog_adams_uniswap_2018,
+  author = {Adams, Hayden},
+  title = {Uniswap: A Unique Exchange},
+  year = {2018},
+  howpublished = {Blog post},
+  month = {November},
+  note = {Uniswap V1 launch announcement; constant product AMM (x*y=k)}
+}
+
+% ============================================================================
+% ERA 8: 2020 - DeFi Summer
+% ============================================================================
+
+@techreport{whitepaper_uniswap_v2_2020,
+  author = {Adams, Hayden and Zinsmeister, Noah and Robinson, Dan},
+  title = {Uniswap v2 Core},
+  year = {2020},
+  month = {March},
+  url = {https://uniswap.org/whitepaper.pdf},
+  note = {Uniswap V2; flash swaps, price oracles, any ERC-20 pairs}
+}
+
+@techreport{whitepaper_curve_stableswap_2020,
+  author = {Egorov, Michael},
+  title = {StableSwap - Efficient Mechanism for Stablecoin Liquidity},
+  year = {2020},
+  url = {https://curve.fi/files/stableswap-paper.pdf},
+  note = {Curve's optimized invariant for like-assets}
+}
+
+@article{article_roughgarden_eip1559_2020,
+  author = {Roughgarden, Tim},
+  title = {Transaction Fee Mechanism Design for the Ethereum Blockchain: An Economic Analysis of EIP-1559},
+  year = {2020},
+  journal = {arXiv preprint arXiv:2012.00854},
+  note = {Economic analysis of EIP-1559 fee mechanism}
+}
+
+% ============================================================================
+% ERA 9: 2021 - L2s, NFTs, Institutional
+% ============================================================================
+
+@techreport{whitepaper_uniswap_v3_2021,
+  author = {Adams, Hayden and Zinsmeister, Noah and Salem, Moody and Keefer, River and Robinson, Dan},
+  title = {Uniswap v3 Core},
+  year = {2021},
+  month = {March},
+  url = {https://uniswap.org/whitepaper-v3.pdf},
+  note = {Concentrated liquidity; capital efficiency innovation}
+}
+
+@misc{eip_buterin_1559_2019,
+  author = {Buterin, Vitalik and Conner, Eric and Dudley, Rick and Slipper, Matthew and Norden, Ian and Bakhta, Abdelhamid},
+  title = {EIP-1559: Fee Market Change for ETH 1.0 Chain},
+  year = {2019},
+  howpublished = {Ethereum Improvement Proposal},
+  url = {https://eips.ethereum.org/EIPS/eip-1559},
+  note = {Base fee burning, priority fees; implemented August 2021}
+}
+
+% ============================================================================
+% ERA 10: 2022 - Collapses & The Merge
+% ============================================================================
+
+@article{article_daian_flashboys_2019,
+  author = {Daian, Philip and Goldfeder, Steven and Kell, Tyler and Li, Yunqi and Zhao, Xueyuan and Bentov, Iddo and Breidenbach, Lorenz and Juels, Ari},
+  title = {Flash Boys 2.0: Frontrunning, Transaction Reordering, and Consensus Instability in Decentralized Exchanges},
+  journal = {IEEE Symposium on Security and Privacy},
+  year = {2019},
+  note = {Foundational MEV research; coined "Miner Extractable Value"}
+}
+
+% ============================================================================
+% ERA 11: 2023-2024 - Recovery, ETFs, EIP-4844
+% ============================================================================
+
+@misc{eip_proto_danksharding_2022,
+  author = {Buterin, Vitalik and Feist, Ansgar and Floersch, Karl and Garnock-Jones, Tony and Resnick, Diederik and others},
+  title = {EIP-4844: Shard Blob Transactions},
+  year = {2022},
+  howpublished = {Ethereum Improvement Proposal},
+  url = {https://eips.ethereum.org/EIPS/eip-4844},
+  note = {Proto-danksharding; blob transactions for L2 data availability}
+}
+
+@misc{eip_7702_2024,
+  author = {Buterin, Vitalik and Liochon, Sam and others},
+  title = {EIP-7702: Set EOA Account Code},
+  year = {2024},
+  howpublished = {Ethereum Improvement Proposal},
+  url = {https://eips.ethereum.org/EIPS/eip-7702},
+  note = {Native account abstraction for EOAs}
+}
+
+% ============================================================================
+% ADDITIONAL SOURCES - Economics & Market Microstructure
+% ============================================================================
+
+@article{article_garman_market_1976,
+  author = {Garman, Mark B.},
+  title = {Market Microstructure},
+  journal = {Journal of Financial Economics},
+  year = {1976},
+  volume = {3},
+  number = {3},
+  pages = {257--275},
+  note = {Foundational market microstructure paper; inventory models}
+}
+
+@article{article_amihud_dealership_1980,
+  author = {Amihud, Yakov and Mendelson, Haim},
+  title = {Dealership Market: Market-Making with Inventory},
+  journal = {Journal of Financial Economics},
+  year = {1980},
+  volume = {8},
+  number = {1},
+  pages = {31--53},
+  note = {Bid-ask spread theory; market making economics}
+}
+
+% ============================================================================
+% BOOKS & SECONDARY SOURCES
+% ============================================================================
+
+@book{book_antonopoulos_mastering_bitcoin_2017,
+  author = {Antonopoulos, Andreas M.},
+  title = {Mastering Bitcoin: Programming the Open Blockchain},
+  publisher = {O'Reilly Media},
+  year = {2017},
+  edition = {2nd},
+  note = {Comprehensive Bitcoin technical reference}
+}
+
+@book{book_russo_infinite_machine_2020,
+  author = {Russo, Camila},
+  title = {The Infinite Machine: How an Army of Crypto-hackers Is Building the Next Internet with Ethereum},
+  publisher = {Harper Business},
+  year = {2020},
+  note = {Ethereum origin story; historical context}
+}
+
+@book{book_leising_out_of_ether_2020,
+  author = {Leising, Matthew},
+  title = {Out of the Ether: The Amazing Story of Ethereum and the \$55 Million Heist that Almost Destroyed It All},
+  publisher = {Wiley},
+  year = {2020},
+  note = {The DAO hack and Ethereum's early days}
+}
+
+@book{book_bier_blocksize_war_2021,
+  author = {Bier, Jonathan},
+  title = {The Blocksize War: The Battle Over Who Controls Bitcoin's Protocol Rules},
+  publisher = {Self-published},
+  year = {2021},
+  note = {Bitcoin's scaling debates; governance lessons}
+}
+
+% ============================================================================
+% PROTOCOL DOCUMENTATION
+% ============================================================================
+
+@online{online_compound_whitepaper_2019,
+  author = {Leshner, Robert and Hayes, Geoffrey},
+  title = {Compound: The Money Market Protocol},
+  year = {2019},
+  url = {https://compound.finance/documents/Compound.Whitepaper.pdf},
+  note = {Compound protocol; cTokens, interest rate models}
+}
+
+@online{online_aave_v3_2022,
+  author = {{Aave Companies}},
+  title = {Aave V3 Technical Paper},
+  year = {2022},
+  url = {https://github.com/aave/aave-v3-core/blob/master/techpaper/Aave_V3_Technical_Paper.pdf},
+  note = {Aave V3; efficiency mode, isolation mode, portals}
+}
+
+@online{online_makerdao_whitepaper_2017,
+  author = {{MakerDAO Team}},
+  title = {The Maker Protocol: MakerDAO's Multi-Collateral Dai (MCD) System},
+  year = {2017},
+  url = {https://makerdao.com/whitepaper/},
+  note = {MakerDAO; CDPs, DAI mechanics, liquidation}
+}
+
+% ============================================================================
+% ZERO KNOWLEDGE
+% ============================================================================
+
+@article{article_bensasson_starks_2018,
+  author = {Ben-Sasson, Eli and Bentov, Iddo and Horesh, Yinon and Riabzev, Michael},
+  title = {Scalable, Transparent, and Post-Quantum Secure Computational Integrity},
+  journal = {IACR Cryptology ePrint Archive},
+  year = {2018},
+  note = {STARKs; no trusted setup, post-quantum secure}
+}
+
+@article{article_gabizon_plonk_2019,
+  author = {Gabizon, Ariel and Williamson, Zachary J. and Ciobotaru, Oana},
+  title = {PLONK: Permutations over Lagrange-bases for Oecumenical Noninteractive arguments of Knowledge},
+  journal = {IACR Cryptology ePrint Archive},
+  year = {2019},
+  note = {Modern proving system used by many ZK rollups}
+}
+
+% ============================================================================
+% SECURITY RESOURCES
+% ============================================================================
+
+@online{online_swc_registry,
+  author = {{Smart Contract Security Consortium}},
+  title = {SWC Registry: Smart Contract Weakness Classification},
+  url = {https://swcregistry.io/},
+  note = {Categorized vulnerability database}
+}
+
+@online{online_consensys_best_practices,
+  author = {{ConsenSys Diligence}},
+  title = {Ethereum Smart Contract Best Practices},
+  url = {https://consensys.github.io/smart-contract-best-practices/},
+  note = {Foundational security patterns}
+}
+
+% ============================================================================
+% PHASE 2 ADDITIONS: ZERO KNOWLEDGE FOUNDATIONS
+% ============================================================================
+
+@article{article_goldwasser_zkp_1985,
+  author = {Goldwasser, Shafi and Micali, Silvio and Rackoff, Charles},
+  title = {The Knowledge Complexity of Interactive Proof Systems},
+  journal = {SIAM Journal on Computing},
+  volume = {18},
+  number = {1},
+  pages = {186--208},
+  year = {1989},
+  note = {Original 1985 STOC version; foundational ZKP paper}
+}
+
+@inproceedings{inproceedings_groth16_2016,
+  author = {Groth, Jens},
+  title = {On the Size of Pairing-based Non-interactive Arguments},
+  booktitle = {EUROCRYPT 2016},
+  year = {2016},
+  note = {Most efficient pairing-based SNARK; widely deployed}
+}
+
+@inproceedings{inproceedings_bulletproofs_2018,
+  author = {B{\"u}nz, Benedikt and Bootle, Jonathan and Boneh, Dan and Poelstra, Andrew and Wuille, Pieter and Maxwell, Greg},
+  title = {Bulletproofs: Short Proofs for Confidential Transactions and More},
+  booktitle = {IEEE S\&P 2018},
+  year = {2018},
+  note = {Range proofs without trusted setup}
+}
+
+@misc{misc_zerocash_2014,
+  author = {Ben-Sasson, Eli and Chiesa, Alessandro and Garman, Christina and Green, Matthew and Miers, Ian and Tromer, Eran and Virza, Madars},
+  title = {Zerocash: Decentralized Anonymous Payments from Bitcoin},
+  year = {2014},
+  note = {ZK privacy for cryptocurrency; Zcash foundation}
+}
+
+% ============================================================================
+% PHASE 2 ADDITIONS: CONSENSUS & SCALING
+% ============================================================================
+
+@inproceedings{inproceedings_hotstuff_2019,
+  author = {Yin, Maofan and Malkhi, Dahlia and Reiter, Michael K. and Gueta, Guy Golan and Abraham, Ittai},
+  title = {HotStuff: BFT Consensus with Linearity and Responsiveness},
+  booktitle = {PODC 2019},
+  year = {2019},
+  note = {Linear BFT; foundation for Libra/Diem}
+}
+
+@inproceedings{inproceedings_block_stm_2022,
+  author = {Gelashvili, Rati and Spiegelman, Alexander and Xiang, Zhuolun and Danezis, George and Li, Zekun and Xia, Yu and Zhou, Runtian and Malkhi, Dahlia},
+  title = {Block-STM: Scaling Blockchain Execution by Turning Ordering Curse to a Performance Blessing},
+  booktitle = {PPoPP 2022},
+  year = {2022},
+  note = {Parallel execution; used in Aptos}
+}
+
+@misc{misc_celestia_lazylegder_2019,
+  author = {Al-Bassam, Mustafa and Sonnino, Alberto and Buterin, Vitalik},
+  title = {LazyLedger: A Data Availability Blockchain with Sub-Linear Full Block Validation},
+  year = {2019},
+  note = {Data availability sampling; became Celestia}
+}
+
+@misc{misc_truebit_2017,
+  author = {Teutsch, Jason and Reitwie{\ss}ner, Christian},
+  title = {TrueBit: A Scalable Verification Solution for Blockchains},
+  year = {2017},
+  note = {Off-chain computation verification}
+}
+
+@misc{misc_avalanche_consensus_2018,
+  author = {{Team Rocket}},
+  title = {Snowflake to Avalanche: A Novel Metastable Consensus Protocol Family for Cryptocurrencies},
+  year = {2018},
+  note = {Metastable consensus; high throughput}
+}
+
+@misc{misc_ghost_protocol_2013,
+  author = {Sompolinsky, Yonatan and Zohar, Aviv},
+  title = {Accelerating Bitcoin's Transaction Processing: Fast Money Grows on Trees, Not Chains},
+  year = {2013},
+  note = {GHOST fork choice rule; influenced Ethereum}
+}
+
+@misc{misc_casper_ffg_2017,
+  author = {Buterin, Vitalik and Griffith, Virgil},
+  title = {Casper the Friendly Finality Gadget},
+  year = {2017},
+  note = {Ethereum PoS finality mechanism}
+}
+
+% ============================================================================
+% PHASE 2 ADDITIONS: DEFI & PROTOCOLS
+% ============================================================================
+
+@article{article_cfmm_angeris_2020,
+  author = {Angeris, Guillermo and Chitra, Tarun and Evans, Alex},
+  title = {An Analysis of Uniswap Markets},
+  journal = {Cryptoeconomic Systems},
+  year = {2020},
+  note = {Mathematical foundations of constant function market makers}
+}
+
+@misc{misc_curve_stableswap_2019,
+  author = {Egorov, Michael},
+  title = {StableSwap - Efficient Mechanism for Stablecoin Liquidity},
+  year = {2019},
+  note = {Curve AMM invariant for stablecoin pools}
+}
+
+@misc{misc_compound_whitepaper_2019,
+  author = {Leshner, Robert and Hayes, Geoffrey},
+  title = {Compound: The Money Market Protocol},
+  year = {2019},
+  note = {Algorithmic lending protocol}
+}
+
+@misc{misc_0x_whitepaper_2017,
+  author = {Warren, Will and Bandeali, Amir},
+  title = {0x: An Open Protocol for Decentralized Exchange on the Ethereum Blockchain},
+  year = {2017},
+  note = {DEX aggregation protocol}
+}
+
+@misc{misc_augur_whitepaper_2015,
+  author = {Peterson, Jack and Krug, Joseph},
+  title = {Augur: A Decentralized Oracle and Prediction Market Platform},
+  year = {2015},
+  note = {First Ethereum prediction market}
+}
+
+@misc{misc_eigenlayer_whitepaper_2023,
+  author = {{EigenLayer Team}},
+  title = {EigenLayer: The Restaking Collective},
+  year = {2023},
+  note = {Restaking paradigm; shared security}
+}
+
+@misc{misc_cosmos_whitepaper_2017,
+  author = {Kwon, Jae and Buchman, Ethan},
+  title = {Cosmos: A Network of Distributed Ledgers},
+  year = {2017},
+  note = {IBC protocol; interoperability}
+}
+
+% ============================================================================
+% PHASE 2 ADDITIONS: ORACLES
+% ============================================================================
+
+@misc{misc_chainlink_whitepaper_2017,
+  author = {Ellis, Steve and Juels, Ari and Nazarov, Sergey},
+  title = {ChainLink: A Decentralized Oracle Network},
+  year = {2017},
+  note = {Decentralized oracle network standard}
+}
+
+@misc{misc_town_crier_2016,
+  author = {Zhang, Fan and Cecchetti, Ethan and Croman, Kyle and Juels, Ari and Shi, Elaine},
+  title = {Town Crier: An Authenticated Data Feed for Smart Contracts},
+  booktitle = {ACM CCS},
+  year = {2016},
+  note = {TEE-based oracle; academic precursor}
+}
+
+@misc{misc_uma_whitepaper_2020,
+  author = {{UMA Team}},
+  title = {UMA: Universal Market Access},
+  year = {2020},
+  note = {Optimistic oracle design}
+}
+
+% ============================================================================
+% PHASE 2 ADDITIONS: PRIVACY
+% ============================================================================
+
+@misc{misc_tornado_cash_2019,
+  author = {{Tornado Cash Team}},
+  title = {Tornado Cash},
+  year = {2019},
+  note = {ZK mixer on Ethereum; OFAC sanctioned 2022}
+}
+
+@misc{misc_privacy_pools_2023,
+  author = {Buterin, Vitalik and Illum, Jacob and Nadler, Matthias and Sch{\"a}r, Fabian and Soleimani, Ameen},
+  title = {Blockchain Privacy and Regulatory Compliance: Towards a Practical Equilibrium},
+  year = {2023},
+  note = {Privacy Pools; compliant privacy proposal}
+}
+
+@misc{misc_mimblewimble_2016,
+  author = {Jedusor, Tom Elvis},
+  title = {MimbleWimble},
+  year = {2016},
+  note = {Privacy + scaling via transaction cut-through}
+}
+
+@misc{misc_cryptonote_2014,
+  author = {van Saberhagen, Nicolas},
+  title = {CryptoNote v 2.0},
+  year = {2014},
+  note = {Ring signatures for Monero}
+}
+
+% ============================================================================
+% PHASE 2 ADDITIONS: GOVERNANCE & DAOS
+% ============================================================================
+
+@misc{misc_compound_governance_2020,
+  author = {{Compound Labs}},
+  title = {Compound Governance},
+  year = {2020},
+  note = {Governor Alpha/Bravo; on-chain governance standard}
+}
+
+@misc{misc_moloch_dao_2019,
+  author = {{MolochDAO Contributors}},
+  title = {MolochDAO v1},
+  year = {2019},
+  note = {Minimalist DAO; rage quit mechanism}
+}
+
+@misc{misc_aragon_whitepaper_2017,
+  author = {Cuende, Luis and Izquierdo, Jorge},
+  title = {Aragon Network: A Decentralized Infrastructure for Value Exchange},
+  year = {2017},
+  note = {DAO framework and tooling}
+}
+
+% ============================================================================
+% PHASE 2 ADDITIONS: IDENTITY & NAMING
+% ============================================================================
+
+@misc{misc_ens_2017,
+  author = {Johnson, Nick},
+  title = {Ethereum Name Service},
+  year = {2017},
+  note = {Decentralized naming on Ethereum}
+}
+
+@misc{misc_soulbound_2022,
+  author = {Weyl, E. Glen and Ohlhaver, Puja and Buterin, Vitalik},
+  title = {Decentralized Society: Finding Web3's Soul},
+  year = {2022},
+  note = {Soulbound tokens; non-transferable credentials}
+}
+
+@misc{misc_lens_protocol_2022,
+  author = {{Aave Companies}},
+  title = {Lens Protocol},
+  year = {2022},
+  note = {Decentralized social graph}
+}
+
+% ============================================================================
+% PHASE 2 ADDITIONS: DEPIN & INFRASTRUCTURE
+% ============================================================================
+
+@misc{misc_filecoin_whitepaper_2017,
+  author = {{Protocol Labs}},
+  title = {Filecoin: A Decentralized Storage Network},
+  year = {2017},
+  note = {Proof of Replication; proof of Spacetime}
+}
+
+@misc{misc_helium_whitepaper_2018,
+  author = {{Helium Systems Inc.}},
+  title = {Helium: A Decentralized Wireless Network},
+  year = {2018},
+  note = {Proof of Coverage; DePIN pioneer}
+}
+
+@misc{misc_render_network_2020,
+  author = {{OTOY Inc.}},
+  title = {Render Network},
+  year = {2020},
+  note = {Distributed GPU rendering}
+}
+
+% ============================================================================
+% PHASE 2 ADDITIONS: CRYPTOGRAPHY
+% ============================================================================
+
+@article{article_shamir_secret_sharing_1979,
+  author = {Shamir, Adi},
+  title = {How to Share a Secret},
+  journal = {Communications of the ACM},
+  volume = {22},
+  number = {11},
+  pages = {612--613},
+  year = {1979},
+  note = {Foundational secret sharing scheme}
+}
+
+@misc{misc_proofs_of_knowledge_bellare_1992,
+  author = {Bellare, Mihir and Goldreich, Oded},
+  title = {On Defining Proofs of Knowledge},
+  year = {1992},
+  note = {ZK theory foundation}
+}
+
+@article{article_bls_signatures_2001,
+  author = {Boneh, Dan and Lynn, Ben and Shacham, Hovav},
+  title = {Short Signatures from the Weil Pairing},
+  journal = {ASIACRYPT 2001},
+  year = {2001},
+  note = {BLS signatures; validator aggregation}
+}
+
+@misc{misc_ed25519_2011,
+  author = {Bernstein, Daniel J. and Duif, Niels and Lange, Tanja and Schwabe, Peter and Yang, Bo-Yin},
+  title = {High-speed high-security signatures},
+  year = {2011},
+  note = {EdDSA signature scheme}
+}
+
+@misc{misc_corbellini_ecc_tutorial,
+  author = {Corbellini, Andrea},
+  title = {Elliptic Curve Cryptography: A Gentle Introduction},
+  year = {2015},
+  url = {https://andrea.corbellini.name/2015/05/17/elliptic-curve-cryptography-a-gentle-introduction/},
+  note = {Excellent ECC tutorial series}
+}
+
+% ============================================================================
+% PHASE 2 ADDITIONS: SECURITY
+% ============================================================================
+
+@inproceedings{inproceedings_biased_nonce_2020,
+  author = {Breitner, Joachim and Heninger, Nadia},
+  title = {Biased Nonce Sense: Lattice Attacks Against Weak ECDSA Signatures in Cryptocurrencies},
+  booktitle = {Financial Cryptography 2020},
+  year = {2020},
+  note = {ECDSA nonce attacks in cryptocurrencies}
+}
+
+@article{article_minerva_2020,
+  author = {Jancar, Jan and Sedlacek, Vladimir and Svenda, Petr and Sys, Marek},
+  title = {Minerva: The curse of ECDSA nonces},
+  journal = {IACR TCHES},
+  year = {2020},
+  note = {Timing attacks on ECDSA implementations}
+}
+
+% ============================================================================
+% PHASE 2 ADDITIONS: PRE-ETHEREUM HISTORY
+% ============================================================================
+
+@misc{misc_namecoin_2011,
+  author = {{Namecoin Developers}},
+  title = {Namecoin},
+  year = {2011},
+  note = {First Bitcoin fork; decentralized DNS}
+}
+
+@misc{misc_mastercoin_whitepaper_2012,
+  author = {Willett, J.R.},
+  title = {The Second Bitcoin Whitepaper},
+  year = {2012},
+  note = {Colored coins; became Omni Layer}
+}
+
+@misc{misc_counterparty_2014,
+  author = {{Counterparty Developers}},
+  title = {Counterparty Protocol Specification},
+  year = {2014},
+  note = {Smart contracts on Bitcoin via OP\_RETURN}
+}
+
+@misc{misc_nxt_2013,
+  author = {{BCNext}},
+  title = {Nxt Whitepaper},
+  year = {2013},
+  note = {First pure PoS; limited scripting}
+}
+
+% ============================================================================
+% PHASE 3 ADDITIONS: COMMUNICATION & PRIVACY TOOLS
+% ============================================================================
+
+@misc{misc_zimmermann_pgp_1991,
+  author = {Zimmermann, Philip R.},
+  title = {PGP: Pretty Good Privacy},
+  year = {1991},
+  note = {First widely available public key encryption software}
+}
+
+@misc{misc_dingledine_tor_2004,
+  author = {Dingledine, Roger and Mathewson, Nick and Syverson, Paul},
+  title = {Tor: The Second-Generation Onion Router},
+  booktitle = {USENIX Security Symposium},
+  year = {2004},
+  note = {TOR network design; anonymity network}
+}
+
+@misc{misc_otr_protocol_2004,
+  author = {Borisov, Nikita and Goldberg, Ian and Brewer, Eric},
+  title = {Off-the-Record Communication, or, Why Not To Use PGP},
+  booktitle = {WPES},
+  year = {2004},
+  note = {OTR messaging protocol; forward secrecy, deniability}
+}
+
+@misc{misc_signal_protocol_2016,
+  author = {Marlinspike, Moxie and Perrin, Trevor},
+  title = {The X3DH Key Agreement Protocol},
+  year = {2016},
+  note = {Signal Protocol key agreement; Double Ratchet foundation}
+}
+
+@misc{misc_snowden_revelations_2013,
+  author = {Greenwald, Glenn and MacAskill, Ewen and Poitras, Laura},
+  title = {NSA Collecting Phone Records of Millions of Verizon Customers Daily},
+  year = {2013},
+  howpublished = {The Guardian},
+  note = {First Snowden disclosure; PRISM and mass surveillance}
+}
+
+@misc{misc_chaum_untraceable_email_1981,
+  author = {Chaum, David},
+  title = {Untraceable Electronic Mail, Return Addresses, and Digital Pseudonyms},
+  journal = {Communications of the ACM},
+  year = {1981},
+  note = {Mix networks concept; foundation for anonymous remailers}
+}
+
+% ============================================================================
+% PHASE 3G ADDITIONS: PRIVACY INFRASTRUCTURE EXPANSION
+% ============================================================================
+
+@misc{misc_clarke_freenet_1999,
+  author = {Clarke, Ian},
+  title = {A Distributed Decentralised Information Storage and Retrieval System},
+  year = {1999},
+  note = {Freenet master's thesis; content-addressable distributed storage}
+}
+
+@misc{misc_i2p_design_2003,
+  author = {{I2P Development Team}},
+  title = {I2P: A Scalable Framework for Anonymous Communication},
+  year = {2003},
+  note = {Garlic routing architecture; distinct from TOR}
+}
+
+@misc{misc_gnunet_2001,
+  author = {{GNU Project}},
+  title = {GNUnet: A Framework for Secure Peer-to-Peer Networking},
+  year = {2001},
+  note = {GNU anonymity framework}
+}
+
+@misc{misc_tails_2009,
+  author = {{Tails Project}},
+  title = {Tails: The Amnesic Incognito Live System},
+  year = {2009},
+  note = {Privacy-focused live OS; Snowden recommended}
+}
+
+@article{sweeney_kanonymity_2002,
+  author = {Sweeney, Latanya},
+  title = {k-Anonymity: A Model for Protecting Privacy},
+  journal = {International Journal of Uncertainty, Fuzziness and Knowledge-Based Systems},
+  year = {2002},
+  note = {Privacy metric; formal privacy framework}
+}
+
+@article{dwork_differential_privacy_2006,
+  author = {Dwork, Cynthia},
+  title = {Differential Privacy},
+  booktitle = {ICALP},
+  year = {2006},
+  note = {Formal privacy guarantees; foundational concept}
+}
+
+@misc{misc_maxwell_coinjoin_2013,
+  author = {Maxwell, Gregory},
+  title = {CoinJoin: Bitcoin Privacy for the Real World},
+  year = {2013},
+  howpublished = {bitcointalk.org},
+  note = {Original CoinJoin proposal; foundational Bitcoin privacy}
+}
+
+@misc{misc_joinmarket_2015,
+  author = {{JoinMarket Developers}},
+  title = {JoinMarket: Decentralized CoinJoin Implementation},
+  year = {2015},
+  note = {Market-based CoinJoin coordination}
+}
+
+@misc{misc_wasabi_wallet_2018,
+  author = {{zkSNACKs}},
+  title = {Wasabi Wallet: Privacy-Focused Bitcoin Wallet},
+  year = {2018},
+  note = {ZeroLink implementation; Chaumian CoinJoin}
+}
+
+@misc{misc_samourai_wallet_2015,
+  author = {{Samourai Wallet Team}},
+  title = {Samourai Wallet: Mobile Bitcoin Privacy},
+  year = {2015},
+  note = {Whirlpool CoinJoin; mobile-first privacy}
+}
+
+@misc{misc_samourai_arrest_2024,
+  author = {{US Department of Justice}},
+  title = {Founders And CEO Of Cryptocurrency Mixing Service Arrested And Charged},
+  year = {2024},
+  month = {April},
+  note = {Samourai Wallet founders arrested; first non-custodial tool prosecution}
+}
+
+@misc{misc_taproot_activation_2021,
+  author = {{Bitcoin Core}},
+  title = {Taproot Soft Fork Activation},
+  year = {2021},
+  month = {November},
+  note = {BIP 340/341/342; Schnorr signatures, improved script privacy}
+}
+
+@misc{misc_bitcoin_core_i2p_2021,
+  author = {{Bitcoin Core}},
+  title = {Bitcoin Core 22.0 Release Notes},
+  year = {2021},
+  month = {August},
+  note = {Native I2P support added alongside TOR}
+}
+
+@misc{misc_lokinet_2019,
+  author = {{Oxen Privacy Tech Foundation}},
+  title = {Lokinet: Private Networking Protocol},
+  year = {2019},
+  note = {Modern I2P implementation; blockchain-incentivized}
+}
+
+@misc{misc_session_messenger_2020,
+  author = {{Oxen Privacy Tech Foundation}},
+  title = {Session: Private Messenger},
+  year = {2020},
+  note = {Signal fork using Lokinet; decentralized, no phone number}
+}
+
+@misc{misc_briar_2018,
+  author = {{Briar Project}},
+  title = {Briar: Secure Messaging, Anywhere},
+  year = {2018},
+  note = {TOR + Bluetooth mesh messaging; works offline}
+}
+
+@misc{misc_element_matrix_2016,
+  author = {{Matrix.org Foundation}},
+  title = {Matrix Protocol Specification},
+  year = {2016},
+  note = {Federated messaging protocol; E2EE via Megolm}
+}
+
+% ============================================================================
+% PHASE 3 ADDITIONS: INTERNATIONAL ADOPTION
+% ============================================================================
+
+@misc{misc_venezuelan_adoption_2018,
+  author = {{Chainalysis Team}},
+  title = {Venezuela's Cryptocurrency Adoption},
+  year = {2018},
+  note = {LocalBitcoins volume analysis; hyperinflation context}
+}
+
+@misc{misc_argentina_stablecoins_2023,
+  author = {{Chainalysis Team}},
+  title = {Argentina Stablecoin Adoption Report},
+  year = {2023},
+  note = {Peso crisis driving stablecoin usage}
+}
+
+@misc{misc_el_salvador_bitcoin_law_2021,
+  author = {{Government of El Salvador}},
+  title = {Ley Bitcoin (Bitcoin Law)},
+  year = {2021},
+  note = {First nation-state Bitcoin legal tender}
+}
+
+@misc{misc_nigeria_crypto_adoption_2021,
+  author = {{Chainalysis Team}},
+  title = {Nigeria Cryptocurrency Adoption Analysis},
+  year = {2021},
+  note = {P2P dominance; EndSARS context}
+}
+
+@misc{misc_lebanon_banking_crisis_2020,
+  author = {{World Bank}},
+  title = {Lebanon Economic Monitor},
+  year = {2020},
+  note = {Banking collapse; capital controls context}
+}
+
+@misc{misc_turkey_crypto_adoption_2022,
+  author = {{Triple-A}},
+  title = {Global Crypto Adoption Report: Turkey},
+  year = {2022},
+  note = {Lira instability driving adoption}
+}
+
+@misc{misc_zimbabwe_hyperinflation_2008,
+  author = {Hanke, Steve H. and Kwok, Alex K.F.},
+  title = {On the Measurement of Zimbabwe's Hyperinflation},
+  journal = {Cato Journal},
+  year = {2009},
+  note = {Documented 89.7 sextillion percent inflation}
+}
+
+% ============================================================================
+% PHASE 3 ADDITIONS: FUNDING & ECONOMICS
+% ============================================================================
+
+@misc{misc_bitcoin_foundation_2012,
+  author = {{Bitcoin Foundation}},
+  title = {Bitcoin Foundation Charter},
+  year = {2012},
+  note = {Early Bitcoin development funding organization}
+}
+
+@misc{misc_mit_epstein_2019,
+  author = {Farrow, Ronan},
+  title = {How an Elite University Research Center Concealed Its Relationship with Jeffrey Epstein},
+  year = {2019},
+  howpublished = {The New Yorker},
+  note = {MIT Media Lab funding controversy}
+}
+
+@misc{misc_nsf_crypto_funding,
+  author = {{National Science Foundation}},
+  title = {Cryptography Research Grants},
+  note = {US government funding of cryptographic research}
+}
+
+@misc{misc_wikileaks_bitcoin_2011,
+  author = {{WikiLeaks}},
+  title = {WikiLeaks Bitcoin Donations},
+  year = {2011},
+  note = {Banking blockade led to Bitcoin adoption}
+}
+
+% ============================================================================
+% PHASE 3 ADDITIONS: DARK WEB MARKETS & MIXERS
+% ============================================================================
+
+@misc{misc_early_bitcoin_mixers,
+  author = {{Various}},
+  title = {Early Bitcoin Mixing Services},
+  note = {Bitcoin Fog, Helix, BestMixer; centralized mixer history}
+}
+
+@misc{misc_dark_web_markets,
+  author = {{Various}},
+  title = {Dark Web Marketplace Timeline},
+  note = {Silk Road, AlphaBay, Hydra; adoption context}
+}
+
+% ============================================================================
+% PHASE 3 ADDITIONS: BITCOIN PROGRAMMABILITY (2023-2025)
+% ============================================================================
+
+@misc{misc_bitvm_2023,
+  author = {Linus, Robin},
+  title = {BitVM: Compute Anything on Bitcoin},
+  year = {2023},
+  note = {General computation on Bitcoin via fraud proofs}
+}
+
+@misc{misc_citrea_2024,
+  author = {{Citrea Team}},
+  title = {Citrea: The First Bitcoin ZK-Validity Rollup},
+  year = {2024},
+  note = {EVM-compatible rollup on Bitcoin via BitVM}
+}
+
+@misc{misc_opcat_bip420_2024,
+  author = {{Various}},
+  title = {BIP-420: OP\_CAT Revival Proposal},
+  year = {2024},
+  note = {Proposal to re-enable OP\_CAT for covenants}
+}
+
+@misc{misc_ordinals_2023,
+  author = {Rodarmor, Casey},
+  title = {Ordinals},
+  year = {2023},
+  note = {Ordinal theory and inscriptions on Bitcoin}
+}
+
+@misc{eip_4844_2024,
+  author = {Buterin, Vitalik and others},
+  title = {EIP-4844: Shard Blob Transactions},
+  year = {2024},
+  howpublished = {Ethereum Improvement Proposal},
+  note = {Proto-danksharding; implemented in Dencun upgrade}
+}

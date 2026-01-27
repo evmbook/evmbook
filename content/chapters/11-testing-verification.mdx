@@ -458,7 +458,7 @@ call_override = false
 
 ## Fork Testing
 
-Test against real mainnet state by forking:
+Test against real Ethereum mainnet state by forking:
 
 ```solidity
 contract ForkTest is Test {
@@ -850,6 +850,15 @@ repos:
         language: system
         pass_filenames: false
 ```
+
+<Callout type="note" title="Code Examples">
+Complete test suites demonstrating patterns covered in this chapter:
+
+- [Counter.t.sol](../code/chapter-11/test/Counter.t.sol) — Unit testing with Foundry
+- [Fork.t.sol](../code/chapter-11/test/Fork.t.sol) — Fork testing against live networks
+- [SimpleVault.invariant.t.sol](../code/chapter-11/test/SimpleVault.invariant.t.sol) — Invariant testing
+- [SimpleVault.sol](../code/chapter-11/src/SimpleVault.sol) — Contract under test
+</Callout>
 
 ## Summary
 
