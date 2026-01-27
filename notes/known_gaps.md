@@ -45,7 +45,7 @@ This document tracks claims that need additional verification, sources that coul
 3. **Vitalik Reddit post on AMMs**
    - Need: Link to specific Reddit post
    - Why: Commonly cited as Uniswap inspiration
-   - Status: Not yet located
+   - Status: ✓ FOUND — October 3, 2016 Reddit post "Let's run on-chain decentralized exchanges the way we run prediction markets" (r/ethereum). Documented via Adjacent Research article with precise date. Full AMM lineage: Köppelmann (Sep 2015) → Johnson Euler (Sep 2016) → Vitalik Reddit (Oct 2016) → Lu invariants (Mar 2017) → Vitalik follow-up (Mar 2018) → Uniswap V1 (Nov 2018).
 
 ### Medium Priority
 
@@ -150,16 +150,16 @@ Multiple theories exist:
 ### Immediate
 
 1. [ ] Search for Mojo Nation original documentation
-2. [ ] Locate Vitalik's AMM Reddit post
+2. [x] Locate Vitalik's AMM Reddit post — FOUND: October 3, 2016 Reddit post "Let's run on-chain decentralized exchanges the way we run prediction markets" (via Adjacent Research); added as `misc_buterin_reddit_amm_2016`
 3. [ ] Verify Szabo smart contracts 1994 vs 1996
 4. [ ] Archive critical blog post URLs via Wayback Machine
 
 ### Short-term
 
 5. [x] Add BitShares/BitUSD to library.bib — Added as `misc_bitshares_bitusd_2014`
-6. [ ] Expand ZK proof system coverage
+6. [x] Expand ZK proof system coverage — Added Bulletproofs detail, Nova, HyperNova, folding schemes
 7. [ ] Profile DeFi era builders
-8. [ ] Add auction theory foundations
+8. [x] Add auction theory foundations — Added Vickrey (1961), Myerson (1981), Milgrom/Weber (1982), Klemperer (1999)
 
 ### Long-term
 

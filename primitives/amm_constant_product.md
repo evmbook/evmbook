@@ -47,7 +47,22 @@ C(q) = b * ln(Σ exp(q_i/b))
 
 **Relevance**: LMSR demonstrated that AMMs were viable for pricing assets. It was implemented in prediction markets (Gnosis, Augur) before DeFi.
 
-### 3. Bonding Curves (2017)
+### 3. Ethereum AMM Development (2015-2017)
+
+The precise intellectual lineage within the Ethereum community:
+
+| Date | Contributor | Contribution |
+|------|-------------|--------------|
+| **Sep 2, 2015** | Martin Köppelmann | Proposed integrating market maker into orderbook (Gnosis) |
+| **Sep 26, 2016** | Nick Johnson | Introduced "Euler" concept—single token paired against all |
+| **Oct 3, 2016** | Vitalik Buterin | Reddit post connecting prior concepts; suggested AMMs like prediction markets |
+| **Mar 6, 2017** | Alan Lu (Gnosis) | Explored various invariant designs |
+| **Jun 2017** | Bancor | Launched bonding curves for continuous liquidity |
+| **Mar 2, 2018** | Vitalik Buterin | Revisited earlier post; discussed Martin Köppelmann's x*y=k formula |
+
+[@misc_adjacent_amm_history]
+
+### 4. Bonding Curves (2017)
 
 **Bancor (June 2017)** — Introduced bonding curves for continuous token liquidity via smart contracts. [@whitepaper_bancor_2017]
 
@@ -66,15 +81,22 @@ Where CRR (Connector Reserve Ratio) determines price sensitivity.
 
 ## First Formalization
 
-**Uniswap V1 (November 2018)** — Hayden Adams launched Uniswap with the constant product formula `x*y=k`. [@blog_adams_uniswap_2018]
+### Köppelmann's x*y=k
+
+**Martin Köppelmann** (Gnosis) proposed the constant product formula, which Vitalik Buterin discussed in a March 2, 2018 post. The formula's elegance—its simplicity and guaranteed liquidity—made it ideal for implementation.
+
+### Uniswap V1 (November 2018)
+
+**Hayden Adams** launched Uniswap with the constant product formula. [@blog_adams_uniswap_2018]
 
 The formalization was remarkably simple:
 - ETH/ERC-20 pairs only
 - No governance token
 - 0.3% fee to liquidity providers
 - Fully permissionless pool creation
+- Received Ethereum Foundation grant (August 2018)
 
-Adams has stated he was inspired by a Vitalik Buterin Reddit post about on-chain market makers, though the exact intellectual lineage to earlier AMM research is unclear.
+Adams was directly inspired by Vitalik's October 3, 2016 Reddit post suggesting AMMs should work like prediction market makers.
 
 ---
 

@@ -300,6 +300,57 @@
   note = {Logarithmic Market Scoring Rule; precursor to AMM concepts}
 }
 
+@misc{misc_buterin_path_independence_2017,
+  author = {Buterin, Vitalik},
+  title = {On Path Independence},
+  year = {2017},
+  month = {June},
+  howpublished = {Blog post},
+  url = {https://vitalik.ca/general/2017/06/22/marketmakers.html},
+  note = {AMM design discussion; follows 2016 Reddit post on decentralized exchanges; influenced Uniswap}
+}
+
+@misc{misc_lu_gnosis_amm_2017,
+  author = {Lu, Alan},
+  title = {Gnosis Market Maker Implementation},
+  year = {2017},
+  note = {First Ethereum implementation of constant product AMM; Gnosis prediction markets}
+}
+
+@misc{misc_koppelmann_amm_2015,
+  author = {K{\"o}ppelmann, Martin},
+  title = {Gnosis Market Maker Orderbook Proposal},
+  year = {2015},
+  month = {September},
+  note = {Proposed integrating market maker into orderbook; precursor to x*y=k}
+}
+
+@misc{misc_johnson_euler_2016,
+  author = {Johnson, Nick},
+  title = {Euler: Single Token Universal Pairing},
+  year = {2016},
+  month = {September},
+  note = {Proposed single token paired against all others for trading}
+}
+
+@misc{misc_buterin_reddit_amm_2016,
+  author = {Buterin, Vitalik},
+  title = {Let's run on-chain decentralized exchanges the way we run prediction markets},
+  year = {2016},
+  month = {October},
+  day = {3},
+  howpublished = {Reddit post, r/ethereum},
+  note = {Connected prediction market AMMs to DEX design; inspired Uniswap}
+}
+
+@misc{misc_adjacent_amm_history,
+  author = {{Adjacent Research}},
+  title = {Ramblings on AMMs and Orderbooks},
+  year = {2024},
+  url = {https://adjacentresearch.xyz/writing/ramblings_on_amms_and_orderbooks},
+  note = {Comprehensive AMM history with primary source links and precise dates}
+}
+
 @misc{misc_finney_rpow_2004,
   author = {Finney, Hal},
   title = {RPOW - Reusable Proofs of Work},
@@ -510,6 +561,54 @@
 }
 
 % ============================================================================
+% AUCTION THEORY FOUNDATIONS
+% ============================================================================
+
+@article{article_vickrey_auction_1961,
+  author = {Vickrey, William},
+  title = {Counterspeculation, Auctions, and Competitive Sealed Tenders},
+  journal = {The Journal of Finance},
+  year = {1961},
+  volume = {16},
+  number = {1},
+  pages = {8--37},
+  note = {Second-price auctions (Vickrey auctions); Nobel Prize 1996; foundation for MEV auction design}
+}
+
+@article{article_myerson_optimal_1981,
+  author = {Myerson, Roger B.},
+  title = {Optimal Auction Design},
+  journal = {Mathematics of Operations Research},
+  year = {1981},
+  volume = {6},
+  number = {1},
+  pages = {58--73},
+  note = {Optimal mechanism design for auctions; Nobel Prize 2007}
+}
+
+@article{article_milgrom_theory_1982,
+  author = {Milgrom, Paul R. and Weber, Robert J.},
+  title = {A Theory of Auctions and Competitive Bidding},
+  journal = {Econometrica},
+  year = {1982},
+  volume = {50},
+  number = {5},
+  pages = {1089--1122},
+  note = {Common value auctions, winner's curse; foundational auction theory}
+}
+
+@article{article_klemperer_auctions_1999,
+  author = {Klemperer, Paul},
+  title = {Auction Theory: A Guide to the Literature},
+  journal = {Journal of Economic Surveys},
+  year = {1999},
+  volume = {13},
+  number = {3},
+  pages = {227--286},
+  note = {Comprehensive survey of auction theory; accessible introduction}
+}
+
+% ============================================================================
 % ERA 11: 2023-2024 - Recovery, ETFs, EIP-4844
 % ============================================================================
 
@@ -696,6 +795,28 @@
   title = {Zerocash: Decentralized Anonymous Payments from Bitcoin},
   year = {2014},
   note = {ZK privacy for cryptocurrency; Zcash foundation}
+}
+
+@misc{misc_halo_2019,
+  author = {Bowe, Sean and Grigg, Jack and Hopwood, Daira},
+  title = {Halo: Recursive Proof Composition without a Trusted Setup},
+  year = {2019},
+  note = {Recursive SNARKs without trusted setup; used in Zcash Orchard}
+}
+
+@misc{misc_nova_2022,
+  author = {Kothapalli, Abhiram and Setty, Srinath and Parno, Bryan},
+  title = {Nova: Recursive Zero-Knowledge Arguments from Folding Schemes},
+  year = {2022},
+  howpublished = {CRYPTO 2022},
+  note = {Folding schemes for incremental verifiable computation; efficient recursive proofs}
+}
+
+@misc{misc_hypernova_2023,
+  author = {Kothapalli, Abhiram and Setty, Srinath},
+  title = {HyperNova: Recursive Arguments for Customizable Constraint Systems},
+  year = {2023},
+  note = {Generalized folding for CCS (customizable constraint systems)}
 }
 
 % ============================================================================

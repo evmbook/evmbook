@@ -135,6 +135,48 @@ The paper:
 | Marlin | Universal | ~500 B | Fast | AHP-based |
 | Halo2 | None | ~5 KB | Moderate | Recursive, no trusted setup |
 
+### Bulletproofs (2017)
+
+**Bünz, Bootle, Boneh et al.** introduced Bulletproofs for range proofs without trusted setup:
+
+| Property | Value |
+|----------|-------|
+| Proof size | O(log n) — ~700 bytes for 64-bit range |
+| Verification | O(n) — slower than SNARKs |
+| Setup | None required |
+| Use case | Range proofs, Monero |
+
+Key features:
+- No trusted setup needed
+- Logarithmic proof size
+- Slower verification (not ideal for on-chain)
+- Used in Monero for confidential transactions
+
+[@inproceedings_bulletproofs_2018]
+
+### Recursive Proofs and Folding Schemes
+
+**Recursive SNARKs** allow proofs to verify other proofs:
+
+| System | Year | Innovation |
+|--------|------|------------|
+| **Halo** | 2019 | Recursive proofs without trusted setup |
+| **Halo2** | 2021 | Improved efficiency; used by Zcash, Scroll |
+| **Nova** | 2022 | Folding scheme for incremental verification |
+| **HyperNova** | 2023 | Generalized folding |
+| **Protostar** | 2023 | Non-uniform IVC |
+
+**Folding schemes** (Nova, HyperNova):
+- Compress multiple instances into one
+- Enable incremental verifiable computation (IVC)
+- More efficient than recursive SNARKs for many use cases
+- Key innovation: "fold" proofs rather than verify inside circuit
+
+**Applications**:
+- Prove arbitrarily long computations
+- Aggregate many proofs into one
+- Enable efficient zkVMs
+
 ---
 
 ## Common Misattributions
