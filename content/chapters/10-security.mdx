@@ -1,7 +1,7 @@
 ---
 title: Smart Contract Security
 description: Common vulnerabilities, attack patterns, and defensive programming
-chapter: 9
+chapter: 10
 ---
 
 # Smart Contract Security
@@ -363,6 +363,176 @@ For critical contracts, formal verification can mathematically prove correctness
 - Solidity SMTChecker (built-in)
 - K Framework
 
+## Flash Loan Attacks
+
+Flash loans allow borrowing large amounts without collateral, as long as the loan is repaid within the same transaction. While legitimate for arbitrage and liquidations, they've enabled numerous exploits.
+
+### The Flash Loan Attack Pattern
+
+```solidity
+// Attack pattern (conceptual)
+contract FlashLoanAttacker {
+    function attack() external {
+        // 1. Borrow massive amount (e.g., $100M)
+        flashLoanProvider.flashLoan(100_000_000e18);
+    }
+
+    function executeOperation(uint256 amount) external {
+        // 2. Use borrowed funds to manipulate markets
+        // - Manipulate oracle prices
+        // - Exhaust liquidity pools
+        // - Trigger bad liquidations
+
+        // 3. Profit from the manipulation
+
+        // 4. Repay loan (must happen in same tx)
+        token.transfer(msg.sender, amount + fee);
+    }
+}
+```
+
+### Defense Against Flash Loan Attacks
+
+1. **Time-Weighted Average Prices (TWAP)** — Don't rely on spot prices
+2. **Multi-block oracle reads** — Require prices from multiple blocks
+3. **Protocol-level checks** — Ensure state changes make economic sense
+4. **Flash loan guards** — Detect and block same-transaction attacks
+
+```solidity
+// Simple flash loan guard
+uint256 private _lastBlockNumber;
+
+modifier noFlashLoan() {
+    require(block.number > _lastBlockNumber, "No flash loans");
+    _;
+    _lastBlockNumber = block.number;
+}
+```
+
+## Oracle Manipulation
+
+Protocols that rely on on-chain oracles are vulnerable to price manipulation.
+
+### Common Oracle Vulnerabilities
+
+**Spot Price Reliance:**
+```solidity
+// VULNERABLE - spot price can be manipulated
+function getCollateralValue(uint256 tokenAmount) public view returns (uint256) {
+    uint256 spotPrice = uniswapPair.getReserves().reserve0 / reserve1;
+    return tokenAmount * spotPrice; // Flash loans can manipulate this
+}
+```
+
+**Defense: Use Chainlink or TWAP:**
+```solidity
+import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+
+function getCollateralValue(uint256 tokenAmount) public view returns (uint256) {
+    (, int256 price,,,) = chainlinkFeed.latestRoundData();
+    require(price > 0, "Invalid price");
+    return tokenAmount * uint256(price) / 1e8;
+}
+```
+
+## Notable Exploits: Case Studies
+
+Learning from real exploits is essential for security awareness.
+
+### Curve Finance (July 2023) — Compiler Bug
+
+**Loss:** ~$70 million
+
+**What happened:** A reentrancy vulnerability in the Vyper compiler (versions 0.2.15-0.3.0) allowed attackers to drain several Curve pools. The compiler incorrectly implemented reentrancy locks.
+
+**Key lesson:** Compiler bugs bypass code review. The Solidity/Vyper code looked correct, but the compiled bytecode had the vulnerability.
+
+```python
+# Vyper code appeared safe
+@nonreentrant('lock')
+def remove_liquidity():
+    # ... implementation
+```
+
+The `@nonreentrant` decorator was broken in affected Vyper versions.
+
+**Defenses:**
+- Pin compiler versions explicitly
+- Test with multiple compiler versions
+- Monitor compiler security advisories
+- Consider Solidity (more battle-tested) for high-value contracts
+
+### Euler Finance (March 2023) — Flash Loan + Logic Bug
+
+**Loss:** ~$197 million (later returned by attacker)
+
+**What happened:** Attacker exploited a combination of:
+1. Missing health check in `donateToReserves()` function
+2. Flash loans to inflate collateral value
+3. Self-liquidation for profit
+
+**Simplified vulnerability:**
+```solidity
+// VULNERABLE - no health check after donation
+function donateToReserves(uint256 amount) external {
+    // Donation reduces sender's collateral
+    balances[msg.sender] -= amount;
+    reserves += amount;
+    // Missing: require(isHealthy(msg.sender));
+}
+```
+
+**Defenses:**
+- Health checks after every balance-changing operation
+- Invariant testing: "No operation should leave users in a liquidatable state without them being liquidated"
+- Integration tests simulating attack patterns
+
+### Nomad Bridge (August 2022) — Improper Initialization
+
+**Loss:** ~$190 million
+
+**What happened:** After an upgrade, the trusted root was accidentally set to 0x00. Since uninitialized mappings return 0, any message was considered valid.
+
+```solidity
+// VULNERABLE - after misconfigured upgrade
+function process(bytes memory message) external {
+    bytes32 root = messages[message].root;
+    // root defaults to 0x00 for unknown messages
+    require(acceptableRoot(root)); // 0x00 was accidentally marked acceptable!
+    // Process the (fake) message...
+}
+```
+
+**Defenses:**
+- Never accept zero values as valid
+- Test upgrade procedures thoroughly
+- Multi-sig + timelock for upgrades
+- Pausability for emergencies
+
+### Ronin Bridge (March 2022) — Compromised Keys
+
+**Loss:** ~$620 million
+
+**What happened:** Attackers compromised 5 of 9 validator private keys through social engineering. The bridge's security relied entirely on key security.
+
+**Defenses:**
+- Decentralize validator sets (more keys, distributed globally)
+- Hardware security modules (HSMs) for signing
+- Operational security training
+- Monitoring for unusual signing patterns
+- Consider optimistic bridges with fraud proofs
+
+### Wormhole Bridge (February 2022) — Signature Bypass
+
+**Loss:** ~$320 million
+
+**What happened:** Attacker bypassed signature verification by exploiting how the bridge verified guardian signatures. They could create valid-looking attestations without actual guardian signatures.
+
+**Defenses:**
+- Multiple independent verification layers
+- Formal verification of signature schemes
+- Bug bounties focused on core verification logic
+
 ## Security Audit Process
 
 1. **Documentation Review** — Understand intended behavior
@@ -374,6 +544,56 @@ For critical contracts, formal verification can mathematically prove correctness
 7. **Findings Report** — Document issues with severity ratings
 8. **Remediation** — Fix issues and verify fixes
 
+### Choosing an Auditor
+
+When selecting a security auditor:
+
+- **Track record** — Have they found critical bugs in similar protocols?
+- **Specialization** — DeFi, bridges, NFTs, etc. require different expertise
+- **Audit depth** — How many hours/weeks will they spend?
+- **Follow-up** — Do they verify remediations?
+
+Well-known audit firms include Trail of Bits, OpenZeppelin, Consensys Diligence, Spearbit, and Cyfrin.
+
+### Bug Bounty Programs
+
+Complement audits with ongoing bug bounties:
+
+```
+Typical Bug Bounty Payouts:
+├── Critical (fund theft possible): $100,000 - $1,000,000+
+├── High (significant impact): $25,000 - $100,000
+├── Medium (limited impact): $5,000 - $25,000
+└── Low (informational): $500 - $5,000
+```
+
+Platforms: Immunefi, HackerOne, Code4rena
+
+## Emergency Response
+
+Despite best efforts, exploits happen. Have a plan:
+
+### Before Deployment
+
+1. **Pausability** — Include pause functions for emergencies
+2. **Admin roles** — Define who can pause/upgrade
+3. **Monitoring** — Set up alerts for unusual activity
+4. **Communication** — Know how to reach your users
+
+### During an Attack
+
+1. **Pause if possible** — Stop the bleeding
+2. **Assess damage** — What was lost? Is attack ongoing?
+3. **Communicate** — Be transparent with users
+4. **Coordinate** — Work with white hats, exchanges, law enforcement
+
+### After an Attack
+
+1. **Post-mortem** — Document exactly what happened
+2. **Fix and verify** — Ensure the vulnerability is patched
+3. **Consider recovery** — User compensation, insurance claims
+4. **Learn** — Update processes to prevent recurrence
+
 ## Conclusions
 
 Smart contract security requires:
@@ -383,5 +603,17 @@ Smart contract security requires:
 - **Thorough testing** — Unit tests, fuzz tests, integration tests
 - **Professional audits** — For contracts handling significant value
 - **Continuous monitoring** — Watch for exploits after deployment
+
+### Key Lessons from 2022-2024
+
+| Exploit | Root Cause | Defense |
+|---------|------------|---------|
+| Curve (2023) | Compiler bug | Pin compiler versions, test bytecode |
+| Euler (2023) | Missing health check | Invariant testing |
+| Nomad (2022) | Bad upgrade config | Test upgrades exhaustively |
+| Ronin (2022) | Key compromise | Decentralize signing, use HSMs |
+| Wormhole (2022) | Signature bypass | Formal verification of core logic |
+
+The pattern is clear: most exploits combine multiple failures—a bug *plus* insufficient testing *plus* inadequate monitoring. No single defense is enough.
 
 Remember: in smart contracts, bugs are permanent and exploits are profitable. The cost of security is always less than the cost of an exploit.

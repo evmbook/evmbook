@@ -1,6 +1,6 @@
 ---
-title: Transactions
-description: Understanding Ethereum transactions, signatures, and propagation
+title: Transactions & Gas
+description: Transaction types, EIP-1559, gas estimation, and mempool dynamics
 chapter: 6
 ---
 
@@ -583,6 +583,191 @@ On **Ethereum Classic (PoW)**, miners use GPUs to find a proof of work that make
 Without going into too much detail, valid transactions will eventually be included in a block of transactions and, thus, recorded in the blockchain. Once included in a block, transactions also modify the state of the Ethereum singleton, either by modifying the balance of an account (in the case of a simple payment) or by invoking contracts that change their internal state. These changes are recorded alongside the transaction, in the form of a transaction *receipt*, which may also include *events*.
 
 A transaction that has completed its journey from creation through signing by an EOA, propagation, and finally inclusion in a block has changed the state of the singleton and left an indelible mark on the blockchain.
+
+## Maximal Extractable Value (MEV)
+
+MEV (Maximal Extractable Value, formerly "Miner Extractable Value") refers to the profit that block producers can capture by reordering, inserting, or censoring transactions within a block.
+
+### How MEV Works
+
+Because block producers control transaction ordering, they can:
+
+1. **Front-run**: Insert their transaction before a profitable user transaction
+2. **Back-run**: Insert their transaction immediately after a profitable opportunity
+3. **Sandwich**: Place transactions both before and after a victim's trade
+4. **Arbitrage**: Capture price differences across DEXs
+5. **Liquidations**: Race to liquidate undercollateralized positions
+
+```
+Normal mempool order:     [Tx1] [Tx2] [Tx3] [Tx4]
+
+Front-running:           [Attacker] [Victim] [Tx1] [Tx2]
+                              ↑ Attacker buys before victim's large buy
+
+Sandwich attack:         [Buy] [Victim] [Sell] [Tx1]
+                           ↑              ↑
+                     Attacker buys   Attacker sells
+                     before victim   after victim
+```
+
+### MEV on Different Consensus Mechanisms
+
+**Proof of Work (ETC)**:
+- Miners control transaction ordering
+- Mining pools may run MEV extraction
+- Less sophisticated MEV infrastructure than Ethereum
+
+**Proof of Stake (ETH)**:
+- Validators propose blocks but often delegate to *builders*
+- PBS (Proposer-Builder Separation) creates a market for block building
+- MEV-Boost connects validators to block builders
+
+```
+ETH Block Production (post-PBS):
+
+Searchers → find MEV opportunities → send bundles to
+    ↓
+Builders → construct optimal blocks → bid to
+    ↓
+Validators → select highest-bidding block → propose to network
+```
+
+### The MEV Supply Chain
+
+| Actor | Role | Example |
+|-------|------|---------|
+| **Searchers** | Find MEV opportunities | Arbitrage bots, liquidation bots |
+| **Builders** | Construct blocks from transactions | Flashbots, bloXroute, Titan |
+| **Relays** | Connect builders to validators | Flashbots Relay, Ultrasound |
+| **Validators** | Propose blocks | Lido, Coinbase, independent |
+
+### Protecting Against MEV
+
+#### 1. Private Mempools (Flashbots Protect)
+
+Instead of broadcasting to the public mempool, send transactions privately:
+
+```typescript
+import { createWalletClient, http } from 'viem'
+import { mainnet } from 'viem/chains'
+
+// Use Flashbots Protect RPC
+const client = createWalletClient({
+  chain: mainnet,
+  transport: http('https://rpc.flashbots.net'),
+})
+
+// Transactions sent here won't be visible in public mempool
+const hash = await client.sendTransaction({
+  to: '0x...',
+  value: parseEther('1'),
+})
+```
+
+<Callout type="info">
+**Flashbots Protect** routes your transaction directly to block builders, bypassing the public mempool. If your transaction would be unprofitable to include (not enough gas), it may take longer to confirm.
+</Callout>
+
+#### 2. Slippage Protection
+
+For DEX trades, set appropriate slippage tolerance:
+
+```solidity
+// Uniswap-style swap with slippage protection
+function swapExactTokensForTokens(
+    uint amountIn,
+    uint amountOutMin,    // Minimum acceptable output
+    address[] calldata path,
+    address to,
+    uint deadline
+) external returns (uint[] memory amounts);
+```
+
+Set `amountOutMin` to protect against sandwich attacks:
+
+```typescript
+// Calculate minimum output with 0.5% slippage
+const amountOutMin = expectedOutput * 995n / 1000n
+```
+
+#### 3. Commit-Reveal Schemes
+
+For high-value operations, use commit-reveal to hide intent:
+
+```solidity
+// Phase 1: Commit (hash of action + secret)
+function commit(bytes32 commitment) external {
+    commitments[msg.sender] = commitment;
+    commitTime[msg.sender] = block.timestamp;
+}
+
+// Phase 2: Reveal (after some blocks)
+function reveal(uint256 action, bytes32 secret) external {
+    require(block.timestamp > commitTime[msg.sender] + COMMIT_DELAY);
+    require(keccak256(abi.encode(action, secret)) == commitments[msg.sender]);
+    // Execute action
+}
+```
+
+#### 4. Time-Weighted Average Prices (TWAP)
+
+For large trades, execute over time to reduce impact:
+
+```solidity
+// Execute trade in chunks over multiple blocks
+function twapSwap(
+    uint256 totalAmount,
+    uint256 chunks,
+    uint256 intervalBlocks
+) external {
+    uint256 chunkSize = totalAmount / chunks;
+    // Queue chunks for execution over time
+}
+```
+
+### MEV and Protocol Design
+
+When designing protocols, consider MEV implications:
+
+**Bad**: Relying on transaction ordering for fairness
+```solidity
+// VULNERABLE: First caller wins
+function claim() external {
+    require(!claimed);
+    claimed = true;
+    token.transfer(msg.sender, reward);
+}
+```
+
+**Better**: Use commit-reveal or randomness
+```solidity
+// Fairer: Random selection from committed participants
+function selectWinner() external {
+    bytes32 randomness = keccak256(abi.encode(
+        block.prevrandao,
+        block.timestamp,
+        participants.length
+    ));
+    uint256 winnerIndex = uint256(randomness) % participants.length;
+    // ...
+}
+```
+
+### The Ethics of MEV
+
+MEV is controversial:
+
+**Arguments for MEV**:
+- Market efficiency: Arbitrage keeps prices aligned
+- Protocol health: Liquidations prevent bad debt
+- Block producer revenue: Sustainable validator economics
+
+**Arguments against MEV**:
+- User harm: Sandwich attacks cost users money
+- Centralization: MEV infrastructure benefits sophisticated actors
+- Network stability: MEV can incentivize reorgs
+
+The ecosystem has evolved toward "MEV redistribution" — extracting MEV but returning value to users through better prices, lower fees, or protocol mechanisms.
 
 ## Multiple-Signature (Multisig) Transactions
 

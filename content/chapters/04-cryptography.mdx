@@ -214,6 +214,53 @@ There are a couple of implementations of the `secp256k1` elliptic curve that are
 
 **libsecp256k1** — Bitcoin Core's `libsecp256k1` is a C-language implementation of the `secp256k1` elliptic curve and other cryptographic primitives. It was written from scratch to replace OpenSSL in Bitcoin Core software, and is considered superior in both performance and security.
 
+### Working with Keys in Practice
+
+Modern development libraries abstract the cryptographic details. Here's how to work with keys using viem:
+
+```typescript
+import { generatePrivateKey, privateKeyToAccount } from 'viem/accounts'
+
+// Generate a cryptographically secure private key
+const privateKey = generatePrivateKey()
+// 0x... (64 hex characters = 256 bits)
+
+// Derive account (public key + address) from private key
+const account = privateKeyToAccount(privateKey)
+
+console.log('Address:', account.address)
+// 0x... (40 hex characters = 160 bits = 20 bytes)
+
+console.log('Public Key:', account.publicKey)
+// 0x04... (130 hex characters = uncompressed public key)
+```
+
+To sign a message:
+
+```typescript
+import { createWalletClient, http } from 'viem'
+import { mainnet } from 'viem/chains'
+
+const client = createWalletClient({
+  account,
+  chain: mainnet,
+  transport: http(),
+})
+
+// Sign a message
+const signature = await account.signMessage({
+  message: 'Hello, Ethereum!',
+})
+
+// Signature contains r, s, and v components
+console.log(signature)
+// 0x... (132 hex characters = r + s + v)
+```
+
+<Callout type="info">
+**Developer Note:** You should never generate or handle private keys in browser JavaScript unless absolutely necessary. For user-facing applications, let wallets like MetaMask manage keys. The examples above are for backend services, scripts, or learning purposes.
+</Callout>
+
 ## Cryptographic Hash Functions
 
 Cryptographic hash functions are used throughout Ethereum. In fact, hash functions are used extensively in almost all cryptographic systems—a fact captured by cryptographer Bruce Schneier, who said, "Much more than encryption algorithms, one-way hash functions are the workhorses of modern cryptography."
@@ -427,6 +474,165 @@ It's all wrong! Several of the alphabetic characters are incorrectly capitalized
 
 The capitalization of the address we input doesn't match the checksum just calculated, meaning something has changed in the address, and an error has been introduced.
 
+## Modern Cryptographic Operations in Solidity
+
+Solidity provides built-in cryptographic primitives that leverage the same mathematics covered in this chapter.
+
+### Hashing in Smart Contracts
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.26;
+
+contract CryptoExamples {
+    // Keccak-256 (Ethereum's primary hash function)
+    function hashWithKeccak(string memory input) public pure returns (bytes32) {
+        return keccak256(abi.encodePacked(input));
+    }
+
+    // SHA-256 (Bitcoin's hash function, available in EVM)
+    function hashWithSHA256(string memory input) public pure returns (bytes32) {
+        return sha256(abi.encodePacked(input));
+    }
+
+    // RIPEMD-160 (used in Bitcoin addresses)
+    function hashWithRIPEMD(string memory input) public pure returns (bytes20) {
+        return ripemd160(abi.encodePacked(input));
+    }
+}
+```
+
+### Signature Verification
+
+Recovering the signer's address from a signature is a common pattern:
+
+```solidity
+contract SignatureVerifier {
+    function recoverSigner(
+        bytes32 messageHash,
+        uint8 v,
+        bytes32 r,
+        bytes32 s
+    ) public pure returns (address) {
+        // ecrecover returns the address that signed the message
+        return ecrecover(messageHash, v, r, s);
+    }
+
+    // More commonly, use the full signature bytes
+    function verify(
+        bytes32 messageHash,
+        bytes memory signature,
+        address expectedSigner
+    ) public pure returns (bool) {
+        require(signature.length == 65, "Invalid signature length");
+
+        bytes32 r;
+        bytes32 s;
+        uint8 v;
+
+        assembly {
+            r := mload(add(signature, 32))
+            s := mload(add(signature, 64))
+            v := byte(0, mload(add(signature, 96)))
+        }
+
+        // Adjust v for Ethereum's convention
+        if (v < 27) v += 27;
+
+        return ecrecover(messageHash, v, r, s) == expectedSigner;
+    }
+}
+```
+
+<Callout type="warning">
+**Security Note:** The `ecrecover` function returns `address(0)` for invalid signatures rather than reverting. Always check that the returned address is not zero and matches the expected signer.
+</Callout>
+
+### EIP-712: Typed Data Signing
+
+For production applications, use EIP-712 structured data signing instead of raw message signing:
+
+```solidity
+contract EIP712Example {
+    bytes32 public constant DOMAIN_TYPEHASH = keccak256(
+        "EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)"
+    );
+
+    bytes32 public constant PERMIT_TYPEHASH = keccak256(
+        "Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)"
+    );
+
+    bytes32 public immutable DOMAIN_SEPARATOR;
+
+    constructor() {
+        DOMAIN_SEPARATOR = keccak256(abi.encode(
+            DOMAIN_TYPEHASH,
+            keccak256("MyToken"),
+            keccak256("1"),
+            block.chainid,
+            address(this)
+        ));
+    }
+
+    function getPermitHash(
+        address owner,
+        address spender,
+        uint256 value,
+        uint256 nonce,
+        uint256 deadline
+    ) public view returns (bytes32) {
+        bytes32 structHash = keccak256(abi.encode(
+            PERMIT_TYPEHASH,
+            owner,
+            spender,
+            value,
+            nonce,
+            deadline
+        ));
+
+        return keccak256(abi.encodePacked(
+            "\x19\x01",
+            DOMAIN_SEPARATOR,
+            structHash
+        ));
+    }
+}
+```
+
 ## Conclusions
 
-In this chapter we provided a brief survey of public key cryptography and focused on the use of public and private keys in Ethereum and the use of cryptographic tools, such as hash functions, in the creation and verification of Ethereum addresses. We also looked at digital signatures and how they can demonstrate ownership of a private key without revealing that private key. In the Wallets chapter, we will put these ideas together and look at how wallets can be used to manage collections of keys.
+In this chapter we provided a survey of public key cryptography and focused on the use of public and private keys in Ethereum and the use of cryptographic tools, such as hash functions, in the creation and verification of Ethereum addresses. We also looked at digital signatures and how they can demonstrate ownership of a private key without revealing that private key.
+
+### Key Takeaways for Developers
+
+1. **Private keys are just numbers** — 256-bit random integers. Security depends entirely on randomness and secrecy.
+
+2. **Public keys derive from private keys** — The elliptic curve math is one-way: easy to compute public from private, impossible to reverse.
+
+3. **Addresses derive from public keys** — Keccak-256 hash, keep last 20 bytes. This is also one-way.
+
+4. **Signatures prove ownership** — You can prove you control a private key without revealing it.
+
+5. **Use libraries, don't implement** — Cryptographic code is subtle. Use battle-tested libraries like viem, ethers.js, or OpenZeppelin.
+
+6. **EIP-55 checksums catch errors** — Always use mixed-case addresses when displaying to users.
+
+7. **EIP-712 for signatures** — Typed data signing prevents users from signing malicious messages that look like transactions.
+
+### The Derivation Chain
+
+```
+Private Key (256 bits)
+    │
+    │  Elliptic curve multiplication (secp256k1)
+    ▼
+Public Key (512 bits = two 256-bit coordinates)
+    │
+    │  Keccak-256 hash → take last 20 bytes
+    ▼
+Address (160 bits = 20 bytes = 40 hex chars)
+```
+
+Every step is one-way. You can go down but never back up.
+
+In the next chapter on Accounts and Wallets, we will put these ideas together and look at how wallets manage collections of keys, derive addresses, and enable user interaction with the blockchain.

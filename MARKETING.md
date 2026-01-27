@@ -16,23 +16,32 @@
 
 The Ethereum Virtual Machine runs billions of dollars in smart contracts across dozens of blockchain networks. Whether you're building on Ethereum, Ethereum Classic, or any EVM-compatible chain—**this is the book that will get you there.**
 
-**Mastering EVM** takes you from curious developer to confident builder. We don't just show you *how* to write smart contracts. We show you *why* they work the way they do.
+**Mastering EVM** takes you from curious developer to confident builder. We don't just show you *how* to write smart contracts. We show you *why* they work the way they do—and how each primitive evolved to its current form.
 
 ---
 
 ## What's Inside
 
-### Part I: Foundations
-Build your mental model of how the EVM actually works. Cryptography, accounts, transactions, and the execution environment that makes trustless computation possible.
+### Part I: The EVM Landscape (Chapters 1-3)
+Understand the EVM in context: what it is today, how we got here from 1976 through 2026, and setting up your modern development environment with Foundry, viem, and TypeScript.
 
-### Part II: Development
-Write production-ready smart contracts in Solidity and Vyper. Learn security patterns, token standards, oracle integration, and complete dApp architecture.
+### Part II: Core Foundations (Chapters 4-7)
+Build your mental model of how the EVM actually works. Cryptography, accounts, transactions, gas, and consensus mechanisms that make trustless computation possible.
 
-### Part III: Deep Dives
-Go beyond the basics. Understand consensus mechanisms, DeFi protocols, Layer 2 scaling solutions, and zero-knowledge proofs.
+### Part III: Smart Contract Development (Chapters 8-12)
+Write production-ready smart contracts. Solidity fundamentals, advanced patterns (proxies, assembly), security, testing with Foundry, and deployment strategies.
 
-### Part IV: Modern Practices
-The frontier of blockchain development. How agentic coding multiplies developer effectiveness while encoding network principles directly into AI workflows.
+### Part IV: EVM Internals (Chapters 13-14)
+Go deep into the machine: stack, memory, storage, opcodes, and gas optimization techniques that separate junior from senior developers.
+
+### Part V: The Application Layer (Chapters 15-22)
+**The evolution narratives.** How each DeFi primitive developed—tokens, AMMs, lending, governance, NFT marketplaces, launchpads, prediction markets, and oracles. Code examples at each evolutionary stage.
+
+### Part VI: Scaling & Infrastructure (Chapters 23-24)
+Layer 2 solutions and zero-knowledge applications. From Plasma to rollups to ZK-EVMs—the full scaling story.
+
+### Part VII: Building for the Real World (Chapters 25-27)
+Regulatory landscape, bootstrapping an EVM ecosystem from scratch, and agentic development with AI assistants.
 
 ---
 
@@ -46,6 +55,7 @@ A unique feature of this book: **we cover both major EVM implementations**.
 | **Philosophy** | Immutability-first | Innovation-first |
 | **Genesis** | July 30, 2015 | July 30, 2015 |
 | **Fork** | — | Block 1,920,000 |
+| **2025 Upgrade** | Olympia (Treasury) | Pectra (AA) |
 
 Understanding both chains gives you the complete picture of the EVM ecosystem. Where implementations differ, we clearly note the distinctions.
 
@@ -57,13 +67,16 @@ Understanding both chains gives you the complete picture of the EVM ecosystem. W
 Technical education shouldn't be gatekept behind paywalls. Read online, download PDFs, fork the repo—**it's yours**.
 
 ### Always Current
-The blockchain space moves fast. We continuously update content to reflect the current state of EVM development. No more learning from 2017 tutorials.
+Updated through 2026: ETF era, MakerDAO→Sky rebrand, Pump.fun, GENIUS Act, L2 dominance. No more learning from 2017 tutorials.
 
-### Battle-Tested Content
-Built on the foundation of *Mastering Ethereum (Open Edition)* by Andreas M. Antonopoulos and Gavin Wood, substantially rewritten and modernized for 2026.
+### Evolution Narratives
+We don't just show you Uniswap V3—we show you EtherDelta → Bancor → Uniswap V1 → V2 → V3 → Curve → Aerodrome. Understanding the *why* makes you a better builder.
+
+### Battle-Tested Foundation
+Built on *Mastering Ethereum (Open Edition)* by Andreas M. Antonopoulos and Gavin Wood, substantially rewritten and expanded for 2026.
 
 ### Modern Tooling
-Foundry, Hardhat, ethers.js v6, Solidity 0.8.x—we cover the tools developers actually use today.
+Foundry, viem, wagmi, TypeScript, Solidity 0.8.26+—the tools developers actually use today.
 
 ---
 
@@ -71,7 +84,7 @@ Foundry, Hardhat, ethers.js v6, Solidity 0.8.x—we cover the tools developers a
 
 - **Blockchain newcomers** wanting a comprehensive introduction
 - **Experienced developers** transitioning from other platforms
-- **Architects** designing blockchain-based systems
+- **Ecosystem builders** deploying infrastructure on new EVM chains
 - **Security researchers** auditing smart contracts
 - **Anyone curious** about how the EVM actually works
 
@@ -99,40 +112,59 @@ open https://masteringevm.com
 
 ---
 
-## Table of Contents
+## Table of Contents (28 Chapters)
 
-**Foundations**
-1. What is the EVM?
-2. Getting Started
-3. EVM Clients
-4. Cryptography
-5. Wallets
-6. Transactions
+**Part I: The EVM Landscape**
+0. Preface
+1. The EVM Today
+2. How We Got Here (1976-2026)
+3. Setting Up Your Environment
 
-**Development**
-7. Solidity
-8. Vyper
-9. Smart Contract Security
-10. Tokens
-11. Oracles
-12. Decentralized Applications
+**Part II: Core Foundations**
+4. Cryptography Essentials
+5. Accounts, Keys & Wallets
+6. Transactions & Gas
+7. Consensus & Finality
 
-**Deep Dives**
-13. EVM Deep Dive
-14. Consensus Mechanisms
-15. DeFi
-16. Scaling Solutions
-17. Zero-Knowledge Proofs
+**Part III: Smart Contract Development**
+8. Solidity Fundamentals
+9. Advanced Solidity Patterns
+10. Smart Contract Security
+11. Testing & Verification
+12. Deployment & Upgrades
 
-**Modern Practices**
-18. Agentic Development
+**Part IV: EVM Internals**
+13. EVM Internals
+14. Gas Optimization
+
+**Part V: The Application Layer**
+15. Token Standards & Evolution
+16. AMM Evolution: From Order Books to Liquidity Pools
+17. Lending & Stablecoin Evolution
+18. Governance & DAOs
+19. NFT Marketplace Evolution
+20. Launchpads & Token Distribution
+21. Prediction Markets
+22. Oracles & Data Feeds
+
+**Part VI: Scaling & Infrastructure**
+23. Layer 2 Solutions
+24. Zero-Knowledge Applications
+
+**Part VII: Building for the Real World**
+25. Regulatory Landscape for Developers
+26. Bootstrapping an EVM Ecosystem
+27. Agentic Development
 
 **Appendices**
 - A: Fork History
 - B: EIP Standards Reference
-- C: Opcode Reference
+- C: EVM Opcodes
 - D: Development Tools
 - E: Glossary
+- F: Regulatory Timeline
+- G: Key Figures in Blockchain History
+- H: Essential Reading List
 
 ---
 
@@ -161,12 +193,6 @@ This work is licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/
 - Adapt — remix, transform, and build upon for any purpose
 
 **Attribution:** This work is a derivative of *Mastering Ethereum (Open Edition)* by Andreas M. Antonopoulos and Gavin Wood.
-
----
-
-## Maintainer
-
-Modernized and maintained by [Claude](https://github.com/claude).
 
 ---
 

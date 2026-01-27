@@ -180,15 +180,29 @@ Some platforms deliberately limit programmability to focus on payments:
 
 **Stellar**: Similar philosophy to XRPL—focused on payments and asset issuance. Stellar has "anchors" (fiat on-ramps), path payments (automatic currency conversion), and Soroban (a recent addition for smart contracts using WASM).
 
+### Emerging and Experimental Platforms
+
+**Qubic**: A radically different approach using "Useful Proof of Work"—instead of arbitrary hash puzzles, Qubic miners train AI models. The network uses quorum-based consensus among 676 "Computors" that must reach agreement. Smart contracts execute in a custom VM with feeless transactions (no gas). Qubic targets AI/ML computation as its primary use case, making computational work economically productive rather than purely securing the network. Trade-offs: Highly experimental, centralized Computor set, unproven at scale.
+
+**Radix (Cerberus)**: Uses a novel "sharded" consensus called Cerberus that claims to solve the scalability trilemma through parallelism at the protocol level. Features Scrypto, a Rust-based language with asset-oriented programming where tokens are native primitives rather than contract state. Interesting approach but requires learning entirely new paradigms.
+
+**Mina Protocol**: The "succinct blockchain"—the entire chain state is compressed to a ~22KB ZK proof. Nodes don't need to store the full history. Smart contracts (zkApps) use o1js and generate ZK proofs client-side. Unique privacy and scalability properties but complex developer experience.
+
+**Algorand**: Pure proof-of-stake with instant finality (no forks possible). Uses a unique Byzantine agreement protocol. Smart contracts in TEAL (low-level) or PyTeal (Python). Known for academic rigor (Silvio Micali) but smaller ecosystem than EVM chains.
+
 ### Historical and Alternative Platforms
+
+**BitShares (2014)**: Dan Larimer's first blockchain project, introducing Delegated Proof of Stake (DPoS) and the concept of a decentralized exchange (DEX) built into the protocol. BitShares pioneered many concepts: price-stable assets (BitUSD), prediction markets, and worker proposals for funding development. Its "graphene" codebase became the foundation for Steem and EOS. While not a smart contract platform, BitShares demonstrated that blockchains could do more than simple transfers—influencing the entire industry's thinking about decentralized applications.
 
 **NXT (2013)**: One of the first pure proof-of-stake platforms. Offered limited built-in features (asset exchange, voting, messaging) but not general programmability. Influenced later PoS designs.
 
-**EOS (2018)**: Promised high TPS through Delegated Proof of Stake (DPoS). Made transactions "free" (no gas) but required staking for resources. The centralization of 21 block producers and governance issues led to a decline.
+**EOS (2018)**: Dan Larimer's third project (after BitShares and Steem), EOS raised $4.1B in a year-long ICO—the largest in crypto history at the time. Promised high TPS through DPoS with 21 block producers. Made transactions "free" (no gas) but required staking for resources. The centralization concerns, governance disputes, and Block.one's controversial use of ICO funds led to decline. EOS remains a cautionary tale about ICO-era promises vs. delivery.
 
 **Decred (2016)**: Hybrid PoW/PoS consensus with a built-in treasury system. Notable for pioneering on-chain governance and stakeholder voting. Limited smart contract capability but interesting governance model.
 
 **Monero**: Deliberately avoids smart contracts to maintain privacy. Complex scripts would leak information. Focuses purely on private value transfer.
+
+**Tezos (2018)**: Self-amending blockchain with on-chain governance for protocol upgrades. Uses formal verification-friendly Michelson language. Pioneered liquid proof-of-stake. Active but niche ecosystem.
 
 ### Why the EVM Won
 
