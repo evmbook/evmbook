@@ -117,8 +117,9 @@ For each major concept:
 - [x] Priority era chapters (3)
 - [x] Manuscript scaffolding
 
-### Phase 2 (Next)
-- [ ] Expand skeleton chapters
+### Phase 2 (Complete)
+- [x] Expand skeleton chapters — All 13 era chapters now complete (~6,600 lines)
+- [x] Add consistent structure (Timeline, Open Questions, Bridge sections)
 - [ ] Verify contested claims
 - [ ] Add missing sources
 - [ ] Cross-reference with main book content

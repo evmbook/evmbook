@@ -1,7 +1,7 @@
 # Mastering EVM (2025 Edition) - Project Status
 
-**Last Updated:** 2026-01-27
-**Book Status:** Content Complete - Historical Accuracy Verification in Progress
+**Last Updated:** 2026-01-28
+**Book Status:** Content Complete - Research Infrastructure Complete
 
 ## Related Docs
 - [MILESTONES.md](MILESTONES.md) - Phase tracking and research logs
@@ -39,6 +39,9 @@ See [MILESTONES.md](MILESTONES.md) for full research log.
 | Phase 11 | Complete | Created 8 new diagrams |
 | Phase 12 | Complete | Linked code examples to chapters |
 | **Phase 13** | **Complete** | Multi-chain terminology + Ch20 enhancement |
+| **Phase R1** | **Complete** | Research infrastructure foundation (docs, BibTeX, 10 primitives) |
+| **Phase R2** | **Complete** | Expanded primitives (27 total), skeleton chapters |
+| **Phase R3** | **Complete** | Era chapter expansion (13 chapters, ~6,600 lines) |
 | Phase 14 | Ready | PDF/EPUB build |
 | Phase 15 | Pending | Distribution (ISBN, KDP, release) |
 
@@ -92,6 +95,54 @@ All diagrams redesigned with publisher-quality styling.
 | ch23-l2-architecture.svg | 23 | Complete |
 | ch24-zk-proof-flow.svg | 24 | Complete |
 | ch26-dependency-tree.svg | 26 | Complete |
+
+---
+
+## Research Infrastructure
+
+A parallel research infrastructure supports historical accuracy verification.
+
+### Manuscript Chapters (13 total)
+
+All era chapters now have consistent structure with Timeline, Open Questions, and Bridge sections.
+
+| Era | Chapter | Period | Lines | Status |
+|-----|---------|--------|-------|--------|
+| 0 | 01_era0_pre1900.md | Pre-1900 | ~440 | Complete |
+| 1 | 02_era1_1900_1945.md | 1900-1945 | ~500 | Complete |
+| 2 | 03_era2_1945_1975.md | 1945-1975 | ~370 | Complete |
+| 3 | 04_era3_1976_1990.md | 1976-1990 | ~700 | Complete |
+| 4 | 05_era4_1990_2008.md | 1990-2008 | ~900 | Complete |
+| 5 | 06_era5_2008_2013.md | 2008-2013 | ~500 | Complete |
+| 6 | 07_era6_2013_2017.md | 2013-2017 | ~480 | Complete |
+| 7 | 08_era7_2017_2019.md | 2017-2019 | ~500 | Complete |
+| 8 | 09_era8_2020.md | 2020 | ~375 | Complete |
+| 9 | 10_era9_2021.md | 2021 | ~490 | Complete |
+| 10 | 11_era10_2022.md | 2022 | ~470 | Complete |
+| 11 | 12_era11_2023_2024.md | 2023-2024 | ~450 | Complete |
+| 12 | 13_era12_2025.md | 2025+ | ~455 | Complete |
+
+**Total:** ~6,600 lines across 13 chapters
+
+### Primitive Dossiers (27 total)
+
+Research dossiers covering specific technologies (~42,000 words total).
+
+| Category | Primitives |
+|----------|-----------|
+| Cryptography | PKC, hash functions, ZK proofs |
+| Consensus | PoW, BFT, restaking |
+| Smart Contracts | VMs, fee markets |
+| DeFi | AMM, lending, derivatives, stablecoins |
+| Infrastructure | L2 rollups, oracles, cross-chain |
+| Ecosystem | Governance, tokens, identity, privacy, DePIN |
+
+### Sources
+
+- **library.bib**: 100+ BibTeX entries
+- **source_index.md**: Human-readable index with credibility tiers
+- **ERA_MAP.md**: 13 eras with 5 parallel tracks
+- **CLAIMS_LEDGER.md**: 80+ verified claims
 
 ---
 
