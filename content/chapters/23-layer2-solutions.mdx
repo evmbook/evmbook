@@ -61,6 +61,92 @@ L1 scaling options have limits:
 
 L2 solutions bypass these tradeoffs by moving execution off-chain while using L1 for security and data availability.
 
+## Scaling Solution Taxonomy
+
+Not everything labeled "Layer 2" is actually an L2. The scaling landscape breaks down along two dimensions:
+
+1. **Proof mechanism**: How is execution verified?
+2. **Data availability**: Where is transaction data stored?
+
+### The Classification Matrix
+
+```
+                    │     Data on L1      │    Data Off-Chain
+────────────────────┼─────────────────────┼─────────────────────
+  Validity Proofs   │    ZK ROLLUP        │     VALIDIUM
+  (ZK proofs)       │    (e.g., Scroll,   │    (e.g., StarkEx,
+                    │    Polygon zkEVM)   │    Immutable X)
+────────────────────┼─────────────────────┼─────────────────────
+  Fraud Proofs      │  OPTIMISTIC ROLLUP  │     OPTIMIUM
+  (challenge game)  │   (e.g., Arbitrum,  │    (e.g., Metis,
+                    │    Optimism, Base)  │    Arbitrum AnyTrust)
+────────────────────┼─────────────────────┼─────────────────────
+  Own Consensus     │       N/A           │     SIDECHAIN
+  (independent)     │                     │    (e.g., Polygon PoS)
+────────────────────┴─────────────────────┴─────────────────────
+```
+
+### True L2s: Rollups
+
+**Rollups** post all transaction data to Ethereum L1, inheriting its security guarantees. If the rollup operator disappears, anyone can reconstruct the full state from L1 data alone.
+
+- **Optimistic Rollups**: Assume batches are valid; fraud proofs challenge invalid state
+- **ZK Rollups**: Cryptographic validity proofs verify each batch; no challenge period
+
+**Key property**: L1 data availability means users can always exit, even if operators are malicious.
+
+### Hybrid Solutions: Validiums and Optimiums
+
+**Validiums** use ZK validity proofs but store data off-chain (on a Data Availability Committee or alternative DA layer like Celestia). Security depends on both the validity proof *and* the DA layer.
+
+| Validium | DA Solution | Use Case |
+|----------|-------------|----------|
+| **StarkEx** | DAC (Data Availability Committee) | dYdX (v3), Immutable X |
+| **zkSync Hyperchains** | Configurable (Ethereum or alt-DA) | App-specific chains |
+| **Polygon CDK** | Configurable | Enterprise deployments |
+
+**Optimiums** (sometimes called "optimistic chains") use fraud proofs but store data off-chain.
+
+| Optimium | DA Solution | Notes |
+|----------|-------------|-------|
+| **Metis Andromeda** | MEMO (decentralized storage) | First major optimium |
+| **Arbitrum AnyTrust** | DAC with fallback to L1 | Gaming-focused Orbit chains |
+
+<Callout type="warning">
+**Validiums and Optimiums have weaker security than rollups.** If the DA layer fails or withholds data, users may not be able to prove their balances or exit. The validity/fraud proofs only verify *execution*, not data availability.
+</Callout>
+
+### Independent L1s Marketed as "L2s"
+
+Some EVM-compatible chains market themselves as scaling solutions but are actually independent L1 blockchains with their own consensus:
+
+| Chain | Reality | Consensus | Security Source |
+|-------|---------|-----------|-----------------|
+| **Polygon PoS** | Sidechain (evolving) | ~100 PoS validators | Own validator set |
+| **BNB Smart Chain (BSC)** | Independent L1 | 21 PoSA validators | Own validator set |
+| **Avalanche C-Chain** | Independent L1 | Avalanche consensus | Own validator set |
+| **Fantom Opera** | Independent L1 | Lachesis (aBFT) | Own validator set |
+
+**These are not Layer 2s.** They do not inherit Ethereum's security. If their validator sets collude or fail, user funds are at risk—there's no "exit to L1" mechanism.
+
+<Callout type="info">
+**The Polygon Evolution**: Polygon PoS launched as a sidechain but Polygon is building actual L2s: Polygon zkEVM (ZK rollup), Polygon Miden (zkSTARK rollup), and AggLayer for unified settlement. The company's strategy shifted from "sidechain scaling" to "ZK-powered L2 ecosystem."
+</Callout>
+
+### Why the Distinction Matters
+
+| Property | Rollup | Validium/Optimium | Sidechain/Alt-L1 |
+|----------|--------|-------------------|------------------|
+| Security inheritance | Full L1 security | Partial (proof only) | None |
+| Exit guarantee | Always possible | Depends on DA | Bridge only |
+| Data reconstruction | From L1 alone | Requires DA layer | Requires chain data |
+| Trust assumptions | L1 consensus | L1 + DA layer | Separate consensus |
+| Typical cost | Higher | Medium | Lowest |
+
+**For users**: Understand where your assets actually live and what guarantees you have.
+
+**For builders**: Choose based on security requirements. Gaming might tolerate validium trust assumptions; DeFi with significant TVL should prefer rollups.
+
 ## L2 Evolution Timeline
 
 ### Era 0: The Early Attempts (2017-2019)
@@ -115,9 +201,13 @@ Plasma chain:   Subtree of transactions validated off-chain
 Plasma research wasn't wasted. The data availability problem it exposed directly led to rollup designs and later to EIP-4844 blobs.
 </Callout>
 
-#### Sidechains: A Different Tradeoff
+#### Sidechains: Independent L1s, Not True L2s
 
-Sidechains run their own consensus but bridge to Ethereum. Unlike Plasma, they don't rely on Ethereum for security—just for asset transfers.
+Sidechains run their own consensus but bridge to Ethereum. Unlike true L2s (rollups), they don't inherit Ethereum's security—they have their own validators, their own consensus, and their own data availability. **Technically, sidechains are independent L1 blockchains that happen to be EVM-compatible.**
+
+<Callout type="warning">
+When a project markets itself as an "L2 scaling solution" but has its own validator set, it's a sidechain (or independent L1), not a true Layer 2. True L2s inherit security from Ethereum through proofs. Sidechains require trusting a separate validator set.
+</Callout>
 
 **Polygon PoS (2020-present)**
 
@@ -1054,6 +1144,27 @@ Future: User sends "cross-L2 intent"
 ### "Rollups are sidechains"
 
 **Reality:** Fundamental difference. Sidechains have their own security (validators, consensus). Rollups inherit L1 security through proofs—either fraud proofs (optimistic) or validity proofs (ZK). A sidechain failure loses user funds. A rollup with functional proofs can always be reconstructed from L1 data.
+
+### "Polygon PoS / BSC / Avalanche are L2s"
+
+**Reality:** These are independent L1 blockchains, not Layer 2s. They have their own validator sets, their own consensus mechanisms, and their own security guarantees. They're EVM-compatible sidechains or alt-L1s, not scaling solutions that inherit Ethereum's security.
+
+- **Polygon PoS**: ~100 validators, own PoS consensus
+- **BSC**: 21 validators, own PoSA consensus
+- **Avalanche C-Chain**: Avalanche consensus, independent security
+
+When marketing says "L2 scaling solution," check whether the chain has its own validators. If yes, it's an L1 with a bridge, not an L2.
+
+### "Validiums have the same security as rollups"
+
+**Reality:** Validiums use validity proofs (same as ZK rollups) but store data off-chain. This creates an additional trust assumption: if the Data Availability Committee (DAC) colludes or fails, users cannot prove their state or exit to L1.
+
+```
+Rollup:    Validity proof ✓ + Data on L1 ✓ = Full L1 security
+Validium:  Validity proof ✓ + Data on DAC ? = L1 proof security + DAC trust
+```
+
+Validiums are appropriate for applications where cost matters more than maximum security (gaming, NFTs). For DeFi with significant TVL, prefer true rollups.
 
 ### "ZK rollups are always more secure than optimistic"
 
