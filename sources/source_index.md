@@ -294,6 +294,7 @@ Human-readable index of sources in `library.bib` with credibility assessments an
 | `misc_polymarket_2020` | Polymarket (2020). Documentation | T2 | Verified | Major prediction market platform |
 | `misc_awesome_prediction_markets` | 0xperp (2024). Awesome Prediction Markets | T2 | Verified | Curated resource collection |
 | `misc_event_markets_resources` | Adjacent Research (2024). Event Markets | T2 | Verified | Market research |
+| `misc_adjacent_play_money_2025` | Adjacent Research (2025). In Defense of Play Money Markets | T2 | Verified | Play money vs real money analysis; Metaculus, Manifold vs Polymarket, Kalshi |
 
 ---
 
