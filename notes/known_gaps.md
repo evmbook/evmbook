@@ -82,7 +82,7 @@ This document tracks claims that need additional verification, sources that coul
 |--------|-------|-------|
 | Women in crypto history | Underrepresented | Cynthia Dwork noted; others needed |
 | Asian crypto pioneers | Underrepresented | Need international perspective |
-| DeFi era builders | Names without deep profiles | Leshner, Egorov, Adams need expansion |
+| DeFi era builders | ✓ Profiles added | Leshner, Egorov, Adams in amm_constant_product.md |
 | L2 researchers | Not profiled | Arbitrum, Optimism, StarkWare teams |
 
 ### Technical Topics
@@ -161,12 +161,25 @@ Multiple theories exist:
 2. [x] Locate Vitalik's AMM Reddit post — FOUND: October 3, 2016 Reddit post "Let's run on-chain decentralized exchanges the way we run prediction markets" (via Adjacent Research); added as `misc_buterin_reddit_amm_2016`
 3. [x] Verify Szabo smart contracts 1994 vs 1996 — RESOLVED: Both dates valid. 1994 = original concept essay; Q1 1996 = Extropy #16 expanded article; 1997 = "Idea of Smart Contracts"
 4. [ ] Archive critical blog post URLs via Wayback Machine
+   - **High priority** (personal sites, may disappear):
+     - weidai.com/bmoney.txt (b-money)
+     - activism.net/cypherpunk/manifesto.html
+     - hashcash.org/papers/hashcash.pdf
+     - vitalik.ca blog posts
+     - fon.hum.uva.nl Szabo archives
+     - financialcryptography.com McCoy post-mortem
+   - **Medium priority** (project docs):
+     - curve.fi/files/stableswap-paper.pdf
+     - uniswap.org whitepapers
+     - compound.finance whitepaper
+     - makerdao.com whitepaper
+   - **Already stable**: nakamotoinstitute.org, archive.org, bitcoin.org, ethereum.org, GitHub
 
 ### Short-term
 
 5. [x] Add BitShares/BitUSD to library.bib — Added as `misc_bitshares_bitusd_2014`
 6. [x] Expand ZK proof system coverage — Added Bulletproofs detail, Nova, HyperNova, folding schemes
-7. [ ] Profile DeFi era builders
+7. [x] Profile DeFi era builders — Added Hayden Adams (Uniswap), Michael Egorov (Curve), Robert Leshner (Compound) profiles to amm_constant_product.md
 8. [x] Add auction theory foundations — Added Vickrey (1961), Myerson (1981), Milgrom/Weber (1982), Klemperer (1999)
 
 ### Long-term

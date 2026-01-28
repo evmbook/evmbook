@@ -251,6 +251,34 @@ Understanding x*y=k is essential for:
 
 ---
 
+## Key Figures
+
+### Hayden Adams (Uniswap)
+
+**Background**: B.S. Engineering, Stony Brook University (2016). Worked as mechanical engineer at Siemens (2016-2017) on computational fluid dynamics.
+
+**Path to Uniswap**: After being laid off from Siemens, Adams' college roommate **Karl Floersch** (Ethereum Foundation, later Optimism CTO) introduced him to Ethereum and suggested building an AMM based on Vitalik Buterin's posts. Ethereum Foundation provided a $65,000 grant.
+
+**Contribution**: Launched Uniswap V1 on November 2, 2018. Implemented the constant product formula in an elegant, gas-efficient smart contract. V2 (2020) added flash swaps and TWAP oracles. V3 (2021) introduced concentrated liquidity.
+
+### Michael Egorov (Curve)
+
+**Background**: PhD Physics, Swinburne University of Technology. Bronze medalist, 2003 International Physics Olympiad. Postdoc at Monash University (2011-2014) building Bose-Einstein Condensate machines.
+
+**Prior work**: Founded NuCypher (2015-2020), a Y Combinator-backed proxy re-encryption company for big data security.
+
+**Contribution**: Founded Curve Finance (June 2020). Developed the StableSwap invariant optimized for like-kind assets (stablecoins, wrapped tokens) with lower slippage near peg. Curve's TVL reached $20B+ at peak.
+
+### Robert Leshner (Compound)
+
+**Background**: B.S. Economics, University of Pennsylvania (2007). Chartered Financial Analyst (CFA). Former chair, San Francisco Revenue Bond Oversight Committee.
+
+**Prior work**: Founded Safe Shepherd (2011), a personal data management startup.
+
+**Contribution**: Founded Compound Finance (2018), pioneering algorithmic interest rate markets. Introduced cTokens for receipt tokens and COMP governance token distribution (June 2020), catalyzing "yield farming" and DeFi Summer. Stepped down as CEO in 2023 to found Superstate.
+
+---
+
 ## Citations
 
 [@article_hanson_lmsr_2003]
