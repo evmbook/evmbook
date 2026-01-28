@@ -120,6 +120,88 @@ Timeline:
 
 ### Privacy Protocol Design Considerations
 
+The Tornado Cash case accelerated research into "compliant privacy"—systems that provide anonymity while allowing users to prove they're not sanctioned.
+
+#### How Privacy Mixers Work (Technical Context)
+
+Tornado Cash and similar protocols use zero-knowledge proofs to break the on-chain link between deposit and withdrawal:
+
+```
+Deposit Phase:
+1. User generates random secret + nullifier
+2. Computes commitment = hash(secret, nullifier)
+3. Deposits ETH + commitment to contract
+4. Commitment added to Merkle tree of deposits
+
+Withdrawal Phase:
+1. User proves (via zkSNARK) they know a secret corresponding to some commitment in the Merkle tree
+2. Nullifier prevents double-spending (same deposit can't be withdrawn twice)
+3. Proof reveals nothing about which deposit corresponds to this withdrawal
+4. Contract sends ETH to recipient address
+```
+
+The cryptographic breakthrough: The zkSNARK proves "I deposited funds at some point" without revealing which deposit was yours. This creates an "anonymity set" of all depositors.
+
+#### Privacy Pools: The Compliance-Preserving Approach
+
+In 2023, Vitalik Buterin and collaborators published "Blockchain Privacy and Regulatory Compliance: Towards a Practical Equilibrium," proposing **Privacy Pools**—a design that enables privacy while allowing users to prove their funds are "clean." [@buterin_privacy_pools_2023]
+
+**The Key Insight:**
+
+Users can optionally prove their deposit is NOT from sanctioned addresses by demonstrating membership in a "good" subset of deposits:
+
+```solidity
+// Privacy Pools concept (simplified)
+contract PrivacyPool {
+    // Standard privacy withdrawal
+    function withdraw(
+        bytes32 nullifier,
+        address recipient,
+        bytes calldata zkProof
+    ) external;
+
+    // Compliant withdrawal: proves funds from clean sources
+    function withdrawWithAssociationSet(
+        bytes32 nullifier,
+        address recipient,
+        bytes calldata zkProof,
+        bytes32 associationSetRoot,  // Merkle root of "clean" deposits
+        bytes calldata inclusionProof // Proves deposit is in clean set
+    ) external {
+        // Verifies:
+        // 1. User knows valid deposit (standard privacy)
+        // 2. That deposit is in the association set (compliance)
+        // Result: Privacy + proof funds aren't from sanctioned sources
+    }
+}
+```
+
+**Association Sets:**
+- Users create or join curated sets of "clean" deposits
+- Exchange withdrawals could form one set
+- KYC'd institutions could form another
+- Sanctioned addresses are excluded
+- Users prove membership without revealing which specific deposit
+
+**Trade-offs:**
+| Approach | Privacy | Compliance | Complexity |
+|----------|---------|------------|------------|
+| No mixer | None | Full | Low |
+| Tornado Cash | Full | None | Medium |
+| Privacy Pools | Partial | Optional | High |
+
+#### Other Privacy Protocol Approaches
+
+**Railgun (2021+)**: On-chain privacy using zkSNARKs with optional "proof of innocence" for compliance. Allows private balances and transfers within the Railgun system.
+
+**Aztec Network**: L2 with native privacy. Moved from privacy-only to "programmable privacy" with compliance hooks built into the protocol design.
+
+**Zcash Approach**: Shielded pools with optional disclosure. Users can generate viewing keys to prove transaction history to auditors.
+
+<Note>
+**The Regulatory Trend**: The privacy protocol space is splitting into two camps—those that enable compliance options (Privacy Pools, Railgun POI) and those that prioritize absolute privacy. Developers should understand the regulatory implications of each approach.
+</Note>
+
 ```solidity
 // Example: Compliance-optional privacy design
 contract PrivacyPool {
@@ -550,3 +632,17 @@ The regulatory landscape for EVM development is complex and evolving. Key princi
 Building in this environment requires balancing innovation with risk awareness. The protocols that thrive long-term will be those that find sustainable compliance approaches while preserving the core value propositions of decentralized systems.
 
 The next chapter covers bootstrapping an EVM ecosystem—the dependency tree that guides what to build and in what order.
+
+---
+
+## Research & Citations
+
+This chapter draws on legal developments, regulatory guidance, and research:
+
+- [@buterin_privacy_pools_2023] — Privacy Pools proposal for compliant privacy
+- [@ofac_tornado_2022] — OFAC sanctions designation and legal analysis
+- [@sec_framework_2019] — SEC framework for digital asset analysis
+- [@mica_regulation_2023] — EU Markets in Crypto-Assets Regulation text
+- [@chainalysis_sanctions_2023] — Chainalysis research on sanctions compliance
+
+For current regulatory developments, monitor SEC, CFTC, and FinCEN announcements, and consult qualified legal counsel for specific guidance.
