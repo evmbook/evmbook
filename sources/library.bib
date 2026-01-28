@@ -41,6 +41,37 @@
   pages = {230--265}
 }
 
+@book{book_mundy_codegirls_2017,
+  author = {Mundy, Liza},
+  title = {Code Girls: The Untold Story of the American Women Code Breakers of World War II},
+  publisher = {Hachette Books},
+  year = {2017},
+  isbn = {978-0316352536},
+  note = {Documents 11,000+ women at Arlington Hall and Navy codebreaking; 70\% of Army cryptanalytic workforce by 1945}
+}
+
+@article{article_batey_dillysgirlies_2009,
+  author = {Batey, Mavis},
+  title = {Dilly: The Man Who Broke Enigmas},
+  publisher = {Dialogue},
+  year = {2009},
+  note = {Memoir by Mavis Batey on Dilly Knox's section at Bletchley Park; documents women cryptanalysts' contributions}
+}
+
+@misc{misc_clarke_joan_mbe,
+  author = {Clarke, Joan Elisabeth Lowther},
+  title = {Bletchley Park Hut 8 Cryptanalytic Work},
+  year = {1940--1945},
+  note = {Deputy Head of Hut 8 (Naval Enigma); only senior woman cryptanalyst at Bletchley; developed Banburismus method with Turing; MBE recipient}
+}
+
+@misc{misc_friedman_elizebeth_nsa,
+  author = {Friedman, Elizebeth Smith},
+  title = {US Coast Guard and OSS Cryptanalytic Work},
+  year = {1916--1945},
+  note = {Broke 4,000+ encrypted messages; Nazi spy ring communications; NSA Hall of Honor (1999). Often credited as "Mother of American Cryptology"}
+}
+
 % ============================================================================
 % ERA 2: 1945-1975 - Information Theory
 % ============================================================================
@@ -454,13 +485,32 @@
   note = {ERC-20 fungible token standard}
 }
 
+% --- Early Exchanges (Non-US) ---
+
+@misc{misc_independent_reserve_2013,
+  author = {Przelozny, Adrian and Tepper, Adam and Perera, Lasanka},
+  title = {Independent Reserve},
+  year = {2013},
+  month = {June},
+  note = {Australia's oldest crypto exchange; founded Sydney Jun 2013, operational Oct 2014; first Singapore MAS license Oct 2021; one of longest-running exchanges globally}
+}
+
 % --- Early Crypto-Collateralized Stablecoins ---
 
 @misc{misc_bitshares_bitusd_2014,
   author = {Larimer, Daniel and Hoskinson, Charles and Bytemaster},
   title = {BitShares: A Peer-to-Peer Polymorphic Digital Asset Exchange},
   year = {2014},
-  note = {First crypto-collateralized stablecoin (BitUSD); Graphene blockchain; predates MakerDAO}
+  month = {July},
+  note = {First crypto-collateralized stablecoin (BitUSD); 200\% BTS collateral; global settlement Nov 2018}
+}
+
+@misc{misc_nubits_2014,
+  author = {{Nu Team}},
+  title = {NuBits: The World's Best Stable Digital Currency},
+  year = {2014},
+  month = {September},
+  note = {First algorithmic/seigniorage stablecoin; dual-token USNBT/NSR; depegged 2016, collapsed 2018}
 }
 
 @misc{misc_buchman_tendermint_2016,
@@ -642,6 +692,115 @@
   note = {Comprehensive survey of auction theory; accessible introduction}
 }
 
+% VCG Mechanism Design
+@article{article_clarke_multipart_1971,
+  author = {Clarke, Edward H.},
+  title = {Multipart Pricing of Public Goods},
+  journal = {Public Choice},
+  year = {1971},
+  volume = {11},
+  number = {1},
+  pages = {17--33},
+  note = {Incentive-compatible pricing mechanism; part of VCG mechanism}
+}
+
+@article{article_groves_incentives_1973,
+  author = {Groves, Theodore},
+  title = {Incentives in Teams},
+  journal = {Econometrica},
+  year = {1973},
+  volume = {41},
+  number = {4},
+  pages = {617--631},
+  note = {Groves mechanism; completes VCG with Vickrey and Clarke}
+}
+
+@article{article_hurwicz_optimality_1972,
+  author = {Hurwicz, Leonid},
+  title = {On Informationally Decentralized Systems},
+  year = {1972},
+  journal = {Decision and Organization},
+  note = {Mechanism design foundations; revelation principle precursor; 2007 Nobel Prize}
+}
+
+@article{article_gibbard_manipulation_1973,
+  author = {Gibbard, Allan},
+  title = {Manipulation of Voting Schemes: A General Result},
+  journal = {Econometrica},
+  year = {1973},
+  volume = {41},
+  number = {4},
+  pages = {587--601},
+  note = {Gibbard-Satterthwaite theorem; strategy-proofness impossibility}
+}
+
+@article{article_satterthwaite_strategyproofness_1975,
+  author = {Satterthwaite, Mark A.},
+  title = {Strategy-proofness and Arrow's Conditions},
+  journal = {Journal of Economic Theory},
+  year = {1975},
+  volume = {10},
+  number = {2},
+  pages = {187--217},
+  note = {With Gibbard: impossibility of non-dictatorial, strategy-proof voting}
+}
+
+% Market Microstructure Extensions
+@article{article_glosten_milgrom_1985,
+  author = {Glosten, Lawrence R. and Milgrom, Paul R.},
+  title = {Bid, Ask and Transaction Prices in a Specialist Market with Heterogeneously Informed Traders},
+  journal = {Journal of Financial Economics},
+  year = {1985},
+  volume = {14},
+  number = {1},
+  pages = {71--100},
+  note = {Adverse selection in market making; bid-ask spread as information cost}
+}
+
+@article{article_kyle_continuous_1985,
+  author = {Kyle, Albert S.},
+  title = {Continuous Auctions and Insider Trading},
+  journal = {Econometrica},
+  year = {1985},
+  volume = {53},
+  number = {6},
+  pages = {1315--1335},
+  note = {Kyle model; informed trading, price impact, market depth}
+}
+
+@article{article_glosten_limit_1994,
+  author = {Glosten, Lawrence R.},
+  title = {Is the Electronic Open Limit Order Book Inevitable?},
+  journal = {The Journal of Finance},
+  year = {1994},
+  volume = {49},
+  number = {4},
+  pages = {1127--1161},
+  note = {Limit order book economics; competition among exchanges}
+}
+
+@article{article_foucault_limit_1999,
+  author = {Foucault, Thierry},
+  title = {Order Flow Composition and Trading Costs in a Dynamic Limit Order Market},
+  journal = {Journal of Financial Markets},
+  year = {1999},
+  volume = {2},
+  number = {2},
+  pages = {99--134},
+  note = {Limit order book dynamics; liquidity provision incentives}
+}
+
+@article{article_budish_hft_2015,
+  author = {Budish, Eric and Cramton, Peter and Shim, John},
+  title = {The High-Frequency Trading Arms Race: Frequent Batch Auctions as a Market Design Response},
+  journal = {The Quarterly Journal of Economics},
+  year = {2015},
+  volume = {130},
+  number = {4},
+  pages = {1547--1621},
+  note = {Batch auctions to eliminate HFT latency arbitrage; influences CoW Protocol design}
+}
+
 % ============================================================================
 % ERA 11: 2023-2024 - Recovery, ETFs, EIP-4844
 % ============================================================================
@@ -745,6 +904,44 @@
   year = {2022},
   url = {https://github.com/aave/aave-v3-core/blob/master/techpaper/Aave_V3_Technical_Paper.pdf},
   note = {Aave V3; efficiency mode, isolation mode, portals}
+}
+
+% DeFi Lending Protocols
+@misc{misc_ethlend_2017,
+  author = {Kulechov, Stani},
+  title = {ETHLend Whitepaper},
+  year = {2017},
+  note = {P2P crypto lending; predecessor to Aave; order-book style matching}
+}
+
+@misc{misc_aave_v1_2020,
+  author = {{Aave}},
+  title = {Aave Protocol Whitepaper},
+  year = {2020},
+  month = {January},
+  note = {Pooled lending model; flash loans introduced; aTokens; rebranded from ETHLend}
+}
+
+@misc{misc_aave_flashloans_2020,
+  author = {{Aave}},
+  title = {Flash Loans Documentation},
+  year = {2020},
+  note = {Uncollateralized single-transaction loans; 0.09\% fee; enabled arbitrage, liquidations}
+}
+
+@misc{misc_comp_launch_2020,
+  author = {{Compound Labs}},
+  title = {Compound Governance Token Launch},
+  year = {2020},
+  month = {June},
+  note = {COMP distribution to suppliers/borrowers; triggered DeFi Summer; yield farming origin}
+}
+
+@misc{misc_morpho_2023,
+  author = {Parrain, Paul and others},
+  title = {Morpho: Optimizing Lending Markets},
+  year = {2023},
+  note = {P2P matching layer on top of Aave/Compound; rate optimization}
 }
 
 @online{online_makerdao_whitepaper_2017,
@@ -1787,6 +1984,58 @@
   note = {Non-pegged reflexive stablecoin design}
 }
 
+@misc{misc_frax_2019,
+  author = {Kazemian, Sam and Mao, Jason},
+  title = {Frax: A Fractional-Algorithmic Stablecoin Protocol},
+  year = {2019},
+  url = {https://docs.frax.finance/},
+  note = {First hybrid (partial collateral + algorithmic) stablecoin; adjustable collateral ratio}
+}
+
+@misc{misc_liquity_lusd_2020,
+  author = {{Liquity AG}},
+  title = {Liquity: Decentralized Borrowing Protocol},
+  year = {2020},
+  url = {https://docs.liquity.org/},
+  note = {Immutable protocol; ETH-only collateral; 110\% min ratio; LUSD stablecoin}
+}
+
+@misc{misc_paxgold_2018,
+  author = {{Paxos Trust Company}},
+  title = {Pax Gold (PAXG): Gold-Backed Cryptocurrency},
+  year = {2018},
+  note = {First gold-backed stablecoin; 1 PAXG = 1 troy oz gold in London vaults}
+}
+
+@misc{misc_paypal_pyusd_2023,
+  author = {{PayPal}},
+  title = {PayPal USD (PYUSD) Stablecoin},
+  year = {2023},
+  note = {First major fintech stablecoin; issued by Paxos; launched August 2023}
+}
+
+@misc{misc_ethena_usde_2024,
+  author = {{Ethena Labs}},
+  title = {Ethena USDe: Internet-Native Synthetic Dollar},
+  year = {2024},
+  url = {https://docs.ethena.fi/},
+  note = {Delta-neutral stablecoin; stETH collateral + short ETH perps; yield from staking + funding}
+}
+
+@misc{misc_fdusd_2024,
+  author = {{First Digital Labs}},
+  title = {First Digital USD (FDUSD)},
+  year = {2024},
+  note = {Institutional fiat-backed stablecoin; rapid growth to top 10 by market cap}
+}
+
+@misc{misc_ripple_rlusd_2024,
+  author = {{Ripple}},
+  title = {Ripple USD (RLUSD)},
+  year = {2024},
+  note = {Ripple's fiat-backed stablecoin; optimized for XRP Ledger cross-border payments}
+}
+
 % --- Curated Resource Collections ---
 
 @misc{misc_awesome_amm,
@@ -1827,4 +2076,210 @@
   year = {2024},
   url = {https://github.com/0xperp/awesome-stablecoins},
   note = {Stablecoin mechanism and research collection}
+}
+
+% ============================================================================
+% NODE SOFTWARE PRIMITIVES - Databases, Networking, Cryptography
+% ============================================================================
+
+% --- Storage Engines ---
+
+@misc{misc_leveldb,
+  author = {Dean, Jeff and Ghemawat, Sanjay},
+  title = {LevelDB: A Fast Key-Value Storage Library},
+  year = {2011},
+  organization = {Google},
+  url = {https://github.com/google/leveldb},
+  note = {LSM-tree implementation; used by Bitcoin Core (2013+), early Geth}
+}
+
+@misc{misc_rocksdb,
+  author = {{Facebook}},
+  title = {RocksDB: A Persistent Key-Value Store},
+  year = {2012},
+  url = {https://github.com/facebook/rocksdb},
+  note = {Facebook fork of LevelDB; multi-threaded; used by Nethermind, Besu}
+}
+
+@misc{misc_lmdb,
+  author = {Chu, Howard},
+  title = {LMDB: Lightning Memory-Mapped Database},
+  year = {2011},
+  organization = {OpenLDAP Project},
+  url = {https://www.symas.com/lmdb},
+  note = {Memory-mapped B+tree; copy-on-write; foundation for MDBX}
+}
+
+@misc{misc_mdbx,
+  author = {Yuriev, Leonid},
+  title = {MDBX: Fast Embedded Key-Value Database},
+  year = {2015},
+  url = {https://github.com/erthink/libmdbx},
+  note = {LMDB fork with improvements; used by Erigon, Reth for 6x smaller archives}
+}
+
+% --- Cryptographic Libraries ---
+
+@misc{misc_libsecp256k1,
+  author = {Wuille, Pieter and {Bitcoin Core Developers}},
+  title = {libsecp256k1: Optimized C library for secp256k1 ECDSA},
+  year = {2013},
+  url = {https://github.com/bitcoin-core/secp256k1},
+  note = {4-10x faster than OpenSSL; constant-time; used by Bitcoin, Ethereum, most blockchains}
+}
+
+@misc{misc_blst,
+  author = {{Supranational}},
+  title = {BLST: BLS12-381 Signature Library},
+  year = {2020},
+  url = {https://github.com/supranational/blst},
+  note = {BLS signature aggregation; required for Ethereum PoS; used by all consensus clients}
+}
+
+% --- Networking ---
+
+@misc{misc_libp2p,
+  author = {{Protocol Labs}},
+  title = {libp2p: A Modular Network Stack},
+  year = {2014},
+  url = {https://libp2p.io/},
+  note = {Modular P2P networking; transports, muxing, pubsub; used by IPFS, Ethereum consensus}
+}
+
+@misc{misc_gossipsub,
+  author = {Vyzovitis, Dimitris and others},
+  title = {GossipSub: Attack-Resilient Message Propagation in the Filecoin and ETH2.0 Networks},
+  year = {2019},
+  url = {https://arxiv.org/abs/2007.02754},
+  note = {Pubsub protocol for blockchain; mesh-based; used for Ethereum attestation/block propagation}
+}
+
+% ============================================================================
+% MINING HARDWARE & POOLS
+% ============================================================================
+
+% --- Mining Hardware Manufacturers ---
+
+@misc{misc_bitmain_antminer,
+  author = {{Bitmain Technologies}},
+  title = {Antminer Series},
+  year = {2013},
+  note = {Dominant ASIC manufacturer; S-series (SHA-256), L-series (Scrypt); founded by Jihan Wu, Micree Zhan}
+}
+
+@misc{misc_canaan_avalon,
+  author = {{Canaan Creative}},
+  title = {Avalon Series},
+  year = {2013},
+  note = {First commercial Bitcoin ASIC (Jan 2013); founded by Zhang Nangeng; Nasdaq IPO 2019}
+}
+
+@misc{misc_microbt_whatsminer,
+  author = {{MicroBT}},
+  title = {WhatsMiner Series},
+  year = {2016},
+  note = {Founded by Yang Zuoxing (ex-Bitmain); M-series competes with Antminer; ~25-35\% market share by 2020}
+}
+
+@misc{misc_innosilicon,
+  author = {{Innosilicon}},
+  title = {Innosilicon Mining Hardware},
+  year = {2014},
+  note = {Third-tier manufacturer; A10 (ETH), T2 (BTC); multi-algorithm focus}
+}
+
+% --- Mining Pools ---
+
+@misc{misc_slush_pool_2010,
+  author = {Palatinus, Marek},
+  title = {Slush Pool: First Bitcoin Mining Pool},
+  year = {2010},
+  month = {November},
+  note = {First mining pool; created Stratum protocol; rebranded to Braiins Pool (2022)}
+}
+
+@misc{misc_stratum_v1,
+  author = {Palatinus, Marek},
+  title = {Stratum Mining Protocol},
+  year = {2012},
+  note = {JSON-RPC over TCP; pool sends work, miners submit shares; widely adopted standard}
+}
+
+@misc{misc_stratum_v2,
+  author = {{Braiins}},
+  title = {Stratum V2: Next Generation Mining Protocol},
+  year = {2019},
+  url = {https://braiins.com/stratum-v2},
+  note = {Binary protocol; encrypted; job negotiation allows miners to construct blocks; decentralizes template creation}
+}
+
+@misc{misc_antpool,
+  author = {{Bitmain}},
+  title = {Antpool Mining Pool},
+  year = {2014},
+  note = {Bitmain-operated; vertical integration with hardware manufacturing}
+}
+
+@misc{misc_f2pool,
+  author = {Wang, Chun and Mao, Shixing},
+  title = {F2Pool},
+  year = {2013},
+  note = {Founded in China; among largest pools historically; multi-coin support}
+}
+
+@misc{misc_foundry_usa,
+  author = {{Digital Currency Group}},
+  title = {Foundry USA Pool},
+  year = {2019},
+  note = {US-based pool; grew to \#1 after China mining ban (2021); regulatory-compliant focus}
+}
+
+@misc{misc_viabtc,
+  author = {Yang, Haipo},
+  title = {ViaBTC Mining Pool},
+  year = {2016},
+  note = {Supported Bitcoin Cash launch; multi-coin pool}
+}
+
+% --- Mining Events ---
+
+@misc{misc_ghash_51_percent_2014,
+  author = {{GHash.IO}},
+  title = {GHash.IO 51\% Hashrate Event},
+  year = {2014},
+  month = {July},
+  note = {Pool briefly exceeded 50\% of Bitcoin hashrate; raised centralization concerns; voluntary reduction followed}
+}
+
+@misc{misc_china_mining_ban_2021,
+  author = {{Various}},
+  title = {China Cryptocurrency Mining Ban},
+  year = {2021},
+  month = {May},
+  note = {National mining ban; ~50\% hashrate drop; miners migrated to US, Kazakhstan, Russia, Canada}
+}
+
+% --- Mining Algorithms ---
+
+@misc{misc_ethash,
+  author = {{Ethereum Foundation}},
+  title = {Ethash: Ethereum Proof of Work Algorithm},
+  year = {2015},
+  note = {Dagger-Hashimoto derivative; 4GB+ DAG; memory-bandwidth bound; partially ASIC-resistant until 2018}
+}
+
+@misc{misc_randomx,
+  author = {{RandomX Team}},
+  title = {RandomX: ASIC-resistant Proof of Work},
+  year = {2019},
+  url = {https://github.com/tevador/RandomX},
+  note = {CPU-optimized; random program execution; used by Monero; most successful ASIC-resistant algorithm}
+}
+
+@misc{misc_equihash,
+  author = {Biryukov, Alex and Khovratovich, Dmitry},
+  title = {Equihash: Asymmetric Proof-of-Work Based on the Generalized Birthday Problem},
+  booktitle = {NDSS},
+  year = {2016},
+  note = {Memory-hard algorithm; used by Zcash; ASICs emerged 2018}
 }

@@ -243,6 +243,42 @@ L2s extend the EVM ecosystem:
 
 ---
 
+## Key Figures
+
+### Ed Felten (Arbitrum / Offchain Labs)
+
+**Background**: B.S. Physics, Caltech (1985); M.S. and Ph.D. Computer Science, University of Washington (1993). Robert E. Kahn Professor Emeritus of Computer Science at Princeton University (1993-2021). Founding Director, Princeton Center for Information Technology Policy.
+
+**Government service**: First Chief Technologist of the FTC (2011); Deputy U.S. Chief Technology Officer at the White House (2015-2017).
+
+**Contribution**: Co-founded Offchain Labs (September 2018) with Ph.D. students Steven Goldfeder and Harry Kalodner. Developed Arbitrum as Princeton research project, licensed technology and launched commercial product. Arbitrum One processed over 1 billion transactions by October 2023.
+
+### Steven Goldfeder (Arbitrum / Offchain Labs)
+
+**Background**: B.S. Mathematics and Computer Science, Yeshiva University; Ph.D. Computer Science, Princeton University (2018), advised by Arvind Narayanan. NSF Graduate Research Fellow; research in cryptography and digital currencies.
+
+**Publications**: Co-authored "Bitcoin and Cryptocurrency Technologies" (Princeton University Press, 2016) and "Arbitrum: Scalable, private smart contracts" (USENIX Security 2018). Published threshold ECDSA research at CCS 2018.
+
+**Contribution**: CEO and Co-founder of Offchain Labs. Led technical development of Arbitrum, the highest-TVL Ethereum L2.
+
+### Eli Ben-Sasson (StarkWare)
+
+**Background**: Ph.D. Computer Science, Hebrew University of Jerusalem (2001), advised by Avi Wigderson. Postdoc at Harvard and MIT. Professor at Technion (2005-2020); Henry Taub Award for Academic Excellence (2009).
+
+**Inventions**: Co-invented STARKs and FRI protocols (2018) — zero-knowledge proofs with post-quantum security, no trusted setup, quasi-linear prover time. Co-inventor of Zerocash protocol; founding scientist of Zcash.
+
+**Contribution**: Co-founded StarkWare Industries (2018) with Uri Kolodny, Michael Riabzev, and Alessandro Chiesa. CEO since February 2024. StarkWare valued at $8B; StarkNet is a major ZK-rollup.
+
+### Karl Floersch (Optimism)
+
+**Background**: B.S. Computer Science, Stony Brook University. College roommate of Hayden Adams (Uniswap founder).
+
+**Career path**: Blockchain engineer at ConsenSys (built Ujo Music) → Ethereum Foundation researcher (2017-2020) — contributed to PoS research, created blockchain education course → Co-founded Plasma Group with Jinglan Wang → Plasma Group evolved into Optimism.
+
+**Contribution**: CTO then CEO of OP Labs. Architected Optimistic Rollup design. Created Retroactive Public Goods Funding (RPGF) mechanism. Oversaw OP Stack release enabling Coinbase's Base and other L2s (Superchain).
+
+---
+
 ## Citations
 
 [@whitepaper_poon_lightning_2016]

@@ -44,6 +44,115 @@ This paper catalyzed MEV research and mitigation efforts.
 
 ---
 
+## Mechanism Design Foundations
+
+Understanding MEV requires economic theory developed over decades in auction and mechanism design.
+
+### Auction Theory Evolution
+
+| Year | Work | Contribution | EVM Relevance |
+|------|------|--------------|---------------|
+| 1961 | Vickrey | Second-price sealed-bid auctions | Foundation for incentive-compatible mechanisms |
+| 1971 | Clarke | Multipart pricing of public goods | VCG mechanism (V) |
+| 1972 | Hurwicz | Informationally decentralized systems | Revelation principle foundations |
+| 1973 | Groves | Incentives in teams | VCG mechanism (G) completes theory |
+| 1973 | Gibbard | Manipulation impossibility | Strategy-proofness limits |
+| 1981 | Myerson | Optimal auction design | Revenue-maximizing mechanisms |
+| 1982 | Milgrom/Weber | Common value auctions | Winner's curse, information revelation |
+
+[@article_vickrey_auction_1961]
+[@article_clarke_multipart_1971]
+[@article_groves_incentives_1973]
+[@article_myerson_optimal_1981]
+
+### VCG Mechanism
+
+The **Vickrey-Clarke-Groves (VCG)** mechanism is incentive-compatible: truth-telling is optimal.
+
+**Structure**:
+```
+1. Each agent reports valuation (can lie)
+2. Mechanism chooses outcome maximizing reported welfare
+3. Each agent pays: harm caused to others by their presence
+4. Truth-telling is dominant strategy
+```
+
+**Blockchain application**: PBS (proposer-builder separation) aims for similar properties—builders reveal true block values through bids.
+
+### Revelation Principle
+
+**Hurwicz's insight**: Any mechanism can be replicated by a direct mechanism where agents report truthfully.
+
+**Implication for MEV**: If we want MEV extraction to be "fair," the mechanism should incentivize honest reporting of opportunities and values. Private order flow auctions (MEV-Share) attempt this.
+
+### Market Microstructure
+
+Traditional finance research on market structure directly informs MEV:
+
+| Year | Paper | Key Insight | MEV Parallel |
+|------|-------|-------------|--------------|
+| 1976 | Garman | Market maker inventory costs | AMM LP risk |
+| 1985 | Kyle | Informed trading, price impact | Sandwich attacks |
+| 1985 | Glosten-Milgrom | Bid-ask as adverse selection cost | AMM spread vs MEV |
+| 1994 | Glosten | Limit order book competition | DEX aggregation |
+| 2015 | Budish et al. | Batch auctions vs HFT | CoW Protocol design |
+
+[@article_garman_market_1976]
+[@article_kyle_continuous_1985]
+[@article_glosten_milgrom_1985]
+[@article_budish_hft_2015]
+
+### Kyle Model and MEV
+
+Kyle (1985) formalized how informed traders profit:
+
+```
+Price impact: ΔP = λ × order_size
+  where λ = market depth parameter
+
+Informed trader profit = information_value - price_impact_cost
+```
+
+**MEV translation**:
+- Sandwich attackers are "informed" (see mempool)
+- Victims suffer adverse selection (trade at worse prices)
+- AMM liquidity providers face same cost as market makers
+
+### Adverse Selection in AMMs
+
+Glosten-Milgrom (1985) showed bid-ask spreads compensate for adverse selection:
+
+```
+Uninformed traders: lose to spread
+Informed traders: profit from spread
+Market maker: breaks even on average
+
+AMM equivalent:
+  LP fees = spread
+  Arbitrageurs = informed traders
+  Retail swappers = uninformed
+  LPs = market makers facing adverse selection
+```
+
+This explains why AMM LPs often underperform: they're systematically trading against informed flow (arbitrageurs, MEV extractors).
+
+### Batch Auctions as MEV Mitigation
+
+Budish, Cramton, Shim (2015) proposed frequent batch auctions to eliminate HFT latency advantages:
+
+```
+Traditional:     Continuous order matching → speed matters
+Batch auction:   Collect orders → match at uniform price → speed irrelevant
+```
+
+**DeFi implementation**: CoW Protocol (Coincidence of Wants) uses batch auctions:
+- Orders collected over time window
+- Solved by off-chain "solvers"
+- No frontrunning possible within batch
+- MEV captured for users via better prices
+
+---
+
 ## First Formalization
 
 **Daian et al. (2019)** — IEEE Symposium on Security and Privacy
@@ -233,6 +342,16 @@ block.coinbase.transfer(bribe);
 ## Citations
 
 [@article_daian_flashboys_2019]
+[@article_vickrey_auction_1961]
+[@article_clarke_multipart_1971]
+[@article_groves_incentives_1973]
+[@article_myerson_optimal_1981]
+[@article_milgrom_theory_1982]
+[@article_garman_market_1976]
+[@article_kyle_continuous_1985]
+[@article_glosten_milgrom_1985]
+[@article_budish_hft_2015]
+[@article_klemperer_auctions_1999]
 
 ---
 

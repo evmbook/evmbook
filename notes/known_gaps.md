@@ -80,27 +80,38 @@ This document tracks claims that need additional verification, sources that coul
 
 | Person | Issue | Notes |
 |--------|-------|-------|
-| Women in crypto history | Underrepresented | Cynthia Dwork noted; others needed |
-| Asian crypto pioneers | Underrepresented | Need international perspective |
+| Women in crypto history | ✓ Expanded | Cynthia Dwork (PoW, proof_of_work.md); WWII codebreakers: Joan Clarke, Mavis Batey, Elizebeth Friedman, Code Girls (Era 1 chapter) |
+| Global crypto pioneers | ✓ Comprehensive | 40+ profiles: Asia (Jihan Wu, CZ, Da Hongfei, Do Kwon), Russia/E.Europe (Buterin, Yakovenko, Nazarov, Egorov), Africa (Abubakar Nur Khalil, Ray Youssef, Vinny Lingham), Middle East (Ben-Sasson, Bancor, Roya Mahboob), LatAm (Casares, Bitso), W.Europe (Wood, Back, Köppelmann), Oceania (Warwick) — all in international_adoption.md |
 | DeFi era builders | ✓ Profiles added | Leshner, Egorov, Adams in amm_constant_product.md |
-| L2 researchers | Not profiled | Arbitrum, Optimism, StarkWare teams |
+| L2 researchers | ✓ Profiles added | Felten, Goldfeder (Arbitrum), Ben-Sasson (StarkWare), Floersch (Optimism) in l2_rollups_and_data_availability.md |
 
 ### Technical Topics
 
 | Topic | Issue | Notes |
 |-------|-------|-------|
-| ZK proof systems | Limited coverage | Only STARKs/PLONK; need Groth16, etc. |
-| EVM client implementations | Not covered | Geth, Erigon, Nethermind history |
-| Mining hardware | Not covered | ASIC history, manufacturers |
-| Privacy protocols | Limited | Tornado Cash, Zcash need expansion |
+| ZK proof systems | ✓ Covered | GMR (1985), Fiat-Shamir, Groth16, PLONK, STARKs, Bulletproofs, Nova, HyperNova, folding schemes, zkEVM taxonomy in zero_knowledge_proofs.md |
+| EVM client implementations | ✓ Covered | Geth, Erigon, Nethermind, Besu, Reth in smart_contracts_and_vms.md |
+| Mining hardware | ✓ Covered | CPU→GPU→FPGA→ASIC evolution, manufacturers (Bitmain, Canaan, MicroBT), pools, algorithms in mining_and_hardware.md |
+| Node software primitives | ✓ Covered | DHTs, storage engines, crypto libraries, libp2p in node_software_primitives.md |
+| Privacy protocols | ✓ Covered | Early mixers, CryptoNote/Monero, Zcash, Tornado Cash, CoinJoin/Wasabi/Samourai, PayJoin, Taproot, Privacy Pools in privacy_protocols.md |
+| Communication privacy | ✓ Covered | PGP, remailers, Freenet, I2P, TOR, Signal, Lokinet, privacy OSes, messengers, DNS privacy in communication_privacy_tools.md |
+
+### DeFi Protocols
+
+| Topic | Issue | Notes |
+|-------|-------|-------|
+| AMMs | ✓ Covered | x*y=k, LMSR precursors, Uniswap V1-V3, Curve in amm_constant_product.md |
+| DeFi lending | ✓ Covered | Compound, Aave, flash loans, cTokens/aTokens, liquidations in defi_lending.md |
+| DeFi derivatives | ✓ Covered | Perpetuals, options, vAMM, power perps in defi_derivatives.md |
+| Stablecoins | ✓ Covered | BitUSD/NuBits history, fiat-backed (USDT/USDC/PYUSD), crypto-backed (DAI/LUSD), algorithmic (UST collapse), hybrid (FRAX), delta-neutral (USDe), commodity-backed (PAXG), 2024-2025 developments in stablecoins_and_collateral.md |
 
 ### Economic Topics
 
 | Topic | Issue | Notes |
 |-------|-------|-------|
-| Auction theory precursors | Limited | Vickrey, Milgrom need proper citation |
-| Market microstructure | Only Garman, Amihud-Mendelson | More depth needed |
-| Mechanism design | Not covered | Formal treatment needed |
+| Auction theory & mechanism design | ✓ Covered | VCG (Vickrey-Clarke-Groves), Hurwicz, Gibbard-Satterthwaite in mev_and_auctions.md and library.bib |
+| Market microstructure | ✓ Covered | Kyle (1985), Glosten-Milgrom (1985), Glosten (1994), Foucault (1999), Budish (2015) in mev_and_auctions.md |
+| MEV economics | ✓ Covered | Adverse selection, batch auctions, AMM-LP connection in mev_and_auctions.md |
 
 ---
 

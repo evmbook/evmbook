@@ -2,12 +2,14 @@
 
 ## Definition
 
-Stablecoins are cryptocurrencies designed to maintain a stable value, typically pegged to fiat currency (USD). Main types:
+Stablecoins are cryptocurrencies designed to maintain a stable value, typically pegged to fiat currency (USD) or commodities (gold). Main types:
 
-1. **Fiat-backed**: Reserves held in banks (USDC, USDT)
-2. **Crypto-backed**: Over-collateralized with crypto (DAI)
-3. **Algorithmic**: Mechanism-based stability (failed: UST)
-4. **Delta-neutral**: Hedged positions (USDe)
+1. **Fiat-backed**: Reserves held in banks (USDC, USDT, PYUSD)
+2. **Crypto-backed**: Over-collateralized with crypto (DAI, LUSD)
+3. **Algorithmic**: Mechanism-based stability (failed: UST, NuBits)
+4. **Hybrid**: Partial collateral + algorithmic adjustment (FRAX)
+5. **Delta-neutral**: Hedged positions (USDe)
+6. **Commodity-backed**: Physical asset reserves (PAXG, XAUT)
 
 Collateralization refers to assets backing a position, critical for:
 - Stablecoin minting
@@ -27,16 +29,51 @@ Collateralization refers to assets backing a position, critical for:
 
 Lesson: Centralized digital dollars have existed; the challenge is decentralization.
 
-### 2. BitUSD (2014)
+### 2. BitUSD (July 21, 2014)
 
 **BitShares** introduced the first crypto-collateralized stablecoin:
-- Collateralized by BTS
-- Algorithmic price feeds
-- Peg maintenance via incentives
+- Created by **Charles Hoskinson** and **Dan Larimer** (later of EOS, Steemit, Cardano)
+- Launched on BitShares decentralized exchange
+- **200% collateralization** in BTS required
+- Escrow-type smart contract ensured repurchase near par
+- Shorting mechanism: acquirer shorts USD/BTS by posting collateral
 
-Partially successful, proved the concept.
+**Design flaw**: Protected against BTS price falls but not against BitUSD price drops below peg.
 
-### 3. MakerDAO & DAI (2017)
+**Failure timeline**:
+- April 2015: Market cap peaked >$1M
+- November 2015: Fell below $200k
+- **November 25, 2018**: "Global settlement" triggered — too under-collateralized
+- Currently trades ~$0.80
+
+### 3. NuBits (September 2014)
+
+**Nu** introduced the first algorithmic/seigniorage stablecoin:
+- Dual-token system: NuBits (USNBT) + NuShares (NSR)
+- Uncollateralized, algorithmically backed
+- Supply expansion/contraction to maintain peg
+- "Parking" rates to incentivize holding during contraction
+
+**2016 crash** (May-June):
+- Bitcoin price spiked
+- Holders mass-sold NuBits to buy BTC
+- Peg broke; stayed broken 3 months
+- Recovered eventually
+
+**2018 crash** (December 2017 - early 2018):
+- Bitcoin's "Christmas crash" drove people INTO NuBits
+- Market cap grew 1,500% ($950k → $14M)
+- Price peaked ~$1.50 (Dec 20-28)
+- Then collapse when sentiment reversed
+- Never recovered
+
+**Design flaw**: Fractional reserve couldn't handle demand fluctuations. No diversified collateral to absorb sell pressure.
+
+**Current status**: Trades ~$0.03-0.30 (varies); effectively dead.
+
+**Significance**: First pure algorithmic stablecoin. Both crashes presaged UST collapse — demonstrated that seigniorage models fail under bank-run dynamics without adequate reserves.
+
+### 4. MakerDAO & DAI (2017)
 
 **MakerDAO (2017)** launched single-collateral DAI (SAI):
 - Collateralized by ETH only
@@ -48,9 +85,9 @@ Partially successful, proved the concept.
 
 **Multi-Collateral DAI (2019)** expanded to multiple collateral types.
 
-### 4. Centralized Stablecoins (2018+)
+### 5. Centralized Stablecoins (2014+)
 
-**Tether (USDT)** — Earliest; controversial reserves
+**Tether (USDT, 2014)** — Earliest fiat-backed; controversial reserves
 **USDC (2018)** — Circle; fully reserved, transparent
 **BUSD (2019)** — Paxos/Binance; regulatory issues led to discontinuation
 
@@ -68,12 +105,17 @@ Partially successful, proved the concept.
 
 ### Algorithmic (Failed Model)
 
-**Basis (2017)** proposed seigniorage shares model:
+**NuBits (2014)** was the first deployed algorithmic stablecoin:
+- Seigniorage-based supply management
+- Dual-token system (NuBits + NuShares)
+- Failed 2016 and 2018 due to insufficient reserves
+
+**Basis (2017)** proposed but never launched:
 - Basis tokens, Bonds, Shares
 - Algorithmic expansion/contraction
-- Never launched (regulatory)
+- Shut down due to regulatory concerns
 
-Similar models (UST/Luna) failed spectacularly.
+Similar models (UST/Luna) failed spectacularly in 2022.
 
 ---
 
@@ -81,12 +123,21 @@ Similar models (UST/Luna) failed spectacularly.
 
 | Date | Stablecoin | Type | Notes |
 |------|------------|------|-------|
-| 2014 | Tether (USDT) | Fiat-backed | First major stablecoin |
+| Jul 2014 | BitUSD | Crypto-collateralized | First stablecoin; 200% BTS collateral |
+| Sep 2014 | NuBits | Algorithmic | First seigniorage model; failed 2018 |
+| Oct 2014 | Tether (USDT) | Fiat-backed | First major fiat-backed |
 | 2017 | SAI (Single DAI) | Crypto-backed | ETH-only collateral |
-| 2018 | USDC | Fiat-backed | Fully reserved |
+| 2018 | USDC | Fiat-backed | Fully reserved, regulated |
+| 2018 | Pax Gold (PAXG) | Commodity-backed | First gold-backed stablecoin |
 | 2019 | DAI (Multi) | Crypto-backed | Multiple collaterals |
+| 2019 | FRAX | Hybrid | Partial collateral + algorithmic |
 | 2020 | UST | Algorithmic | Collapsed May 2022 |
-| 2024 | USDe | Delta-neutral | Hedged positions |
+| 2020 | LUSD | Crypto-backed | Liquity; ETH-only, immutable |
+| 2023 | PYUSD | Fiat-backed | PayPal's stablecoin |
+| 2024 | USDe | Delta-neutral | Ethena; hedged positions |
+| 2024 | FDUSD | Fiat-backed | First Digital; top 10 by cap |
+| 2024 | RLUSD | Fiat-backed | Ripple's stablecoin |
+| Apr 2025 | USD1 | Fiat-backed | World Liberty Financial |
 
 ---
 
@@ -94,25 +145,44 @@ Similar models (UST/Luna) failed spectacularly.
 
 | Date | Event | Significance |
 |------|-------|--------------|
-| 2014 | Tether launch | First major stablecoin |
-| 2017 | MakerDAO SAI | Decentralized stablecoin |
+| Jul 2014 | BitUSD launch | First crypto-collateralized stablecoin |
+| Sep 2014 | NuBits launch | First algorithmic stablecoin |
+| Oct 2014 | Tether launch | First fiat-backed stablecoin |
+| Jun 2016 | NuBits first depeg | Recovered after 3 months |
+| 2017 | MakerDAO SAI | First decentralized stablecoin on Ethereum |
 | 2018 | USDC launch | Regulated fiat-backed |
-| 2019 | Multi-collateral DAI | Expanded collateral |
+| 2018 | Pax Gold (PAXG) launch | First gold-backed stablecoin |
+| Nov 2018 | BitUSD global settlement | Under-collateralization failure |
+| Dec 2017-2018 | NuBits final collapse | Never recovered |
+| 2019 | Multi-collateral DAI | Expanded collateral types |
+| 2019 | FRAX launch | First hybrid collateral/algorithmic model |
 | 2020 | Stablecoin TVL explodes | DeFi Summer |
-| Mar 2023 | USDC depeg (SVB) | Temporary 87¢ floor |
+| 2020 | Liquity (LUSD) launch | Immutable, ETH-only CDP |
 | May 2022 | **UST/Luna collapse** | $40B+ destroyed |
-| 2024 | Ethena USDe | Delta-neutral model |
-| 2024 | MakerDAO → Sky | Rebrand |
+| Mar 2023 | USDC depeg (SVB) | Temporary 87¢ floor; recovered same week |
+| Aug 2023 | PayPal PYUSD launch | First major fintech stablecoin |
+| 2024 | Ethena USDe | Delta-neutral model; rapid growth |
+| 2024 | MakerDAO → Sky | Rebrand to Sky, DAI → USDS |
+| 2024 | FDUSD, RLUSD launch | New institutional stablecoins |
+| Apr 2025 | USD1 launch | World Liberty Financial entry |
 
 ### Stablecoin Market Cap
 
-| Date | Total Supply | Top 3 |
-|------|--------------|-------|
+| Date | Total Supply | Top Stablecoins |
+|------|--------------|-----------------|
 | 2020 | ~$20B | USDT, USDC, DAI |
 | 2021 | ~$140B | USDT, USDC, BUSD |
 | 2022 | ~$150B (peak) | Pre-UST collapse |
-| 2023 | ~$130B | Post-collapse |
-| 2024 | ~$160B | Recovery |
+| 2023 | ~$130B | Post-collapse recovery |
+| 2024 | ~$170B | USDT, USDC, USDe, DAI |
+| 2025 | ~$200B+ | USDT dominant; new entrants growing |
+
+**2025 Market Leaders**:
+1. USDT — Dominant market share (~60%)
+2. USDC — Regulated, transparent
+3. DAI/USDS — Decentralized, crypto-backed
+4. USDe — Fastest-growing delta-neutral
+5. FDUSD — New institutional entrant
 
 ---
 
@@ -131,6 +201,54 @@ Collapse sequence:
 5. ~$40B value destroyed
 
 Lesson: Algorithmic stablecoins without collateral are fragile.
+
+---
+
+## Stablecoin Design Variations
+
+### Hybrid Model (FRAX)
+
+**Frax (2019)** pioneered the hybrid approach:
+- Partial collateralization (adjustable 50-100%)
+- Algorithmic supply adjustment for remainder
+- Collateral ratio increases during instability
+- More capital-efficient than fully collateralized
+- Survived where pure algorithmic models failed
+
+### Commodity-Backed
+
+Gold-backed stablecoins tokenize physical reserves:
+
+| Stablecoin | Backing | Storage | Notes |
+|------------|---------|---------|-------|
+| PAXG | 1 troy oz gold | London vaults | Redeemable for physical |
+| XAUT | 1 troy oz gold | Swiss vaults | Tether's gold offering |
+
+Use cases: Inflation hedge, gold exposure without custody.
+
+### Immutable Protocols (LUSD)
+
+**Liquity (2020)** introduced immutable lending:
+- No governance; code is final
+- ETH-only collateral
+- 110% minimum collateralization
+- Recovery mode for systemic risk
+- Cannot be upgraded or shut down
+
+Trade-off: Inflexibility vs. censorship resistance.
+
+### Institutional Stablecoins (2023-2025)
+
+Traditional finance entered the market:
+
+| Stablecoin | Issuer | Launch | Significance |
+|------------|--------|--------|--------------|
+| PYUSD | PayPal | Aug 2023 | First major fintech |
+| FDUSD | First Digital | 2024 | Institutional focus |
+| RLUSD | Ripple | 2024 | Cross-border payments |
+| USD1 | World Liberty Financial | Apr 2025 | Newest major entrant |
+
+Trend: Regulated entities launching compliant stablecoins to capture market share.
 
 ---
 

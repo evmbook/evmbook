@@ -65,7 +65,7 @@ Human-readable index of sources in `library.bib` with credibility assessments an
 |-----|----------|------|--------|-------|
 | `misc_napster_1999` | Fanning, S. (1999). Napster | T2 | Verified | First major P2P file sharing; centralized index model |
 | `inproceedings_gnutella_2000` | Ripeanu, M. (2001). Gnutella Network | T1 | Verified | Fully decentralized P2P; influenced DHT research |
-| `misc_wilcox_mojonation_2000` | Wilcox-O'Hearn, Z. (2000). Mojo Nation | T2 | Unverified | **Key precursor**: Token incentives for file sharing; needs primary source |
+| `misc_mojonation_technical_2000` | Autonomous Zone Industries (2000). Mojo Nation Technical Overview | T1 | Verified | **Token economics verified**: Feb 14, 2000; Mojo micropayments, IOU credit; Jim McCoy (CEO), Zooko, Bram Cohen |
 | `inproceedings_stoica_chord_2001` | Stoica, I. et al. (2001). Chord | T1 | Verified | ACM SIGCOMM; foundational DHT paper |
 | `inproceedings_maymounkov_kademlia_2002` | Maymounkov, P. & Mazières, D. (2002). Kademlia | T1 | Verified | DHT used by BitTorrent, IPFS, Ethereum |
 | `misc_cohen_bittorrent_2001` | Cohen, B. (2001). BitTorrent | T2 | Verified | Incentive-compatible P2P; tit-for-tat |
@@ -77,7 +77,7 @@ Human-readable index of sources in `library.bib` with credibility assessments an
 |-----|----------|------|--------|-------|
 | `inproceedings_dwork_pricing_1992` | Dwork, C. & Naor, M. (1992). Pricing via Processing | T1 | Verified | CRYPTO '92; **first PoW formalization** |
 | `misc_hughes_manifesto_1993` | Hughes, E. (1993). A Cypherpunk's Manifesto | T1 | Verified | Philosophical foundation; widely archived |
-| `misc_szabo_smart_contracts_1994` | Szabo, N. (1994). Smart Contracts | T1 | Unverified | Original concept; date disputed (1994 vs 1996) |
+| `misc_szabo_smart_contracts_1994` | Szabo, N. (1994). Smart Contracts | T1 | Verified | **Date verified**: Copyright 1994; original definition. 1996 Extropy #16 is expanded version |
 | `misc_szabo_smart_contracts_building_1996` | Szabo, N. (1996). Smart Contracts: Building Blocks | T1 | Verified | Extropy Magazine publication |
 | `techreport_back_hashcash_1997` | Back, A. (1997). Hashcash (announcement) | T1 | Verified | Cypherpunks mailing list; PoW for anti-spam |
 | `techreport_back_hashcash_2002` | Back, A. (2002). Hashcash paper | T1 | Verified | Formal paper; cited in Bitcoin whitepaper |
@@ -172,7 +172,13 @@ Human-readable index of sources in `library.bib` with credibility assessments an
 | Key | Citation | Tier | Status | Notes |
 |-----|----------|------|--------|-------|
 | `article_garman_market_1976` | Garman, M.B. (1976). Market Microstructure | T1 | Verified | J. Financial Economics; inventory models |
-| `article_amihud_dealership_1980` | Amihud, Y. & Mendelson, H. (1980). Dealership Market | T1 | Verified | Bid-ask spread theory |
+| `article_amihud_dealership_1980` | Amihud & Mendelson (1980). Dealership Market | T1 | Verified | Bid-ask spread theory |
+| `article_kyle_continuous_1985` | Kyle, A.S. (1985). Continuous Auctions | T1 | Verified | Informed trading; price impact; market depth |
+| `article_glosten_milgrom_1985` | Glosten & Milgrom (1985). Bid, Ask, Transaction | T1 | Verified | Adverse selection in market making |
+| `article_glosten_limit_1994` | Glosten, L.R. (1994). Limit Order Book | T1 | Verified | LOB economics; exchange competition |
+| `article_foucault_limit_1999` | Foucault, T. (1999). Order Flow Composition | T1 | Verified | Limit order dynamics; liquidity provision |
+| `article_hasbrouck_market_microstructure_2006` | Hasbrouck, J. (2006). Empirical Market Microstructure | T1 | Verified | Classic microstructure textbook |
+| `article_budish_hft_2015` | Budish et al. (2015). HFT Arms Race | T1 | Verified | Batch auctions; influences CoW Protocol |
 
 ---
 
@@ -257,6 +263,20 @@ Human-readable index of sources in `library.bib` with credibility assessments an
 
 ---
 
+## DeFi Lending Protocols
+
+| Key | Citation | Tier | Status | Notes |
+|-----|----------|------|--------|-------|
+| `online_compound_whitepaper_2019` | Leshner, R. & Hayes, G. (2019). Compound Whitepaper | T1 | Verified | Pooled lending; cTokens; algorithmic rates |
+| `misc_ethlend_2017` | Kulechov, S. (2017). ETHLend | T1 | Verified | P2P lending; Aave predecessor |
+| `misc_aave_v1_2020` | Aave (2020). Aave V1 Whitepaper | T1 | Verified | Pooled model; flash loans; aTokens |
+| `online_aave_v3_2022` | Aave (2022). Aave V3 Technical Paper | T1 | Verified | E-mode, isolation, portals |
+| `misc_aave_flashloans_2020` | Aave (2020). Flash Loans Documentation | T1 | Verified | Uncollateralized single-tx loans |
+| `misc_comp_launch_2020` | Compound (2020). COMP Launch | T2 | Verified | June 2020; triggered DeFi Summer |
+| `misc_morpho_2023` | Morpho (2023). Optimizing Lending | T1 | Verified | P2P matching layer optimization |
+
+---
+
 ## DeFi Derivatives — Academic Research
 
 | Key | Citation | Tier | Status | Notes |
@@ -298,27 +318,79 @@ Human-readable index of sources in `library.bib` with credibility assessments an
 
 ---
 
-## Stablecoins — Academic Research
+## Stablecoins — Early History & Research
 
 | Key | Citation | Tier | Status | Notes |
 |-----|----------|------|--------|-------|
-| `misc_bitshares_bitusd_2014` | BitShares (2014). BitUSD | T1 | Verified | First crypto-collateralized stablecoin |
+| `misc_bitshares_bitusd_2014` | Larimer et al. (Jul 2014). BitUSD | T1 | Verified | First crypto-collateralized stablecoin; global settlement Nov 2018 |
+| `misc_nubits_2014` | Nu Team (Sep 2014). NuBits | T1 | Verified | First algorithmic stablecoin; collapsed 2018 |
 | `online_makerdao_whitepaper_2017` | MakerDAO (2017). Dai Whitepaper | T1 | Verified | CDP system design |
 | `misc_curve_stableswap_2019` | Egorov, M. (2019). StableSwap Invariant | T1 | Verified | Stablecoin-optimized AMM |
-| `misc_frax_2020` | Frax Finance (2020). Fractional-Algorithmic | T2 | Verified | Hybrid stablecoin design |
+| `misc_paxgold_2018` | Paxos (2018). Pax Gold | T1 | Verified | First gold-backed stablecoin; 1 PAXG = 1 oz gold |
+| `misc_frax_2019` | Kazemian & Mao (2019). Frax Protocol | T1 | Verified | First hybrid (partial collateral + algorithmic) stablecoin |
+| `misc_liquity_lusd_2020` | Liquity AG (2020). Liquity Protocol | T1 | Verified | Immutable ETH-backed CDP; LUSD stablecoin |
 | `misc_ust_collapse_2022` | Various (2022). UST/LUNA Analysis | T2 | Verified | Algorithmic stablecoin failure |
+| `misc_paypal_pyusd_2023` | PayPal (Aug 2023). PYUSD | T1 | Verified | First major fintech stablecoin |
+| `misc_ethena_usde_2024` | Ethena Labs (2024). USDe | T1 | Verified | Delta-neutral stablecoin; stETH + short perps |
+| `misc_fdusd_2024` | First Digital Labs (2024). FDUSD | T2 | Verified | Institutional fiat-backed; rapid growth to top 10 |
+| `misc_ripple_rlusd_2024` | Ripple (2024). RLUSD | T2 | Verified | Cross-border optimized stablecoin |
 | `misc_awesome_stablecoins` | 0xperp (2024). Awesome Stablecoins | T2 | Verified | Curated resource collection |
 
 ---
 
-## Auction Theory — Foundational Research
+## Auction Theory & Mechanism Design — Foundational Research
 
 | Key | Citation | Tier | Status | Notes |
 |-----|----------|------|--------|-------|
-| `article_vickrey_auctions_1961` | Vickrey, W. (1961). Counterspeculation, Auctions | T1 | Verified | Second-price auctions; Nobel work |
-| `article_myerson_optimal_auctions_1981` | Myerson, R. (1981). Optimal Auction Design | T1 | Verified | Revenue-optimal mechanisms |
-| `article_milgrom_theory_auctions_1982` | Milgrom, P. & Weber, R. (1982). Theory of Auctions | T1 | Verified | Common value auctions |
-| `book_klemperer_auctions_1999` | Klemperer, P. (1999). Auction Theory | T1 | Verified | Definitive auction theory survey |
+| `article_vickrey_auction_1961` | Vickrey, W. (1961). Counterspeculation, Auctions | T1 | Verified | Second-price auctions; Nobel 1996 |
+| `article_clarke_multipart_1971` | Clarke, E. (1971). Multipart Pricing | T1 | Verified | VCG mechanism; incentive-compatible pricing |
+| `article_hurwicz_optimality_1972` | Hurwicz, L. (1972). Informationally Decentralized Systems | T1 | Verified | Mechanism design foundations; Nobel 2007 |
+| `article_groves_incentives_1973` | Groves, T. (1973). Incentives in Teams | T1 | Verified | Completes VCG mechanism |
+| `article_gibbard_manipulation_1973` | Gibbard, A. (1973). Manipulation of Voting Schemes | T1 | Verified | Strategy-proofness impossibility |
+| `article_satterthwaite_strategyproofness_1975` | Satterthwaite, M. (1975). Strategy-proofness | T1 | Verified | Gibbard-Satterthwaite theorem |
+| `article_myerson_optimal_1981` | Myerson, R. (1981). Optimal Auction Design | T1 | Verified | Revenue-optimal mechanisms; Nobel 2007 |
+| `article_milgrom_theory_1982` | Milgrom, P. & Weber, R. (1982). Theory of Auctions | T1 | Verified | Common value auctions; winner's curse |
+| `article_klemperer_auctions_1999` | Klemperer, P. (1999). Auction Theory Survey | T1 | Verified | Definitive auction theory literature review |
+
+---
+
+## Mining Hardware & Pools
+
+| Key | Citation | Tier | Status | Notes |
+|-----|----------|------|--------|-------|
+| `misc_bitmain_antminer` | Bitmain (2013+). Antminer Series | T2 | Verified | Dominant ASIC manufacturer; S-series (SHA-256) |
+| `misc_canaan_avalon` | Canaan (2013). Avalon Series | T2 | Verified | First commercial Bitcoin ASIC (Jan 2013) |
+| `misc_microbt_whatsminer` | MicroBT (2016). WhatsMiner Series | T2 | Verified | Founded by ex-Bitmain designer |
+| `misc_slush_pool_2010` | Palatinus, M. (2010). Slush Pool | T1 | Verified | First mining pool (Nov 2010) |
+| `misc_stratum_v1` | Palatinus, M. (2012). Stratum Protocol | T1 | Verified | Standard mining pool protocol |
+| `misc_stratum_v2` | Braiins (2019). Stratum V2 | T1 | Verified | Encrypted, decentralized template creation |
+| `misc_ghash_51_percent_2014` | GHash.IO (2014). 51% Event | T2 | Verified | July 2014; centralization concern |
+| `misc_china_mining_ban_2021` | Various (2021). China Mining Ban | T2 | Verified | May 2021; ~50% hashrate drop |
+| `misc_ethash` | Ethereum (2015). Ethash | T1 | Verified | Memory-hard PoW algorithm |
+| `misc_randomx` | RandomX Team (2019). RandomX | T1 | Verified | Most successful ASIC-resistant algorithm |
+
+---
+
+## Node Software Primitives
+
+| Key | Citation | Tier | Status | Notes |
+|-----|----------|------|--------|-------|
+| `misc_leveldb` | Dean, J. & Ghemawat, S. (2011). LevelDB | T1 | Verified | Google's LSM-tree; used by Bitcoin Core, early Geth |
+| `misc_rocksdb` | Facebook (2012). RocksDB | T1 | Verified | LevelDB fork; multi-threaded; used by Nethermind, Besu |
+| `misc_lmdb` | Chu, H. (2011). LMDB | T1 | Verified | Memory-mapped B+tree; OpenLDAP Project |
+| `misc_mdbx` | Yuriev, L. (2015). MDBX | T1 | Verified | LMDB fork; used by Erigon, Reth (6x smaller archives) |
+| `misc_libsecp256k1` | Wuille, P. (2013). libsecp256k1 | T1 | Verified | Optimized ECC; 4-10x faster than OpenSSL |
+| `misc_blst` | Supranational (2020). BLST | T1 | Verified | BLS12-381; required for ETH PoS |
+| `misc_libp2p` | Protocol Labs (2014). libp2p | T1 | Verified | Modular P2P stack; used by IPFS, ETH consensus |
+| `misc_gossipsub` | Vyzovitis, D. et al. (2019). GossipSub | T1 | Verified | Pubsub for blockchain attestation/block propagation |
+
+---
+
+## International Exchanges & Infrastructure
+
+| Key | Citation | Tier | Status | Notes |
+|-----|----------|------|--------|-------|
+| `misc_independent_reserve_2013` | Przelozny et al. (2013). Independent Reserve | T2 | Verified | Australia's oldest exchange; Sydney; first Singapore MAS license 2021 |
 
 ---
 
@@ -326,9 +398,9 @@ Human-readable index of sources in `library.bib` with credibility assessments an
 
 The following sources need additional verification or primary documentation:
 
-1. **`misc_wilcox_mojonation_2000`** — Mojo Nation token economics; need primary source documentation
-2. **`misc_szabo_smart_contracts_1994`** — Original date disputed; 1994 vs 1996
-3. **`misc_szabo_bitgold_1998`** — Bit Gold; described 1998 but published 2005
+1. ~~**`misc_mojonation_technical_2000`**~~ — ✓ VERIFIED: Primary sources found (Feb 14, 2000 Technical Overview)
+2. ~~**`misc_szabo_smart_contracts_1994`**~~ — ✓ VERIFIED: Copyright 1994 confirmed; 1996 Extropy #16 is expanded version
+3. **`misc_szabo_bitgold_1998`** — Bit Gold; described 1998 but published 2005 (remains contested)
 
 ---
 

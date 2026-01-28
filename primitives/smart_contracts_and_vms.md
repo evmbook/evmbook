@@ -512,6 +512,205 @@ After years of focusing solely on monetary use, Bitcoin experienced renewed inte
 
 ---
 
+## EVM Client Implementations
+
+The EVM specification is implemented by multiple independent clients. This client diversity is critical for network security—a bug in one client won't take down the entire network.
+
+### Client Timeline
+
+| Year | Client | Team/Origin | Notes |
+|------|--------|-------------|-------|
+| 2014 | **Aleth (cpp-ethereum)** | Ethereum Foundation | Original C++ implementation; deprecated 2020 |
+| 2015 | **Geth (go-ethereum)** | Ethereum Foundation | Go implementation; dominant client |
+| 2015 | **Parity Ethereum** | Parity Technologies | Rust implementation; fastest sync |
+| 2016 | **Hyperledger Besu** | ConsenSys/Hyperledger | Java; enterprise features |
+| 2019 | **Nethermind** | Nethermind | C#/.NET; performance focus |
+| 2020 | **Erigon** | Ledgerwatch (ex-TurboGeth) | Go; archival efficiency |
+| 2020 | **OpenEthereum** | OpenEthereum DAO | Parity fork; sunset 2023 |
+| 2023 | **Reth** | Paradigm | Rust; modular design |
+
+### Key Clients in Detail
+
+#### Geth (go-ethereum)
+
+**The reference implementation** and most widely deployed client:
+
+**Team**: Ethereum Foundation; led by Péter Szilágyi (@karalabe) and Guillaume Ballet.
+
+**Technical contributions**:
+- Defines de facto EVM behavior when spec is ambiguous
+- Introduced snap sync protocol (2021)
+- First to implement EIP-4844 blobs
+- LevelDB → Pebble database migration (2024)
+
+**Market share**: ~65-80% of consensus layer validators use Geth (varies by measure).
+
+**Concern**: Supermajority concentration is a centralization risk.
+
+#### Parity Ethereum → OpenEthereum
+
+**Fastest client of its era**, written in Rust by Parity Technologies:
+
+**History**:
+- 2015-2019: Parity Ethereum under Gavin Wood/Parity
+- November 2019: Transitioned to OpenEthereum DAO
+- 2023: Deprecated in favor of Erigon and Reth
+
+**Technical contributions**:
+- Warp sync (fast state sync)
+- First Rust Ethereum implementation
+- Foundation for Polkadot's Substrate
+
+**Notable incidents**:
+- July 2017: Multi-sig wallet bug; $30M+ frozen
+- November 2017: Parity wallet library freeze; $150M+ locked
+
+#### Erigon (formerly TurboGeth)
+
+**Archival-optimized client** focused on disk efficiency:
+
+**Team**: Ledgerwatch (Alexey Akhunov @realLedgerwatch); spun out of Geth.
+
+**Technical innovations**:
+- Flat database layout (not MPT-based storage)
+- Archive node in ~2TB vs. ~12TB for Geth archive
+- Staged sync architecture
+- OtterSync for faster data transfer
+
+**Use case**: Archival nodes, indexers, researchers needing historical state.
+
+#### Nethermind
+
+**High-performance C#/.NET implementation**:
+
+**Team**: Nethermind (Tomasz Stańczak); funded by Ethereum Foundation and others.
+
+**Technical contributions**:
+- Fast sync innovations
+- RPC performance optimizations
+- Extensive tracing APIs
+- Used by many staking providers
+
+**Ecosystem**: Active in research; contributes to Verkle trees, statelessness.
+
+#### Hyperledger Besu
+
+**Enterprise-focused Java client**:
+
+**Team**: Originally ConsenSys; now Hyperledger Foundation.
+
+**Features**:
+- Privacy groups (for private transactions)
+- Permissioning modules
+- Mainnet and private network support
+- GraphQL API
+
+**Use case**: Enterprises needing compliance features.
+
+#### Reth
+
+**Newest major client**, designed for modularity:
+
+**Team**: Paradigm (Georgios Konstantopoulos @gakonst); open-sourced 2023.
+
+**Design philosophy**:
+- Clean Rust codebase
+- Modular components (can swap consensus, execution)
+- Designed for rollup builders to customize
+- Fast sync and execution
+
+**Status (2024-2025)**: Production-ready; gaining adoption.
+
+### Client Diversity Problem
+
+| Client | Consensus Layer Share (2024) | Risk |
+|--------|------------------------------|------|
+| Geth | ~65-70% | Supermajority |
+| Nethermind | ~15-20% | — |
+| Besu | ~8-10% | — |
+| Erigon | ~5-7% | — |
+| Reth | Growing | — |
+
+**Supermajority risks**:
+- If Geth has a consensus bug, >66% of validators could be slashed
+- Network could finalize an invalid chain
+- No recovery mechanism in PoS for supermajority bugs
+
+**Mitigation efforts**:
+- Client diversity campaigns by EF
+- Staking pools (Lido) diversifying clients
+- Protocol incentives under discussion
+
+### Key Figures in Client Development
+
+#### Péter Szilágyi (Geth)
+
+**Background**: Lead developer of Geth since early Ethereum.
+
+**Technical contributions**:
+- EVM and p2p networking improvements
+- Snap sync protocol
+- Database layer optimizations
+
+**Role**: De facto arbiter of EVM implementation details when specification is ambiguous.
+
+#### Gavin Wood (Parity/Polkadot)
+
+**Background**: Co-founder of Ethereum; author of Yellow Paper.
+
+**Contributions to clients**:
+- Founded Parity Technologies
+- Oversaw Parity Ethereum development
+- Later pivoted to Polkadot/Substrate
+
+#### Alexey Akhunov (Erigon)
+
+**Background**: Former Geth contributor; state management researcher.
+
+**Contributions**:
+- TurboGeth → Erigon development
+- Research on state expiry, statelessness
+- Verkle tree implementation work
+
+**Significance**: Demonstrated that EVM clients can be radically more efficient.
+
+### Client Architecture Comparison
+
+| Component | Geth | Erigon | Nethermind | Besu | Reth |
+|-----------|------|--------|------------|------|------|
+| **Language** | Go | Go | C# | Java | Rust |
+| **Database** | Pebble | MDBX | RocksDB | RocksDB | MDBX |
+| **Sync modes** | Full, Snap, Light | Staged | Fast, Full | Fast, Full | Full |
+| **Archive size** | ~12 TB | ~2 TB | ~8 TB | ~10 TB | ~2.5 TB |
+| **Best for** | General use | Archives | Performance | Enterprise | Modularity |
+
+### ETC Client Landscape
+
+Ethereum Classic has its own client implementations:
+
+| Client | Base | Status |
+|--------|------|--------|
+| **Core-geth** | Geth fork | Primary client |
+| **Hyperledger Besu** | Java | Supports ETC |
+
+**Historical note**: Post-Merge, ETC clients diverged significantly from Ethereum clients. ETC maintained PoW consensus while Ethereum moved to PoS.
+
+### Underlying Software Primitives
+
+Blockchain clients build on decades of distributed systems research. Key foundational components include:
+
+| Category | Primitives | Blockchain Usage |
+|----------|------------|------------------|
+| **Peer discovery** | Kademlia DHT (2002) | Ethereum devp2p, IPFS |
+| **Block propagation** | GossipSub (2019) | Ethereum consensus layer |
+| **Storage** | LevelDB, RocksDB, MDBX | All major clients |
+| **Cryptography** | libsecp256k1, BLST | Signatures, PoS |
+| **Networking** | libp2p | Post-Merge consensus |
+
+For detailed lineage of these components, see [Node Software Primitives](node_software_primitives.md).
+
+---
+
 ## EVM Relevance
 
 This primitive *is* the EVM. Understanding smart contracts and VMs means understanding:
@@ -521,6 +720,7 @@ This primitive *is* the EVM. Understanding smart contracts and VMs means underst
 3. **Upgradeability**: Proxy patterns, diamonds
 4. **Composability**: Contract-to-contract calls
 5. **Testing**: Fuzzing, formal verification
+6. **Client diversity**: Running minority clients improves network health
 
 ---
 
@@ -539,6 +739,7 @@ This primitive *is* the EVM. Understanding smart contracts and VMs means underst
 
 ## Cross-References
 
+- [Node Software Primitives](node_software_primitives.md) — P2P networking, databases, crypto libraries
 - [Fee Markets & EIP-1559](fee_markets_eip1559.md) — Gas economics
 - [MEV & Auctions](mev_and_auctions.md) — Transaction ordering attacks
 - [L2 Rollups & Data Availability](l2_rollups_and_data_availability.md) — EVM execution on L2s

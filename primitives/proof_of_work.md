@@ -217,6 +217,22 @@ PoW concepts apply to:
 
 ---
 
+## Key Figures
+
+### Cynthia Dwork (PoW Co-Inventor)
+
+**Background**: B.S.E. Princeton University (1979); Ph.D. Computer Science, Cornell University (1983), advised by John Hopcroft. Over 30 years at IBM and Microsoft Research before joining Harvard as Gordon McKay Professor of Computer Science.
+
+**PoW Contribution**: Co-authored "Pricing via Processing or Combatting Junk Mail" with Moni Naor (CRYPTO 1992) — the **first formalization of proof-of-work**. Proposed computational puzzles to deter email spam, establishing that scarce computation could meter access to systems without trusted third parties. This foundational work directly influenced Hashcash and Bitcoin.
+
+**Other contributions**: Co-invented differential privacy (2006) — now deployed in Apple devices and the 2020 U.S. Census. Research on algorithmic fairness.
+
+**Recognition**: National Medal of Science (2025); cited for "visionary contributions to computer science and secure public-key cryptography."
+
+**Historical significance**: Cynthia Dwork is often overlooked in cryptocurrency histories despite co-inventing the core consensus mechanism that underlies Bitcoin, Ethereum (pre-Merge), and Ethereum Classic.
+
+---
+
 ## Citations
 
 [@inproceedings_dwork_pricing_1992]
