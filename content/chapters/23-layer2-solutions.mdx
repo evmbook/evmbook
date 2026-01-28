@@ -16,15 +16,15 @@ Layer 2 scaling wasn't a new idea when Ethereum launched. The concept evolved th
 
 ### Academic Foundations
 
-**Payment Channels** — The concept of off-chain transactions with on-chain settlement dates to **Bitcoin's early days (2012-2013)**. The Lightning Network whitepaper [@whitepaper_poon_lightning_2016] formalized bidirectional payment channels with hash time-locked contracts (HTLCs).
+**Payment Channels** — The concept of off-chain transactions with on-chain settlement dates to **Bitcoin's early days (2012-2013)**. The Lightning Network whitepaper (2016) formalized bidirectional payment channels with hash time-locked contracts (HTLCs).
 
-**Plasma** — Poon and Buterin's 2017 paper [@whitepaper_poon_plasma_2017] proposed nested child chains with Merkle commitments to L1. While Plasma itself failed, it identified the data availability problem that shaped all subsequent scaling research.
+**Plasma** — Poon and Buterin's 2017 paper proposed nested child chains with Merkle commitments to L1. While Plasma itself failed, it identified the data availability problem that shaped all subsequent scaling research.
 
 **Rollups** — The rollup concept emerged from Plasma's lessons. By posting all transaction data to L1, rollups solved data availability while keeping execution off-chain. Optimistic rollups (assume valid, prove fraud) and ZK rollups (prove validity cryptographically) emerged as the two main approaches.
 
 ### The Truebit Influence
 
-**Truebit (2017)** [@misc_truebit_2017] proposed off-chain computation with on-chain verification games—the intellectual precursor to optimistic rollup fraud proofs. The verification game concept influenced Arbitrum's multi-round dispute resolution.
+**Truebit (2017)** proposed off-chain computation with on-chain verification games—the intellectual precursor to optimistic rollup fraud proofs. The verification game concept influenced Arbitrum's multi-round dispute resolution.
 
 ## The Scalability Problem
 

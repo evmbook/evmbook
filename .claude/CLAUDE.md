@@ -188,6 +188,31 @@ For open-ended exploration, prefer using specialized agents:
 4. Flag uncertainties in `notes/known_gaps.md`
 5. Follow citation format in `docs/RESEARCH_SYSTEM.md`
 
+### After Completing Tasks
+**IMPORTANT:** Update project documentation when work is complete:
+
+1. **`docs/PROJECT-STATUS.md`** — Main status file
+   - Update phase status in the table
+   - Keep "Next Steps" section current
+   - Update "Last Updated" date
+
+2. **`docs/MILESTONES.md`** — Phase tracking
+   - Move completed phases to "Completed Phases" table
+   - Update "Current Phase" section
+   - Keep research log accurate
+
+3. **`notes/known_gaps.md`** — Research gaps
+   - Check off resolved items in Action Items
+   - Remove or archive completed sections
+   - Add any new gaps discovered
+
+4. **`notes/plan.md`** — Research priorities
+   - Update phase completion status
+   - Move completed items to done
+   - Adjust priorities as needed
+
+This ensures project documentation stays current and actionable.
+
 ## DO NOT
 
 - Reference `book_series/` - this directory was deleted

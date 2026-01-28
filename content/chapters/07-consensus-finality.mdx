@@ -16,7 +16,7 @@ Consensus mechanisms solve the Byzantine Generals Problem: how can distributed p
 
 ### The Original Problem (1982)
 
-**Lamport, Shostak, and Pease (1982)** formalized this challenge in their paper "The Byzantine Generals Problem" [@article_lamport_byzantine_1982]. The metaphor: Several Byzantine generals must coordinate an attack on a city. They communicate only via messengers, but some generals may be traitors who send contradictory messages.
+**Lamport, Shostak, and Pease (1982)** formalized this challenge in their paper "The Byzantine Generals Problem". The metaphor: Several Byzantine generals must coordinate an attack on a city. They communicate only via messengers, but some generals may be traitors who send contradictory messages.
 
 ```
 General A: "Attack at dawn"  →  General B
@@ -29,7 +29,7 @@ How can honest generals coordinate?
 
 ### From Theory to Practice: PBFT (1999)
 
-**Practical Byzantine Fault Tolerance (PBFT)** by Castro and Liskov (1999) [@inproceedings_castro_pbft_1999] made BFT practical:
+**Practical Byzantine Fault Tolerance (PBFT)** by Castro and Liskov (1999) made BFT practical:
 
 ```
 Three-Phase Protocol:
@@ -69,15 +69,15 @@ Proof of Work was the original consensus mechanism for Bitcoin and Ethereum. It 
 
 Proof of Work wasn't invented by Satoshi Nakamoto. Its lineage spans nearly two decades:
 
-**Dwork & Naor (1992)** — First formalized PoW in "Pricing via Processing or Combatting Junk Mail" [@inproceedings_dwork_pricing_1992]. Their insight: computational work could meter access to systems without trusted third parties. Proposed to combat email spam.
+**Dwork & Naor (1992)** — First formalized PoW in "Pricing via Processing or Combatting Junk Mail". Their insight: computational work could meter access to systems without trusted third parties. Proposed to combat email spam.
 
-**Hashcash (1997)** — Adam Back implemented PoW for email anti-spam using SHA-1 partial hash collisions [@techreport_back_hashcash_2002]. Directly cited in Bitcoin's whitepaper.
+**Hashcash (1997)** — Adam Back implemented PoW for email anti-spam using SHA-1 partial hash collisions. Directly cited in Bitcoin's whitepaper.
 
-**b-money (1998)** — Wei Dai proposed decentralized currency where money creation required computational puzzles [@misc_dai_bmoney_1998]. Never implemented.
+**b-money (1998)** — Wei Dai proposed decentralized currency where money creation required computational puzzles. Never implemented.
 
-**Bit Gold (1998/2005)** — Nick Szabo proposed "unforgeable" digital gold created through PoW with chained proofs [@misc_szabo_bitgold_1998]. Conceptually close to Bitcoin.
+**Bit Gold (1998/2005)** — Nick Szabo proposed "unforgeable" digital gold created through PoW with chained proofs. Conceptually close to Bitcoin.
 
-**RPOW (2004)** — Hal Finney created "Reusable Proofs of Work" attempting to make Hashcash stamps transferable [@misc_finney_rpow_2004]. Relied on trusted servers.
+**RPOW (2004)** — Hal Finney created "Reusable Proofs of Work" attempting to make Hashcash stamps transferable. Relied on trusted servers.
 
 **Bitcoin (2009)** — Satoshi synthesized these ideas into a working system. The innovations:
 - Difficulty adjustment every 2016 blocks

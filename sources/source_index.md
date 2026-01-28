@@ -187,9 +187,66 @@ Human-readable index of sources in `library.bib` with credibility assessments an
 | Key | Citation | Tier | Status | Notes |
 |-----|----------|------|--------|-------|
 | `book_antonopoulos_mastering_bitcoin_2017` | Antonopoulos, A.M. (2017). Mastering Bitcoin, 2nd ed. | T2 | Verified | Definitive Bitcoin technical reference |
+| `book_antonopoulos_wood_mastering_ethereum_2018` | Antonopoulos, A.M. & Wood, G. (2018). Mastering Ethereum | T2 | Verified | Original Ethereum technical reference; this book's derivative source |
 | `book_russo_infinite_machine_2020` | Russo, C. (2020). The Infinite Machine | T2 | Verified | Ethereum origin story; journalistic |
 | `book_leising_out_of_ether_2020` | Leising, M. (2020). Out of the Ether | T2 | Verified | DAO hack history |
+| `book_shin_cryptopians_2022` | Shin, L. (2022). The Cryptopians | T2 | Verified | Ethereum founding; interpersonal dynamics; fork decision |
 | `book_bier_blocksize_war_2021` | Bier, J. (2021). The Blocksize War | T2 | Verified | Bitcoin governance lessons |
+| `book_popper_digital_gold_2015` | Popper, N. (2015). Digital Gold | T2 | Verified | Bitcoin history narrative; Satoshi, early adopters |
+| `book_bilton_american_kingpin_2017` | Bilton, N. (2017). American Kingpin | T2 | Verified | Silk Road; Bitcoin adoption context |
+| `book_singh_code_book_1999` | Singh, S. (1999). The Code Book | T3 | Verified | Accessible cryptography history |
+| `book_aumasson_serious_cryptography_2017` | Aumasson, J-P. (2017). Serious Cryptography | T2 | Verified | Modern crypto primer; hashes, signatures, ECC |
+| `book_buterin_proof_of_stake_2022` | Buterin, V. (2022). Proof of Stake | T1 | Verified | Vitalik's collected essays; Ethereum philosophy |
+| `book_ammous_bitcoin_standard_2018` | Ammous, S. (2018). The Bitcoin Standard | T2 | Verified | Austrian economics perspective; influential but controversial |
+| `book_bhatia_layered_money_2021` | Bhatia, N. (2021). Layered Money | T2 | Verified | Monetary layer theory; settlement layer concepts |
+| `book_voshmgir_token_economy_2020` | Voshmgir, S. (2020). Token Economy, 2nd ed. | T2 | Verified | Token design patterns; cryptoeconomics |
+| `book_harvey_defi_future_finance_2021` | Harvey, C.R. et al. (2021). DeFi and the Future of Finance | T1 | Verified | Academic DeFi treatment; Duke professors |
+| `book_posner_weyl_radical_markets_2018` | Posner, E.A. & Weyl, E.G. (2018). Radical Markets | T1 | Verified | Mechanism design; quadratic voting; governance theory |
+| `book_roberts_kings_of_crypto_2021` | Roberts, J.J. (2021). Kings of Crypto | T2 | Verified | Coinbase story; institutional adoption |
+| `book_faux_number_go_up_2023` | Faux, Z. (2023). Number Go Up | T2 | Verified | Skeptical perspective; Tether; FTX collapse |
+
+---
+
+## Layer 2 Scaling Solutions
+
+| Key | Citation | Tier | Status | Notes |
+|-----|----------|------|--------|-------|
+| `misc_arbitrum_2018` | Kalodner, H. et al. (2018). Arbitrum | T1 | Verified | Optimistic rollup; largest L2 by TVL; interactive fraud proofs |
+| `misc_optimism_2019` | Optimism PBC (2019). Optimism | T1 | Verified | Optimistic rollup; OP Stack; Superchain (Base, Zora, Mode) |
+| `misc_zksync_2020` | Matter Labs (2020). zkSync | T1 | Verified | ZK rollup; zkEVM; native account abstraction |
+| `misc_starkware_2018` | Ben-Sasson, E. et al. (2018). STARKs | T1 | Verified | STARK proofs; StarkNet/StarkEx foundation; no trusted setup |
+| `misc_polygon_matic_2017` | Kanani, J. et al. (2017). Matic/Polygon | T1 | Verified | Plasma-based sidechain; evolved to Polygon PoS; zkEVM |
+
+---
+
+## Staking & Infrastructure Protocols
+
+| Key | Citation | Tier | Status | Notes |
+|-----|----------|------|--------|-------|
+| `misc_lido_2020` | Lido DAO (2020). Lido Liquid Staking | T1 | Verified | stETH; 30%+ of staked ETH; largest DeFi protocol by TVL |
+| `misc_rocket_pool_2021` | Darcius, D. et al. (2021). Rocket Pool | T1 | Verified | Decentralized staking; permissionless node operators; rETH |
+| `misc_the_graph_2018` | Ramirez, Y. et al. (2018). The Graph | T1 | Verified | Indexing protocol; subgraphs; essential DeFi infrastructure |
+| `misc_gnosis_safe_2018` | Gnosis (2018). Safe (Gnosis Safe) | T1 | Verified | Multi-signature wallet standard; DAO treasury standard |
+| `misc_erc4337_2021` | Buterin, V. et al. (2021). ERC-4337 | T1 | Verified | Account abstraction; bundlers; paymasters; smart accounts |
+
+---
+
+## DeFi Protocols — Additional
+
+| Key | Citation | Tier | Status | Notes |
+|-----|----------|------|--------|-------|
+| `misc_yearn_2020` | Cronje, A. (2020). Yearn Finance | T1 | Verified | Yield aggregator; vaults; automated optimization |
+| `misc_dydx_2017` | Juliano, A. (2017). dYdX | T1 | Verified | Perpetuals DEX; moved to Cosmos; StarkEx L2 |
+| `misc_gmx_2021` | GMX Team (2021). GMX | T1 | Verified | Perpetuals on Arbitrum/Avalanche; GLP model; real yield |
+
+---
+
+## Alternative Layer 1s (Comparison Context)
+
+| Key | Citation | Tier | Status | Notes |
+|-----|----------|------|--------|-------|
+| `misc_polkadot_2016` | Wood, G. (2016). Polkadot | T1 | Verified | Parachain architecture; shared security; Gavin Wood post-Ethereum |
+| `misc_solana_2017` | Yakovenko, A. (2017). Solana | T1 | Verified | Proof of History; high throughput; parallel execution |
 
 ---
 

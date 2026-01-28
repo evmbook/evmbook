@@ -63,9 +63,29 @@ Limitation: Data availability problem; users must watch chain.
 
 Various researchers (Buterin, Plasma Group, Optimism) developed optimistic rollup specifications 2018-2020.
 
+**Arbitrum (2018)** — Kalodner, Goldfeder, Chen, Felten published "Arbitrum: Scalable, Private Smart Contracts" at USENIX Security 2018. Introduced interactive fraud proofs with logarithmic on-chain cost.
+
+[@misc_arbitrum_2018]
+
+**Optimism (2019)** — Emerged from Plasma Group research. Developed the OP Stack, enabling the Superchain ecosystem (Base, Zora, Mode, etc.).
+
+[@misc_optimism_2019]
+
 ### ZK Rollups
 
-**StarkWare** and **Matter Labs** pioneered ZK rollup implementations, building on SNARK/STARK research.
+**StarkWare (2018)** — Ben-Sasson et al. developed STARKs: transparent (no trusted setup), post-quantum secure validity proofs. Powers StarkNet and StarkEx.
+
+[@misc_starkware_2018]
+
+**zkSync (2020)** — Matter Labs pioneered zkEVM development with native account abstraction. zkSync Era launched 2023.
+
+[@misc_zksync_2020]
+
+### Sidechains / Commit Chains
+
+**Polygon/Matic (2017)** — Originally a Plasma-based sidechain, evolved to Polygon PoS (commit chain) and now developing Polygon zkEVM.
+
+[@misc_polygon_matic_2017]
 
 ---
 
@@ -283,7 +303,13 @@ L2s extend the EVM ecosystem:
 
 [@whitepaper_poon_lightning_2016]
 [@whitepaper_poon_plasma_2017]
+[@misc_arbitrum_2018]
+[@misc_optimism_2019]
+[@misc_starkware_2018]
+[@misc_zksync_2020]
+[@misc_polygon_matic_2017]
 [@eip_proto_danksharding_2022]
+[@misc_celestia_lazylegder_2019]
 
 ---
 

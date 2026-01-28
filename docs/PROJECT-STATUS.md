@@ -1,7 +1,7 @@
 # Mastering EVM (2025 Edition) - Project Status
 
 **Last Updated:** 2026-01-28
-**Book Status:** Content Complete - Research Infrastructure Complete
+**Book Status:** Ready for Publishing (Phase 14)
 
 ## Related Docs
 - [MILESTONES.md](MILESTONES.md) - Phase tracking and research logs
@@ -9,16 +9,11 @@
 
 ---
 
-## Current Work: Historical Accuracy Fixes
+## Next Steps
 
-Two corrections identified from web research:
+**Phase 14: PDF/EPUB Build** — Content and research infrastructure complete. Ready for final build.
 
-| File | Issue | Fix |
-|------|-------|-----|
-| `22-oracles.mdx` | Chainlink timeline unclear | Add "(whitepaper 2017, network 2019)" |
-| `23-layer2-solutions.mdx` | Raiden "launched 2020" incorrect | Change to "started 2015, POC 2016" |
-
-See [MILESTONES.md](MILESTONES.md) for full research log.
+**Phase 15: Distribution** — ISBN allocation complete. Pending: KDP setup, release.
 
 ---
 
@@ -42,6 +37,7 @@ See [MILESTONES.md](MILESTONES.md) for full research log.
 | **Phase R1** | **Complete** | Research infrastructure foundation (docs, BibTeX, 10 primitives) |
 | **Phase R2** | **Complete** | Expanded primitives (27 total), skeleton chapters |
 | **Phase R3** | **Complete** | Era chapter expansion (13 chapters, ~6,600 lines) |
+| **Phase R4** | **Complete** | Book integration assessment (chapters already comprehensive) |
 | Phase 14 | Ready | PDF/EPUB build |
 | Phase 15 | Pending | Distribution (ISBN, KDP, release) |
 

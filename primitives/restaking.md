@@ -376,6 +376,8 @@ Restaking operations are gas-intensive:
 [@misc_eigenlayer_2023]
 [@misc_buterin_overload_2023]
 [@misc_symbiotic_2024]
+[@misc_lido_2020]
+[@misc_rocket_pool_2021]
 
 ---
 

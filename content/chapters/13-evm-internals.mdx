@@ -10,7 +10,7 @@ The Ethereum Virtual Machine (EVM) is the runtime environment for smart contract
 
 ## Smart Contract Origins
 
-The concept of smart contracts predates cryptocurrency by over a decade. **Nick Szabo** first described the concept in 1994, envisioning "a set of promises, specified in digital form, including protocols within which the parties perform on these promises." His 1996 paper "Smart Contracts: Building Blocks for Digital Markets" provided the theoretical foundation that would later inspire Ethereum. [@misc_szabo_smart_contracts_building_1996]
+The concept of smart contracts predates cryptocurrency by over a decade. **Nick Szabo** first described the concept in 1994, envisioning "a set of promises, specified in digital form, including protocols within which the parties perform on these promises." His 1996 paper "Smart Contracts: Building Blocks for Digital Markets" provided the theoretical foundation that would later inspire Ethereum.
 
 ### Pre-Ethereum Attempts
 
@@ -32,9 +32,9 @@ Bitcoin's Script language was intentionally constrained—Satoshi removed severa
 
 ### The Ethereum Solution
 
-Vitalik Buterin's 2013 whitepaper proposed a fundamentally different approach: a blockchain with a built-in Turing-complete programming language. The key insight was that instead of building specialized features (like Namecoin's DNS or Mastercoin's tokens), you could build a general-purpose platform where any application could be created through smart contracts. [@whitepaper_buterin_ethereum_2013]
+Vitalik Buterin's 2013 whitepaper proposed a fundamentally different approach: a blockchain with a built-in Turing-complete programming language. The key insight was that instead of building specialized features (like Namecoin's DNS or Mastercoin's tokens), you could build a general-purpose platform where any application could be created through smart contracts.
 
-Gavin Wood's Yellow Paper (2014) formally specified the EVM, defining every opcode, gas cost, and state transition rule with mathematical precision. This specification enabled multiple independent client implementations—a crucial factor in Ethereum's resilience. [@yellowpaper_wood_ethereum_2014]
+Gavin Wood's Yellow Paper (2014) formally specified the EVM, defining every opcode, gas cost, and state transition rule with mathematical precision. This specification enabled multiple independent client implementations—a crucial factor in Ethereum's resilience.
 
 ## EVM Architecture
 
@@ -512,6 +512,31 @@ Unlike centralized systems, the EVM has multiple independent implementations. Th
 <Warning>
 **Client Diversity Matters**: In 2021, a bug in Geth affected over 75% of the network. While the issue was quickly patched, it highlighted the danger of client monoculture. The Ethereum community actively encourages running minority clients to improve network resilience.
 </Warning>
+
+### Client Diversity Metrics
+
+The concentration of validators on a single client creates systemic risk:
+
+| Client | Consensus Layer Share (2024) | Status |
+|--------|------------------------------|--------|
+| Geth | ~65-70% | Supermajority ⚠️ |
+| Nethermind | ~15-20% | Minority |
+| Besu | ~8-10% | Minority |
+| Erigon | ~5-7% | Minority |
+| Reth | Growing | Minority |
+
+**Supermajority risks**:
+- If Geth has a consensus bug, >66% of validators could be slashed
+- The network could finalize an invalid chain
+- No recovery mechanism in PoS for supermajority bugs
+
+This is why the Ethereum Foundation and staking pools actively promote client diversity campaigns.
+
+### Key Figures in Client Development
+
+**Péter Szilágyi** — Lead Geth developer since early Ethereum. His technical contributions include the snap sync protocol and database layer optimizations. When the Yellow Paper is ambiguous, Geth's behavior often becomes the de facto specification.
+
+**Alexey Akhunov** — Former Geth contributor who created TurboGeth (now Erigon). His research on state management and archival efficiency demonstrated that EVM clients could be radically more storage-efficient, reducing archive nodes from ~12TB to ~2TB.
 
 ### Ethereum Classic Clients
 

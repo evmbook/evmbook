@@ -244,6 +244,46 @@ Prevents infinite loops and meters resource usage.
 
 ---
 
+## Account Abstraction (ERC-4337)
+
+Traditional Ethereum accounts are externally owned accounts (EOAs) controlled by private keys. **ERC-4337** enables smart contract accounts as first-class citizens without protocol changes.
+
+### How It Works
+
+```
+1. User creates UserOperation (not a transaction)
+2. Bundlers collect UserOperations
+3. Bundler submits bundle to EntryPoint contract
+4. EntryPoint validates and executes each UserOp
+5. Paymasters can sponsor gas fees
+```
+
+### Key Components
+
+| Component | Purpose |
+|-----------|---------|
+| **Smart Account** | Contract wallet with custom validation |
+| **EntryPoint** | Singleton contract that processes UserOps |
+| **Bundler** | Off-chain actor that bundles UserOps |
+| **Paymaster** | Contract that can sponsor gas for users |
+
+[@misc_erc4337_2021]
+
+### Capabilities Enabled
+
+- **Social recovery**: Recover wallet via trusted contacts
+- **Gas abstraction**: Pay fees in any token (or sponsored)
+- **Batched transactions**: Multiple calls in one UserOp
+- **Session keys**: Temporary permissions for dApps
+
+### Adoption (2024-2025)
+
+- Safe (Gnosis Safe) integrating 4337 [@misc_gnosis_safe_2018]
+- zkSync, StarkNet have native account abstraction
+- EIP-7702 proposes native EOA → smart account upgrade
+
+---
+
 ## Open Questions
 
 1. **EVM evolution**: How should the EVM evolve while maintaining compatibility?
@@ -255,6 +295,8 @@ Prevents infinite loops and meters resource usage.
 4. **Upgradeability**: How to balance immutability with the need for bug fixes?
 
 5. **Cross-chain contracts**: How should contracts interact across chains?
+
+6. **Account abstraction adoption**: Will ERC-4337 or native AA (EIP-7702) dominate?
 
 ---
 
@@ -329,6 +371,14 @@ DELEGATECALL: execute code in caller's context
 | Aptos | Move VM | Block-STM parallel | Parallel execution |
 | TON | TVM | Stack-based, async | Actor model |
 | Cosmos chains | WASM (CosmWasm) | WebAssembly | IBC interop |
+
+**Solana** — Yakovenko (2017) introduced Proof of History for high-throughput consensus. The Solana VM (SBF/BPF) enables parallel execution but requires explicit account locking.
+
+[@misc_solana_2017]
+
+**Polkadot** — Wood (2016) designed a heterogeneous multi-chain framework with shared security via relay chain and WASM-based parachains.
+
+[@misc_polkadot_2016]
 
 ---
 
@@ -734,6 +784,11 @@ This primitive *is* the EVM. Understanding smart contracts and VMs means underst
 [@misc_mastercoin_whitepaper_2012]
 [@misc_counterparty_2014]
 [@misc_nxt_2013]
+[@misc_polkadot_2016]
+[@misc_solana_2017]
+[@misc_erc4337_2021]
+[@misc_gnosis_safe_2018]
+[@misc_the_graph_2018]
 
 ---
 

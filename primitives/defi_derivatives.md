@@ -69,9 +69,9 @@ Funding rate = (mark_price - index_price) / index_price × time_factor
 
 | Protocol | Design | Launch | Notes |
 |----------|--------|--------|-------|
-| **dYdX** | Orderbook + StarkEx | 2021 | Largest DEX perps by volume |
+| **dYdX** | Orderbook + StarkEx | 2021 | Largest DEX perps by volume [@misc_dydx_2017] |
 | **Perpetual Protocol** | vAMM | 2020 | First vAMM perpetual |
-| **GMX** | GLP pool | 2021 | Zero slippage, oracle-based |
+| **GMX** | GLP pool | 2021 | Zero slippage, oracle-based [@misc_gmx_2021] |
 | **Gains Network** | Synthetic DAI | 2021 | Up to 150x leverage |
 | **Drift** | Dynamic AMM | 2021 | Solana; hybrid orderbook |
 | **Hyperliquid** | Orderbook | 2023 | L1 for perpetuals |
@@ -291,6 +291,9 @@ L2 deployment essential for active trading.
 [@misc_paradigm_everlasting_options]
 [@misc_paradigm_power_perps]
 [@misc_defi_derivatives]
+[@misc_dydx_2017]
+[@misc_gmx_2021]
+[@misc_perpetual_protocol]
 
 ---
 

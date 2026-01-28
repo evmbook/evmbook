@@ -146,7 +146,7 @@ exchangeRate = (totalCash + totalBorrows - reserves) / totalSupply
 | May 2019 | Compound V2 | Refined model |
 | Jan 2020 | Aave V1 | Flash loans introduced |
 | Jun 2020 | **COMP distribution** | Triggers DeFi Summer |
-| Aug 2020 | YFI launch | Yield aggregation |
+| Aug 2020 | YFI launch | Yield aggregation [@misc_yearn_2020] |
 | Dec 2020 | Aave V2 | Credit delegation |
 | 2021 | Lending TVL peaks | $50B+ across protocols |
 | Mar 2022 | Aave V3 | Multi-chain, efficiency modes |
@@ -505,6 +505,7 @@ IPool(pool).flashLoanSimple(
 [@online_compound_whitepaper_2019]
 [@online_aave_v3_2022]
 [@article_daian_flashboys_2019]
+[@misc_yearn_2020]
 
 ---
 
