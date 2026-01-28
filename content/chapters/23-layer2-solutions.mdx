@@ -10,6 +10,22 @@ Blockchain scalability has been the defining challenge of the EVM ecosystem. The
 
 This chapter traces the evolution of L2 scaling, from early failures through the rollup era to the blob-powered present.
 
+## Historical Context
+
+Layer 2 scaling wasn't a new idea when Ethereum launched. The concept evolved through multiple iterations.
+
+### Academic Foundations
+
+**Payment Channels** — The concept of off-chain transactions with on-chain settlement dates to **Bitcoin's early days (2012-2013)**. The Lightning Network whitepaper [@whitepaper_poon_lightning_2016] formalized bidirectional payment channels with hash time-locked contracts (HTLCs).
+
+**Plasma** — Poon and Buterin's 2017 paper [@whitepaper_poon_plasma_2017] proposed nested child chains with Merkle commitments to L1. While Plasma itself failed, it identified the data availability problem that shaped all subsequent scaling research.
+
+**Rollups** — The rollup concept emerged from Plasma's lessons. By posting all transaction data to L1, rollups solved data availability while keeping execution off-chain. Optimistic rollups (assume valid, prove fraud) and ZK rollups (prove validity cryptographically) emerged as the two main approaches.
+
+### The Truebit Influence
+
+**Truebit (2017)** [@misc_truebit_2017] proposed off-chain computation with on-chain verification games—the intellectual precursor to optimistic rollup fraud proofs. The verification game concept influenced Arbitrum's multi-round dispute resolution.
+
 ## The Scalability Problem
 
 ### The Trilemma
@@ -322,6 +338,48 @@ Before blobs, L2s posted data to calldata:
 L2 costs were dominated by data posting, not computation.
 
 #### EIP-4844: Proto-Danksharding
+
+Blobs create a separate data market, the most significant L2 cost reduction since rollups launched.
+
+**Type 3 Transaction Format:**
+
+```
+Type 3 (Blob) Transaction Fields:
+├── Standard EIP-1559 fields:
+│   ├── nonce, gasLimit, to, value, data
+│   ├── maxFeePerGas
+│   └── maxPriorityFeePerGas
+│
+├── New blob fields:
+│   ├── max_fee_per_blob_gas    # Max willing to pay per blob gas
+│   ├── blob_versioned_hashes   # Commitments to blob contents
+│   └── Sidecar (not in tx hash):
+│       ├── blobs[]             # The actual blob data (~128 KB each)
+│       ├── commitments[]       # KZG commitments
+│       └── proofs[]            # KZG proofs
+│
+└── Blob pricing:
+    ├── Target: 3 blobs/block (393 KB)
+    ├── Max: 6 blobs/block (786 KB)
+    ├── Base fee adjusts to hit target
+    └── Separate from regular gas market
+```
+
+**KZG Commitments:**
+
+KZG (Kate-Zaverucha-Goldberg) polynomial commitments enable efficient blob verification:
+- Commit to blob data with a 48-byte commitment
+- Prove any evaluation without revealing full blob
+- Enables future data availability sampling (DAS)
+
+```
+Full Danksharding (future):
+├── 16+ MB of blobs per block
+├── Data availability sampling (DAS)
+│   └── Nodes verify random samples, not full blobs
+├── No need to download all data
+└── 100x+ more capacity than current 4844
+```
 
 Blobs create a separate data market:
 
@@ -783,3 +841,296 @@ L2 scaling has evolved through distinct eras:
 The future is multi-L2. Users won't know which rollup they're on—wallets will abstract it away. But builders need to understand the stack to make good decisions about where to deploy and how to design cross-chain experiences.
 
 The EVM is the constant across L1, L2, and beyond.
+
+## Sequencer Economics and Security
+
+Understanding L2 economics requires understanding sequencer incentives.
+
+### Sequencer Revenue Model
+
+```
+Sequencer Revenue:
+├── L2 transaction fees collected from users
+├── MEV extracted from transaction ordering
+├── Priority tips for fast inclusion
+│
+└── Minus:
+    ├── L1 data posting costs (calldata or blobs)
+    ├── L1 state commitment costs
+    ├── ZK prover costs (for ZK rollups)
+    └── Infrastructure costs
+```
+
+**Profit margins vary dramatically:**
+- Pre-EIP-4844: Often negative or thin margins
+- Post-EIP-4844: Substantial margins possible
+- Competition: L2s competing on fees erodes margins
+
+### Sequencer Centralization Risks
+
+Most L2s launched with centralized sequencers—a practical choice for iteration speed but with known risks:
+
+| Risk | Impact | Mitigation |
+|------|--------|------------|
+| Censorship | Sequencer can exclude transactions | Forced inclusion via L1 |
+| MEV extraction | Sequencer captures all MEV | Proposer-builder separation |
+| Downtime | L2 unavailable if sequencer fails | Force exit to L1 |
+| Regulatory pressure | Single point of legal attack | Geographic distribution |
+
+**Forced Inclusion**: All major rollups allow users to submit transactions directly to L1 if the sequencer censors them. This is the ultimate censorship resistance backstop:
+
+```solidity
+// User bypasses sequencer by submitting to L1 inbox
+function forceInclude(bytes calldata txData) external {
+    // Transaction queued for L2 processing
+    // Sequencer MUST include within timeout
+    inbox.enqueueTransaction(txData);
+}
+```
+
+### Decentralization Roadmaps
+
+| L2 | Current State | Decentralization Plan |
+|----|---------------|----------------------|
+| **Arbitrum** | Single sequencer | BoLD fraud proofs live; sequencer decentralization planned |
+| **Optimism** | Single sequencer | Cannon fault proofs live; OP Stack sequencer set |
+| **Base** | Single sequencer | Inherits Optimism roadmap |
+| **zkSync** | Single sequencer + prover | Decentralized prover network planned |
+| **Scroll** | Single sequencer | Open prover network live |
+
+### L2 Security Stages
+
+The L2Beat "stage" classification helps assess rollup security:
+
+```
+Stage 0: "Training wheels"
+├── Centralized sequencer
+├── Upgradeable contracts with no delay
+├── No fraud/validity proofs live
+└── User funds at operator risk
+
+Stage 1: "Limited training wheels"
+├── Fraud/validity proofs live
+├── Time-locked upgrades (7+ days)
+├── Emergency exit path works
+└── 6/8 security council threshold
+
+Stage 2: "Full rollup"
+├── Decentralized sequencing
+├── 30+ day upgrade delay (or immutable)
+├── Permissionless proving
+└── No single point of failure
+```
+
+**Current status (2026):**
+- Arbitrum: Stage 1 (BoLD fraud proofs live)
+- Optimism: Stage 1 (Cannon fault proofs live)
+- zkSync Era: Stage 0 (proofs in progress)
+- Most others: Stage 0
+
+<Warning>
+Most L2s today rely on security councils with upgrade power. Users trust that 4+ of 8 council members won't collude to steal funds. This is a significant trust assumption often overlooked in "Ethereum security" claims.
+</Warning>
+
+## L2 MEV Dynamics
+
+MEV on L2 differs from L1 MEV.
+
+### Sequencer MEV Monopoly
+
+Unlike L1's competitive block building:
+- L2 sequencer sees all transactions
+- No competition for block inclusion
+- Sequencer can extract all available MEV
+
+```
+L1: User → Mempool → Searchers compete → Builder → Validator
+L2: User → Sequencer (monopoly) → L1 batch
+```
+
+### MEV Capture Strategies
+
+| Strategy | Description | L2 Impact |
+|----------|-------------|-----------|
+| **Passive** | Sequencer doesn't extract MEV | User-friendly; leaving money on table |
+| **Active** | Sequencer runs MEV strategies | Profitable; potentially harms users |
+| **MEV sharing** | Return MEV to protocols/users | Optimism's vision with sequencer decentralization |
+| **MEV auctions** | Auction ordering rights | Flashbots-style for L2 |
+
+**Optimism's approach:** Revenue sharing model where sequencer profits fund public goods.
+
+**Base's approach:** Coinbase runs sequencer; no explicit MEV policy published.
+
+**Arbitrum's approach:** Timeboost auctions time-priority within blocks.
+
+## Interoperability Challenges
+
+The multi-L2 world creates new problems.
+
+### Liquidity Fragmentation
+
+```
+Before L2s:
+All liquidity on Ethereum L1
+
+After L2s:
+├── Ethereum L1: $X
+├── Arbitrum: $Y
+├── Base: $Z
+├── Optimism: $W
+├── zkSync: $V
+└── ... (dozens more)
+```
+
+Result: Worse execution for users unless bridging is seamless.
+
+### Bridge Security Hierarchy
+
+| Bridge Type | Security | Speed | Cost |
+|-------------|----------|-------|------|
+| **Canonical (native)** | L1 security | 7 days (OR) / minutes (ZK) | Gas costs |
+| **Liquidity network** | LP bond | Minutes | Fee (~0.1-0.5%) |
+| **Third-party bridge** | Own validator set | Fast | Variable |
+
+**Historical bridge losses (through 2024):**
+- Ronin: $625M (2022)
+- Wormhole: $320M (2022)
+- Nomad: $190M (2022)
+
+Third-party bridges remain the weakest link in cross-L2 security.
+
+### Emerging Solutions
+
+**Superchain vision (Optimism):** Shared bridge, atomic messaging between OP Stack chains.
+
+**AggLayer (Polygon):** Unified settlement layer across Polygon chains.
+
+**Shared sequencing:** Atomic transactions across L2s via shared ordering.
+
+```
+Future: User sends "cross-L2 intent"
+├── Shared sequencer orders on both L2s atomically
+├── Execution happens simultaneously
+├── No bridge risk, no liquidity fragmentation
+└── But: Requires shared sequencer infrastructure
+```
+
+## Key Figures in L2 Development
+
+### Ed Felten (Arbitrum / Offchain Labs)
+
+**Background:** B.S. Physics, Caltech (1985); Ph.D. Computer Science, University of Washington (1993). Robert E. Kahn Professor Emeritus of Computer Science at Princeton University. Founding Director, Princeton Center for Information Technology Policy.
+
+**Government service:** First Chief Technologist of the FTC (2011); Deputy U.S. Chief Technology Officer at the White House (2015-2017).
+
+**Contribution:** Co-founded Offchain Labs (September 2018) with Princeton Ph.D. students Steven Goldfeder and Harry Kalodner. Developed Arbitrum as a Princeton research project, later licensing the technology for commercial deployment. Arbitrum One processed over 1 billion transactions by October 2023.
+
+### Steven Goldfeder (Arbitrum / Offchain Labs)
+
+**Background:** B.S. Mathematics and Computer Science, Yeshiva University; Ph.D. Computer Science, Princeton University (2018), advised by Arvind Narayanan. NSF Graduate Research Fellow with research in cryptography and digital currencies.
+
+**Publications:** Co-authored "Bitcoin and Cryptocurrency Technologies" (Princeton University Press, 2016) and "Arbitrum: Scalable, private smart contracts" (USENIX Security 2018).
+
+**Contribution:** CEO and Co-founder of Offchain Labs. Led technical development of Arbitrum, which became the highest-TVL Ethereum L2.
+
+### Eli Ben-Sasson (StarkWare)
+
+**Background:** Ph.D. Computer Science, Hebrew University of Jerusalem (2001). Postdoc at Harvard and MIT. Professor at Technion (2005-2020).
+
+**Inventions:** Co-invented STARKs and FRI protocols (2018)—zero-knowledge proofs with post-quantum security, no trusted setup, and quasi-linear prover time. Co-inventor of Zerocash protocol; founding scientist of Zcash.
+
+**Contribution:** Co-founded StarkWare Industries (2018). StarkWare valued at $8B at peak; StarkNet is a leading ZK-rollup with a unique Cairo programming language.
+
+### Karl Floersch (Optimism)
+
+**Background:** B.S. Computer Science, Stony Brook University. College roommate of Hayden Adams (Uniswap founder).
+
+**Career path:** Blockchain engineer at ConsenSys (built Ujo Music) → Ethereum Foundation researcher (2017-2020), contributed to PoS research → Co-founded Plasma Group with Jinglan Wang → Plasma Group evolved into Optimism.
+
+**Contribution:** CTO then CEO of OP Labs. Architected the Optimistic Rollup design. Created Retroactive Public Goods Funding (RPGF) mechanism. Oversaw OP Stack release enabling Coinbase's Base and the Superchain vision.
+
+## Common Misconceptions
+
+### "Rollups are sidechains"
+
+**Reality:** Fundamental difference. Sidechains have their own security (validators, consensus). Rollups inherit L1 security through proofs—either fraud proofs (optimistic) or validity proofs (ZK). A sidechain failure loses user funds. A rollup with functional proofs can always be reconstructed from L1 data.
+
+### "ZK rollups are always more secure than optimistic"
+
+**Reality:** Both provide L1 security when implemented correctly. Trade-offs differ:
+- ZK: Faster finality, but complex prover systems
+- Optimistic: Simpler, but relies on honest verifier assumption
+
+A buggy ZK prover is worse than a working optimistic system.
+
+### "L2s make Ethereum less valuable"
+
+**Reality:** L2s increase demand for ETH:
+- Data posting uses ETH for gas
+- Bridged ETH is locked on L1
+- L2 activity generates L1 settlement fees
+- EIP-4844 blob fees accrue to validators
+
+L2s extend Ethereum's security to more use cases.
+
+### "We'll eventually have one dominant L2"
+
+**Reality:** The trend is opposite—proliferation, not consolidation. Different L2s serve different niches:
+- Base: Fiat onramp (Coinbase integration)
+- Arbitrum: DeFi ecosystem (first-mover liquidity)
+- zkSync: Native account abstraction
+- StarkNet: Non-EVM, Cairo development
+
+Multi-L2 with interoperability is the likely equilibrium.
+
+## The Rollup-as-a-Service Economy
+
+Deploying custom rollups became commoditized by 2024.
+
+### RaaS Providers
+
+| Provider | Stack | Notable Deployments |
+|----------|-------|---------------------|
+| **Conduit** | OP Stack | Aevo, Zora, Mode |
+| **Caldera** | OP Stack, Arbitrum Orbit | Manta, Injective |
+| **Gelato** | OP Stack, Polygon CDK | Lisk, Reya |
+| **AltLayer** | Multiple | Restaked rollups |
+| **Ankr** | OP Stack | Various |
+
+### Custom Rollup Economics
+
+```
+DIY Rollup:
+├── Development: $500K-2M (6-12 months)
+├── Security audits: $100K-500K
+├── Sequencer infrastructure: $10K-50K/month
+└── Ongoing maintenance: 2-5 engineers
+
+RaaS Rollup:
+├── Setup: Days to weeks
+├── Cost: $5K-50K/month + fees
+├── Infrastructure: Managed
+└── Tradeoff: Less customization
+```
+
+### When Custom Rollups Make Sense
+
+| Use Case | Benefit of Custom Rollup |
+|----------|-------------------------|
+| High-volume DEX | Custom ordering, lower fees |
+| Gaming | Gasless transactions, custom mechanics |
+| Enterprise | Permissioned, compliant |
+| Special execution | Non-EVM, custom precompiles |
+
+**The trend:** App-specific rollups for high-value applications, general-purpose L2s for everything else.
+
+## L2 Adoption Metrics (2026)
+
+| Metric | L1 Ethereum | All L2s Combined |
+|--------|-------------|------------------|
+| Daily transactions | ~1M | ~10M+ |
+| Daily active addresses | ~400K | ~2M+ |
+| TVL | ~$50B | ~$40B+ |
+| Average tx cost | $2-5 | $0.001-0.10 |
+
+**The inflection point:** L2 transaction volume exceeded L1 in 2024 and continues growing.
