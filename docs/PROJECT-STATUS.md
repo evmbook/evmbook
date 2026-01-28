@@ -145,7 +145,7 @@ Research dossiers covering specific technologies (~42,000 words total).
 ## Publishing Details
 
 **Title:** Mastering EVM (2025 Edition)
-**Author:** Christopher Mercer
+**Author:** B.L. Brocer
 **Publisher:** White B0x Inc.
 **Version:** 2025.1.0
 
@@ -196,6 +196,6 @@ Research dossiers covering specific technologies (~42,000 words total).
 
 > "Decentralization flows down, never up. A centralized foundation guarantees centralized outcomes."
 >
-> — Christopher Mercer
+> — B.L. Brocer
 
 Opens Chapter 1, setting the tone for the entire book.

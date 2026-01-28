@@ -42,7 +42,7 @@ pandoc \
     --epub-chapter-level=1 \
     --metadata title="Mastering EVM (2025 Edition)" \
     --metadata subtitle="The Complete Guide to the Ethereum Virtual Machine" \
-    --metadata author="Christopher Mercer" \
+    --metadata author="B.L. Brocer" \
     --metadata date="January 2026" \
     --metadata lang="en-US" \
     --metadata rights="CC BY-NC 4.0" \

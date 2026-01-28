@@ -53,7 +53,7 @@
   <g transform="translate(50, 430)">
     <text font-family="Arial, sans-serif" font-size="12" fill="#8B9DC3" font-weight="bold">ABOUT THE AUTHOR</text>
     <text y="30" font-family="Georgia, serif" font-size="12" fill="#CCCCCC">
-      <tspan x="0" dy="0">Christopher Mercer is a blockchain architect and educator with deep</tspan>
+      <tspan x="0" dy="0">B.L. Brocer is a blockchain architect and educator with deep</tspan>
       <tspan x="0" dy="18">expertise in EVM internals, smart contract security, and decentralized</tspan>
       <tspan x="0" dy="18">systems design. He has contributed to multiple EVM implementations</tspan>
       <tspan x="0" dy="18">and believes in building technology that empowers individuals.</tspan>

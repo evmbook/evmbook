@@ -142,7 +142,7 @@ See [LICENSE](LICENSE) for full terms.
 
 ## Author & Publisher
 
-**Christopher Mercer** — Author
+**B.L. Brocer** — Author
 **White B0x Inc.** — Publisher
 
 Developed with assistance from [Claude](https://claude.ai).
