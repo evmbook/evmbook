@@ -12,6 +12,30 @@ Understanding tokens isn't just about knowing the interface. It's about understa
 
 ## The Evolution of Token Standards
 
+### Pre-Ethereum Tokens: Bitcoin's Colored Coins (2012-2014)
+
+Before Ethereum, tokenization attempts happened on Bitcoin:
+
+**Colored Coins (2012-2013):**
+- Mark specific satoshis to represent external assets
+- Limited by Bitcoin Script constraints
+- No smart contract logic
+- Influenced later designs
+
+**Mastercoin/Omni (2013):**
+- Layer-2 protocol on Bitcoin
+- Enabled token creation and DEX functionality
+- Tether (USDT) originally launched on Omni in 2014
+- J.R. Willett's "Second Bitcoin Whitepaper" proposed the concept
+
+**Counterparty (2014):**
+- Smart contracts on Bitcoin via OP_RETURN
+- XCP token distributed via proof-of-burn
+- More programmability than Colored Coins
+- Still constrained by Bitcoin's architecture
+
+**Lesson**: The demand for tokens predated Ethereum. Bitcoin's scripting limitations pushed innovation to purpose-built platforms.
+
 ### Life Before Standards (2015-2017)
 
 When Ethereum launched in 2015, anyone could create a token contract. The problem was that every implementation was different. Wallets couldn't display arbitrary tokens. Exchanges had to write custom integration code for each token. The friction was enormous.
@@ -973,3 +997,207 @@ Token standards evolved to solve real problems:
 Each standard builds on what came before. The power isn't in any single standard—it's in the composability they enable together. A governance token (ERC20Votes) can be deposited in a vault (ERC-4626) that's traded on a DEX, all because they speak the same language.
 
 Understanding tokens deeply is essential for building anything on the EVM.
+
+## ERC-6551: Token Bound Accounts (2023)
+
+ERC-6551 introduced a paradigm shift: **every NFT can own assets**.
+
+### The Concept
+
+Traditional NFTs are passive—they can be owned but cannot own things themselves. ERC-6551 gives each NFT its own smart contract wallet:
+
+```
+Traditional NFT:
+User wallet → owns → NFT (passive asset)
+
+ERC-6551:
+User wallet → owns → NFT → owns → [tokens, other NFTs, assets]
+```
+
+### How It Works
+
+```solidity
+interface IERC6551Account {
+    // Returns the NFT this account is bound to
+    function token() external view returns (
+        uint256 chainId,
+        address tokenContract,
+        uint256 tokenId
+    );
+
+    // Current state (nonce for transaction ordering)
+    function state() external view returns (uint256);
+
+    // Check if address can sign for this account
+    function isValidSigner(address signer, bytes calldata context)
+        external view returns (bytes4);
+}
+```
+
+Each NFT gets a deterministic account address derived from:
+- Chain ID
+- Token contract address
+- Token ID
+- Implementation address
+- Salt
+
+### Use Cases
+
+| Use Case | Description |
+|----------|-------------|
+| **Character inventories** | Game character NFT owns equipment NFTs |
+| **Bundle transfers** | Transfer NFT and all its contents together |
+| **NFT-owned DAOs** | NFT communities with shared treasuries |
+| **Profile pages** | Social NFT owns reputation, credentials |
+| **Airdrop recipients** | Projects airdrop to NFTs, not users |
+
+### Implementation
+
+```solidity
+// Create a Token Bound Account for an NFT
+function createAccount(
+    address implementation,
+    uint256 chainId,
+    address tokenContract,
+    uint256 tokenId,
+    uint256 salt,
+    bytes calldata initData
+) external returns (address account);
+
+// Get the deterministic address for an NFT's account
+function account(
+    address implementation,
+    uint256 chainId,
+    address tokenContract,
+    uint256 tokenId,
+    uint256 salt
+) external view returns (address);
+```
+
+**Significance**: ERC-6551 transforms NFTs from passive assets into active agents that can hold value, interact with protocols, and accumulate history.
+
+## Security Tokens and RWA Standards
+
+### ERC-1400: Security Token Standard (2018)
+
+For real-world assets requiring regulatory compliance:
+
+```solidity
+interface IERC1400 {
+    // Partition-based balances (different share classes)
+    function balanceOfByPartition(bytes32 partition, address tokenHolder)
+        external view returns (uint256);
+
+    // Transfer with compliance checking
+    function transferByPartition(
+        bytes32 partition,
+        address to,
+        uint256 value,
+        bytes calldata data
+    ) external returns (bytes32);
+
+    // Check if transfer is allowed
+    function canTransferByPartition(
+        address from,
+        address to,
+        bytes32 partition,
+        uint256 value,
+        bytes calldata data
+    ) external view returns (bytes1, bytes32, bytes32);
+}
+```
+
+**Key features:**
+- Partitioned balances for share classes
+- Document management for legal compliance
+- Transfer restrictions (whitelisting, accreditation)
+- Forced transfers (legal/compliance requirements)
+
+### ERC-3643: T-REX Protocol (2021)
+
+On-chain identity verification for permissioned transfers:
+
+```solidity
+// Transfer only allowed if both parties have valid identity claims
+function transfer(address to, uint256 amount) external returns (bool) {
+    require(identityRegistry.isVerified(msg.sender), "Sender not verified");
+    require(identityRegistry.isVerified(to), "Recipient not verified");
+    require(compliance.canTransfer(msg.sender, to, amount), "Transfer not compliant");
+    return super.transfer(to, amount);
+}
+```
+
+### Real World Asset Tokenization (2024-2025)
+
+| Product | Issuer | Type | Notes |
+|---------|--------|------|-------|
+| BUIDL | BlackRock | Treasury Fund | $2.3B+ AUM; largest tokenized fund |
+| OUSG | Ondo Finance | Treasury ETF | Tokenized BlackRock ETF exposure |
+| USDY | Ondo Finance | Yield-bearing USD | Treasury + bank deposit yield |
+| BENJI | Franklin Templeton | Money Market | First SEC-registered on-chain fund |
+
+**Key insight**: RWAs bridge TradFi and DeFi, bringing real-world yield on-chain while requiring permissioned access for regulatory compliance.
+
+## Common Misattributions
+
+### 1. "NFTs are just art/JPEGs"
+
+**Misconception**: NFTs only have value for digital art.
+
+**Reality**: ERC-721/1155 is a primitive for any unique digital asset:
+- Domain names (ENS)
+- Financial positions (Uniswap V3 LP positions)
+- Event tickets
+- Identity credentials
+- Real estate deeds
+- Game items
+
+Art is one application; the primitive is ownership of unique digital objects.
+
+### 2. "ERC-20 is obsolete"
+
+**Misconception**: ERC-777 or newer standards replaced ERC-20.
+
+**Reality**: ERC-20 remains dominant due to:
+- Universal wallet/exchange support
+- Simple, well-audited implementations
+- ERC-777's hooks introduced reentrancy attack vectors
+- Network effects make switching costly
+
+### 3. "Tokens are only for speculation"
+
+**Misconception**: Tokens have no utility beyond trading.
+
+**Reality**: Tokens enable:
+- Governance participation (voting rights)
+- Protocol revenue sharing (fee distribution)
+- Access control (gated content/features)
+- Coordination mechanisms (staking, bonding)
+- Collateral for lending
+- Reputation and identity
+
+### 4. "Standards are just about compatibility"
+
+**Misconception**: Token standards only matter for wallets and exchanges.
+
+**Reality**: Standards enable *composability*—the ability for protocols to build on each other without coordination. ERC-4626 means any vault can work with any protocol expecting that interface. This is the foundation of DeFi's "money legos."
+
+## Research Citations
+
+This chapter draws on the following foundational sources:
+
+**Original EIPs:**
+- EIP-20: Token Standard (Vogelsteller & Buterin, 2015) [@eip_erc20_2015]
+- EIP-721: Non-Fungible Token Standard (Entriken et al., 2018) [@eip_erc721_2018]
+- EIP-1155: Multi-Token Standard (Radomski et al., 2018) [@eip_erc1155_2018]
+- EIP-4626: Tokenized Vault Standard (2022) [@eip_erc4626_2022]
+- EIP-6551: Non-fungible Token Bound Accounts (2023)
+- EIP-1400: Security Token Standard (2018)
+
+**Historical Context:**
+- Mastercoin whitepaper (Willett, 2012)—"The Second Bitcoin Whitepaper"
+- Colored Coins documentation (2012-2013)
+
+<Callout type="tip" title="Further Reading">
+For governance token mechanics, see Chapter 18 (Governance & DAOs). For vault strategies and yield, see Chapter 17 (Lending). For NFT marketplaces and trading, see Chapter 19 (NFT Evolution).
+</Callout>
