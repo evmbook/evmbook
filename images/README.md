@@ -85,6 +85,6 @@ Recommended tools:
 
 ## License
 
-Images created for this book are licensed under CC BY-SA 4.0.
+Images created for this book are licensed under CC BY-NC 4.0.
 
 Third-party logos (Ethereum, ETC, etc.) are used under fair use for educational purposes and remain property of their respective owners.

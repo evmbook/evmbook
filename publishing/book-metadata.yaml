@@ -100,9 +100,9 @@ keywords:
 
 # License
 license:
-  type: "CC BY-SA 4.0"
-  url: "https://creativecommons.org/licenses/by-sa/4.0/"
-  attribution: "Derivative of Mastering Ethereum (Open Edition) by Andreas M. Antonopoulos and Gavin Wood"
+  type: "CC BY-NC 4.0"
+  url: "https://creativecommons.org/licenses/by-nc/4.0/"
+  attribution: "© 2026 Christopher Mercer / White B0x Inc."
 
 # Website
 website:

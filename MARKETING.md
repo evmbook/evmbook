@@ -74,8 +74,8 @@ Updated through 2026: ETF era, MakerDAO→Sky rebrand, Pump.fun, GENIUS Act, L2 
 ### Evolution Narratives
 We don't just show you Uniswap V3—we show you EtherDelta → Bancor → Uniswap V1 → V2 → V3 → Curve → Aerodrome. Understanding the *why* makes you a better builder.
 
-### Battle-Tested Foundation
-Built on *Mastering Ethereum (Open Edition)* by Andreas M. Antonopoulos and Gavin Wood, substantially rewritten and expanded for 2026.
+### Comprehensive Coverage
+180,000+ words covering the complete EVM development journey, from cryptographic foundations to modern DeFi protocols.
 
 ### Modern Tooling
 Foundry, viem, wagmi, TypeScript, Solidity 0.8.26+—the tools developers actually use today.
@@ -203,15 +203,15 @@ See our [Contributing Guide](CONTRIBUTING.md) for details.
 
 ## License
 
-<img src="https://licensebuttons.net/l/by-sa/4.0/88x31.png" alt="CC BY-SA 4.0" />
+<img src="https://licensebuttons.net/l/by-nc/4.0/88x31.png" alt="CC BY-NC 4.0" />
 
-This work is licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+This work is licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/).
 
 **You are free to:**
-- Share — copy and redistribute in any medium or format
-- Adapt — remix, transform, and build upon for any purpose
+- Share — copy and redistribute in any medium or format for non-commercial purposes
+- Adapt — remix, transform, and build upon for non-commercial purposes
 
-**Attribution:** This work is a derivative of *Mastering Ethereum (Open Edition)* by Andreas M. Antonopoulos and Gavin Wood.
+Commercial use requires permission from the publisher.
 
 **Author:** Christopher Mercer
 **Publisher:** White B0x Inc.

@@ -134,11 +134,11 @@ The content is designed for MDX-compatible static site generators. The website a
 
 ## License
 
-This work is licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+This work is licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) (Attribution-NonCommercial).
 
-### Attribution
+You are free to share and adapt this material for non-commercial purposes with attribution. Commercial use requires permission from the publisher.
 
-This work builds upon concepts from "Mastering Ethereum" by Andreas M. Antonopoulos and Gavin Wood (CC BY-SA 4.0), but has been substantially rewritten with new examples, modern tooling (2025-2026), dual-chain coverage, and comprehensive application layer evolution content not present in the original.
+See [LICENSE](LICENSE) for full terms.
 
 ## Author & Publisher
 

@@ -187,7 +187,7 @@ Human-readable index of sources in `library.bib` with credibility assessments an
 | Key | Citation | Tier | Status | Notes |
 |-----|----------|------|--------|-------|
 | `book_antonopoulos_mastering_bitcoin_2017` | Antonopoulos, A.M. (2017). Mastering Bitcoin, 2nd ed. | T2 | Verified | Definitive Bitcoin technical reference |
-| `book_antonopoulos_wood_mastering_ethereum_2018` | Antonopoulos, A.M. & Wood, G. (2018). Mastering Ethereum | T2 | Verified | Original Ethereum technical reference; this book's derivative source |
+| `book_antonopoulos_wood_mastering_ethereum_2018` | Antonopoulos, A.M. & Wood, G. (2018). Mastering Ethereum | T2 | Verified | Original Ethereum technical reference (2018) |
 | `book_russo_infinite_machine_2020` | Russo, C. (2020). The Infinite Machine | T2 | Verified | Ethereum origin story; journalistic |
 | `book_leising_out_of_ether_2020` | Leising, M. (2020). Out of the Ether | T2 | Verified | DAO hack history |
 | `book_shin_cryptopians_2022` | Shin, L. (2022). The Cryptopians | T2 | Verified | Ethereum founding; interpersonal dynamics; fork decision |

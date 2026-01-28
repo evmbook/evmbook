@@ -45,7 +45,7 @@ pandoc \
     --metadata author="Christopher Mercer" \
     --metadata date="January 2026" \
     --metadata lang="en-US" \
-    --metadata rights="CC BY-SA 4.0" \
+    --metadata rights="CC BY-NC 4.0" \
     --highlight-style=tango \
     --output="$OUTPUT_DIR/mastering-evm-2025.epub" \
     $CHAPTERS $APPENDICES
