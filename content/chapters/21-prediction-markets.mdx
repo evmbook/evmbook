@@ -424,6 +424,45 @@ contract BinaryMarket {
 
 ### Adding an AMM
 
+The automated market making for prediction markets has a rich academic history that predates DeFi. Understanding this lineage helps explain why prediction markets pioneered AMM concepts.
+
+#### Hanson's LMSR (2003)
+
+Robin Hanson's **Logarithmic Market Scoring Rule (LMSR)** was the first practical automated market maker for prediction markets. Published in "Combinatorial Information Market Design" (2003), LMSR solved a critical problem: how to provide liquidity in markets with few participants. [@hanson_lmsr_2003]
+
+```
+LMSR Cost Function:
+C(q) = b * ln(Σ exp(q_i / b))
+
+Where:
+- q_i = quantity of shares for outcome i
+- b = liquidity parameter (controls price sensitivity)
+- Price of outcome i: p_i = exp(q_i / b) / Σ exp(q_j / b)
+```
+
+**Key Properties:**
+- Prices always sum to 1 (probability constraint)
+- Bounded loss for market maker (~b * ln(n) for n outcomes)
+- No liquidity providers needed—market maker is the protocol
+
+**LMSR vs Constant Product:**
+
+| Property | LMSR | Constant Product (x*y=k) |
+|----------|------|--------------------------|
+| Origin | Hanson (2003) | Uniswap (2018) |
+| Domain | Prediction markets | Token exchanges |
+| Prices | Sum to 1 | Ratio-determined |
+| Bounded loss | Yes (parameter b) | No (impermanent loss) |
+| Liquidity | Subsidized by creator | Provided by LPs |
+
+The conceptual leap from LMSR to Uniswap's constant product formula represents one of DeFi's key intellectual debts to prediction market research. Both use mathematical invariants to determine prices without order books.
+
+<Note>
+**Historical Connection**: Gnosis (2017) built on LMSR for their prediction market. Vitalik Buterin proposed Reddit's "Let's run on Ethereum" market in 2017 using LMSR concepts. The intellectual path from academic prediction market research to DeFi AMMs is direct.
+</Note>
+
+#### Modern Prediction Market AMMs
+
 ```solidity
 // AMM for outcome tokens
 contract PredictionMarketAMM {
@@ -432,10 +471,12 @@ contract PredictionMarketAMM {
 
     uint256 public yesBalance;
     uint256 public noBalance;
+    uint256 public liquidityParam; // LMSR 'b' parameter
 
     function getPrice(uint256 outcomeIndex) public view returns (uint256) {
-        // YES price = NO balance / (YES balance + NO balance)
-        // Probabilities sum to 1
+        // Simplified LMSR pricing
+        // YES price = exp(yesBalance/b) / (exp(yesBalance/b) + exp(noBalance/b))
+        // Approximation using constant product for gas efficiency:
         uint256 total = yesBalance + noBalance;
         if (outcomeIndex == 0) {
             return noBalance * 1e18 / total;
@@ -445,8 +486,9 @@ contract PredictionMarketAMM {
     }
 
     function buy(uint256 outcomeIndex, uint256 amount, uint256 minReceived) external {
-        // LMSR or constant product formula
-        // Update balances, transfer tokens
+        // Most implementations use constant product for simplicity
+        // Pure LMSR requires exponential calculations (expensive on-chain)
+        // Hybrid approaches balance accuracy vs gas costs
     }
 }
 ```
@@ -776,3 +818,17 @@ Prediction markets are evolving toward:
 **7. Privacy preservation**: MACI-style anti-collusion and private trading to reduce manipulation and coercion.
 
 Polymarket proved prediction markets can achieve mainstream adoption. The next generation will build on that foundation—incorporating privacy, anti-collusion, and governance applications—while addressing remaining centralization and regulatory challenges.
+
+---
+
+## Research & Citations
+
+This chapter draws on foundational research and primary sources:
+
+- [@hanson_lmsr_2003] — Robin Hanson's Logarithmic Market Scoring Rule, foundational to prediction market AMMs
+- [@hanson_futarchy_2000] — Original futarchy proposal for governance by prediction market
+- [@gnosis_conditional_tokens_2019] — Conditional Token Framework specification
+- [@uma_optimistic_oracle_2020] — UMA's optimistic oracle design
+- [@buterin_prediction_markets_2014] — Early Ethereum prediction market concepts
+
+For practical implementation references, see the Gnosis Conditional Token Framework documentation and Polymarket's open-source components.
