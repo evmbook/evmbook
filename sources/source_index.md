@@ -329,12 +329,33 @@ Human-readable index of sources in `library.bib` with credibility assessments an
 | `misc_paxgold_2018` | Paxos (2018). Pax Gold | T1 | Verified | First gold-backed stablecoin; 1 PAXG = 1 oz gold |
 | `misc_frax_2019` | Kazemian & Mao (2019). Frax Protocol | T1 | Verified | First hybrid (partial collateral + algorithmic) stablecoin |
 | `misc_liquity_lusd_2020` | Liquity AG (2020). Liquity Protocol | T1 | Verified | Immutable ETH-backed CDP; LUSD stablecoin |
+| `misc_abracadabra_mim_2021` | Sestagalli & Squirrel (Jun 2021). MIM | T1 | Verified | ibToken collateral; peaked $4.6B; Sifu scandal |
+| `misc_mim_sifu_scandal_2022` | Various (Jan 2022). Sifu Scandal | T2 | Verified | CFO revealed as QuadrigaCX co-founder; MIM depegged |
 | `misc_ust_collapse_2022` | Various (2022). UST/LUNA Analysis | T2 | Verified | Algorithmic stablecoin failure |
 | `misc_paypal_pyusd_2023` | PayPal (Aug 2023). PYUSD | T1 | Verified | First major fintech stablecoin |
 | `misc_ethena_usde_2024` | Ethena Labs (2024). USDe | T1 | Verified | Delta-neutral stablecoin; stETH + short perps |
 | `misc_fdusd_2024` | First Digital Labs (2024). FDUSD | T2 | Verified | Institutional fiat-backed; rapid growth to top 10 |
+| `misc_trueusd_2018` | TrustToken (2018). TUSD | T1 | Verified | Daily attestations; first live audit stablecoin |
+| `misc_gemini_dollar_2018` | Gemini (2018). GUSD | T1 | Verified | NYDFS regulated; State Street custody |
+| `misc_pax_dollar_2018` | Paxos (2018). USDP | T1 | Verified | Formerly PAX; NYDFS regulated |
+| `misc_synthetix_susd_2019` | Synthetix (2019). sUSD | T1 | Verified | Crypto-collateralized synthetic; SNX backing |
 | `misc_ripple_rlusd_2024` | Ripple (2024). RLUSD | T2 | Verified | Cross-border optimized stablecoin |
 | `misc_awesome_stablecoins` | 0xperp (2024). Awesome Stablecoins | T2 | Verified | Curated resource collection |
+
+---
+
+## Real World Asset (RWA) Tokenization
+
+| Key | Citation | Tier | Status | Notes |
+|-----|----------|------|--------|-------|
+| `misc_blackrock_buidl_2024` | BlackRock (Mar 2024). BUIDL Fund | T1 | Verified | Largest tokenized fund; $2.3B+ AUM |
+| `misc_ondo_finance_2022` | Allman, N. (2022). Ondo Finance | T1 | Verified | OUSG, USDY; $1.6B TVL; ~17% Treasury market |
+| `misc_franklin_templeton_benji_2021` | Franklin Templeton (2021). BENJI | T1 | Verified | First SEC-registered on-chain fund |
+| `misc_centrifuge_tinlake_2019` | Vogelsang, L. (2019). Centrifuge | T1 | Verified | NFT-based RWA; Tinlake; $1B+ TVL |
+| `misc_maple_finance_2021` | Maple Finance (2021). Institutional Lending | T1 | Verified | Undercollateralized RWA lending; MPL token |
+| `misc_securitize_ds_protocol` | Securitize (2018). DS Protocol | T1 | Verified | SEC-registered; powers BlackRock BUIDL |
+| `misc_erc1400_security_token_2018` | Dossa et al. (2018). ERC-1400 | T1 | Verified | Security token standard |
+| `misc_rwa_xyz_analytics` | RWA.xyz (2024). RWA Analytics | T2 | Verified | Market data; Treasury tracking |
 
 ---
 

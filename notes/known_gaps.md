@@ -103,7 +103,8 @@ This document tracks claims that need additional verification, sources that coul
 | AMMs | ✓ Covered | x*y=k, LMSR precursors, Uniswap V1-V3, Curve in amm_constant_product.md |
 | DeFi lending | ✓ Covered | Compound, Aave, flash loans, cTokens/aTokens, liquidations in defi_lending.md |
 | DeFi derivatives | ✓ Covered | Perpetuals, options, vAMM, power perps in defi_derivatives.md |
-| Stablecoins | ✓ Covered | BitUSD/NuBits history, fiat-backed (USDT/USDC/PYUSD), crypto-backed (DAI/LUSD), algorithmic (UST collapse), hybrid (FRAX), delta-neutral (USDe), commodity-backed (PAXG), 2024-2025 developments in stablecoins_and_collateral.md |
+| Stablecoins | ✓ Covered | BitUSD/NuBits history, fiat-backed (USDT/USDC/TUSD/GUSD/PYUSD), crypto-backed (DAI/LUSD), synthetic (sUSD), algorithmic (UST/MIM), hybrid (FRAX), delta-neutral (USDe), commodity-backed (PAXG), RWA-backed in stablecoins_and_collateral.md |
+| RWA tokenization | ✓ Covered | Tokenized Treasuries (BUIDL, OUSG, BENJI), private credit (Centrifuge, Maple), ERC-1400, key figures in rwa_tokenization.md |
 
 ### Economic Topics
 

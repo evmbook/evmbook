@@ -4,12 +4,14 @@
 
 Stablecoins are cryptocurrencies designed to maintain a stable value, typically pegged to fiat currency (USD) or commodities (gold). Main types:
 
-1. **Fiat-backed**: Reserves held in banks (USDC, USDT, PYUSD)
+1. **Fiat-backed**: Reserves held in banks (USDC, USDT, TUSD, GUSD, PYUSD)
 2. **Crypto-backed**: Over-collateralized with crypto (DAI, LUSD)
 3. **Algorithmic**: Mechanism-based stability (failed: UST, NuBits)
 4. **Hybrid**: Partial collateral + algorithmic adjustment (FRAX)
-5. **Delta-neutral**: Hedged positions (USDe)
-6. **Commodity-backed**: Physical asset reserves (PAXG, XAUT)
+5. **Synthetic**: Protocol-minted via overcollateralized positions (sUSD)
+6. **Delta-neutral**: Hedged positions (USDe)
+7. **Commodity-backed**: Physical asset reserves (PAXG, XAUT)
+8. **RWA-backed**: Tokenized real-world assets (USDY, BUIDL yields)
 
 Collateralization refers to assets backing a position, critical for:
 - Stablecoin minting
@@ -128,11 +130,16 @@ Similar models (UST/Luna) failed spectacularly in 2022.
 | Oct 2014 | Tether (USDT) | Fiat-backed | First major fiat-backed |
 | 2017 | SAI (Single DAI) | Crypto-backed | ETH-only collateral |
 | 2018 | USDC | Fiat-backed | Fully reserved, regulated |
+| 2018 | TUSD | Fiat-backed | TrueUSD; daily attestations |
+| 2018 | GUSD | Fiat-backed | Gemini Dollar; NYDFS regulated |
+| 2018 | USDP | Fiat-backed | Pax Dollar; Paxos (formerly PAX) |
 | 2018 | Pax Gold (PAXG) | Commodity-backed | First gold-backed stablecoin |
 | 2019 | DAI (Multi) | Crypto-backed | Multiple collaterals |
+| 2019 | sUSD | Synthetic | Synthetix; crypto-collateralized synthetic |
 | 2019 | FRAX | Hybrid | Partial collateral + algorithmic |
 | 2020 | UST | Algorithmic | Collapsed May 2022 |
 | 2020 | LUSD | Crypto-backed | Liquity; ETH-only, immutable |
+| Jun 2021 | MIM | Crypto-backed | Abracadabra; ibToken collateral; Sifu scandal 2022 |
 | 2023 | PYUSD | Fiat-backed | PayPal's stablecoin |
 | 2024 | USDe | Delta-neutral | Ethena; hedged positions |
 | 2024 | FDUSD | Fiat-backed | First Digital; top 10 by cap |
@@ -158,6 +165,9 @@ Similar models (UST/Luna) failed spectacularly in 2022.
 | 2019 | FRAX launch | First hybrid collateral/algorithmic model |
 | 2020 | Stablecoin TVL explodes | DeFi Summer |
 | 2020 | Liquity (LUSD) launch | Immutable, ETH-only CDP |
+| Jun 2021 | Abracadabra MIM launch | ibToken-backed; peaked $4.6B market cap |
+| Oct 2021 | MIM crosses $1B | 7th largest stablecoin |
+| Jan 2022 | **MIM/Wonderland Sifu scandal** | CFO revealed as QuadrigaCX co-founder |
 | May 2022 | **UST/Luna collapse** | $40B+ destroyed |
 | Mar 2023 | USDC depeg (SVB) | Temporary 87¢ floor; recovered same week |
 | Aug 2023 | PayPal PYUSD launch | First major fintech stablecoin |
@@ -236,6 +246,26 @@ Use cases: Inflation hedge, gold exposure without custody.
 - Cannot be upgraded or shut down
 
 Trade-off: Inflexibility vs. censorship resistance.
+
+### Interest-Bearing Token Model (MIM)
+
+**Abracadabra.money (June 2021)** introduced borrowing against yield-bearing collateral:
+- Collateral: Interest-bearing tokens (yvUSDC, xSUSHI, yvWETH)
+- Users unlock liquidity from "stranded capital" in yield farms
+- Multi-chain deployment (Ethereum, Avalanche, Fantom, BSC, Arbitrum)
+- SPELL governance token; stakers receive 75% of fees
+- Founders: Daniele Sestagalli + "Squirrel" (pseudonymous)
+
+**Rise and fall**:
+- Oct 2021: MIM crosses $1B, becomes 7th largest stablecoin
+- Peak: $4.6B market cap, part of "Frog Nation" ecosystem (with Wonderland, Popsicle)
+- Jan 27, 2022: **Sifu scandal** — Wonderland CFO "Sifu" revealed as Michael Patryn (QuadrigaCX co-founder, convicted fraudster)
+- Impact: MIM depegged, SPELL collapsed 84%, Wonderland TIME fell 97%
+- Market cap dropped from $4.6B to ~$2.85B
+- Governance vote (55%) kept project alive; Sifu removed
+- Current: ~$100M market cap; protocol still operational
+
+**Lesson**: Protocol reputation risk is real. Anonymous team members can hide problematic histories.
 
 ### Institutional Stablecoins (2023-2025)
 
@@ -366,3 +396,5 @@ Most stablecoins use ERC-20, but with extensions:
 - [AMM Constant Product](amm_constant_product.md) — Stablecoin pairs, Curve
 - [Fee Markets & EIP-1559](fee_markets_eip1559.md) — Transaction costs affect usage
 - [L2 Rollups & Data Availability](l2_rollups_and_data_availability.md) — Stablecoin bridging
+- [RWA Tokenization](rwa_tokenization.md) — Tokenized treasuries, yield-bearing stables
+- [DeFi Lending](defi_lending.md) — Stablecoin lending markets

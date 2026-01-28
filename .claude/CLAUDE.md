@@ -150,4 +150,3 @@ For open-ended exploration, prefer using specialized agents:
 - Use ethers.js v5 patterns - use viem or ethers.js v6
 - Write JavaScript - use TypeScript
 - Reference external plan files - all docs are in `docs/`
-- Post verbose progress updates in chat - document in `docs/` instead
