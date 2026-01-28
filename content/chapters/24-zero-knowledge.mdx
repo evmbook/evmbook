@@ -8,7 +8,51 @@ chapter: 24
 
 Zero-knowledge proofs (ZKPs) are cryptographic methods that allow one party (the prover) to convince another party (the verifier) that a statement is true, without revealing any information beyond the validity of the statement itself.
 
-In the EVM ecosystem, ZKPs enable both **privacy** (hiding transaction details) and **scalability** (ZK rollups).
+In the EVM ecosystem, ZKPs enable both **privacy** (hiding transaction details) and **scalability** (ZK rollups). Understanding ZK requires tracing its evolution from theoretical foundations through practical deployment.
+
+## Historical Evolution
+
+### Theoretical Foundations (1985-2000)
+
+The field began with groundbreaking work by **Goldwasser, Micali, and Rackoff (1985)** — "The Knowledge Complexity of Interactive Proof Systems":
+
+- Introduced the concept of zero-knowledge proofs
+- Defined knowledge complexity formally
+- Proved that ZK proofs exist for NP-complete problems
+- Established the theoretical framework for all subsequent ZK research
+
+<Callout type="note">
+This paper won the Gödel Prize (1993) and ACM Turing Award (2012). The authors showed that powerful proofs could be achieved while revealing nothing beyond truth.
+</Callout>
+
+**Fiat and Shamir (1986)** transformed the field by showing how to convert interactive proofs to non-interactive:
+
+- Replace verifier's random challenges with hash function outputs
+- Enables NIZKs (Non-Interactive Zero-Knowledge) in the random oracle model
+- The "Fiat-Shamir heuristic" is used in virtually all practical ZK systems today
+
+### The Path to Practicality (2000-2016)
+
+| Year | System | Innovation |
+|------|--------|------------|
+| 2000s | PCPs | Probabilistically checkable proofs — verify by reading few bits |
+| 2012 | **Pinocchio** | First practical SNARK — made ZK usable |
+| 2013 | libsnark | Open-source SNARK library; enabled experimentation |
+| 2014 | Zerocash paper | ZK for cryptocurrency privacy |
+| 2016 | **Groth16** | Most efficient pairing-based SNARK; still widely used |
+| 2016 | **Zcash launch** | First ZK cryptocurrency deployment |
+
+### Modern Systems (2017-Present)
+
+| Year | System | Contribution |
+|------|--------|--------------|
+| 2017 | Bulletproofs | Range proofs without trusted setup |
+| 2017 | EIP-196/197 | ZK precompiles on Ethereum |
+| 2018 | STARKs | Transparent (no trusted setup), post-quantum |
+| 2019 | PLONK | Universal trusted setup; major breakthrough |
+| 2019 | Halo | Recursive proofs without trusted setup |
+| 2022 | Nova | Folding schemes for incremental verification |
+| 2023-24 | zkEVM race | Polygon, zkSync, Scroll, Linea compete for EVM equivalence |
 
 ## What is a Zero-Knowledge Proof?
 
@@ -84,6 +128,50 @@ After many rounds, Bob becomes convinced Alice knows the password, but learned n
 | Trusted setup | Required | Not needed |
 | Quantum resistant | No | Yes |
 | Prover time | Slower | Faster for large circuits |
+
+### Bulletproofs
+
+**Bünz, Bootle, Boneh et al. (2017)** introduced Bulletproofs for range proofs without trusted setup:
+
+| Property | Value |
+|----------|-------|
+| Proof size | O(log n) — ~700 bytes for 64-bit range |
+| Verification | O(n) — slower than SNARKs |
+| Setup | None required |
+| Primary use | Range proofs in Monero |
+
+Bulletproofs trade verification speed for no trusted setup. They're ideal for proving values are within ranges (e.g., transaction amounts are positive) but not efficient enough for complex on-chain verification.
+
+### SNARK Variants
+
+| System | Setup | Proof Size | Best For |
+|--------|-------|------------|----------|
+| Groth16 | Circuit-specific | ~200 B | Fixed circuits (cheapest on-chain) |
+| PLONK | Universal | ~400 B | Reusable setup, flexible circuits |
+| Marlin | Universal | ~500 B | Academic research |
+| Halo2 | None | ~5 KB | Recursive proofs |
+
+### Recursive Proofs and Folding Schemes
+
+**Recursive SNARKs** allow proofs to verify other proofs, enabling powerful compositions:
+
+| System | Year | Innovation |
+|--------|------|------------|
+| **Halo** | 2019 | Recursive proofs without trusted setup |
+| **Halo2** | 2021 | Improved efficiency; used by Zcash, Scroll |
+| **Nova** | 2022 | Folding scheme for incremental verification |
+| **HyperNova** | 2023 | Generalized folding for R1CS |
+| **Protostar** | 2023 | Non-uniform IVC |
+
+<Callout type="info">
+**Folding schemes** compress multiple proof instances into one without fully verifying each. This is more efficient than recursive verification for many use cases — the key insight behind Nova and HyperNova.
+</Callout>
+
+**Applications of recursive proofs:**
+- Prove arbitrarily long computations
+- Aggregate many proofs into one
+- Enable efficient zkVMs
+- Power Mina Protocol's constant-size blockchain
 
 ## How ZK Proofs Work (Simplified)
 
@@ -162,6 +250,43 @@ contract ZKRollup {
 }
 ```
 
+### zkEVM Taxonomy
+
+Not all zkEVMs are equal. Vitalik Buterin proposed a taxonomy based on EVM equivalence:
+
+| Type | Description | Trade-off | Examples |
+|------|-------------|-----------|----------|
+| **Type 1** | Fully Ethereum-equivalent | Slowest proving, full compatibility | Taiko |
+| **Type 2** | EVM-equivalent | Minor differences (gas, precompiles) | Scroll, Polygon zkEVM |
+| **Type 2.5** | EVM-equivalent except gas costs | Faster proving | — |
+| **Type 3** | Almost EVM-equivalent | Some opcodes differ | Linea (transitional) |
+| **Type 4** | High-level language compatible | Compiles Solidity to ZK-friendly VM | zkSync Era, StarkNet |
+
+<Note>
+**Type 1** is the holy grail — existing Ethereum tools work unchanged. But proving Ethereum's design choices (like Keccak256 hashing) is expensive. **Type 4** systems like zkSync compile Solidity to a ZK-optimized instruction set, making proving faster but requiring recompilation.
+</Note>
+
+### ZK Rollup Economics
+
+Understanding the cost structure of ZK rollups:
+
+| Component | Cost Factor | Who Pays |
+|-----------|-------------|----------|
+| **Proving** | ~$0.01-0.10 per tx | Sequencer (hardware, electricity) |
+| **L1 Verification** | 200,000-500,000 gas | Sequencer |
+| **Data availability** | ~16 gas/byte (calldata) or ~1 gas/byte (blobs) | Users (amortized) |
+
+**Cost evolution with EIP-4844:**
+
+| Rollup Type | Pre-4844 Cost/tx | Post-4844 Cost/tx |
+|-------------|------------------|-------------------|
+| Optimistic | ~$0.10 | ~$0.01 |
+| ZK | ~$0.20 | ~$0.02 |
+
+<Tip>
+ZK rollups have higher fixed costs (proving) but lower marginal costs at scale. As batches grow larger, the per-transaction cost approaches the data availability cost alone.
+</Tip>
+
 ### Privacy Protocols
 
 ZKPs enable private transactions:
@@ -199,6 +324,38 @@ contract Mixer {
     }
 }
 ```
+
+### Privacy Pools and Compliant Privacy
+
+After Tornado Cash sanctions (August 2022), research shifted toward "compliant privacy" — proving funds aren't from illicit sources without revealing the full transaction graph.
+
+**Privacy Pools** (Buterin et al., 2023) propose:
+
+```
+1. Users deposit to shielded pool (like Tornado Cash)
+2. Association sets define "acceptable" deposit sources
+3. Withdrawal proves membership in acceptable set
+4. Regulators can verify compliance without seeing full history
+```
+
+```solidity
+// Privacy Pool withdrawal (simplified)
+function withdraw(
+    bytes32 nullifier,
+    bytes32 root,
+    bytes32 associationSetRoot,  // New: acceptable sources
+    uint256[] calldata proof
+) external {
+    // Prove:
+    // 1. You know a valid deposit commitment
+    // 2. Your deposit is in the association set
+    // 3. You haven't withdrawn before (nullifier)
+    require(verifier.verify(proof, [nullifier, root, associationSetRoot]));
+    // ... transfer funds
+}
+```
+
+This approach aims to preserve privacy benefits while addressing regulatory concerns — users can prove their funds are "clean" without revealing their exact source.
 
 ### Identity & Credentials
 
@@ -316,32 +473,143 @@ contract Groth16Verifier {
 
 On-chain verification is expensive but constant:
 
-| Operation | Gas Cost |
-|-----------|----------|
-| Groth16 verification | ~200,000 |
-| PLONK verification | ~300,000 |
-| STARK verification | ~1,000,000 |
+| Operation | Gas Cost | Notes |
+|-----------|----------|-------|
+| BN256 addition (EIP-196) | 150 | Basic curve operation |
+| BN256 scalar multiplication | 6,000 | Key operation for verification |
+| BN256 pairing check (EIP-197) | 45,000 per pair | Core SNARK verification |
+| Groth16 verification | ~200,000 | 3 pairings + additions |
+| PLONK verification | ~300,000 | More operations, same curve |
+| STARK verification | ~1,000,000+ | Hash-based, no pairings |
 
 The cost is independent of circuit complexity — you pay the same whether proving 1 operation or 1 million.
+
+### ZK Precompiles on Ethereum
+
+Ethereum's EIP-196 and EIP-197 (Byzantium, 2017) enabled efficient on-chain SNARK verification:
+
+```solidity
+// EIP-196: BN256 curve addition
+address constant BN256_ADD = address(0x06);
+// EIP-196: BN256 scalar multiplication
+address constant BN256_MUL = address(0x07);
+// EIP-197: BN256 pairing check
+address constant BN256_PAIRING = address(0x08);
+
+// Verify Groth16 proof using pairing precompile
+function verifyProof(
+    uint256[2] memory a,
+    uint256[2][2] memory b,
+    uint256[2] memory c,
+    uint256[] memory publicInputs
+) public view returns (bool) {
+    // Construct pairing input
+    // e(A, B) = e(α, β) · e(L, γ) · e(C, δ)
+    bytes memory input = abi.encodePacked(a, b, c, publicInputs);
+
+    (bool success, bytes memory result) = BN256_PAIRING.staticcall(input);
+    return success && abi.decode(result, (bool));
+}
+```
+
+**Future precompiles under discussion:**
+- BLS12-381 operations (better security margin, Ethereum 2.0 compatibility)
+- KZG commitment verification (for data availability sampling)
+- Poseidon hash (ZK-friendly, faster to prove than Keccak)
+
+### Cross-Chain ZK Applications
+
+ZK proofs enable trustless cross-chain communication:
+
+| Application | How It Works | Example |
+|-------------|--------------|---------|
+| **ZK light clients** | Prove consensus without running full node | Succinct's Telepathy |
+| **Storage proofs** | Prove historical state existed | Herodotus, Axiom |
+| **Bridge verification** | Prove deposit on source chain | zkBridge |
+| **Cross-rollup transfers** | Prove L2 state on another L2 | Polymer, Lagrange |
+
+```
+Traditional bridge: Trust relayers/validators
+ZK bridge: Verify proof that event occurred on source chain
+```
+
+This shift from social trust to cryptographic verification is fundamental to blockchain scaling.
 
 ## ZK Development Stack
 
 ### Languages
-- **Circom** — Domain-specific, most mature
-- **Noir** — Rust-like, developer-friendly
-- **Cairo** — StarkNet's language
-- **Leo** — Aleo's language
+
+| Language | Style | Ecosystem | Best For |
+|----------|-------|-----------|----------|
+| **Circom** | Domain-specific | snarkjs, SnarkJS | Most tutorials, Tornado Cash |
+| **Noir** | Rust-like | Aztec | Developer experience, Aztec apps |
+| **Cairo** | Python-like | StarkNet | StarkNet contracts |
+| **Leo** | Rust-like | Aleo | Privacy-focused L1 |
+| **o1js** | TypeScript | Mina | Browser-friendly proofs |
 
 ### Libraries
-- **snarkjs** — JavaScript ZK tools
-- **arkworks** — Rust ZK library
-- **gnark** — Go ZK library
-- **halo2** — Rust, used by zkSync
+
+| Library | Language | Proof System | Used By |
+|---------|----------|--------------|---------|
+| **snarkjs** | JavaScript | Groth16, PLONK | Web apps, prototypes |
+| **arkworks** | Rust | Multiple | Research, production |
+| **gnark** | Go | Groth16, PLONK | Linea, enterprise |
+| **halo2** | Rust | Halo2/KZG | Scroll, zkSync |
+| **Plonky2** | Rust | PLONK + FRI | Polygon zkEVM |
 
 ### Services
-- **Axiom** — Historical Ethereum data proofs
-- **Herodotus** — Cross-chain state proofs
-- **Risc0** — ZK proofs for any Rust code
+
+| Service | Function | Use Case |
+|---------|----------|----------|
+| **Axiom** | Historical Ethereum data proofs | Prove past state without replay |
+| **Herodotus** | Cross-chain state proofs | Trustless cross-L2 data |
+| **Risc0** | ZK proofs for RISC-V programs | Prove arbitrary Rust code |
+| **Succinct** | zkVM infrastructure | General-purpose proving |
+| **Bonsai** | Risc0 proving service | Remote proof generation |
+
+### Development Workflow
+
+```bash
+# Typical Circom + snarkjs workflow
+
+# 1. Write circuit
+cat > circuit.circom << 'EOF'
+pragma circom 2.0.0;
+template Multiplier() {
+    signal input a;
+    signal input b;
+    signal output c;
+    c <== a * b;
+}
+component main = Multiplier();
+EOF
+
+# 2. Compile to R1CS
+circom circuit.circom --r1cs --wasm --sym -o build/
+
+# 3. Trusted setup (Powers of Tau ceremony for production)
+snarkjs powersoftau new bn128 12 pot12_0000.ptau
+snarkjs powersoftau contribute pot12_0000.ptau pot12_0001.ptau
+snarkjs powersoftau prepare phase2 pot12_0001.ptau pot12_final.ptau
+snarkjs groth16 setup build/circuit.r1cs pot12_final.ptau circuit_0000.zkey
+snarkjs zkey contribute circuit_0000.zkey circuit_final.zkey
+
+# 4. Export verification key
+snarkjs zkey export verificationkey circuit_final.zkey verification_key.json
+
+# 5. Generate proof (with witness)
+snarkjs groth16 prove circuit_final.zkey witness.wtns proof.json public.json
+
+# 6. Verify locally
+snarkjs groth16 verify verification_key.json public.json proof.json
+
+# 7. Generate Solidity verifier
+snarkjs zkey export solidityverifier circuit_final.zkey Verifier.sol
+```
+
+<Tip>
+For production, use a proper Powers of Tau ceremony (like Hermez's or Zcash's) rather than generating your own. Universal setups (PLONK) reduce this burden.
+</Tip>
 
 ## Practical Considerations
 
@@ -398,25 +666,60 @@ template Good() {
 }
 ```
 
+## Adoption Timeline
+
+| Date | Event | Significance |
+|------|-------|--------------|
+| 1985 | GMR paper | ZKP theoretical foundation established |
+| 1986 | Fiat-Shamir heuristic | Non-interactive transformation |
+| 2012 | Pinocchio | First practical SNARK |
+| 2014 | Zerocash paper | ZK for cryptocurrency privacy |
+| **Oct 2016** | **Zcash launch** | First ZK cryptocurrency deployment |
+| 2016 | Groth16 | Most efficient SNARK; still widely used |
+| 2017 | EIP-196/197 | ZK precompiles on Ethereum |
+| 2017 | Bulletproofs | Range proofs without trusted setup |
+| 2018 | STARKs introduced | Transparent, post-quantum secure |
+| 2019 | PLONK | Universal trusted setup breakthrough |
+| 2019 | Tornado Cash | ZK privacy mixer on Ethereum |
+| 2020 | Loopring, zkSync 1.0 | First ZK rollups live |
+| 2022 | StarkNet mainnet | STARK-based general-purpose rollup |
+| 2022 | Nova folding scheme | Efficient incremental verification |
+| 2023 | zkSync Era | EVM-compatible ZK rollup |
+| 2024 | Scroll, Linea mainnet | zkEVM competition intensifies |
+
+## Common Misconceptions
+
+<Warning>
+**"ZK proofs are only for privacy"** — False. ZK proofs have two major applications: privacy (Zcash, Tornado Cash) and scalability (rollups). For rollups, ZK is about compression and verification, not hiding data.
+</Warning>
+
+**"Trusted setup means insecure"** — Multi-party computation ceremonies distribute trust. Zcash's "Powers of Tau" had thousands of participants. If *any* participant is honest, the setup is secure. Universal setups (PLONK) only need to be done once.
+
+**"STARKs are always better"** — Trade-offs exist:
+- SNARKs: ~200 bytes (cheap on-chain), no post-quantum security
+- STARKs: ~50-100 KB (expensive on-chain), post-quantum secure
+- Choice depends on use case
+
 ## Conclusions
 
-Zero-knowledge proofs are transformative technology for blockchains:
+Zero-knowledge proofs represent one of cryptography's most powerful ideas — proving knowledge without revealing it. From Goldwasser, Micali, and Rackoff's 1985 theoretical breakthrough to today's zkEVM rollups processing millions of transactions, ZK has evolved from academic curiosity to critical infrastructure.
 
 **For Privacy:**
 - Hide transaction amounts and participants
 - Prove identity attributes without revealing data
-- Enable confidential DeFi
+- Enable confidential DeFi (though regulatory pressure is significant)
 
 **For Scalability:**
-- ZK rollups provide fast finality
+- ZK rollups provide fast finality (no 7-day challenge period)
 - Constant verification cost regardless of batch size
-- No fraud proof challenge period
+- Type 1-4 zkEVMs offer different compatibility/performance trade-offs
 
 **Key Takeaways:**
 - ZKPs prove statements without revealing underlying data
-- zk-SNARKs are small but need trusted setup
-- zk-STARKs are transparent but larger
-- Circuit design is an art — efficiency matters
-- The ecosystem is rapidly evolving
+- The GMR → Fiat-Shamir → Groth16 → PLONK lineage shows how theory becomes practice
+- zk-SNARKs are small but need trusted setup; zk-STARKs are transparent but larger
+- Bulletproofs, Nova, and folding schemes expand the toolkit
+- Circuit design is an art — efficiency determines cost
+- zkEVM taxonomy (Type 1-4) explains the compatibility/speed trade-off
 
-ZK technology is complex but increasingly accessible through better tooling and higher-level languages.
+The ZK ecosystem continues to mature rapidly. As proving times decrease and tooling improves, ZK may become as invisible to developers as HTTPS encryption — essential infrastructure that "just works."
