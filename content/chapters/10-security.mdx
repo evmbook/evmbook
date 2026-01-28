@@ -367,6 +367,16 @@ For critical contracts, formal verification can mathematically prove correctness
 
 Flash loans allow borrowing large amounts without collateral, as long as the loan is repaid within the same transaction. While legitimate for arbitrage and liquidations, they've enabled numerous exploits.
 
+### Flash Loan Attack Taxonomy
+
+| Attack Type | Mechanism | Example Exploits |
+|-------------|-----------|------------------|
+| **Oracle manipulation** | Borrow → skew AMM price → exploit dependent protocol | bZx (2020), Harvest (2020) |
+| **Governance attacks** | Borrow → acquire votes → pass malicious proposal | Beanstalk (2022) |
+| **Liquidation manipulation** | Borrow → crash collateral price → self-liquidate profitably | Various |
+| **Reentrancy amplification** | Borrow → trigger reentrancy with massive capital | Cream Finance (2021) |
+| **Logic exploitation** | Borrow → trigger edge case with large values | Euler (2023) |
+
 ### The Flash Loan Attack Pattern
 
 ```solidity
@@ -391,12 +401,34 @@ contract FlashLoanAttacker {
 }
 ```
 
+### Flash Loan Attack Case Studies
+
+**bZx Attacks (February 2020)**:
+The first major flash loan exploits, occurring days apart:
+1. Attack 1: Borrowed ETH → opened leveraged short → manipulated oracle via Uniswap → profit
+2. Attack 2: Borrowed sUSD → pumped sUSD on Kyber → used inflated collateral to borrow ETH
+Combined loss: ~$1M
+
+**Harvest Finance (October 2020)**:
+- Borrowed USDC/USDT via flash loan
+- Repeatedly swapped large amounts to manipulate Curve pool prices
+- Deposited into Harvest at manipulated (lower) price
+- Withdrew at normal price
+- Loss: ~$34M in 7 minutes
+
+**Beanstalk Governance (April 2022)**:
+- Borrowed governance tokens (BEAN) via flash loan
+- Proposed and voted for malicious governance proposal in single transaction
+- Drained protocol treasury before timelock could prevent
+- Loss: ~$182M
+
 ### Defense Against Flash Loan Attacks
 
 1. **Time-Weighted Average Prices (TWAP)** — Don't rely on spot prices
 2. **Multi-block oracle reads** — Require prices from multiple blocks
 3. **Protocol-level checks** — Ensure state changes make economic sense
 4. **Flash loan guards** — Detect and block same-transaction attacks
+5. **Governance timelocks with snapshot voting** — Prevent single-transaction governance attacks
 
 ```solidity
 // Simple flash loan guard
@@ -407,11 +439,80 @@ modifier noFlashLoan() {
     _;
     _lastBlockNumber = block.number;
 }
+
+// Governance protection: require holding tokens before proposal
+modifier requirePriorTokenBalance(address proposer) {
+    require(
+        getPriorVotes(proposer, block.number - 1) >= proposalThreshold,
+        "Must hold tokens for at least 1 block"
+    );
+    _;
+}
+```
+
+## MEV (Maximal Extractable Value) Attacks
+
+MEV refers to profit extractable by reordering, inserting, or censoring transactions within a block. While some MEV is beneficial (arbitrage improves market efficiency), much of it harms users.
+
+### MEV Attack Types
+
+| Attack | Mechanism | User Impact |
+|--------|-----------|-------------|
+| **Sandwich attack** | Frontrun + backrun user's trade | User gets worse price |
+| **Frontrunning** | Copy user's profitable tx with higher gas | User's opportunity stolen |
+| **Backrunning** | Execute immediately after profitable tx | Liquidations, arbitrage captured |
+| **Time-bandit attack** | Reorg chain to capture past MEV | Consensus instability |
+
+### Sandwich Attack Deep Dive
+
+The most common MEV attack targeting users:
+
+```
+1. Victim submits: Swap 100 ETH → TOKEN
+2. Attacker frontruns: Buy TOKEN (price increases)
+3. Victim's tx executes: Gets fewer TOKEN than expected
+4. Attacker backruns: Sell TOKEN at higher price (profit)
+
+Victim paid for the attacker's profit via worse execution.
+```
+
+**Example on-chain:**
+```
+Block N:
+  Tx 1: Attacker buys 1000 TOKEN for 10 ETH
+  Tx 2: Victim swaps 100 ETH, gets 9500 TOKEN (expected 10000)
+  Tx 3: Attacker sells 1000 TOKEN for 10.5 ETH
+
+Attacker profit: 0.5 ETH
+Victim loss: ~500 TOKEN worth of slippage
+```
+
+### MEV Protection Strategies
+
+| Strategy | How It Works | Trade-off |
+|----------|--------------|-----------|
+| **Private mempools** | Submit to Flashbots, MEV Blocker | Centralization risk |
+| **Batch auctions** | CoW Protocol style—orders matched at uniform price | Higher latency |
+| **Commit-reveal** | Hide transaction details until execution | UX complexity |
+| **MEV-Share** | Searchers share profits with users | Partial protection |
+| **Tight slippage** | Limit acceptable price impact | May fail in volatile markets |
+
+```solidity
+// User protection: Set tight slippage
+// Maximum 0.5% slippage
+uint256 minAmountOut = expectedAmount * 995 / 1000;
+router.swapExactTokensForTokens(
+    amountIn,
+    minAmountOut,  // Sandwicher profit capped at 0.5%
+    path,
+    to,
+    deadline
+);
 ```
 
 ## Oracle Manipulation
 
-Protocols that rely on on-chain oracles are vulnerable to price manipulation.
+Protocols that rely on on-chain oracles are vulnerable to price manipulation. This is often combined with flash loans for maximum impact.
 
 ### Common Oracle Vulnerabilities
 
@@ -424,16 +525,68 @@ function getCollateralValue(uint256 tokenAmount) public view returns (uint256) {
 }
 ```
 
-**Defense: Use Chainlink or TWAP:**
+### Oracle Manipulation Techniques
+
+| Technique | How It Works | Defense |
+|-----------|--------------|---------|
+| **AMM reserve manipulation** | Large swap skews reserves | Use TWAP, not spot |
+| **Low-liquidity attacks** | Manipulate thin markets | Require minimum liquidity |
+| **Multi-block attacks** | Manipulate across blocks | Use longer TWAP windows |
+| **Delayed oracle attacks** | Exploit stale prices | Check oracle freshness |
+
+### Chainlink Best Practices
+
 ```solidity
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
 function getCollateralValue(uint256 tokenAmount) public view returns (uint256) {
-    (, int256 price,,,) = chainlinkFeed.latestRoundData();
+    (
+        uint80 roundId,
+        int256 price,
+        uint256 startedAt,
+        uint256 updatedAt,
+        uint80 answeredInRound
+    ) = chainlinkFeed.latestRoundData();
+
+    // 1. Check for valid price
     require(price > 0, "Invalid price");
+
+    // 2. Check for stale data (e.g., no update in 1 hour)
+    require(block.timestamp - updatedAt < 3600, "Stale price");
+
+    // 3. Check round completeness
+    require(answeredInRound >= roundId, "Round not complete");
+
     return tokenAmount * uint256(price) / 1e8;
 }
 ```
+
+### Uniswap V3 TWAP Oracle
+
+```solidity
+// Using Uniswap V3 TWAP (manipulation-resistant)
+function getTWAP(address pool, uint32 twapInterval) public view returns (uint256) {
+    uint32[] memory secondsAgos = new uint32[](2);
+    secondsAgos[0] = twapInterval;  // e.g., 1800 for 30-min TWAP
+    secondsAgos[1] = 0;             // now
+
+    (int56[] memory tickCumulatives, ) = IUniswapV3Pool(pool).observe(secondsAgos);
+
+    int56 tickCumulativesDelta = tickCumulatives[1] - tickCumulatives[0];
+    int24 arithmeticMeanTick = int24(tickCumulativesDelta / int56(uint56(twapInterval)));
+
+    return OracleLibrary.getQuoteAtTick(
+        arithmeticMeanTick,
+        1e18,  // base amount
+        token0,
+        token1
+    );
+}
+```
+
+<Note>
+**TWAP Duration Trade-off**: Longer TWAP windows are more manipulation-resistant but less responsive to legitimate price changes. 30 minutes is common for lending protocols; shorter windows for DEX aggregators.
+</Note>
 
 ## Notable Exploits: Case Studies
 
@@ -626,3 +779,26 @@ Smart contract security requires:
 The pattern is clear: most exploits combine multiple failures—a bug *plus* insufficient testing *plus* inadequate monitoring. No single defense is enough.
 
 Remember: in smart contracts, bugs are permanent and exploits are profitable. The cost of security is always less than the cost of an exploit.
+
+---
+
+## Research & Citations
+
+This chapter draws on security research and post-mortem analyses:
+
+**MEV Research:**
+- [@article_daian_flashboys_2019] — Flash Boys 2.0: Foundational MEV research defining the problem and measuring extraction
+- [@article_kyle_continuous_1985] — Kyle model explaining adverse selection in markets (applies to sandwich attacks)
+
+**Security Auditing:**
+- Trail of Bits publications on smart contract security
+- OpenZeppelin security guidelines and contract patterns
+- Consensys Diligence best practices
+
+**Exploit Post-Mortems:**
+- Rekt.news — comprehensive DeFi exploit documentation
+- Chainalysis and SlowMist attack analyses
+
+<Callout type="tip" title="Further Reading">
+For flash loan mechanics, see Chapter 17 (Lending). For MEV in the context of DEX trading, see Chapter 16 (AMM Evolution). For oracle design patterns, see Chapter 22 (Oracles).
+</Callout>
