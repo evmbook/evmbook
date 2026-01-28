@@ -415,6 +415,54 @@ Human-readable index of sources in `library.bib` with credibility assessments an
 
 ---
 
+## Regulatory & Privacy
+
+| Key | Citation | Tier | Status | Notes |
+|-----|----------|------|--------|-------|
+| `misc_buterin_privacy_pools_2023` | Buterin, V. et al. (2023). Privacy Pools | T1 | Verified | Compliance-preserving privacy via association sets |
+| `misc_ofac_tornado_2022` | U.S. Treasury (2022). Tornado Cash Sanctions | T1 | Verified | First OFAC sanction of smart contract; $7B+ laundered |
+| `misc_sec_framework_2019` | SEC (2019). Digital Asset Framework | T1 | Verified | Howey test application to crypto |
+| `misc_mica_regulation_2023` | EU (2023). MiCA Regulation | T1 | Verified | EU comprehensive crypto regulatory framework |
+| `misc_chainalysis_sanctions_2023` | Chainalysis (2023). Sanctions Compliance | T2 | Verified | Tornado Cash tracking research |
+
+---
+
+## MEV & Flash Loans
+
+| Key | Citation | Tier | Status | Notes |
+|-----|----------|------|--------|-------|
+| `article_daian_flashboys_2019` | Daian, P. et al. (2019). Flash Boys 2.0 | T1 | Verified | IEEE S&P; coined "MEV" |
+| `misc_bzx_attack_2020` | Various (2020). bZx Attack | T2 | Verified | First major flash loan exploit |
+| `misc_harvest_attack_2020` | Various (2020). Harvest Finance Attack | T2 | Verified | $34M via Curve manipulation |
+| `misc_beanstalk_attack_2022` | Various (2022). Beanstalk Governance Attack | T2 | Verified | $182M flash loan governance exploit |
+| `misc_flashbots_2020` | Flashbots (2020). MEV Infrastructure | T1 | Verified | Private transaction pools |
+| `misc_mev_boost_2022` | Flashbots (2022). MEV-Boost | T1 | Verified | PBS implementation; majority of blocks post-Merge |
+
+---
+
+## Additional EIPs (Recent)
+
+| Key | Citation | Tier | Status | Notes |
+|-----|----------|------|--------|-------|
+| `eip_1153_2022` | Dourlens et al. (2022). EIP-1153 | T1 | Verified | Transient storage opcodes; TSTORE/TLOAD |
+| `eip_2929_2020` | Buterin & Swende (2020). EIP-2929 | T1 | Verified | Gas cost increases for state access |
+| `eip_5656_2022` | Colvin et al. (2022). EIP-5656 | T1 | Verified | MCOPY opcode for memory copying |
+| `eip_radomski_erc1155_2018` | Radomski et al. (2018). EIP-1155 | T1 | Verified | Multi-token standard; semi-fungible |
+| `eip_4626_2022` | Santoro et al. (2022). EIP-4626 | T1 | Verified | Tokenized vault standard |
+
+---
+
+## Prediction Markets — Additional
+
+| Key | Citation | Tier | Status | Notes |
+|-----|----------|------|--------|-------|
+| `misc_gnosis_conditional_tokens_2019` | Gnosis (2019). Conditional Tokens | T1 | Verified | ERC-1155 based; combinatorial outcomes |
+| `misc_uma_optimistic_oracle_2020` | UMA (2020). Optimistic Oracle | T1 | Verified | Dispute-based oracle; DVM escalation |
+| `misc_buterin_prediction_markets_2014` | Buterin, V. (2014). SchellingCoin | T1 | Verified | Early prediction market mechanism |
+| `article_hanson_futarchy_2000` | Hanson, R. (2000). Futarchy | T1 | Verified | Governance by prediction market |
+
+---
+
 ## Sources Needing Follow-Up
 
 The following sources need additional verification or primary documentation:
