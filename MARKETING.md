@@ -213,7 +213,7 @@ This work is licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/
 
 Commercial use requires permission from the publisher.
 
-**Author:** B.L. Brocer
+**Author:** C. M. Mercer
 **Publisher:** White B0x Inc.
 
 ---

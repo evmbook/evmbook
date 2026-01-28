@@ -165,17 +165,17 @@
     <rect x="-10" y="-15" width="175" height="110" rx="8" fill="#FFF" fill-opacity="0.9" stroke="#E5E7EB"/>
     <text x="0" y="0" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#374151">Legend</text>
 
-    <rect x="0" y="12" width="14" height="14" rx="3" fill="url(#ethGradient)"/>
-    <text x="20" y="23" font-family="Arial, sans-serif" font-size="9" fill="#4B5563">Ethereum Mainnet (PoS)</text>
+    <rect x="0" y="12" width="14" height="14" rx="3" fill="url(#etcGradient)"/>
+    <text x="20" y="23" font-family="Arial, sans-serif" font-size="9" fill="#4B5563">Ethereum Classic (ETC)</text>
 
-    <rect x="0" y="32" width="14" height="14" rx="3" fill="url(#etcGradient)"/>
-    <text x="20" y="43" font-family="Arial, sans-serif" font-size="9" fill="#4B5563">Ethereum Classic (PoW)</text>
+    <rect x="0" y="32" width="14" height="14" rx="3" fill="url(#ethGradient)"/>
+    <text x="20" y="43" font-family="Arial, sans-serif" font-size="9" fill="#4B5563">Ethereum (ETH)</text>
 
-    <rect x="0" y="52" width="14" height="14" rx="3" fill="url(#l2Gradient)"/>
-    <text x="20" y="63" font-family="Arial, sans-serif" font-size="9" fill="#4B5563">Layer 2 Rollups</text>
+    <rect x="0" y="52" width="14" height="14" rx="3" fill="url(#altGradient)"/>
+    <text x="20" y="63" font-family="Arial, sans-serif" font-size="9" fill="#4B5563">EVM-Compatible Layer 1s</text>
 
-    <rect x="0" y="72" width="14" height="14" rx="3" fill="url(#altGradient)"/>
-    <text x="20" y="83" font-family="Arial, sans-serif" font-size="9" fill="#4B5563">EVM-Compatible L1s</text>
+    <rect x="0" y="72" width="14" height="14" rx="3" fill="url(#l2Gradient)"/>
+    <text x="20" y="83" font-family="Arial, sans-serif" font-size="9" fill="#4B5563">ETH Layer 2 Rollups</text>
   </g>
 
   <!-- Key insight callout -->
