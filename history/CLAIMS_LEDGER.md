@@ -301,15 +301,43 @@ Registry of important historical claims with confidence assessments and source d
 
 ---
 
+## MEV & Flash Loans (Eras 8-12)
+
+| ID | Claim | Era | Confidence | Source(s) | Notes |
+|----|-------|-----|------------|-----------|-------|
+| C137 | Flash loans were introduced by Aave in January 2020, enabling uncollateralized borrowing within a single transaction | 8 | HIGH | Aave documentation | First implementation; atomic loan + repay |
+| C138 | bZx attacks (February 2020) were the first major flash loan exploits, occurring days apart, totaling ~$1M | 8 | HIGH | [@misc_bzx_attack_2020] | Oracle manipulation via Uniswap |
+| C139 | Harvest Finance exploit (October 2020) used flash loans to manipulate Curve pool prices, extracting $34M in 7 minutes | 8 | HIGH | [@misc_harvest_attack_2020] | Repeated price manipulation |
+| C140 | Beanstalk governance attack (April 2022) used flash-borrowed tokens to pass a malicious proposal, draining $182M | 10 | HIGH | [@misc_beanstalk_attack_2022] | Single-transaction governance exploit |
+| C141 | Daian et al. coined "MEV" (Miner Extractable Value) in "Flash Boys 2.0" (2019); renamed "Maximal" post-Merge | 8 | HIGH | [@article_daian_flashboys_2019] | Foundational MEV research |
+| C142 | Flashbots was founded in 2020 to mitigate MEV's negative externalities via private transaction pools | 8 | HIGH | [@misc_flashbots_2020] | MEV extraction infrastructure |
+| C143 | MEV-Boost became the dominant block production method post-Merge, with ~90% of blocks using PBS | 10-12 | HIGH | [@misc_mev_boost_2022] | Proposer-builder separation |
+| C144 | Sandwich attacks extract value by frontrunning user trades, costing DeFi users hundreds of millions annually | 8-12 | HIGH | MEV research | Most common user-facing MEV |
+| C145 | Time-Weighted Average Prices (TWAP) became standard oracle defense after flash loan attacks demonstrated spot price manipulation risks | 8 | HIGH | DeFi best practices | Chainlink, Uniswap V3 TWAP |
+
+---
+
+## Smart Contract Security (Eras 6-12)
+
+| ID | Claim | Era | Confidence | Source(s) | Notes |
+|----|-------|-----|------------|-----------|-------|
+| C146 | The DAO reentrancy attack (June 2016) established reentrancy as a critical vulnerability class | 6 | HIGH | Post-mortem analyses | Led to checks-effects-interactions pattern |
+| C147 | Curve Finance Vyper compiler bug (July 2023) caused ~$70M in losses, demonstrating compiler-level vulnerabilities | 11 | HIGH | Post-mortem; Vyper issues | Version 0.2.15 affected |
+| C148 | Euler Finance hack (March 2023) lost $197M to a missing health check; funds later returned by hacker | 11 | HIGH | Post-mortem | Largest DeFi loss with recovery |
+| C149 | Bridge exploits accounted for >$2B losses in 2022 alone (Ronin, Wormhole, Nomad, Harmony) | 10 | HIGH | Multiple post-mortems | High-value attack targets |
+| C150 | EIP-1153 transient storage (2024) provides gas-efficient reentrancy protection via TSTORE/TLOAD | 12 | HIGH | [@eip_1153_2022] | Replaces storage-based locks |
+
+---
+
 ## Summary Statistics
 
 | Category | Count |
 |----------|-------|
-| Total Claims | 136 |
-| HIGH Confidence | 110 |
+| Total Claims | 150 |
+| HIGH Confidence | 123 |
 | MEDIUM Confidence | 15 |
 | LOW Confidence | 6 |
-| CONTESTED | 5 |
+| CONTESTED | 6 |
 
 ### Claims by Topic Area
 
@@ -329,10 +357,16 @@ Registry of important historical claims with confidence assessments and source d
 | Token Standards | 4 | C067-C070 |
 | Identity & Naming | 4 | C071-C074 |
 | DePIN & Infrastructure | 4 | C075-C078 |
+| Communication & Privacy Tools | 7 | C079-C085 |
+| International Adoption | 7 | C086-C092 |
+| Funding & Economics | 6 | C093-C098 |
+| Dark Web Markets & Mixers | 6 | C099-C104 |
 | Bitcoin Programmability | 6 | C105-C110 |
 | Privacy Infrastructure | 10 | C111-C120 |
 | Restaking & Shared Security | 8 | C121-C128 |
 | Cross-Chain Interoperability | 8 | C129-C136 |
+| MEV & Flash Loans | 9 | C137-C145 |
+| Smart Contract Security | 5 | C146-C150 |
 
 ---
 
