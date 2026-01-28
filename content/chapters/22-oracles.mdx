@@ -12,6 +12,22 @@ Oracles bridge this gap, bringing off-chain data on-chain in ways contracts can 
 
 ## The Oracle Problem
 
+The concept of trusted data sources predates blockchain. Traditional finance relies on centralized providers like Bloomberg and Reuters. But blockchain requires something different—Byzantine fault tolerant data delivery where no single party can manipulate outcomes.
+
+### Theoretical Foundations
+
+**Vitalik Buterin's SchellingCoin (2014)** proposed using Schelling points for decentralized truth:
+- Multiple parties stake tokens and report data
+- Majority report wins; minority is slashed
+- Economic incentives coordinate on "truth"
+
+This game-theoretic foundation influenced all subsequent oracle designs.
+
+**Town Crier (2016)** — Cornell research introduced Trusted Execution Environments (TEEs) for secure data fetching:
+- Hardware-based trust model
+- Data authenticated at the source
+- Influenced Chainlink's architecture
+
 Why can't smart contracts just make HTTP requests?
 
 ```solidity
@@ -356,6 +372,36 @@ contract TellorConsumer {
 - Smaller reporter network
 - Dispute resolution takes time
 
+### DIA: Community-Driven Feeds
+
+DIA provides transparent, open-source price feeds with verifiable methodologies:
+
+```solidity
+interface IDIAOracleV2 {
+    function getValue(string memory key)
+        external view returns (uint128 value, uint128 timestamp);
+}
+
+contract DIAConsumer {
+    IDIAOracleV2 public oracle;
+
+    function getPrice(string memory pair) external view returns (uint128) {
+        (uint128 value, uint128 timestamp) = oracle.getValue(pair);
+        require(block.timestamp - timestamp < 3600, "Stale");
+        return value;
+    }
+}
+```
+
+**DIA Advantages:**
+- Fully open-source methodology
+- Community can verify data sources
+- Supports long-tail assets
+
+**DIA Limitations:**
+- Smaller user base
+- Less battle-tested than Chainlink
+
 ### API3: First-Party Oracles
 
 API3 connects data providers directly to blockchains—first-party oracles rather than third-party aggregators.
@@ -425,6 +471,81 @@ interface OptimisticOracleV2 {
 - Not suitable for real-time prices
 - Relies on token holder voting for disputes
 
+## Oracle Design Patterns
+
+### Push vs Pull Architecture
+
+Understanding the fundamental design choice:
+
+**Push Model (Chainlink, Chronicle)**:
+```
+Oracle nodes periodically → Update on-chain → dApps read stored data
+
+Pros: Simple integration, always fresh
+Cons: Gas costs borne by oracle network
+```
+
+**Pull Model (Pyth, RedStone)**:
+```
+User requests price → Fetch from off-chain → Submit with transaction
+
+Pros: Fresh data, lower network costs
+Cons: Complex integration, user pays
+```
+
+| Aspect | Push | Pull |
+|--------|------|------|
+| Who pays gas | Oracle network / sponsors | End users |
+| Data freshness | Heartbeat (e.g., every hour) | Always current |
+| Integration complexity | Simple read | Modified tx flow |
+| Failure mode | Stale data | Failed transaction |
+
+### Aggregation Mechanisms
+
+How multiple data sources become one price:
+
+| Method | How It Works | Best For |
+|--------|--------------|----------|
+| **Median** | Middle value of sorted reports | Standard price feeds (ignores outliers) |
+| **Mean** | Simple average | When outliers are unlikely |
+| **Weighted median** | Median with reputation weights | Higher trust in proven nodes |
+| **TWAP** | Average over time window | Manipulation resistance |
+| **VWAP** | Volume-weighted average | Trading applications |
+
+```solidity
+// Median aggregation (simplified)
+function aggregate(int256[] memory values) internal pure returns (int256) {
+    // Sort values
+    for (uint i = 0; i < values.length; i++) {
+        for (uint j = i + 1; j < values.length; j++) {
+            if (values[j] < values[i]) {
+                (values[i], values[j]) = (values[j], values[i]);
+            }
+        }
+    }
+    // Return middle value
+    return values[values.length / 2];
+}
+```
+
+### Deviation vs Heartbeat Updates
+
+Chainlink uses two triggers for updates:
+
+```
+Deviation threshold: Update if price changes >X% (typically 0.5-1%)
+Heartbeat: Update every N hours regardless (typically 1-24h)
+
+Example: ETH/USD feed
+- Deviation: 0.5%
+- Heartbeat: 1 hour
+
+If ETH moves 0.6% → Immediate update
+If ETH stays flat for 50 minutes → Update at 1 hour mark
+```
+
+This balances freshness with gas costs.
+
 ## The Oracle Landscape (2026)
 
 | Oracle | Best For | Latency | Cost | Decentralization |
@@ -436,6 +557,7 @@ interface OptimisticOracleV2 {
 | **Tellor** | Censorship resistance | Minutes-hours | Low | Very High |
 | **API3** | First-party data needs | Varies | Medium | Medium |
 | **UMA** | Prediction markets, disputes | Hours | Low | High |
+| **DIA** | Open-source, verifiable | ~1 min | Low | Medium |
 | **Uniswap TWAP** | On-chain, permissionless | Period-based | None | Maximum |
 
 ### Decision Matrix
@@ -519,6 +641,25 @@ require(answeredInRound >= roundId, "Round not complete");
 require(price > MIN_PRICE && price < MAX_PRICE, "Price out of bounds");
 ```
 
+### Notable Oracle Exploits
+
+Understanding past exploits helps design safer systems:
+
+| Date | Protocol | Loss | Attack Vector | Lesson |
+|------|----------|------|---------------|--------|
+| Oct 2020 | **Harvest Finance** | $34M | Flash loan TWAP manipulation | Short TWAP windows are vulnerable |
+| Nov 2020 | **Cheese Bank** | $3.3M | Flash loan oracle attack | Don't trust on-chain spot prices |
+| Feb 2020 | **bZx** | $350K | Oracle manipulation via Uniswap | Use robust aggregated feeds |
+| Apr 2022 | **Beanstalk** | $182M | Governance + oracle | Oracles can be attacked via governance |
+| Oct 2022 | **Mango Markets** | $114M | Price manipulation | Thin liquidity = manipulable prices |
+| Nov 2022 | **Bonq** | $120M | Tellor oracle manipulation | Verify reporter reputation |
+
+<Warning>
+**The Harvest Finance Attack (Oct 2020)**: Attacker used flash loans to manipulate Curve's USDC/USDT pool, which Harvest used for pricing. Within one transaction, they drained $34M. Lesson: TWAP windows must exceed flash loan timeframes.
+</Warning>
+
+**Mango Markets (Oct 2022)**: Avraham Eisenberg openly manipulated MNGO token price by depositing and self-trading to inflate his collateral value, then borrowing against it. He was later arrested—a landmark case for on-chain "exploits vs attacks" legal theory.
+
 ### Best Practices
 
 1. **Use multiple oracles** for critical applications
@@ -596,6 +737,270 @@ contract RobustPriceConsumer {
        └───────────┘           └───────────┘           └───────────┘
 ```
 
+## Oracle Evolution Timeline
+
+| Date | Event | Significance |
+|------|-------|--------------|
+| 2014 | SchellingCoin concept | Game-theoretic oracle foundation |
+| 2016 | Town Crier paper | TEE-based oracle research |
+| 2016 | Oraclize on Ethereum | First centralized oracle service |
+| 2017 | Chainlink whitepaper | Decentralized oracle network |
+| 2017 | Chainlink ICO | $32M raised |
+| 2019 | Chainlink mainnet | First major deployment |
+| 2020 | DeFi Summer | Oracles become critical infrastructure |
+| 2020 | Flash loan oracle attacks | Exposed TWAP vulnerabilities |
+| 2021 | Chainlink VRF v2 | Verifiable randomness improved |
+| 2021 | Pyth Network launches | High-frequency financial data |
+| 2022 | Chainlink staking | Economic security upgrade |
+| 2022 | Mango Markets exploit | $114M oracle manipulation |
+| 2023 | Chronicle launches | MakerDAO's gas-efficient oracle |
+| 2023 | Chainlink CCIP | Cross-chain messaging |
+| 2024 | RedStone growth | Modular oracle adoption |
+
+## Economic Security Models
+
+Oracle security ultimately depends on economic incentives. Different approaches have emerged.
+
+### Stake-Based Security (Chainlink)
+
+Node operators stake LINK tokens, risking slashing for misbehavior:
+
+```
+Security Model:
+┌─────────────────────────────────────────┐
+│            Node Operator                │
+│  Stake: 1000 LINK ($10,000)            │
+│  Revenue: $500/month from fees         │
+│  Slashing: 100% stake for bad data     │
+└─────────────────────────────────────────┘
+
+Rational behavior: Don't risk $10,000 for < $10,000 gain
+Attack cost = Stake × Number of colluding nodes
+```
+
+**Key factors:**
+- Stake at risk must exceed potential attack profit
+- Reputation loss compounds financial penalty
+- Historical performance affects future selection
+
+### Optimistic Security (UMA)
+
+UMA assumes data is correct unless challenged:
+
+```
+Flow:
+1. Proposer submits answer + bond (e.g., 1000 USDC)
+2. 2-hour dispute window opens
+3. If disputed: Both sides bond → DVM (UMA token holders) vote
+4. Loser forfeits bond to winner
+
+Attack cost = Bond + opportunity cost of losing vote
+Defense cost = Bond (recovered if correct)
+```
+
+This model works well for subjective or long-tail data where real-time updates aren't needed.
+
+### Reputation-Weighted Selection
+
+Most oracle networks weight node selection by historical performance:
+
+```solidity
+// Simplified reputation scoring
+struct NodeReputation {
+    uint256 successfulReports;
+    uint256 disputes;
+    uint256 slashEvents;
+    uint256 uptimePercentage;
+}
+
+function calculateWeight(NodeReputation memory rep)
+    internal pure returns (uint256) {
+    return (rep.successfulReports * 100 - rep.disputes * 500 - rep.slashEvents * 10000)
+           * rep.uptimePercentage / 100;
+}
+```
+
+Higher-reputation nodes get more queries, creating positive feedback for honest behavior.
+
+## Cross-Chain Oracle Mechanics
+
+As multi-chain DeFi grows, cross-chain oracles become critical infrastructure.
+
+### Chainlink CCIP
+
+Cross-Chain Interoperability Protocol enables generalized messaging:
+
+```
+Source Chain          Chainlink Network         Destination Chain
+┌───────────┐         ┌─────────────┐          ┌───────────┐
+│  Send     │ ───────>│  Validate   │─────────>│  Execute  │
+│  Message  │         │  Finality   │          │  Message  │
+│           │         │  Commit     │          │           │
+└───────────┘         └─────────────┘          └───────────┘
+                            │
+                      Risk Management
+                      (rate limits, value caps)
+```
+
+CCIP provides:
+- Arbitrary message passing (not just token transfers)
+- Programmable token transfers
+- Defense-in-depth security model
+
+### LayerZero and Axelar Comparison
+
+| Feature | CCIP | LayerZero | Axelar |
+|---------|------|-----------|--------|
+| Security model | DON + Risk Network | Ultra-Light Nodes | Validator set |
+| Message format | Arbitrary bytes | Arbitrary bytes | GMP |
+| Rate limiting | Built-in | User-configured | Protocol-level |
+| Finality | Configurable | Configurable | Threshold |
+
+### Cross-Chain Price Feeds
+
+For multi-chain protocols needing consistent prices:
+
+```solidity
+// Option 1: Same feed deployed on each chain (Chainlink approach)
+// Each chain has local oracle nodes
+
+// Option 2: Read from source chain via message
+function getCanonicalPrice(bytes32 priceId) external {
+    // Request price from Ethereum mainnet
+    ccipRouter.sendMessage(
+        ETHEREUM_CHAIN_SELECTOR,
+        abi.encode(priceId),
+        PRICE_ORACLE_ADDRESS
+    );
+}
+
+// Option 3: Use chain-native TWAP
+function getLocalTwap(address pair) public view returns (uint256) {
+    // Calculate from local DEX
+    return twapOracle.consult(pair, 1 hours);
+}
+```
+
+<Tip>
+For cross-chain lending protocols, consider using the canonical price from the most liquid chain, propagated via oracle networks to other deployments.
+</Tip>
+
+## Multi-Oracle Strategies
+
+Critical applications shouldn't depend on a single oracle. Here are production patterns.
+
+### Fallback Chains
+
+```solidity
+contract MultiOracle {
+    address[] public oracles; // Priority order
+
+    function getPrice() external view returns (uint256) {
+        for (uint i = 0; i < oracles.length; i++) {
+            try IOracle(oracles[i]).getPrice() returns (uint256 price) {
+                if (isValid(price)) return price;
+            } catch {}
+        }
+        revert("All oracles failed");
+    }
+
+    function isValid(uint256 price) internal view returns (bool) {
+        return price > 0 && price < type(uint128).max;
+    }
+}
+```
+
+### Median of Multiple Sources
+
+```solidity
+contract MedianOracle {
+    address public chainlink;
+    address public pyth;
+    address public chronicle;
+
+    function getPrice() external view returns (uint256) {
+        uint256[] memory prices = new uint256[](3);
+
+        prices[0] = getChainlinkPrice();
+        prices[1] = getPythPrice();
+        prices[2] = getChroniclePrice();
+
+        // Sort and return median
+        sortArray(prices);
+        return prices[1]; // Middle value
+    }
+}
+```
+
+### Circuit Breakers
+
+Pause operations when oracles diverge significantly:
+
+```solidity
+contract SafeOracle {
+    uint256 public constant MAX_DEVIATION = 200; // 2%
+
+    function getValidatedPrice() external view returns (uint256) {
+        uint256 chainlinkPrice = getChainlinkPrice();
+        uint256 pythPrice = getPythPrice();
+
+        uint256 deviation = abs(int256(chainlinkPrice) - int256(pythPrice))
+                           * 10000 / chainlinkPrice;
+
+        require(deviation <= MAX_DEVIATION, "Oracle deviation too high");
+
+        // Return average if within tolerance
+        return (chainlinkPrice + pythPrice) / 2;
+    }
+}
+```
+
+<Warning>
+During the March 2023 USDC depeg, some protocols froze because their oracles reported conflicting prices. Design for graceful degradation, not catastrophic failure.
+</Warning>
+
+## Oracle Extractable Value (OEV)
+
+A newer consideration: oracles themselves can capture value from their privileged position.
+
+```
+Traditional MEV: Searcher → Validator → Protocol
+OEV:           Oracle update → Liquidation opportunity → Value
+
+Example:
+1. Oracle updates ETH price downward
+2. Liquidation becomes possible
+3. Who captures the liquidation bonus?
+   - Currently: MEV searchers
+   - OEV proposal: Oracle network or protocol
+```
+
+**API3's OEV Approach**: Routes liquidation value back to the protocol rather than MEV searchers. This changes the economics of oracle provision significantly.
+
+<Note>
+OEV represents an estimated $100M+ annually in value that currently flows to MEV searchers rather than protocols or their users.
+</Note>
+
+## Future Directions
+
+### ZK Oracles
+Zero-knowledge proofs could verify data authenticity without revealing sources:
+- Prove price came from licensed exchange without exposing API keys
+- Verify aggregate computation without showing individual data points
+- Enable privacy-preserving data feeds
+
+### Cross-Chain Oracle Networks
+Chainlink's CCIP and competitors are building general-purpose cross-chain messaging:
+- State proofs from other chains
+- Trustless bridge verification
+- Cross-L2 composability
+
+### AI-Enhanced Oracles
+Emerging patterns include:
+- LLM-verified event resolution
+- Anomaly detection for manipulation
+- Automated data quality scoring
+
 ## What We Learned
 
 **1. No perfect oracle exists.** Every solution trades off decentralization, latency, cost, and coverage. Choose based on your requirements.
@@ -608,4 +1013,8 @@ contract RobustPriceConsumer {
 
 **5. Validation is non-negotiable.** Every oracle integration needs freshness checks, bounds validation, and fallback handling.
 
-The oracle landscape continues evolving. ZK-proven data feeds, AI-verified information, and cross-chain oracle networks are emerging. But the fundamental challenge remains: trustworthy bridges between on-chain determinism and off-chain reality.
+**6. The exploit history is instructive.** Harvest, Mango, bZx, and others show that oracle attacks are profitable and recurring. Defensive design is essential.
+
+**7. OEV is the next frontier.** Value that currently flows to MEV searchers could flow back to protocols and users through oracle-captured MEV.
+
+The oracle landscape continues evolving. ZK-proven data feeds, cross-chain oracle networks, and OEV capture mechanisms are emerging. But the fundamental challenge remains: trustworthy bridges between on-chain determinism and off-chain reality.
