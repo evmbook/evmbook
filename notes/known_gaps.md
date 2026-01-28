@@ -35,12 +35,20 @@ This document tracks claims that need additional verification, sources that coul
 1. **Mojo Nation original documentation**
    - Need: Original whitepaper or specification
    - Why: Token incentive claim is significant
-   - Status: Only secondary sources found
+   - Status: ✓ FOUND — Primary sources located:
+     - Technical Overview (Feb 14, 2000) from Autonomous Zone Industries
+     - Financial Cryptography post-mortem by Jim McCoy (founder)
+     - IPTPS 2002 paper by Zooko Wilcox-O'Hearn
+     - **Confirmed**: Mojo tokens for micropayments; IOU-based credit system; token server for anti-double-spend. Key people: Jim McCoy (CEO), Zooko Wilcox-O'Hearn, Bram Cohen. Ceased Feb 2002 due to hyperinflation.
 
 2. **Szabo smart contracts 1994 document**
    - Need: Original 1994 version
    - Why: Date dispute (1994 vs 1996)
-   - Status: 1996 Extropy Magazine version confirmed
+   - Status: ✓ RESOLVED — Both dates correct for different works:
+     - **1994**: Original "Smart Contracts" essay (copyright 1994) — first definition
+     - **Q1 1996**: "Smart Contracts: Building Blocks for Digital Markets" in Extropy #16
+     - **1997**: "The Idea of Smart Contracts" follow-up
+     - Archive.org has Extropy #16 PDF confirming Q1 1996 publication
 
 3. **Vitalik Reddit post on AMMs**
    - Need: Link to specific Reddit post
@@ -139,7 +147,7 @@ Multiple theories exist:
 
 | Source | Issue | Status |
 |--------|-------|--------|
-| `misc_wilcox_mojonation_2000` | Needs primary doc | Unverified |
+| `misc_mojonation_technical_2000` | ✓ Primary doc found | Verified |
 | `misc_szabo_bitgold_1998` | Date disputed | Medium confidence |
 | Various blog posts | URLs may break | Need archival copies |
 
@@ -149,9 +157,9 @@ Multiple theories exist:
 
 ### Immediate
 
-1. [ ] Search for Mojo Nation original documentation
+1. [x] Search for Mojo Nation original documentation — FOUND: Technical Overview (Feb 14, 2000), McCoy post-mortem, IPTPS 2002 paper. Token economics verified.
 2. [x] Locate Vitalik's AMM Reddit post — FOUND: October 3, 2016 Reddit post "Let's run on-chain decentralized exchanges the way we run prediction markets" (via Adjacent Research); added as `misc_buterin_reddit_amm_2016`
-3. [ ] Verify Szabo smart contracts 1994 vs 1996
+3. [x] Verify Szabo smart contracts 1994 vs 1996 — RESOLVED: Both dates valid. 1994 = original concept essay; Q1 1996 = Extropy #16 expanded article; 1997 = "Idea of Smart Contracts"
 4. [ ] Archive critical blog post URLs via Wayback Machine
 
 ### Short-term
