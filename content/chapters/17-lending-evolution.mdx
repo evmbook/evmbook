@@ -24,6 +24,52 @@ Blockchain lending inverts this model:
 
 The tradeoff? Capital inefficiency. Overcollateralized loans require $150 of collateral for $100 of borrowing. But they work without identity, credit scores, or legal systems.
 
+## Historical Precursors: Pre-DeFi Stablecoins
+
+Before Ethereum, several projects attempted crypto-backed stablecoins. Understanding their failures illuminates why the MakerDAO/Compound model succeeded.
+
+### BitUSD (July 2014): First Crypto-Collateralized Stablecoin
+
+**BitShares** introduced BitUSD—the first crypto-collateralized stablecoin—created by Charles Hoskinson and Dan Larimer (later of Cardano and EOS).
+
+- **Mechanism**: 200% collateralization in BTS tokens required
+- **Shorting model**: Users shorted USD/BTS by posting collateral
+- **Design flaw**: Protected against BTS price falls but not against BitUSD depegging below $1
+
+**Failure Timeline**:
+- April 2015: Market cap peaked >$1M
+- November 2015: Fell below $200k
+- November 25, 2018: "Global settlement" triggered—system too undercollateralized
+- Current status: Trades ~$0.80, effectively abandoned
+
+**Lesson**: Over-collateralization works only if liquidation mechanisms function reliably.
+
+### NuBits (September 2014): First Algorithmic Stablecoin
+
+**Nu** introduced the first seigniorage-based stablecoin:
+- Dual-token system: NuBits (USNBT) + NuShares (NSR)
+- Uncollateralized, algorithmically backed
+- "Parking" rates to incentivize holding during contraction
+
+**2016 Crash** (May-June):
+- Bitcoin price spiked → holders mass-sold NuBits for BTC
+- Peg broke; stayed broken 3 months before recovering
+
+**2018 Final Collapse** (December 2017 - early 2018):
+- Bitcoin's "Christmas crash" drove users INTO NuBits as safe haven
+- Market cap grew 1,500% ($950k → $14M)
+- Price peaked ~$1.50 (Dec 20-28, 2017)
+- Then catastrophic collapse when sentiment reversed
+- Never recovered; currently trades ~$0.03-0.30
+
+**Design Flaw**: Fractional reserve couldn't handle demand fluctuations. No diversified collateral to absorb sell pressure.
+
+**Significance**: Both NuBits crashes presaged the UST collapse by demonstrating that seigniorage models fail under bank-run dynamics without adequate reserves.
+
+<Callout type="note" title="The Pattern">
+Every failed algorithmic stablecoin—NuBits (2016/2018), Iron Finance (2021), UST (2022)—exhibited the same death spiral dynamic. The mechanism designed to restore the peg instead accelerates collapse when confidence breaks.
+</Callout>
+
 ## Era 0: Peer-to-Peer Lending (2017)
 
 ### ETHLend: The Napster of DeFi Lending
@@ -751,3 +797,117 @@ When building on lending protocols:
 **5. Governance evolves.** MakerDAO → Sky shows that even mature protocols must adapt to regulatory and market pressures.
 
 The lending landscape continues evolving. Isolated markets, cross-chain lending, and novel collateral types (NFTs, RWAs) are expanding what's possible. But the core mechanics—overcollateralization, algorithmic rates, and liquidation enforcement—remain constant foundations to build upon.
+
+## Key Figures in DeFi Lending
+
+### Robert Leshner (Compound)
+
+**Background**: B.S. Economics, University of Pennsylvania (Wharton); Chartered Financial Analyst (CFA). Previously CFO at Postmates and chair of San Francisco Revenue Bond Oversight Committee.
+
+**Path to DeFi**: Founded Safe Shepherd (2011), a personal data management startup. Transitioned to crypto, recognizing the potential for algorithmic money markets.
+
+**Contributions**:
+- Founded Compound (2017), designing the pooled lending model that became the industry standard
+- Introduced cTokens—composable receipt tokens representing deposits
+- Launched COMP governance token distribution (June 2020), catalyzing "yield farming" and DeFi Summer
+- Stepped down as CEO in 2023 to found Superstate, bridging TradFi and DeFi
+
+**Significance**: Compound's pooled model replaced peer-to-peer matching with algorithmic rate discovery. Every major lending protocol since—Aave, Morpho, Spark—builds on patterns Leshner established.
+
+### Stani Kulechov (Aave)
+
+**Background**: Law studies in Finland; self-taught developer with an entrepreneurial bent from teenage years.
+
+**Path to Aave**: Founded ETHLend in 2017 as peer-to-peer lending. Recognized the matching problem and pivoted to pooled model with the Aave rebrand in 2020.
+
+**Contributions**:
+- Pioneered **flash loans** (2020)—borrow any amount with zero collateral, repay in same transaction
+- Introduced variable and stable rate options for borrowers
+- Led Aave V2 (2020) and V3 (2022) with E-mode, isolation mode, and portals
+- Founded Lens Protocol for decentralized social media
+
+**Significance**: Flash loans were paradigm-shifting for DeFi capital efficiency, enabling liquidations without capital, atomic arbitrage, and complex collateral operations in single transactions.
+
+### The Stablecoin Pioneers
+
+**Rune Christensen (MakerDAO)**: Founded MakerDAO in 2014, introducing the CDP model. Navigated the protocol through The DAO era, DeFi Summer, and the Sky rebrand.
+
+**Guy Young (Ethena)**: Launched USDe's delta-neutral model (2024), achieving rapid TVL growth through funding rate yield.
+
+**Dan Larimer & Charles Hoskinson (BitUSD)**: Created the first crypto-collateralized stablecoin (2014), though it ultimately failed. Larimer later built EOS and Steemit; Hoskinson founded Cardano.
+
+## Common Misattributions
+
+### 1. "DeFi lending is like traditional lending"
+
+**Misconception**: Same mechanics, just on blockchain.
+
+**Reality**: Fundamental differences:
+- **Overcollateralized**: No credit scores, identity, or underwriting
+- **Algorithmic rates**: Market-clearing prices without human intervention
+- **Instant liquidation**: No collections process; automated enforcement
+- **Permissionless**: Anyone can supply/borrow without approval
+
+Traditional lending accepts credit risk and uses legal systems for enforcement. DeFi lending eliminates credit risk through overcollateralization and uses smart contracts for enforcement.
+
+### 2. "Flash loans are primarily for attacks"
+
+**Misconception**: Flash loans exist to enable exploits.
+
+**Reality**: The vast majority of flash loan volume is legitimate:
+- **Arbitrage**: Maintaining price consistency across venues (market efficiency)
+- **Liquidations**: Enabling anyone to liquidate without capital (protocol health)
+- **Collateral swaps**: Changing collateral type without closing positions (user convenience)
+- **Self-liquidation**: Users unwinding their own positions efficiently
+
+Exploits are a minority use case. Flash loans democratize capital access for legitimate MEV extraction and capital-efficient operations.
+
+### 3. "Higher APY means better protocol"
+
+**Misconception**: Compare protocols by yield alone.
+
+**Reality**: APY depends on multiple factors:
+- **Token incentives**: Often temporary; can disappear after campaigns end
+- **Utilization**: High utilization means idle capital is minimal
+- **Risk parameters**: Higher yields often compensate for higher risk
+- **Protocol sustainability**: Unsustainable yield leads to eventual collapse
+
+A 15% APY on a protocol with questionable security is worse than 4% on audited, battle-tested infrastructure.
+
+### 4. "Compound invented DeFi lending"
+
+**Misconception**: Compound was the first DeFi lending protocol.
+
+**Reality**: ETHLend (now Aave) predates Compound. However, Compound invented the **pooled lending model** with algorithmic interest rates that became the industry standard. The innovation wasn't lending—it was eliminating the need for counterparty matching.
+
+### 5. "All stablecoins are the same risk"
+
+**Misconception**: USDC, DAI, and UST had equivalent risk profiles.
+
+**Reality**: Vastly different risk structures:
+- **USDC**: Bank-held reserves; realized SVB risk briefly in March 2023
+- **DAI**: Overcollateralized with crypto; liquidation and oracle risk
+- **UST**: Algorithmic with no real backing; realized death spiral catastrophically
+
+Understanding stablecoin design determines appropriate use cases and risk management.
+
+## Research Citations
+
+This chapter draws on the following foundational sources:
+
+**Lending Protocols**:
+- Compound Protocol Whitepaper (Leshner & Hayes, 2019) [@online_compound_whitepaper_2019]
+- Aave Protocol V3 Documentation [@online_aave_v3_2022]
+- Flash Boys 2.0: Frontrunning in Decentralized Exchanges (Daian et al., 2019) [@article_daian_flashboys_2019]—foundational MEV research
+
+**Stablecoins**:
+- MakerDAO Whitepaper (2017) [@online_makerdao_whitepaper_2017]—formalized CDPs, liquidation ratios, stability fees
+- BitShares BitUSD Documentation (2014)—first crypto-collateralized stablecoin
+
+**Economic Foundations**:
+- Money market theory from traditional finance informed algorithmic rate design
+- Auction theory (Vickrey 1961, mechanism design) underlies liquidation mechanisms
+
+<Callout type="tip" title="Further Reading">
+For deeper technical details on liquidation MEV dynamics, see Chapter 22 (Oracles) and the MEV section in Chapter 16 (AMMs). For stablecoin regulatory considerations, see Chapter 25 (Regulatory Landscape).
+</Callout>
