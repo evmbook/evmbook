@@ -220,15 +220,47 @@ This ensures project documentation stays current and actionable.
 
 ## Website Alignment (evmbook-site)
 
-The companion website at masteringevm.com pulls content from this repository. When updating book content, ensure the website stays aligned:
+The companion website at masteringevm.com pulls content from this repository. **This repo is the authoritative source of truth for all website content.**
 
-**Key files the website references:**
-- `content/chapters/_index.json` — Chapter/appendix list (Sidebar.tsx)
-- `content/chapters/00-preface.mdx` — Book philosophy (Hero.tsx, Features.tsx)
-- `images/covers/cover-back.svg` — Author bio (About page)
-- `publishing/book-metadata.yaml` — License, publisher, ISBN (Footer)
+### What the Website Syncs
 
-**Brand guidelines:**
+| Book Repo | Website Repo | Purpose |
+|-----------|--------------|---------|
+| `content/chapters/*.mdx` | `content/chapters/` | 28 chapter pages |
+| `content/appendices/*.mdx` | `content/appendices/` | 8 appendix pages |
+| `content/chapters/_index.json` | `content/chapters/` | Canonical TOC |
+| `code/` | `content/code/` | Code Library section |
+| `images/diagrams/*.svg` | `public/diagrams/` | Diagram gallery |
+
+### After Updating Book Content
+
+When chapters, appendices, code, or diagrams change, sync to the website:
+
+```bash
+cd ../evmbook-site
+cp -r ../evmbook-v2025/content/chapters/*.mdx content/chapters/
+cp ../evmbook-v2025/content/chapters/_index.json content/chapters/
+cp -r ../evmbook-v2025/content/appendices/*.mdx content/appendices/
+cp -r ../evmbook-v2025/code/* content/code/
+cp ../evmbook-v2025/images/diagrams/*.svg public/diagrams/
+```
+
+Then update website navigation:
+1. `src/components/layout/Sidebar.tsx` — Match `_index.json`
+2. `src/components/layout/Footer.tsx` — Update counts
+3. `public/sitemap.xml` — Regenerate URLs
+
+### Website Anti-Regression Checks
+
+Before deploying the website, verify:
+- [ ] 28 chapters present and match book
+- [ ] 8 appendices present and match book
+- [ ] Sidebar.tsx lists all chapters/appendices
+- [ ] `npm run build` succeeds with no 404s
+- [ ] Code Library page works
+- [ ] Diagrams page renders all 18 SVGs
+
+### Brand Guidelines
 - Author: Christopher Mercer with Claude (Anthropic)
 - Publisher: White B0x Inc.
 - License: CC BY-NC 4.0
