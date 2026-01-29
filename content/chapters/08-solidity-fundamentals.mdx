@@ -6,7 +6,7 @@ chapter: 8
 
 # Smart Contracts and Solidity
 
-As we discussed earlier, there are two different types of accounts in Ethereum: externally owned accounts (EOAs) and contract accounts. EOAs are controlled by users, often via software such as a wallet application that is external to the Ethereum platform. In contrast, contract accounts are controlled by program code (also commonly referred to as "smart contracts") that is executed by the Ethereum Virtual Machine. In short, EOAs are simple accounts without any associated code or data storage, whereas contract accounts have both associated code and data storage.
+As we discussed earlier, there are two different types of accounts in Ethereum: externally owned accounts (EOAs) and contract accounts. EOAs are controlled by users, often via wallet software external to the EVM platform. Contract accounts are controlled by program code ("smart contracts") executed by the Ethereum Virtual Machine. EOAs have no associated code or data storage; contract accounts have both.
 
 In this chapter, we will discuss contract accounts and the program code that controls them using the Solidity programming language.
 
@@ -40,7 +40,7 @@ Transactions are *atomic*, regardless of how many contracts they call or what th
 
 ## Introduction to Ethereum High-Level Languages
 
-The EVM is a virtual machine that runs a special form of code called *EVM bytecode*. While it is possible to program smart contracts directly in bytecode, EVM bytecode is rather unwieldy and very difficult for programmers to read and understand. Instead, most Ethereum developers use a high-level language to write programs, and a compiler to convert them into bytecode.
+The EVM is a virtual machine that runs a special form of code called *EVM bytecode*. While it is possible to program smart contracts directly in bytecode, EVM bytecode is difficult for programmers to read and understand. Instead, most Ethereum developers use a high-level language to write programs, and a compiler to convert them into bytecode.
 
 Currently supported high-level programming languages for smart contracts include:
 
