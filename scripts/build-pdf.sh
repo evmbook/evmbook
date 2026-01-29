@@ -49,7 +49,7 @@ pandoc \
     --variable sansfont="DejaVu Sans" \
     --variable monofont="DejaVu Sans Mono" \
     --metadata title="Mastering EVM (2025 Edition)" \
-    --metadata author="C. M. Mercer" \
+    --metadata author="Christopher Mercer" \
     --metadata date="January 2026" \
     --highlight-style=tango \
     --output="$OUTPUT_DIR/mastering-evm-2025.pdf" \

@@ -2,14 +2,25 @@
 
 ## Project Context
 
-This is the **Mastering EVM** book series repository—educational content about Ethereum Virtual Machine development.
+This is the **Mastering EVM** book repository—a single comprehensive volume (28 chapters) covering EVM development from cryptographic foundations through modern agentic development.
+
+**NOT a book series.** This is a unified book with chapters 00-27.
 
 ## Content Type
 
 - MDX files (Markdown + JSX components)
 - Technical documentation about blockchain/EVM
-- Code examples in Solidity, JavaScript/TypeScript
+- Code examples in Solidity, TypeScript (not JavaScript)
 - Both Ethereum (ETH) and Ethereum Classic (ETC) coverage
+
+## Documentation Structure
+
+All project docs are in `docs/` as single sources of truth:
+- `PROJECT-STATUS.md` — Master status, phases, next steps
+- `KNOWN-GAPS.md` — Research gaps, unverified claims
+- `DESIGN-SYSTEM.md` — Diagram specs, colors, typography
+- `RESEARCH_SYSTEM.md` — Citation rules, confidence tagging
+- `STYLE_GUIDE.md` — Voice, naming, controversy handling
 
 ## Code Standards
 
@@ -40,10 +51,10 @@ contract Example {
 }
 ```
 
-### JavaScript/TypeScript
+### TypeScript
+- Use TypeScript (not JavaScript)
 - Use ethers.js v6 syntax (not v5)
-- Prefer viem for new code
-- TypeScript preferred over JavaScript
+- Prefer viem/wagmi for new code
 - Use async/await over .then()
 
 ```typescript
@@ -105,3 +116,10 @@ Helpful suggestion
 - Explain both ETH and ETC where relevant
 - Document historical context and lessons from failures
 - Use consistent terminology from the glossary
+
+## DO NOT
+
+- Describe this as a "book series" — it's a single book
+- Use ethers.js v5 patterns — use viem or ethers.js v6
+- Write JavaScript — use TypeScript
+- Create duplicate tracking files — use existing docs in `docs/`

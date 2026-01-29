@@ -137,7 +137,7 @@ When auditing existing book chapters:
 1. Extract factual claims
 2. Classify as attributed/unattributed
 3. Find supporting sources
-4. Flag gaps in `notes/known_gaps.md`
+4. Flag gaps in `docs/KNOWN-GAPS.md`
 
 ---
 
@@ -190,21 +190,27 @@ For each primitive or major concept:
 ## File Organization
 
 ```
+docs/
+├── PROJECT-STATUS.md   # Master status, phases, research log
+├── KNOWN-GAPS.md       # Unverified claims needing follow-up
+├── DESIGN-SYSTEM.md    # Diagram specs
+├── RESEARCH_SYSTEM.md  # This file
+└── STYLE_GUIDE.md      # Voice, naming, controversy handling
+
 sources/
-├── README.md           # This file's companion, explains BibTeX usage
-├── library.bib         # Master BibTeX library
+├── README.md           # BibTeX usage guide
+├── library.bib         # Master BibTeX library (319 entries)
 └── source_index.md     # Human-readable index with credibility notes
 
 history/
 ├── ERA_MAP.md          # Timeline with citations per era
-└── CLAIMS_LEDGER.md    # Central registry of verified claims
+└── CLAIMS_LEDGER.md    # Central registry of verified claims (150)
 
 primitives/
-└── *.md                # Dossiers with embedded citations
+└── *.md                # Dossiers with embedded citations (27 total)
 
 notes/
-├── known_gaps.md       # Unverified claims needing follow-up
-└── plan.md             # Research priorities and rationale
+└── [session files]     # Temporary working files (archive when done)
 ```
 
 ---

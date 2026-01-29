@@ -48,7 +48,7 @@ case "$BUILD_TYPE" in
                     --variable fontsize=11pt \
                     --variable geometry:margin=1in \
                     --metadata title="Mastering EVM (2025 Edition)" \
-                    --metadata author="C. M. Mercer" \
+                    --metadata author="Christopher Mercer" \
                     --metadata date="January 2026" \
                     --highlight-style=tango \
                     --output=dist/mastering-evm-2025.pdf \
@@ -78,7 +78,7 @@ case "$BUILD_TYPE" in
                     --toc-depth=3 \
                     --number-sections \
                     --metadata title="Mastering EVM (2025 Edition)" \
-                    --metadata author="C. M. Mercer" \
+                    --metadata author="Christopher Mercer" \
                     --metadata date="January 2026" \
                     --highlight-style=tango \
                     --output=dist/mastering-evm-2025.epub \

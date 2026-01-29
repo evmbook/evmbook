@@ -6,65 +6,289 @@ chapter: 26
 
 # Bootstrapping an EVM Ecosystem
 
-> "Decentralization flows down, never up. A centralized foundation guarantees centralized outcomes."
+> "Decentralization is bounded from below. The base layer determines the maximum decentralization possible above it, and applications inevitably inherit the weakest properties of their foundation."
 >
-> — C. M. Mercer
+> — Christopher Mercer
 
 This quote opened Chapter 1, and we return to it now with deeper understanding. You've learned each DeFi primitive individually—tokens, AMMs, lending, oracles, governance. This chapter reveals how they fit together: the dependency tree that determines what must exist before something else can work.
 
 If you're building on a new EVM chain, launching an L2, or trying to understand why some ecosystems thrive while others stagnate, this chapter provides the map.
 
-## The Dependency Tree
+## The Composable DeFi Stack: Money Legos
 
-Every application in an EVM ecosystem depends on lower-level primitives. This isn't just conceptual—it's functional. You literally cannot deploy certain contracts without others existing first.
+The term "Money Legos" captures a fundamental insight about EVM ecosystems: each primitive is a building block that can snap together with others to create complex financial applications. But like actual Lego blocks, there's an order to assembly—you can't build the roof before the foundation.
+
+Each token standard creates a **different application stack** with its own dependency tree:
+
+| Token Standard | Primary Stack | Key Dependencies |
+|----------------|---------------|------------------|
+| **ERC-20** | DeFi (DEX → Lending → Stablecoins) | TWAP oracles from DEX pairs |
+| **ERC-721** | NFTs (Marketplace → Lending → Derivatives) | Floor price from marketplace activity |
+| **ERC-1155** | Multi-outcome (Prediction Markets, Gaming) | Single contract for all outcomes/items |
+
+The key question for each primitive: **"What must exist for this to function?"**
+
+But there's a deeper question: **"Does this introduce off-chain dependencies?"**
+
+A truly sovereign EVM ecosystem can function entirely on-chain, with no reliance on external data providers, bridges, or third parties. Off-chain dependencies (Chainlink oracles, bridged stablecoins) add functionality but introduce different security assumptions.
+
+---
+
+## ERC-20: The DeFi Stack
+
+The ERC-20 token standard enables the entire DeFi ecosystem. Here's the dependency chain:
+
+![ERC-20 DeFi Stack](/images/diagrams/ch26-erc20-defi-stack.svg)
+
+### How Price Discovery Works On-Chain
+
+1. **DEX (Constant Product)** — Uniswap V2 style AMMs only need tokens. Price discovery happens purely through the x·y=k formula. No stablecoins or oracles required.
+
+2. **Cross-Exchange Arbitrage** — When multiple DEXs exist, arbitrageurs maintain price parity across them. Token pairs become de facto price oracles.
+
+3. **TWAP Oracles** — Time-Weighted Average Price oracles read from DEX pairs. For USD pricing, you need a TOKEN/STABLE pair on-chain.
+
+4. **Lending Markets** — Require TWAP oracles for collateral valuation and DEX liquidity for liquidations.
+
+5. **CDP Stablecoins** — Collateralized Debt Position stables (DAI, RAI, LUSD) need TWAP oracles and DEX liquidity. Once deployed, they replace bridged stables.
+
+### The Bootstrap Problem
+
+TWAP oracles need stablecoins, but CDP stablecoins need oracles. Solutions:
+
+- **Option A:** Use native token as unit of account (everything priced in ETC/ETH, not USD)
+- **Option B:** Seed with ONE bridged stablecoin to bootstrap USD pricing, then build native alternatives
+- **Option C:** Bootstrap with ETH-denominated lending first (borrow ETH against TOKEN)
+
+### TWAP Oracles for Bootstrap
+
+TWAP (Time-Weighted Average Price) oracles derive prices from on-chain DEX data—no external dependencies required. This makes them ideal for bootstrapping new ecosystems.
+
+| Version | Oracle Approach | Bootstrap Complexity |
+|---------|----------------|---------------------|
+| V2 | Cumulative accumulators | Simplest—any token pair works |
+| V3 | Built-in observation array | Moderate—geometric mean, configurable |
+| V4 | Hooks-based (opt-in) | Flexible—truncated oracles, TWAMM |
+
+**For new ecosystems:** V2-style pools remain the simplest bootstrap. Any two tokens can create a price reference without stablecoins, external oracles, or complex configuration. Once liquidity exists, the DEX pair becomes a permissionless price oracle.
+
+V3 improved manipulation resistance with geometric mean TWAP (using log prices). V4 takes a modular approach—oracles are implemented via hooks, enabling custom solutions like truncated oracles (limiting historical windows to prevent flash loan attacks) and TWAMM (Time-Weighted Average Market Maker for gradual large order execution).
+
+<Tip>
+For detailed TWAP implementation patterns across V2, V3, and V4—including code examples, truncated oracles, and TWAMM—see [Chapter 22: Oracles](/chapters/22-oracles).
+</Tip>
+
+---
+
+## ERC-721: The NFT Stack
+
+Non-fungible tokens create a parallel application stack with different dependencies:
+
+![ERC-721 NFT Stack](/images/diagrams/ch26-erc721-nft-stack.svg)
+
+### How NFT Pricing Works
+
+Unlike ERC-20 DeFi, NFT pricing comes from **marketplace activity**, not TWAP oracles:
+
+1. **NFT Marketplaces** — Seaport (OpenSea), Blur, LooksRare. Need ERC-721 tokens + payment method (WETH).
+
+2. **Floor Price Discovery** — The lowest listed price for a collection becomes the de facto valuation metric.
+
+3. **NFT Lending** — Protocols like NFTfi, BendDAO use floor prices to determine collateral value.
+
+4. **NFT Derivatives** — Floor perps, fractionalization (which creates ERC-20s), NFT indexes.
+
+### Evolution of NFT Marketplaces
+
+| Era | Protocol | Innovation |
+|-----|----------|------------|
+| 2017 | Wyvern (OpenSea v1) | First general-purpose NFT marketplace |
+| 2022 | Seaport (OpenSea v2) | Gas-efficient, composable orders |
+| 2022 | Blur | Pro trading, aggregation, incentives |
+
+### Crossover to DeFi
+
+Fractionalized NFTs become ERC-20 tokens, bridging into the DeFi stack. This enables:
+- DEX trading of fractional ownership
+- Lending against fractional positions
+- Index products tracking multiple collections
+
+---
+
+## ERC-1155: The Multi-Outcome Stack
+
+ERC-1155 shines when a single contract needs to manage multiple related token types. Two dominant use cases have emerged: **prediction markets** and **gaming economies**.
+
+![ERC-1155 Multi-Token Stack](/images/diagrams/ch26-erc1155-multitoken-stack.svg)
+
+### Why ERC-1155?
+
+One contract manages multiple token IDs, each representing a different outcome or item type:
+
+```solidity
+// Prediction market: each outcome is a token ID
+contract PredictionMarket is ERC1155 {
+    uint256 constant YES = 0;  // "Yes" outcome shares
+    uint256 constant NO = 1;   // "No" outcome shares
+    // Shares sum to $1 at resolution
+}
+
+// Gaming: currencies and items in one contract
+contract GameEconomy is ERC1155 {
+    uint256 constant GOLD = 0;           // Fungible currency
+    uint256 constant WOOD = 1;           // Fungible resource
+    uint256 constant LEGENDARY_SWORD = 1000;  // Non-fungible item
+}
+```
+
+### Prediction Markets (Polymarket Model)
+
+Polymarket's architecture demonstrates ERC-1155's power for multi-outcome systems:
+
+1. **Outcome Shares** — Each market outcome is a token ID. Binary markets have YES/NO; multi-outcome markets have one ID per possibility.
+
+2. **Conditional Tokens (CTF)** — Gnosis's Conditional Token Framework uses ERC-1155 to represent positions across outcome combinations.
+
+3. **CLOB Trading** — Order books match buyers and sellers of outcome shares. Prices reflect probability estimates.
+
+4. **Resolution** — Winning shares redeem for the collateral (usually USDC). Losing shares become worthless.
+
+| Component | Dependency |
+|-----------|------------|
+| Outcome shares | ERC-1155 contract |
+| Trading | Order book or AMM |
+| Collateral | Stablecoin (USDC) |
+| Resolution | Oracle or UMA optimistic oracle |
+
+### Gaming Economies
+
+The original ERC-1155 use case remains powerful for games:
+
+1. **Mixed Token Types** — Fungible currencies, semi-fungible consumables, and unique items in one contract
+2. **Batch Operations** — Transfer multiple item types in a single transaction (gas efficient)
+3. **Cross-Game Interoperability** — Loot, Treasure ecosystem enable assets across multiple games
+
+### DeFi Crossover
+
+ERC-1155 tokens integrate with DeFi through:
+- **Wrapper contracts** — Convert to ERC-20 for DEX trading
+- **Specialized AMMs** — Prediction market AMMs like Polymarket's CLOB
+- **Collateralization** — Use positions as collateral in lending protocols
+
+---
+
+## The Sovereign On-Chain Path
+
+Each stack shares a common foundation. Here's the combined view:
+
+### Overview
 
 ```
-                    ┌─────────────────────────────────────┐
-                    │         USER APPLICATIONS           │
-                    │   (Wallets, Dashboards, Analytics)  │
-                    └─────────────────┬───────────────────┘
-                                      │
-        ┌─────────────────────────────┼─────────────────────────────┐
-        │                             │                             │
-        ▼                             ▼                             ▼
-┌───────────────┐           ┌─────────────────┐           ┌─────────────────┐
-│  LAUNCHPADS   │           │   PREDICTION    │           │   GOVERNANCE    │
-│  (Pump.fun)   │           │    MARKETS      │           │     (DAOs)      │
-└───────┬───────┘           │  (Polymarket)   │           └────────┬────────┘
-        │                   └────────┬────────┘                    │
-        │                            │                             │
-        └────────────┬───────────────┼─────────────────────────────┘
-                     │               │
-                     ▼               ▼
-              ┌──────────────────────────────┐
-              │         DEX / AMMs           │
-              │  (Uniswap, Curve, Aerodrome) │
-              └──────────────┬───────────────┘
-                             │
-              ┌──────────────┼──────────────┐
-              │              │              │
-              ▼              ▼              ▼
-       ┌───────────┐  ┌───────────┐  ┌───────────┐
-       │  LENDING  │  │ STABLES   │  │  ORACLES  │
-       │(Aave,Comp)│  │(DAI,USDC) │  │(Chainlink)│
-       └─────┬─────┘  └─────┬─────┘  └─────┬─────┘
-             │              │              │
-             └──────────────┼──────────────┘
-                            │
-                            ▼
-              ┌──────────────────────────────┐
-              │       TOKEN STANDARDS        │
-              │   (ERC-20, ERC-721, ERC-1155)│
-              └──────────────┬───────────────┘
-                             │
-                             ▼
-              ┌──────────────────────────────┐
-              │         EVM CHAIN            │
-              │   (Execution + Consensus)    │
-              └──────────────────────────────┘
+                         ┌─────────────────────────────────────┐
+                         │         USER APPLICATIONS           │
+                         │   (Wallets, Dashboards, Analytics)  │
+                         └─────────────────┬───────────────────┘
+                                           │
+         ┌─────────────────────────────────┼─────────────────────────────────┐
+         │                                 │                                 │
+         ▼                                 ▼                                 ▼
+  ┌─────────────┐                 ┌─────────────┐                 ┌─────────────────┐
+  │ DERIVATIVES │                 │ PREDICTION  │                 │   LAUNCHPADS    │
+  │(native unit)│                 │  MARKETS    │                 │  (LBPs, etc)    │
+  │needs:TWAP   │                 │(on-chain    │                 │ needs: DEX      │
+  │ oracles,DEX │                 │ resolution) │                 └────────┬────────┘
+  └──────┬──────┘                 └──────┬──────┘                          │
+         │                               │                                 │
+         └───────────────────────────────┼─────────────────────────────────┘
+                                         │
+                  ┌──────────────────────┼──────────────────────┐
+                  │                      │                      │
+                  ▼                      ▼                      ▼
+           ┌─────────────┐        ┌─────────────┐        ┌─────────────┐
+           │   LENDING   │        │ CDP STABLES │        │ TWAP ORACLES│
+           │(native unit)│        │ (native)    │        │ (from DEX)  │
+           │needs: TWAP  │◄──────►│needs: TWAP  │◄──────►│needs: DEX   │
+           │ oracles,DEX │        │ oracles,DEX │        │ + stable    │
+           └──────┬──────┘        └──────┬──────┘        │   pair      │
+                  │                      │               └──────┬──────┘
+                  └──────────────────────┼──────────────────────┘
+                                         │
+                  ┌──────────────────────┼──────────────────────┐
+                  │                      │                      │
+                  ▼                      ▼                      ▼
+           ┌─────────────┐        ┌───────────────┐        ┌───────────────┐
+           │   DEX V2    │        │  GOVERNANCE   │        │  SEED STABLE  │
+           │(const prod) │        │   (DAOs)      │        │ (bootstrap)   │
+           │needs: tokens│        │needs: tokens  │        │ 1 bridged OR  │
+           │    only     │        │    only       │        │ native unit   │
+           └──────┬──────┘        └───────┬───────┘        └───────┬───────┘
+                  │                       │                        │
+                  └───────────────────────┼────────────────────────┘
+                                          │
+                                          ▼
+                         ┌──────────────────────────────┐
+                         │       TOKEN STANDARDS        │
+                         │     ERC-20 · WETH · ERC-721  │
+                         └──────────────┬───────────────┘
+                                        │
+                                        ▼
+                         ┌──────────────────────────────┐
+                         │         EVM CHAIN            │
+                         │   (Execution + Consensus)    │
+                         └──────────────────────────────┘
 ```
 
-![DeFi Dependency Tree](/images/diagrams/ch26-dependency-tree.svg)
+This ASCII diagram shows the ERC-20 DeFi path, which is the most complex dependency tree. The ERC-721 and ERC-1155 stacks follow similar patterns but with marketplace activity replacing oracle infrastructure for pricing.
+
+---
+
+## Off-Chain Dependencies (Optional Enhancements)
+
+Off-chain data sources add functionality but change the security model:
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        OFF-CHAIN DEPENDENCIES                           │
+│                    (Different security assumptions)                     │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐   │
+│  │  CHAINLINK      │     │  BRIDGED        │     │   EXTERNAL      │   │
+│  │  ORACLES        │     │  STABLECOINS    │     │   RPC/INDEXERS  │   │
+│  │  ─────────────  │     │  ─────────────  │     │  ─────────────  │   │
+│  │  Trust: oracle  │     │  Trust: bridge  │     │  Trust: infra   │   │
+│  │  operators      │     │  operators +    │     │  providers      │   │
+│  │                 │     │  issuer (Circle)│     │                 │   │
+│  └────────┬────────┘     └────────┬────────┘     └────────┬────────┘   │
+│           │                       │                       │             │
+│           └───────────────────────┼───────────────────────┘             │
+│                                   │                                     │
+└───────────────────────────────────┼─────────────────────────────────────┘
+                                    │
+                        ┌───────────▼───────────┐
+                        │   ON-CHAIN ECOSYSTEM  │
+                        │  (Sovereign, or uses  │
+                        │   off-chain data)     │
+                        └───────────────────────┘
+```
+
+| Dependency | What It Provides | Trust Assumption |
+|------------|------------------|------------------|
+| **Chainlink** | Fast, accurate price feeds | Oracle node operators won't collude |
+| **Bridged USDC** | USD-denominated liquidity | Circle won't freeze/blacklist, bridge is secure |
+| **External RPCs** | Node access for users | Infura/Alchemy won't censor |
+
+**A sovereign ecosystem can function without any of these.** But most ecosystems choose to use them for enhanced functionality:
+
+- Chainlink enables faster, more manipulation-resistant prices than TWAP
+- Bridged stables provide instant USD liquidity without CDP bootstrap
+- External RPCs let users interact without running nodes
+
+The trade-off: **convenience vs. sovereignty**. The Mercer principle applies: if your foundation depends on off-chain actors, your ceiling is set by their trustworthiness.
+
+![Sovereign On-Chain Dependency Tree](/images/diagrams/ch26-dependency-tree.svg)
+
+---
 
 ## Bootstrap Order for a New Chain
 
@@ -734,7 +958,7 @@ contract CrossChainVault is ICrossChainReceiver {
 
 Building an EVM ecosystem is like constructing a building: you can't install the roof before the walls, and you can't build walls without a foundation. The dependency tree isn't just a conceptual model—it's the practical reality of what contracts can and cannot do without supporting infrastructure.
 
-Remember Mercer's principle: decentralization flows down, never up. Every centralized component in your foundation becomes a ceiling for everything built above it. Choose your foundations wisely.
+Remember Mercer's principle: decentralization is bounded from below. Every centralized component in your foundation becomes a ceiling for everything built above it. Choose your foundations wisely.
 
 The most successful ecosystems aren't those that move fastest, but those that build each layer solidly before moving to the next. The composability that makes DeFi powerful also makes it fragile—a weakness at any level cascades upward.
 

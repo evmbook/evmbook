@@ -213,7 +213,7 @@ This work is licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/
 
 Commercial use requires permission from the publisher.
 
-**Author:** C. M. Mercer
+**Author:** Christopher Mercer
 **Publisher:** White B0x Inc.
 
 ---

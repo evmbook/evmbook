@@ -142,11 +142,11 @@
       <text y="4" text-anchor="middle" font-family="monospace" font-size="7" fill="#4338CA">0xA92D...</text>
     </g>
 
-    <text x="275" y="55" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#6B7280">index 0, 1, 2...</text>
+    <text x="275" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#6B7280">index 0, 1, 2...</text>
   </g>
 
   <!-- Key differences callout -->
-  <g transform="translate(400, 345)">
+  <g transform="translate(400, 335)">
     <rect x="-180" y="-18" width="360" height="36" rx="6" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1"/>
     <text y="0" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#92400E">EOAs initiate transactions. Contracts only execute when called.</text>
     <text y="14" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#B45309">Every transaction must originate from an EOA (or use ERC-4337 account abstraction).</text>

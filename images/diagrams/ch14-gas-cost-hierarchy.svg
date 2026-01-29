@@ -47,12 +47,12 @@
     <text x="-220" y="-8" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#FFF">STORAGE (SSTORE/SLOAD)</text>
     <text x="-220" y="12" font-family="Arial, sans-serif" font-size="10" fill="#FECACA">Persistent state - survives between transactions</text>
 
-    <g transform="translate(100, 0)">
+    <g transform="translate(65, 0)">
       <rect x="-55" y="-22" width="110" height="44" rx="6" fill="#FFF" fill-opacity="0.2"/>
       <text y="-5" text-anchor="middle" font-family="monospace" font-size="9" fill="#FFF">Cold SLOAD</text>
       <text y="12" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#FFF">2,100 gas</text>
     </g>
-    <g transform="translate(200, 0)">
+    <g transform="translate(185, 0)">
       <rect x="-55" y="-22" width="110" height="44" rx="6" fill="#FFF" fill-opacity="0.2"/>
       <text y="-5" text-anchor="middle" font-family="monospace" font-size="9" fill="#FFF">New SSTORE</text>
       <text y="12" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#FFF">20,000 gas</text>
@@ -65,12 +65,12 @@
     <text x="-220" y="-8" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#FFF">MEMORY (MLOAD/MSTORE)</text>
     <text x="-220" y="12" font-family="Arial, sans-serif" font-size="10" fill="#FEF3C7">Volatile - cleared after transaction</text>
 
-    <g transform="translate(100, 0)">
+    <g transform="translate(65, 0)">
       <rect x="-55" y="-22" width="110" height="44" rx="6" fill="#FFF" fill-opacity="0.2"/>
       <text y="-5" text-anchor="middle" font-family="monospace" font-size="9" fill="#FFF">MLOAD</text>
       <text y="12" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#FFF">3 gas</text>
     </g>
-    <g transform="translate(200, 0)">
+    <g transform="translate(185, 0)">
       <rect x="-55" y="-22" width="110" height="44" rx="6" fill="#FFF" fill-opacity="0.2"/>
       <text y="-5" text-anchor="middle" font-family="monospace" font-size="9" fill="#FFF">Expansion</text>
       <text y="12" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#FFF">O(n²)</text>
@@ -83,12 +83,12 @@
     <text x="-220" y="-8" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#FFF">CALLDATA (read-only)</text>
     <text x="-220" y="12" font-family="Arial, sans-serif" font-size="10" fill="#C7D2FE">Input data - immutable during execution</text>
 
-    <g transform="translate(100, 0)">
+    <g transform="translate(65, 0)">
       <rect x="-55" y="-22" width="110" height="44" rx="6" fill="#FFF" fill-opacity="0.2"/>
       <text y="-5" text-anchor="middle" font-family="monospace" font-size="9" fill="#FFF">Non-zero byte</text>
       <text y="12" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#FFF">16 gas</text>
     </g>
-    <g transform="translate(200, 0)">
+    <g transform="translate(185, 0)">
       <rect x="-55" y="-22" width="110" height="44" rx="6" fill="#FFF" fill-opacity="0.2"/>
       <text y="-5" text-anchor="middle" font-family="monospace" font-size="9" fill="#FFF">Zero byte</text>
       <text y="12" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#FFF">4 gas</text>
@@ -101,12 +101,12 @@
     <text x="-220" y="-8" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#FFF">STACK (PUSH/POP/DUP/SWAP)</text>
     <text x="-220" y="12" font-family="Arial, sans-serif" font-size="10" fill="#D1FAE5">Temporary computation - 1024 slots max</text>
 
-    <g transform="translate(100, 0)">
+    <g transform="translate(65, 0)">
       <rect x="-55" y="-22" width="110" height="44" rx="6" fill="#FFF" fill-opacity="0.2"/>
       <text y="-5" text-anchor="middle" font-family="monospace" font-size="9" fill="#FFF">PUSH1</text>
       <text y="12" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#FFF">3 gas</text>
     </g>
-    <g transform="translate(200, 0)">
+    <g transform="translate(185, 0)">
       <rect x="-55" y="-22" width="110" height="44" rx="6" fill="#FFF" fill-opacity="0.2"/>
       <text y="-5" text-anchor="middle" font-family="monospace" font-size="9" fill="#FFF">DUP/SWAP</text>
       <text y="12" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#FFF">3 gas</text>
@@ -115,7 +115,7 @@
 
   <!-- Optimization tips -->
   <g transform="translate(720, 250)" filter="url(#dropShadow)">
-    <rect x="-55" y="-130" width="110" height="260" rx="8" fill="#FFF" stroke="#E5E7EB"/>
+    <rect x="-55" y="-130" width="110" height="270" rx="8" fill="#FFF" stroke="#E5E7EB"/>
     <text y="-110" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#374151">Optimize</text>
 
     <text y="-85" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#EF4444">Pack storage</text>

@@ -16,16 +16,15 @@ evmbook-v1/
 │   └── meta/                       # About, colophon
 ├── manuscript/                     # Era-based historical chapters (13 chapters)
 │   └── chapters/                   # Era 0-12 (~6,600 lines total)
-├── primitives/                     # Research dossiers (27 primitives, ~42K words)
-├── sources/                        # BibTeX library (100+ entries)
+├── primitives/                     # Research dossiers (27 primitives, ~49K words)
+├── sources/                        # BibTeX library (319 entries)
 ├── history/                        # ERA_MAP.md, CLAIMS_LEDGER.md
-├── docs/                           # Project documentation
-├── notes/                          # Research notes and gaps
+├── docs/                           # Project documentation (SINGLE SOURCE OF TRUTH)
+├── notes/                          # Session-specific working files only
 ├── .claude/                        # Agent instructions (this file)
 ├── .archive/                       # Superseded content (reference only)
-│   └── old-chapters/               # Previous chapter versions
 ├── code/                           # Code examples (24 Solidity files)
-├── images/                         # Diagrams (15 SVGs)
+├── images/                         # Diagrams (18 SVGs)
 └── scripts/                        # Build scripts
 ```
 
@@ -141,24 +140,27 @@ The repository includes a parallel research infrastructure for historical accura
 
 ### Sources (`sources/`)
 
-- `library.bib` — 100+ BibTeX entries
+- `library.bib` — 319 BibTeX entries
 - `source_index.md` — Human-readable source index with credibility tiers
 
 ### History (`history/`)
 
 - `ERA_MAP.md` — 13 eras with 5 parallel tracks
-- `CLAIMS_LEDGER.md` — 80+ verified claims with confidence levels
+- `CLAIMS_LEDGER.md` — 150 verified claims with confidence levels
 
 ## Project Documentation
 
-All project docs are self-contained in `docs/`:
-- **`docs/PROJECT-STATUS.md`** - Current status, next steps, book structure
-- **`docs/MILESTONES.md`** - Phase tracking, research logs
-- **`docs/DESIGN-SYSTEM.md`** - Diagram specs, colors, typography
-- **`docs/RESEARCH_SYSTEM.md`** - Citation rules, confidence tagging
-- **`docs/STYLE_GUIDE.md`** - Voice, naming, controversy handling
+All project docs are in `docs/` as **single sources of truth**:
 
-**Read these docs first** when starting a new session.
+| File | Purpose |
+|------|---------|
+| `PROJECT-STATUS.md` | Master status, phases, next steps, research log |
+| `KNOWN-GAPS.md` | Research gaps, unverified claims, future work |
+| `DESIGN-SYSTEM.md` | Diagram specs, colors, typography |
+| `RESEARCH_SYSTEM.md` | Citation rules, confidence tagging |
+| `STYLE_GUIDE.md` | Voice, naming, controversy handling |
+
+**Read `docs/PROJECT-STATUS.md` first** when starting a new session.
 
 ## Task Patterns
 
@@ -185,33 +187,36 @@ For open-ended exploration, prefer using specialized agents:
 1. Check `primitives/` for existing dossiers on the topic
 2. Use BibTeX keys from `sources/library.bib` for citations: `[@key]`
 3. Add new claims to `history/CLAIMS_LEDGER.md` with confidence levels
-4. Flag uncertainties in `notes/known_gaps.md`
+4. Flag uncertainties in `docs/KNOWN-GAPS.md`
 5. Follow citation format in `docs/RESEARCH_SYSTEM.md`
 
 ### After Completing Tasks
 **IMPORTANT:** Update project documentation when work is complete:
 
-1. **`docs/PROJECT-STATUS.md`** — Main status file
+1. **`docs/PROJECT-STATUS.md`** — Single source of truth
    - Update phase status in the table
    - Keep "Next Steps" section current
+   - Add entries to "Research Log" section
    - Update "Last Updated" date
 
-2. **`docs/MILESTONES.md`** — Phase tracking
-   - Move completed phases to "Completed Phases" table
-   - Update "Current Phase" section
-   - Keep research log accurate
+2. **`docs/KNOWN-GAPS.md`** — Research gaps
+   - Move resolved items to "Resolved Items" section
+   - Add any new gaps discovered during work
 
-3. **`notes/known_gaps.md`** — Research gaps
-   - Check off resolved items in Action Items
-   - Remove or archive completed sections
-   - Add any new gaps discovered
-
-4. **`notes/plan.md`** — Research priorities
-   - Update phase completion status
-   - Move completed items to done
-   - Adjust priorities as needed
+3. **Archive session plans** — When done with major planning sessions
+   - Move completed plans to `.archive/notes-YYYY-MM-DD/`
+   - Keep `notes/` clean for active work only
 
 This ensures project documentation stays current and actionable.
+
+## Best Practices for Agentic Documentation
+
+1. **Single source of truth** — One file per concern (status, gaps, style)
+2. **docs/ for stable docs** — Reference documentation that persists
+3. **notes/ for session work** — Temporary files, archive when done
+4. **Archive, don't delete** — Move completed plans to `.archive/`
+5. **Update status immediately** — Mark tasks done as you complete them
+6. **Cross-reference** — Link related docs, don't duplicate content
 
 ## DO NOT
 
@@ -219,4 +224,5 @@ This ensures project documentation stays current and actionable.
 - Describe this as an "11-book series" - it's a single book
 - Use ethers.js v5 patterns - use viem or ethers.js v6
 - Write JavaScript - use TypeScript
-- Reference external plan files - all docs are in `docs/`
+- Create duplicate tracking files - use existing docs in `docs/`
+- Leave stale plans in `notes/` - archive completed work

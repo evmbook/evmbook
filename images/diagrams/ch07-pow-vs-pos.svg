@@ -46,9 +46,9 @@
   <g transform="translate(190, 75)" filter="url(#dropShadow)">
     <!-- Header -->
     <rect x="-155" y="0" width="310" height="50" rx="12" fill="url(#powGradient)"/>
-    <text x="0" y="22" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#D1FAE5">⛏️ CONSENSUS MODEL</text>
+    <text x="0" y="22" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#D1FAE5">CONSENSUS MODEL</text>
     <text y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#FFF">
-      Proof of Work
+      Proof of Work ⛏️
     </text>
 
     <!-- Content box -->
@@ -61,32 +61,32 @@
     </g>
 
     <!-- Security model -->
-    <text y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#374151">Security Model</text>
+    <text y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#374151">Validation Model</text>
     <rect x="-130" y="140" width="260" height="50" rx="6" fill="#F0FDF4"/>
-    <text y="160" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#15803D">Miners invest in hardware + electricity</text>
-    <text y="175" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#15803D">to compete for block rewards</text>
+    <text y="160" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#15803D">Miners invest in computational power for block rewards</text>
+    <text y="175" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#15803D">Orphaned for misbehavior causing economic losses</text>
 
     <!-- Specs table -->
     <g transform="translate(0, 205)">
       <rect x="-130" y="0" width="125" height="28" rx="4" fill="#F9FAFB" stroke="#E5E7EB"/>
-      <text x="-65" y="18" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#6B7280">Block Time</text>
+      <text x="-65" y="18" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#6B7280">Entry Barrier</text>
       <rect x="5" y="0" width="125" height="28" rx="4" fill="#ECFDF5" stroke="#3AB83A"/>
-      <text x="67" y="18" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#166534">~13 sec</text>
+      <text x="67" y="18" text-anchor="middle" font-family="monospace" font-size="10" fill="#166534">Hardware Cost</text>
 
       <rect x="-130" y="32" width="125" height="28" rx="4" fill="#F9FAFB" stroke="#E5E7EB"/>
-      <text x="-65" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#6B7280">Finality</text>
+      <text x="-65" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#6B7280">Censorship Resistance</text>
       <rect x="5" y="32" width="125" height="28" rx="4" fill="#ECFDF5" stroke="#3AB83A"/>
-      <text x="67" y="50" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#166534">Probabilistic</text>
+      <text x="67" y="50" text-anchor="middle" font-family="monospace" font-size="10" fill="#166534">High</text>
 
       <rect x="-130" y="64" width="125" height="28" rx="4" fill="#F9FAFB" stroke="#E5E7EB"/>
       <text x="-65" y="82" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#6B7280">Attack Vector</text>
       <rect x="5" y="64" width="125" height="28" rx="4" fill="#ECFDF5" stroke="#3AB83A"/>
-      <text x="67" y="82" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#166534">51% hashpower</text>
+      <text x="67" y="82" text-anchor="middle" font-family="monospace" font-size="10" fill="#166534">51% hashpower</text>
 
       <rect x="-130" y="96" width="125" height="28" rx="4" fill="#F9FAFB" stroke="#E5E7EB"/>
-      <text x="-65" y="114" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#6B7280">Algorithm</text>
+      <text x="-65" y="114" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#6B7280">Energy Use</text>
       <rect x="5" y="96" width="125" height="28" rx="4" fill="#ECFDF5" stroke="#3AB83A"/>
-      <text x="67" y="114" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#166534">ETCHash</text>
+      <text x="67" y="114" text-anchor="middle" font-family="monospace" font-size="10" fill="#166534">High</text>
     </g>
   </g>
 
@@ -94,9 +94,9 @@
   <g transform="translate(610, 75)" filter="url(#dropShadow)">
     <!-- Header -->
     <rect x="-155" y="0" width="310" height="50" rx="12" fill="url(#posGradient)"/>
-    <text x="0" y="22" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#E0E7FF">🔒 CONSENSUS MODEL</text>
+    <text x="0" y="22" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#E0E7FF">CONSENSUS MODEL</text>
     <text y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#FFF">
-      Proof of Stake
+      Proof of Stake 🔒
     </text>
 
     <!-- Content box -->
@@ -109,61 +109,61 @@
     </g>
 
     <!-- Security model -->
-    <text y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#374151">Security Model</text>
+    <text y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#374151">Validation Model</text>
     <rect x="-130" y="140" width="260" height="50" rx="6" fill="#EEF2FF"/>
-    <text y="160" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#4338CA">Validators stake 32 ETH as collateral</text>
-    <text y="175" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#4338CA">Slashed for misbehavior</text>
+    <text y="160" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#4338CA">Validators stake collateral for block rewards</text>
+    <text y="175" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#4338CA">Slashed for misbehavior resulting is asset forfeiture</text>
 
     <!-- Specs table -->
     <g transform="translate(0, 205)">
       <rect x="-130" y="0" width="125" height="28" rx="4" fill="#F9FAFB" stroke="#E5E7EB"/>
-      <text x="-65" y="18" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#6B7280">Block Time</text>
+      <text x="-65" y="18" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#6B7280">Entry Barrier</text>
       <rect x="5" y="0" width="125" height="28" rx="4" fill="#EEF2FF" stroke="#627EEA"/>
-      <text x="67" y="18" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#4338CA">12 sec</text>
+      <text x="67" y="18" text-anchor="middle" font-family="monospace" font-size="10" fill="#4338CA">Stake Cost</text>
 
       <rect x="-130" y="32" width="125" height="28" rx="4" fill="#F9FAFB" stroke="#E5E7EB"/>
-      <text x="-65" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#6B7280">Finality</text>
+      <text x="-65" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#6B7280">Censorship Resistance</text>
       <rect x="5" y="32" width="125" height="28" rx="4" fill="#EEF2FF" stroke="#627EEA"/>
-      <text x="67" y="50" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#4338CA">~13 min</text>
+      <text x="67" y="50" text-anchor="middle" font-family="monospace" font-size="10" fill="#4338CA">Low</text>
 
       <rect x="-130" y="64" width="125" height="28" rx="4" fill="#F9FAFB" stroke="#E5E7EB"/>
       <text x="-65" y="82" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#6B7280">Attack Vector</text>
       <rect x="5" y="64" width="125" height="28" rx="4" fill="#EEF2FF" stroke="#627EEA"/>
-      <text x="67" y="82" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#4338CA">34%/51% stake</text>
+      <text x="67" y="82" text-anchor="middle" font-family="monospace" font-size="10" fill="#4338CA">34%/51% stake</text>
 
       <rect x="-130" y="96" width="125" height="28" rx="4" fill="#F9FAFB" stroke="#E5E7EB"/>
       <text x="-65" y="114" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#6B7280">Energy Use</text>
       <rect x="5" y="96" width="125" height="28" rx="4" fill="#EEF2FF" stroke="#627EEA"/>
-      <text x="67" y="114" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#4338CA">-99.95%</text>
+      <text x="67" y="114" text-anchor="middle" font-family="monospace" font-size="10" fill="#4338CA">Low</text>
     </g>
   </g>
 
   <!-- Center: What they share -->
   <g transform="translate(400, 250)">
-    <rect x="-60" y="-60" width="120" height="150" rx="12" fill="#FFF" stroke="#9CA3AF" stroke-width="2" filter="url(#dropShadow)"/>
+    <rect x="-60" y="-60" width="120" height="160" rx="12" fill="#FFF" stroke="#9CA3AF" stroke-width="2" filter="url(#dropShadow)"/>
     <text y="-38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#374151">Both Share</text>
 
     <g transform="translate(0, -10)">
-      <circle r="8" fill="#8B5CF6"/>
+      <circle r="8" fill="#FF8C00"/>
       <text x="0" y="4" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#FFF">1</text>
     </g>
     <text y="8" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#4B5563">Same EVM</text>
 
     <g transform="translate(0, 30)">
-      <circle r="8" fill="#8B5CF6"/>
+      <circle r="8" fill="#FF8C00"/>
       <text x="0" y="4" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#FFF">2</text>
     </g>
     <text y="48" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#4B5563">Same Opcodes</text>
 
     <g transform="translate(0, 70)">
-      <circle r="8" fill="#8B5CF6"/>
+      <circle r="8" fill="#FF8C00"/>
       <text x="0" y="4" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#FFF">3</text>
     </g>
     <text y="88" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#4B5563">Same Contracts</text>
   </g>
 
   <!-- Key insight -->
-  <g transform="translate(400, 450)">
+  <g transform="translate(400, 460)">
     <rect x="-280" y="-22" width="560" height="55" rx="8" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1"/>
     <text y="-4" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#92400E">Key Insight</text>
     <text y="12" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#B45309">The EVM specification is consensus-agnostic. Your Solidity code runs identically on both chains.</text>

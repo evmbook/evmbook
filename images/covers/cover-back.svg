@@ -41,8 +41,8 @@
       <tspan x="0" y="208" fill="#CCCCCC">&#8226; Layer 2 solutions and zero-knowledge applications</tspan>
       <tspan x="0" y="230" fill="#CCCCCC">&#8226; Multi-chain deployment and upgrade strategies</tspan>
       <tspan x="0" y="252" fill="#CCCCCC">&#8226; AI-assisted development with agentic coding patterns</tspan>
-      <tspan x="0" y="295" font-style="italic" fill="#AAAAAA">"Decentralization flows down, never up.</tspan>
-      <tspan x="0" y="315" font-style="italic" fill="#AAAAAA">A centralized foundation guarantees centralized outcomes."</tspan>
+      <tspan x="0" y="295" font-style="italic" fill="#AAAAAA">"Decentralization is bounded from below. The base layer determines</tspan>
+      <tspan x="0" y="315" font-style="italic" fill="#AAAAAA">the maximum decentralization possible above it." — Christopher Mercer</tspan>
     </text>
   </g>
 
@@ -52,16 +52,20 @@
   <!-- About the Author section -->
   <g transform="translate(50, 430)">
     <text font-family="Arial, sans-serif" font-size="12" fill="#8B9DC3" font-weight="bold">ABOUT THE AUTHOR</text>
-    <text y="30" font-family="Georgia, serif" font-size="12" fill="#CCCCCC">
-      <tspan x="0" dy="0">C. M. Mercer is a blockchain architect and educator with deep</tspan>
-      <tspan x="0" dy="18">expertise in EVM internals, smart contract security, and decentralized</tspan>
-      <tspan x="0" dy="18">systems design. He has contributed to multiple EVM implementations</tspan>
-      <tspan x="0" dy="18">and believes in building technology that empowers individuals.</tspan>
+    <text y="28" font-family="Georgia, serif" font-size="9" fill="#CCCCCC">
+      <tspan x="0" dy="0">Christopher Mercer is a blockchain architect and ecosystem builder focused</tspan>
+      <tspan x="0" dy="14">on long-lived systems. He has deployed and maintained production application</tspan>
+      <tspan x="0" dy="14">protocols and participated in network protocol governance and infrastructure</tspan>
+      <tspan x="0" dy="14">planning across multiple EVM networks.</tspan>
+      <tspan x="0" dy="21">His work centers on understanding how decentralized applications evolve over</tspan>
+      <tspan x="0" dy="14">time—technically, economically, and operationally—and how those dependencies</tspan>
+      <tspan x="0" dy="14">shape what is realistically buildable. Mastering EVM reflects this systems-level</tspan>
+      <tspan x="0" dy="14">approach, reviewing the EVM as it exists today rather than as it is often idealized.</tspan>
     </text>
   </g>
 
   <!-- Technical specs -->
-  <g transform="translate(50, 560)">
+  <g transform="translate(50, 600)">
     <text font-family="monospace" font-size="10" fill="#666666">
       <tspan x="0" dy="0">28 Chapters | 8 Appendices | Code Examples</tspan>
       <tspan x="0" dy="15">Covers: Ethereum, Ethereum Classic, L2s</tspan>

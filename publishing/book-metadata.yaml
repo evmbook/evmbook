@@ -9,14 +9,14 @@ release_date: "January 2026"
 
 # Authors
 authors:
-  - name: "C. M. Mercer"
+  - name: "Christopher Mercer"
     role: "Author"
   - name: "Claude (Anthropic)"
     role: "Writing Collaborator"
 
 # Audiobook
 audiobook:
-  reader: "C. M. Mercer"
+  reader: "Christopher Mercer"
   narrator_notes: "Read by the author"
   format: "MP3/M4B"
   distribution: "Audible, direct download"
@@ -102,7 +102,7 @@ keywords:
 license:
   type: "CC BY-NC 4.0"
   url: "https://creativecommons.org/licenses/by-nc/4.0/"
-  attribution: "© 2026 C. M. Mercer / White B0x Inc."
+  attribution: "© 2026 Christopher Mercer / White B0x Inc."
 
 # Website
 website:

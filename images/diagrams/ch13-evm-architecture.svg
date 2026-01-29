@@ -214,8 +214,10 @@
     <text x="-340" y="60" font-family="monospace" font-size="7" fill="#94A3B8">PUSH1 PUSH1 MSTORE CALLVALUE DUP1 ISZERO PUSH2 JUMPI PUSH1 DUP1 REVERT JUMPDEST POP PUSH2 ...</text>
 
     <!-- PC indicator -->
-    <polygon points="-300,30 -295,22 -290,30" fill="#EF4444"/>
-    <text x="-295" y="19" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#EF4444">PC</text>
+    <g transform="translate(500, 15)">
+      <polygon points="-300,30 -295,22 -290,30" fill="#EF4444"/>
+      <text x="-295" y="45" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#EF4444">PC</text>
+    </g>
 
     <!-- Gas meter -->
     <g transform="translate(300, 45)">

@@ -1,5 +1,8 @@
 # Known Gaps & Unverified Claims
 
+**Last Updated:** 2026-01-28
+**Location:** `docs/KNOWN-GAPS.md` (single source of truth for research gaps)
+
 ## Purpose
 
 This document tracks claims needing verification, sources that couldn't be confirmed, and research gaps.

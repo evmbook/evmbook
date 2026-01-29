@@ -4,8 +4,10 @@
 **Book Status:** Ready for Publishing (Phase 14)
 
 ## Related Docs
-- [MILESTONES.md](MILESTONES.md) - Phase tracking and research logs
 - [DESIGN-SYSTEM.md](DESIGN-SYSTEM.md) - Diagram specs, colors, typography
+- [KNOWN-GAPS.md](KNOWN-GAPS.md) - Research gaps and unverified claims
+- [RESEARCH_SYSTEM.md](RESEARCH_SYSTEM.md) - Citation rules, confidence tagging
+- [STYLE_GUIDE.md](STYLE_GUIDE.md) - Voice, naming, controversy handling
 
 ---
 
@@ -122,7 +124,7 @@ All era chapters now have consistent structure with Timeline, Open Questions, an
 
 ### Primitive Dossiers (27 total)
 
-Research dossiers covering specific technologies (~42,000 words total).
+Research dossiers covering specific technologies (~49,000 words total).
 
 | Category | Primitives |
 |----------|-----------|
@@ -135,17 +137,17 @@ Research dossiers covering specific technologies (~42,000 words total).
 
 ### Sources
 
-- **library.bib**: 100+ BibTeX entries
+- **library.bib**: 319 BibTeX entries
 - **source_index.md**: Human-readable index with credibility tiers
 - **ERA_MAP.md**: 13 eras with 5 parallel tracks
-- **CLAIMS_LEDGER.md**: 80+ verified claims
+- **CLAIMS_LEDGER.md**: 150 verified claims
 
 ---
 
 ## Publishing Details
 
 **Title:** Mastering EVM (2025 Edition)
-**Author:** C. M. Mercer
+**Author:** Christopher Mercer
 **Publisher:** White B0x Inc.
 **Version:** 2025.1.0
 
@@ -192,10 +194,37 @@ Research dossiers covering specific technologies (~42,000 words total).
 
 ---
 
+## Research Log
+
+### R4: Book Integration Assessment (2026-01-28)
+
+Compared chapters to research primitives. Found chapters already comprehensive:
+
+| Chapter | Lines | Primitive Lines | Result |
+|---------|-------|-----------------|--------|
+| Ch 24 (ZK) | ~726 | ~351 | Already expanded |
+| Ch 22 (Oracles) | ~1,021 | ~350 | Already expanded |
+| Ch 07 (Consensus) | ~627 | ~482 | Already expanded |
+| Ch 13 (EVM) | ~660 | ~748 | Enhanced with client diversity metrics |
+
+### Historical Research Verification (2026-01-27)
+
+**Verified Accurate:**
+- Ch16 AMM: EtherDelta 2016, Bancor 2017, Uniswap Nov 2018
+- Ch17 Lending: ETHLend 2017, Compound 2018, MakerDAO DAI Dec 2017
+- Ch18 Governance: Multisigs → Compound Governor → veToken
+- Ch21 Prediction: Augur ICO 2015, launch July 2018
+
+**Minor Corrections Applied:**
+- Ch22: Chainlink timeline clarified (whitepaper 2017, network 2019)
+- Ch23: Raiden Network dates corrected (started 2015, not 2020)
+
+---
+
 ## Mercer Quote (Book's Philosophical Foundation)
 
-> "Decentralization flows down, never up. A centralized foundation guarantees centralized outcomes."
+> "Decentralization is bounded from below. The base layer determines the maximum decentralization possible above it, and applications inevitably inherit the weakest properties of their foundation."
 >
-> — C. M. Mercer
+> — Christopher Mercer
 
 Opens Chapter 1, setting the tone for the entire book.

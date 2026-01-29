@@ -81,7 +81,7 @@
     <rect x="-90" y="-35" width="180" height="70" rx="12" fill="url(#ethGradient)"/>
     <text y="-8" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#FFF">Ethereum</text>
     <text y="10" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#E0E7FF">Proof of Stake</text>
-    <text y="25" text-anchor="middle" font-family="monospace" font-size="9" fill="#C7D2FE">Chain ID: 1 | ~$400B TVL</text>
+    <text y="25" text-anchor="middle" font-family="monospace" font-size="9" fill="#C7D2FE">Chain ID: 1 | Leading PoS EVM</text>
   </g>
   <path d="M 400 130 L 400 165" stroke="#627EEA" stroke-width="2" marker-end="url(#arrowhead)"/>
 
@@ -90,7 +90,7 @@
     <rect x="-85" y="-32" width="180" height="70" rx="12" fill="url(#etcGradient)"/>
     <text y="-8" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#FFF">Ethereum Classic</text>
     <text y="8" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#D1FAE5">Proof of Work</text>
-    <text y="22" text-anchor="middle" font-family="monospace" font-size="9" fill="#A7F3D0">Chain ID: 61 | Original 2015</text>
+    <text y="22" text-anchor="middle" font-family="monospace" font-size="9" fill="#A7F3D0">Chain ID: 61 | Leading PoW EVM</text>
   </g>
   <path d="M 225 240 L 325 240" stroke="#3AB83A" stroke-width="2" marker-end="url(#arrowhead)"/>
 
@@ -105,21 +105,27 @@
   <g transform="translate(640, 150)">
     <!-- Section background -->
     <rect x="-85" y="-20" width="170" height="200" rx="12" fill="#FFF" fill-opacity="0.7" stroke="#E5E7EB" stroke-width="1"/>
-    <text x="0" y="0" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#374151">Layer 2 Rollups</text>
+    <text x="0" y="0" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#374151">ETH Layer 2 Rollups</text>
   </g>
 
   <!-- L2s -->
   <g transform="translate(640, 180)" filter="url(#dropShadow)">
-    <rect x="-60" y="-18" width="120" height="36" rx="8" fill="url(#l2Gradient)"/>
-    <text y="5" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#FFF">Arbitrum</text>
+    <rect x="-60" y="-18" width="120" height="40" rx="8" fill="url(#l2Gradient)"/>
+    <text y="-5" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#FFF">Arbitrum One</text>
+    <text y="8" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#FFF">Fraud Proofs</text>
+    <text y="18" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#FFF">Chain ID: 42161 | ~$17B TVS</text>
   </g>
   <g transform="translate(640, 235)" filter="url(#dropShadow)">
-    <rect x="-60" y="-18" width="120" height="36" rx="8" fill="url(#l2Gradient)"/>
-    <text y="5" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#FFF">Optimism</text>
+    <rect x="-60" y="-18" width="120" height="40" rx="8" fill="url(#l2Gradient)"/>
+    <text y="-5" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#FFF">OP Mainnet</text>
+    <text y="8" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#FFF">Fraud Proofs</text>
+    <text y="18" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#FFF">Chain ID: 10 | ~$2B TVS</text>
   </g>
   <g transform="translate(640, 290)" filter="url(#dropShadow)">
-    <rect x="-60" y="-18" width="120" height="36" rx="8" fill="url(#l2Gradient)"/>
-    <text y="5" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#FFF">Base / zkSync</text>
+    <rect x="-60" y="-18" width="120" height="40" rx="8" fill="url(#l2Gradient)"/>
+    <text y="-5" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#FFF">ZKsync Era</text>
+    <text y="8" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#FFF">Validity Proofs</text>
+    <text y="18" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#FFF">Chain ID: 324 | ~$450M TVS</text>
   </g>
 
   <!-- L2 connections -->
@@ -136,16 +142,22 @@
 
   <!-- Alt L1s (Bottom) -->
   <g transform="translate(220, 390)" filter="url(#dropShadow)">
-    <rect x="-55" y="-20" width="110" height="40" rx="8" fill="url(#altGradient)"/>
-    <text y="5" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#FFF">Polygon PoS</text>
+    <rect x="-65" y="-20" width="130" height="45" rx="8" fill="url(#altGradient)"/>
+    <text y="-5" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#FFF">Polygon PoS</text>
+    <text y="8" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#FFF">Proof of Stake</text>
+    <text y="18" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#FFF">Chain ID: 137 | Sidechain</text>
   </g>
   <g transform="translate(400, 390)" filter="url(#dropShadow)">
-    <rect x="-55" y="-20" width="110" height="40" rx="8" fill="url(#altGradient)"/>
-    <text y="5" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#FFF">BNB Chain</text>
+    <rect x="-65" y="-20" width="130" height="45" rx="8" fill="url(#altGradient)"/>
+    <text y="-5" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#FFF">BNB Smart Chain</text>
+    <text y="8" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#FFF">Proof of Stake</text>
+    <text y="18" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#FFF">Chain ID: 56 | Layer 1 EVM</text>
   </g>
   <g transform="translate(580, 390)" filter="url(#dropShadow)">
-    <rect x="-55" y="-20" width="110" height="40" rx="8" fill="url(#altGradient)"/>
-    <text y="5" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#FFF">Avalanche C</text>
+    <rect x="-65" y="-20" width="130" height="45" rx="8" fill="url(#altGradient)"/>
+    <text y="-5" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#FFF">Avalanche C-Chain</text>
+    <text y="8" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#FFF">Proof of Stake</text>
+    <text y="18" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#FFF">Chain ID: 43114 | Layer 1 EVM</text>
   </g>
 
   <!-- Alt L1 connections -->

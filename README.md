@@ -65,19 +65,19 @@ ISBN (Paperback): 979-8-9947278-0-5
 evmbook-v1/
 ├── content/
 │   ├── chapters/           # 28 chapters (MDX) including preface
-│   │   ├── 00-preface.mdx
-│   │   ├── 01-evm-today.mdx
-│   │   └── ... through 27-agentic-development.mdx
-│   └── appendices/         # 8 appendices (A-H)
-│       ├── a-fork-history.mdx
-│       ├── b-eip-standards.mdx
-│       └── ... through h-essential-reading.mdx
-├── publishing/             # Publishing metadata and templates
-├── images/                 # Diagrams and screenshots
-├── code/                   # Runnable code examples
+│   ├── appendices/         # 8 appendices (A-H)
+│   └── meta/               # About, colophon
+├── manuscript/             # Era-based historical chapters (13 chapters)
+├── primitives/             # Research dossiers (27 primitives, ~49K words)
+├── sources/                # BibTeX library (319 entries)
+├── history/                # ERA_MAP.md, CLAIMS_LEDGER.md (150 claims)
+├── docs/                   # Project documentation (single source of truth)
+├── images/                 # 18 publisher-quality SVG diagrams
+├── code/                   # 24 Solidity code examples (Foundry)
 ├── scripts/                # Build scripts (PDF, EPUB)
 ├── .claude/                # Claude Code configuration
-└── .github/                # GitHub Copilot configuration
+├── .github/                # GitHub Copilot configuration
+└── .archive/               # Superseded content (reference only)
 ```
 
 ## Technical Standards
@@ -134,15 +134,20 @@ The content is designed for MDX-compatible static site generators. The website a
 
 ## License
 
-This work is licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) (Attribution-NonCommercial).
+| Content | License |
+|---------|---------|
+| Book text & diagrams | [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) |
+| Code examples | [MIT License](https://opensource.org/licenses/MIT) |
 
-You are free to share and adapt this material for non-commercial purposes with attribution. Commercial use requires permission from the publisher.
+You are free to share and adapt the book content for non-commercial purposes with attribution. Code examples can be freely used in any project, including commercial ones.
+
+For commercial licensing inquiries: licensing@whiteb0x.com
 
 See [LICENSE](LICENSE) for full terms.
 
 ## Author & Publisher
 
-**C. M. Mercer** — Author
+**Christopher Mercer** — Author
 **White B0x Inc.** — Publisher
 
-Developed with assistance from [Claude](https://claude.ai).
+Copyright © 2026 Christopher Mercer / White B0x Inc.
