@@ -10,9 +10,9 @@ chapter: 1
 >
 > — Christopher Mercer
 
-This principle shapes everything that follows in this book. A decentralized blockchain provides *optionality*—you can build centralized applications for efficiency or decentralized applications for trust minimization. A centralized blockchain offers no such choice. The ceiling for decentralization is set by the foundation.
+This principle shapes everything that follows. A decentralized blockchain provides *optionality*—you can build centralized applications for efficiency or decentralized applications for trust minimization. A centralized blockchain offers no such choice.
 
-The Ethereum Virtual Machine (EVM) is the most battle-tested decentralized foundation available to developers today. This chapter explains what you're building on—not how we got here (that's the next chapter), but what the landscape looks like right now.
+The Ethereum Virtual Machine (EVM) is the most widely deployed smart contract runtime. This chapter explains what you're building on—not how we got here (that's Chapter 2), but what the landscape looks like now.
 
 ## What Is the EVM?
 
@@ -48,7 +48,7 @@ The EVM is not a single blockchain. It's a *standard* implemented by dozens of n
 
 **Layer 1 Chains:**
 - **Ethereum Classic (ETC)**: The original 2015 genesis chain continuing proof-of-work. Prioritizes immutability and "code is law" philosophy.
-- **Ethereum (ETH)**: The 2016 fork of the original, now running proof-of-stake since The Merge (September 2022). Highest security, most liquidity, highest fees.
+- **Ethereum (ETH)**: The 2016 fork of the original, now running proof-of-stake since The Merge (September 2022). Highest security budget, most liquidity, highest fees.
 - **BNB Smart Chain**: High throughput, lower decentralization. Popular for retail applications.
 - **Avalanche C-Chain**: Sub-second finality, EVM-compatible subnet of Avalanche.
 - **Polygon PoS**: Ethereum sidechain with its own validator set.
@@ -61,7 +61,7 @@ The EVM is not a single blockchain. It's a *standard* implemented by dozens of n
 - **Polygon zkEVM**: ZK rollup targeting full EVM equivalence.
 - **Scroll**: Another zkEVM implementation.
 
-**The Common Thread:** All these chains execute the same EVM bytecode. Code you write in Solidity compiles once and deploys to any of them. Your MetaMask wallet works on all of them. This is the EVM's superpower—it's a de facto standard.
+**The Common Thread:** All these chains execute the same EVM bytecode. Code you write in Solidity compiles once and deploys to any of them. Your MetaMask wallet works on all of them. This is the EVM's primary advantage—it's a de facto standard.
 
 <Callout type="note" title="ETC vs ETH">
 This book covers both Ethereum (ETH) and Ethereum Classic (ETC). Where implementations differ—consensus mechanism, fee handling, upgrade philosophy—we'll note it explicitly. The smart contract development experience is nearly identical.
@@ -92,7 +92,7 @@ The EVM dominates smart contract development, but it's not the only option. Unde
 
 ### Solana (SVM)
 
-Solana is the EVM's most credible competitor for new development. Its Solana Virtual Machine (SVM) takes a different architectural approach:
+Solana is the EVM's primary competitor for new development. Its Solana Virtual Machine (SVM) takes a different architectural approach:
 
 - **Programs are stateless**: Logic and data are separated. Programs operate on "accounts" passed as inputs.
 - **Parallel execution**: Transactions touching different accounts run simultaneously.
@@ -110,7 +110,7 @@ Hedera uses hashgraph consensus instead of blockchain—a directed acyclic graph
 - **Smart contracts**: Hedera Smart Contract Service runs EVM bytecode.
 - **Use case**: Enterprise applications where corporate governance is acceptable.
 
-**For EVM developers:** Hedera offers EVM compatibility, so your Solidity code works. But the governance model is fundamentally different from public blockchains.
+**For EVM developers:** Hedera offers EVM compatibility, so your Solidity code works. But the governance model differs fundamentally from public blockchains.
 
 ### XRP Ledger
 
@@ -129,11 +129,11 @@ Move, originally developed for Facebook's Diem, introduces resource-oriented pro
 - **Parallel execution**: Ownership model enables concurrent processing.
 - **New paradigm**: Requires learning different mental models.
 
-**For EVM developers:** Interesting technology, but you'd need to learn a new language and ecosystem. The tooling and auditor base is much smaller.
+**For EVM developers:** Interesting technology, but you'd need to learn a new language and ecosystem. The tooling and auditor base is smaller.
 
-### Why the EVM Still Wins
+### EVM Market Position
 
-Despite newer alternatives, the EVM maintains dominance:
+The EVM maintains its position through accumulated advantages:
 
 | Factor | EVM Advantage |
 |--------|---------------|
@@ -143,7 +143,7 @@ Despite newer alternatives, the EVM maintains dominance:
 | **Network effects** | Users, wallets, and applications already exist |
 | **Compatibility** | Write once, deploy to dozens of chains |
 
-The EVM's "technical debt" is also its moat. Developers know Solidity. Auditors know Solidity patterns. Users have MetaMask. Switching costs are high.
+The EVM's accumulated technical choices also create switching costs. Developers know Solidity. Auditors know Solidity patterns. Users have MetaMask. Migration requires rebuilding this infrastructure.
 
 ## Alternative Computation Models
 
@@ -151,7 +151,7 @@ Understanding the EVM's architecture requires comparing it to fundamentally diff
 
 ### The Account Model (EVM)
 
-The EVM also has a lineage—born from the limitations of Bitcoin's scripting:
+The EVM has a lineage—born from the limitations of Bitcoin's scripting:
 
 ```
 2012: Colored Coins — Assets on Bitcoin (limited by Script)
@@ -200,7 +200,7 @@ The EVM uses an **account model** where the blockchain maintains global state:
 
 ### The UTXO Model (Bitcoin)
 
-Bitcoin didn't emerge from nowhere. It synthesized decades of cryptographic research and cypherpunk proposals:
+Bitcoin synthesized decades of cryptographic research and cypherpunk proposals:
 
 ```
 1989: DigiCash (Chaum) — Blind signatures, digital cash concept
@@ -216,7 +216,7 @@ Bitcoin didn't emerge from nowhere. It synthesized decades of cryptographic rese
 2008: Bitcoin (Satoshi) — Combined all pieces into working system
 ```
 
-Satoshi's genius was *synthesis*: combining existing cryptographic primitives (hash functions, digital signatures, Merkle trees) with economic incentives (mining rewards, difficulty adjustment) into a system that actually worked without trusted third parties.
+Satoshi's contribution was *synthesis*: combining existing cryptographic primitives (hash functions, digital signatures, Merkle trees) with economic incentives (mining rewards, difficulty adjustment) into a system that worked without trusted third parties.
 
 Bitcoin uses **Unspent Transaction Outputs (UTXOs)**—discrete "coins" that are consumed and created:
 
@@ -237,7 +237,7 @@ No global state—just a set of unspent outputs.
 **Trade-off:** Parallel validation and privacy, but limited smart contract capability.
 
 <Note>
-The Bitcoin whitepaper cites Hashcash, b-money, and timestamping work. Notably, Wei Dai (b-money) and Adam Back (Hashcash) were both contacted by Satoshi before Bitcoin's release. Hal Finney received the first Bitcoin transaction. The cypherpunk lineage is direct.
+The Bitcoin whitepaper cites Hashcash, b-money, and timestamping work. Wei Dai (b-money) and Adam Back (Hashcash) were both contacted by Satoshi before Bitcoin's release. Hal Finney received the first Bitcoin transaction. The cypherpunk lineage is direct.
 </Note>
 
 ### Extended UTXO (Cardano)
@@ -299,7 +299,7 @@ Transaction: "Run Program with Accounts [A, B, C]"
 - Non-overlapping transactions execute in parallel
 - Rust-based development (steeper learning curve)
 
-**Trade-off:** Massive parallelism and throughput, but complex programming model and state management.
+**Trade-off:** High parallelism and throughput, but complex programming model and state management.
 
 ### Move (Sui, Aptos)
 
@@ -638,7 +638,7 @@ Built-in features (2014!):
 └── Content creators earn STEEM tokens
 ```
 
-- **First social blockchain**: Proved non-financial use cases
+- **First social blockchain**: Demonstrated non-financial use cases
 - **Delegated bandwidth**: Users stake for "resource credits" (no per-tx fees)
 - **3-second blocks**: Maintained DPoS speed
 
@@ -656,10 +656,10 @@ EOS architecture:
 - **Parallel execution**: Designed for high throughput
 - **Governance controversy**: Block producer collusion concerns, on-chain arbitration debates
 
-**Trade-off:** DPoS enables speed (sub-second finality) but concentrates power in few block producers. The 21-BP model faced criticism for cartel behavior. EOS showed that "Ethereum killer" scaling comes with governance trade-offs.
+**Trade-off:** DPoS enables speed (sub-second finality) but concentrates power in few block producers. The 21-BP model faced criticism for cartel behavior. EOS demonstrated that high-throughput designs come with governance trade-offs.
 
 <Note>
-Many "innovations" in later platforms trace back to this lineage. Tron's DPoS, various "feeless" designs, and stake-based resource models all echo Larimer's work. The criticisms of these systems (centralization, governance capture) also informed later designs.
+Many features in later platforms trace back to this lineage. Tron's DPoS, various "feeless" designs, and stake-based resource models all echo Larimer's work. The criticisms of these systems (centralization, governance capture) also informed later designs.
 </Note>
 
 ### AI & Compute Networks (Bittensor, Qubic)
@@ -737,7 +737,7 @@ Useful Proof of Work:
 
 ### Why the Account Model Won for DeFi
 
-The EVM's sequential, global-state model seems inefficient, but it enabled DeFi's killer feature: **atomic composability**.
+The EVM's sequential, global-state model seems inefficient, but it enabled DeFi's defining feature: **atomic composability**.
 
 ```solidity
 // This only works with global state and atomic transactions
@@ -759,7 +759,7 @@ function flashLoanArbitrage() external {
 }
 ```
 
-This pattern is impossible or extremely difficult in UTXO models. The EVM's "inefficiency" is actually its superpower for financial applications.
+This pattern is impossible or extremely difficult in UTXO models. The EVM's sequential execution is what enables financial applications to compose without coordination.
 
 ## Institutional Legitimacy: The ETF Era
 
@@ -777,11 +777,11 @@ Two events in 2024 changed crypto's relationship with traditional finance:
 
 3. **Institutional use cases emerge**: Tokenized treasuries, compliant stablecoins, regulated DeFi protocols—these require developers who understand both technology and compliance.
 
-The ETFs validated crypto as an asset class. Now the question is: what can you build on it?
+The ETFs validated crypto as an asset class. The question for developers is: what can you build on it?
 
 ## The Decentralization Spectrum
 
-Not all "decentralized" systems are equally decentralized. Understanding this spectrum is crucial for honest development.
+Not all systems claiming decentralization are equally decentralized. Understanding this spectrum is necessary for honest development.
 
 | Layer | Centralized Choice | Decentralized Choice | Trade-off |
 |-------|-------------------|---------------------|-----------|
@@ -797,7 +797,7 @@ Not all "decentralized" systems are equally decentralized. Understanding this sp
 The problem isn't centralization—it's *claiming* decentralization while having centralized components. If your RPC provider goes down, your "decentralized" app stops working. If your admin key is compromised, your "trustless" protocol isn't.
 
 <Callout type="warning" title="Decentralization Theater">
-Many projects claim properties they don't have. "Decentralized" bridges controlled by single entities. "ZK-powered" systems without ZK proofs. "Non-custodial" protocols with admin freeze functions. Throughout this book, we'll teach you to identify and avoid these patterns—and to build honestly from the start.
+Many projects claim properties they don't have. "Decentralized" bridges controlled by single entities. "ZK-powered" systems without ZK proofs. "Non-custodial" protocols with admin freeze functions. Throughout this book, we'll teach you to identify these patterns—and to build honestly from the start.
 </Callout>
 
 ## What the EVM Gives You
@@ -835,7 +835,7 @@ Gas economics differ between chains:
 - **Ethereum Classic**: Olympia upgrade implements EIP-1559 with treasury funding instead of burning.
 - **L2s**: Much cheaper (10-100x) due to batching transactions to L1.
 
-Understanding gas is essential for writing efficient contracts. We'll cover optimization techniques in Chapter 14.
+Understanding gas is essential for writing efficient contracts. We cover optimization techniques in Chapter 14.
 
 ## EVM Components
 
@@ -857,7 +857,7 @@ An EVM-based blockchain consists of:
 
 ## Reading This Book
 
-This book assumes you can write code and understand basic programming concepts. You don't need blockchain experience—we'll build that from the ground up.
+This book assumes you can write code and understand basic programming concepts. You don't need blockchain experience—we build from the ground up.
 
 **Part I (Chapters 1-3)** sets context: what the EVM is, how we got here, and how to set up your development environment.
 
@@ -875,7 +875,7 @@ This book assumes you can write code and understand basic programming concepts. 
 
 **Part VIII (Chapters 25-27)** prepares you for the real world: regulatory landscape, bootstrapping ecosystems, and AI-assisted development.
 
-Throughout, we'll highlight differences between Ethereum and Ethereum Classic where relevant. The goal is practical knowledge you can apply immediately.
+Throughout, we highlight differences between Ethereum and Ethereum Classic where relevant. The goal is practical knowledge you can apply immediately.
 
 ## What You'll Build
 
