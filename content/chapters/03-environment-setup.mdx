@@ -31,7 +31,7 @@ The EVM development ecosystem has matured significantly. Where early developers 
 
 ## Installing Foundry
 
-Foundry is the standard toolchain for professional Solidity development. It's fast, written in Rust, and lets you write tests in Solidity.
+Foundry is a widely-adopted toolchain for Solidity development. It's fast, written in Rust, and lets you write tests in Solidity.
 
 ### Installation
 
@@ -236,7 +236,7 @@ Modern EVM development uses TypeScript for scripts, tests (when not using Foundr
 
 ### viem (Recommended for New Projects)
 
-viem is the modern standard—type-safe, tree-shakeable, and designed for TypeScript:
+viem offers strong type safety, tree-shaking, and modern TypeScript patterns:
 
 ```bash
 npm install viem
@@ -639,7 +639,7 @@ Raw RPC calls are inefficient for complex queries. You can't easily ask an RPC e
 
 ### The Graph: Decentralized Indexing
 
-The Graph is the standard for production dApps:
+The Graph provides decentralized indexing for production dApps:
 
 ```graphql
 # Query a subgraph (Uniswap V3 example)
@@ -955,18 +955,15 @@ Install these extensions:
 }
 ```
 
-### Cursor / AI-Assisted Development
+### AI-Assisted Development
 
-Modern AI assistants like Claude (via Claude Code) understand Solidity deeply. Use them for:
+AI coding assistants can help with Solidity development:
 - Generating boilerplate
 - Explaining complex patterns
 - Reviewing security issues
 - Writing tests
 
-```bash
-# Claude Code for Solidity development
-claude "Write a minimal ERC-20 token with permit functionality"
-```
+Always review AI-generated code carefully, especially for security-sensitive smart contracts.
 
 ## Summary
 
@@ -982,9 +979,9 @@ The 2026 EVM development stack:
 | TypeScript | Yes (default) | JavaScript (legacy) |
 
 Key points:
-- **Foundry** is the professional choice for smart contract development
+- **Foundry** is widely adopted for smart contract development
 - **TypeScript** is the default for scripts and frontends
-- **viem** is the modern, type-safe client library
+- **viem** provides type-safe client interactions
 - **wagmi** provides React hooks for wallet integration
 - **Anvil** enables fast local development with mainnet forking
 
