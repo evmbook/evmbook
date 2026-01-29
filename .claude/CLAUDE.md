@@ -229,8 +229,8 @@ The companion website at masteringevm.com pulls content from this repository. **
 | `content/chapters/*.mdx` | `content/chapters/` | 28 chapter pages |
 | `content/appendices/*.mdx` | `content/appendices/` | 8 appendix pages |
 | `content/chapters/_index.json` | `content/chapters/` | Canonical TOC |
-| `code/` | `content/code/` | Code Library section |
-| `images/diagrams/*.svg` | `public/diagrams/` | Diagram gallery |
+| `code/` | `content/code/` | Code Library (`/read/code`) |
+| `images/diagrams/*.svg` | `public/images/diagrams/` | Diagram gallery (`/read/diagrams`) |
 
 ### After Updating Book Content
 
@@ -242,7 +242,7 @@ cp -r ../evmbook-v2025/content/chapters/*.mdx content/chapters/
 cp ../evmbook-v2025/content/chapters/_index.json content/chapters/
 cp -r ../evmbook-v2025/content/appendices/*.mdx content/appendices/
 cp -r ../evmbook-v2025/code/* content/code/
-cp ../evmbook-v2025/images/diagrams/*.svg public/diagrams/
+cp ../evmbook-v2025/images/diagrams/*.svg public/images/diagrams/
 ```
 
 Then update website navigation:
@@ -255,10 +255,10 @@ Then update website navigation:
 Before deploying the website, verify:
 - [ ] 28 chapters present and match book
 - [ ] 8 appendices present and match book
-- [ ] Sidebar.tsx lists all chapters/appendices
+- [ ] Sidebar.tsx lists all chapters/appendices + Resources section
 - [ ] `npm run build` succeeds with no 404s
-- [ ] Code Library page works
-- [ ] Diagrams page renders all 18 SVGs
+- [ ] Code Library works at `/read/code`
+- [ ] Diagrams render at `/read/diagrams` (all 18 SVGs)
 
 ### Brand Guidelines
 - Author: Christopher Mercer with Claude (Anthropic)
