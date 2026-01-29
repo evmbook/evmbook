@@ -6,9 +6,9 @@ chapter: 4
 
 # Cryptography
 
-One of Ethereum's foundational technologies is *cryptography*, which is a branch of mathematics used extensively in computer security. Cryptography means "secret writing" in Greek, but the study of cryptography encompasses more than just secret writing, which is referred to as *encryption*. Cryptography can, for example, also be used to prove knowledge of a secret without revealing that secret (e.g., with a digital signature), or to prove the authenticity of data (e.g., with digital fingerprints, also known as "hashes"). These types of cryptographic proofs are mathematical tools critical to the operation of the Ethereum platform (and, indeed, all blockchain systems), and are also extensively used in Ethereum applications.
+One of Ethereum's foundational technologies is *cryptography*, a branch of mathematics used extensively in computer security. Cryptography means "secret writing" in Greek, but the study of cryptography encompasses more than just secret writing, which is referred to as *encryption*. Cryptography can also be used to prove knowledge of a secret without revealing that secret (e.g., with a digital signature), or to prove the authenticity of data (e.g., with digital fingerprints, also known as "hashes"). These types of cryptographic proofs are mathematical tools critical to the operation of the Ethereum platform (and all blockchain systems), and are also extensively used in Ethereum applications.
 
-Note that, at the time of publication, no part of the Ethereum protocol involves encryption; that is to say all communications with the Ethereum platform and between nodes (including transaction data) are unencrypted and can (necessarily) be read by anyone. This is so everyone can verify the correctness of state updates and consensus can be reached. In the future, advanced cryptographic tools, such as zero knowledge proofs and homomorphic encryption, will be available that will allow for some encrypted calculations to be recorded on the blockchain while still enabling consensus; however, while provision has been made for them, they have yet to be deployed.
+At the time of publication, no part of the Ethereum protocol involves encryption; all communications with the Ethereum platform and between nodes (including transaction data) are unencrypted and can (necessarily) be read by anyone. This is so everyone can verify the correctness of state updates and consensus can be reached. In the future, advanced cryptographic tools, such as zero-knowledge proofs and homomorphic encryption, will be available that will allow for some encrypted calculations to be recorded on the blockchain while still enabling consensus; however, while provision has been made for them, they have yet to be deployed.
 
 In this chapter we will introduce some of the cryptography used in Ethereum: namely public key cryptography (PKC), which is used to control ownership of funds, in the form of private keys and addresses.
 
@@ -16,7 +16,7 @@ In this chapter we will introduce some of the cryptography used in Ethereum: nam
 
 As we saw earlier in the book, Ethereum has two different types of accounts: *externally owned accounts* (EOAs) and *contracts*. Ownership of ether by EOAs is established through digital *private keys*, *Ethereum addresses*, and *digital signatures*. The private keys are at the heart of all user interaction with Ethereum. In fact, account addresses are derived directly from private keys: a private key uniquely determines a single Ethereum address, also known as an *account*.
 
-Private keys are not used directly in the Ethereum system in any way; they are never transmitted or stored on Ethereum. That is to say that private keys should remain private and never appear in messages passed to the network, nor should they be stored on-chain; only account addresses and digital signatures are ever transmitted and stored on the Ethereum system.
+Private keys are not used directly in the Ethereum system in any way; they are never transmitted or stored on Ethereum. Private keys should remain private and never appear in messages passed to the network, nor should they be stored on-chain; only account addresses and digital signatures are ever transmitted and stored on the Ethereum system.
 
 Access and control of funds is achieved with digital signatures, which are also created using the private key. Ethereum transactions require a valid digital signature to be included in the blockchain. Anyone with a copy of a private key has control of the corresponding account and any ether it holds. Assuming a user keeps their private key safe, the digital signatures in Ethereum transactions prove the true owner of the funds, because they prove ownership of the private key.
 
@@ -116,7 +116,7 @@ Elliptic curve cryptography is a type of asymmetric or public key cryptography b
 Ethereum uses the exact same elliptic curve, called `secp256k1`, as Bitcoin. That makes it possible to reuse many of the elliptic curve libraries and tools from Bitcoin.
 </Note>
 
-Ethereum uses a specific elliptic curve and set of mathematical constants, as defined in a standard called `secp256k1`, established by the US National Institute of Standards and Technology (NIST). The `secp256k1` curve is defined by the following function, which produces an elliptic curve:
+Ethereum uses a specific elliptic curve and set of mathematical constants, as defined in a standard called `secp256k1`, established by the Standards for Efficient Cryptography Group (SECG). The `secp256k1` curve is defined by the following function, which produces an elliptic curve:
 
 **y² = (x³ + 7) mod p**
 
@@ -185,7 +185,7 @@ x = 6e145ccef1033dea239875dd00dfb4fee6e3348b84985c92f103444683bae07b
 y = 83b5c38e5e2b0c8529d7fa3f64d46daa1ece2d9ac14cab9477d042c84c32ccd0
 ```
 
-In Ethereum you may see public keys represented as a serialization of 130 hexadecimal characters (65 bytes). This is adopted from a standard serialization format proposed by the industry consortium Standards for Efficient Cryptography Group (SECG). The standard defines four possible prefixes that can be used to identify points on an elliptic curve:
+In Ethereum you may see public keys represented as a serialization of 130 hexadecimal characters (65 bytes). This is adopted from a standard serialization format proposed by the Standards for Efficient Cryptography Group (SECG). The standard defines four possible prefixes that can be used to identify points on an elliptic curve:
 
 | Prefix | Meaning | Length (bytes counting prefix) |
 |--------|---------|-------------------------------|
