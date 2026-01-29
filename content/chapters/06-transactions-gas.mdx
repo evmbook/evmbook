@@ -6,7 +6,7 @@ chapter: 6
 
 # Transactions
 
-Transactions are signed messages originated by an externally owned account, transmitted by the Ethereum network, and recorded on the Ethereum blockchain. This basic definition conceals a lot of surprising and fascinating details. Another way to look at transactions is that they are the only things that can trigger a change of state, or cause a contract to execute in the EVM. Ethereum is a global singleton state machine, and transactions are what make that state machine "tick," changing its state. Contracts don't run on their own. Ethereum doesn't run autonomously. Everything starts with a transaction.
+Transactions are signed messages originated by an externally owned account, transmitted by the network, and recorded on the blockchain. This basic definition conceals important details worth understanding. Transactions are the only mechanism that can trigger a state change or cause a contract to execute in the EVM. Ethereum is a global singleton state machine, and transactions are what make that state machine "tick," changing its state. Contracts don't run on their own. Ethereum doesn't run autonomously. Everything starts with a transaction.
 
 In this chapter, we will dissect transactions, show how they work, and examine the details. Note that much of this chapter is addressed to those who are interested in managing their own transactions at a low level, perhaps because they are writing a wallet app; you don't have to worry about this if you are happy using existing wallet applications, although you may find the details interesting!
 
@@ -281,14 +281,14 @@ We talked about gas a little in earlier chapters. However, let's cover some basi
 The following section discusses both the legacy `gasPrice` model and the modern EIP-1559 fee mechanism. On EIP-1559-enabled networks (Ethereum since London 2021, ETC since Olympia 2025), the `maxFeePerGas` and `maxPriorityFeePerGas` fields are preferred. Legacy `gasPrice` transactions are still supported for backward compatibility.
 </Callout>
 
-Gas is the fuel of Ethereum. Gas is not ether—it's a separate virtual currency with its own exchange rate against ether. Ethereum uses gas to control the amount of resources that a transaction can use, since it will be processed on thousands of computers around the world. The open-ended (Turing-complete) computation model requires some form of metering in order to avoid denial-of-service attacks or inadvertently resource-devouring transactions.
+Gas is the fuel of EVM execution. Gas is not ether—it's a separate virtual currency with its own exchange rate against the native currency. EVM networks use gas to control the amount of resources that a transaction can use, since it will be processed on thousands of computers around the world. The open-ended (Turing-complete) computation model requires some form of metering in order to avoid denial-of-service attacks or inadvertently resource-devouring transactions.
 
 Gas is separate from ether in order to protect the system from the volatility that might arise along with rapid changes in the value of ether, and also as a way to manage the important and sensitive ratios between the costs of the various resources that gas pays for (namely, computation, memory, and storage).
 
 The `gasPrice` field in a transaction allows the transaction originator to set the price they are willing to pay in exchange for gas. The price is measured in wei per gas unit.
 
 <Tip>
-The popular site ETH Gas Station provides information on the current prices of gas and other relevant gas metrics for the Ethereum main network.
+Various block explorers and gas tracking tools provide real-time information on gas prices and fee estimates for EVM networks.
 </Tip>
 
 Wallets can adjust the `gasPrice` in transactions they originate to achieve faster confirmation of transactions. The higher the `gasPrice`, the faster the transaction is likely to be confirmed. Conversely, lower-priority transactions can carry a reduced price, resulting in slower confirmation. The minimum value that `gasPrice` can be set to is zero, which means a fee-free transaction. During periods of low demand for space in a block, such transactions might very well get mined.
@@ -324,10 +324,10 @@ The analogy to a fuel tank is somewhat misleading, however. It's actually more l
 
 The recipient of a transaction is specified in the `to` field. This contains a 20-byte Ethereum address. The address can be an EOA or a contract address.
 
-Ethereum does no further validation of this field. Any 20-byte value is considered valid. If the 20-byte value corresponds to an address without a corresponding private key, or without a corresponding contract, the transaction is still valid. Ethereum has no way of knowing whether an address was correctly derived from a public key (and therefore from a private key) in existence.
+The protocol does no further validation of this field. Any 20-byte value is considered valid. If the 20-byte value corresponds to an address without a corresponding private key, or without a corresponding contract, the transaction is still valid. The protocol has no way of knowing whether an address was correctly derived from a public key (and therefore from a private key) in existence.
 
 <Warning>
-The Ethereum protocol does not validate recipient addresses in transactions. You can send to an address that has no corresponding private key or contract, thereby "burning" the ether, rendering it forever unspendable. Validation should be done at the user interface level.
+The protocol does not validate recipient addresses in transactions. You can send to an address that has no corresponding private key or contract, thereby "burning" the value, rendering it forever unspendable. Validation should be done at the user interface level.
 </Warning>
 
 Sending a transaction to the wrong address will probably *burn* the ether sent, rendering it forever inaccessible (unspendable), since most addresses do not have a known private key and therefore no signature can be generated to spend it.
@@ -399,7 +399,7 @@ A contract can reject incoming payments by throwing an exception immediately whe
 
 ### Transmitting a Data Payload to an EOA or Contract
 
-When your transaction contains data, it is most likely addressed to a contract address. That doesn't mean you cannot send a data payload to an EOA—that is completely valid in the Ethereum protocol. However, in that case, the interpretation of the data is up to the wallet you use to access the EOA. It is ignored by the Ethereum protocol. Most wallets also ignore any data received in a transaction to an EOA they control.
+When your transaction contains data, it is most likely addressed to a contract address. That doesn't mean you cannot send a data payload to an EOA—that is completely valid in the protocol. However, in that case, the interpretation of the data is up to the wallet you use to access the EOA. It is ignored by the protocol. Most wallets also ignore any data received in a transaction to an EOA they control.
 
 For now, let's assume your transaction is delivering data to a contract address. In that case, the data will be interpreted by the EVM as a *contract invocation*. Most contracts use this data more specifically as a *function invocation*, calling the named function and passing any encoded arguments to the function.
 
