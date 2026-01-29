@@ -1,15 +1,15 @@
-# Claude Code Instructions for evmbook-v1
+# Claude Code Instructions for evmbook-v2025
 
 ## Project Overview
 
-This repository contains **Mastering EVM**—a comprehensive single-volume book (28 chapters) covering EVM development from cryptographic foundations through modern agentic development.
+This repository contains **Mastering EVM (2025 Edition)**—a comprehensive single-volume book (28 chapters) covering EVM development from cryptographic foundations through modern agentic development.
 
-**NOT an 11-book series.** This is a unified book with chapters 00-27.
+**This is the source of truth.** The companion website (evmbook-site) pulls content from here.
 
 ## Repository Structure
 
 ```
-evmbook-v1/
+evmbook-v2025/
 ├── content/                        # Book source content (MDX)
 │   ├── chapters/                   # 28 chapters (00-preface through 27-agentic)
 │   ├── appendices/                 # 8 appendices (A-H)
@@ -218,6 +218,22 @@ This ensures project documentation stays current and actionable.
 5. **Update status immediately** — Mark tasks done as you complete them
 6. **Cross-reference** — Link related docs, don't duplicate content
 
+## Website Alignment (evmbook-site)
+
+The companion website at masteringevm.com pulls content from this repository. When updating book content, ensure the website stays aligned:
+
+**Key files the website references:**
+- `content/chapters/_index.json` — Chapter/appendix list (Sidebar.tsx)
+- `content/chapters/00-preface.mdx` — Book philosophy (Hero.tsx, Features.tsx)
+- `images/covers/cover-back.svg` — Author bio (About page)
+- `publishing/book-metadata.yaml` — License, publisher, ISBN (Footer)
+
+**Brand guidelines:**
+- Author: Christopher Mercer with Claude (Anthropic)
+- Publisher: White B0x Inc.
+- License: CC BY-NC 4.0
+- Voice: Calm, systems-oriented, grounded, no hype
+
 ## DO NOT
 
 - Reference `book_series/` - this directory was deleted
@@ -226,3 +242,5 @@ This ensures project documentation stays current and actionable.
 - Write JavaScript - use TypeScript
 - Create duplicate tracking files - use existing docs in `docs/`
 - Leave stale plans in `notes/` - archive completed work
+- Invent author credentials not in the back cover copy
+- Use derivative attribution to Antonopoulos/Wood

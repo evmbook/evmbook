@@ -62,7 +62,7 @@ ISBN (Paperback): 979-8-9947278-0-5
 ## Repository Structure
 
 ```
-evmbook-v1/
+evmbook-v2025/
 ├── content/
 │   ├── chapters/           # 28 chapters (MDX) including preface
 │   ├── appendices/         # 8 appendices (A-H)
