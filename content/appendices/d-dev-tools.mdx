@@ -603,6 +603,93 @@ With MCP enabled, Claude can:
 - Check transaction receipts and logs
 - Verify contract deployments
 
+### GitHub Copilot
+
+GitHub Copilot provides AI-powered code completion directly in your IDE. It excels at autocompleting Solidity patterns, test scaffolding, and repetitive code.
+
+- **Website**: [github.com/features/copilot](https://github.com/features/copilot)
+- **Documentation**: [docs.github.com/copilot](https://docs.github.com/en/copilot)
+
+**Key features for EVM development:**
+
+- Inline code completion for Solidity and TypeScript
+- Pattern recognition from OpenZeppelin and common contracts
+- Test generation assistance
+- NatSpec documentation completion
+
+#### Installing Copilot
+
+**VS Code:**
+1. Install the "GitHub Copilot" extension from the marketplace
+2. Sign in with your GitHub account (requires Copilot subscription)
+3. Copilot activates automatically in supported files (.sol, .ts, .js)
+
+**Neovim:**
+```bash
+# Using lazy.nvim
+{
+  "github/copilot.vim",
+  config = function()
+    vim.g.copilot_filetypes = { solidity = true }
+  end,
+}
+```
+
+Run `:Copilot setup` and authenticate with GitHub.
+
+**JetBrains IDEs:**
+1. Install "GitHub Copilot" from Preferences → Plugins
+2. Restart the IDE and sign in via Tools → GitHub Copilot → Login
+
+#### Configuring for Solidity
+
+Create `.github/copilot-instructions.md` in your project root:
+
+```markdown
+# Copilot Instructions for EVM Development
+
+When generating Solidity code:
+- Target Solidity ^0.8.24
+- Use OpenZeppelin contracts v5.x patterns
+- Include NatSpec documentation (@notice, @param, @return)
+- Follow checks-effects-interactions pattern
+- Emit events for state changes
+
+When generating tests:
+- Use Foundry's forge-std for Solidity tests
+- Use Hardhat with ethers.js v6 for TypeScript tests
+- Include edge cases and failure scenarios
+```
+
+#### Effective Prompts for Solidity
+
+Write descriptive comments to guide Copilot:
+
+```solidity
+// ERC-20 token with 1 million fixed supply, minted to deployer
+contract MyToken is ERC20 {
+    // Copilot will complete the constructor
+}
+
+// Withdraw function with reentrancy protection
+// Requires balance >= amount, emits Withdrawal event
+function withdraw(uint256 amount) external {
+    // Copilot will implement the pattern
+}
+```
+
+#### Copilot Chat
+
+Copilot Chat provides conversational assistance within your IDE:
+
+- **VS Code**: Open via Ctrl/Cmd+Shift+I or the chat icon
+- **JetBrains**: Tools → GitHub Copilot → Chat
+
+Example queries:
+- "Explain this contract's access control"
+- "Add fuzz tests for the withdraw function"
+- "What vulnerabilities should I check for?"
+
 ### Agentic Workflows
 
 Effective patterns for AI-assisted EVM development:
